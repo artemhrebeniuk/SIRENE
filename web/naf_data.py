@@ -1,159 +1,159 @@
 """
-NAF (Nomenclature d'Activités Française) descriptions dictionary
-for top economic activities in France.
+NAF (Nomenclature of French Activities) dictionary with clear English descriptions
+and French official activity designations.
 """
 
-NAF_LABELS = {
-    # Section A - Agriculture, sylviculture et pêche
-    "01.11Z": "Culture de céréales, légumineuses et graines oléagineuses",
-    "01.21Z": "Culture de la vigne",
-    "01.41Z": "Élevage de vaches laitières",
-    "01.42Z": "Élevage d'autres bovins et de buffles",
-    "02.20Z": "Exploitation forestière",
-    "03.11Z": "Pêche en mer",
+NAF_LABELS_EN = {
+    # Section A - Agriculture, forestry and fishing
+    "01.11Z": "Cereal, Legume & Oilseed Farming",
+    "01.21Z": "Grape Growing & Vineyards",
+    "01.41Z": "Dairy Cattle Farming",
+    "01.42Z": "Beef Cattle & Livestock Farming",
+    "02.20Z": "Logging & Forestry",
+    "03.11Z": "Marine Fishing",
     
-    # Section C - Industrie manufacturière
-    "10.71A": "Fabrication industrielle de pain et de pâtisserie",
-    "10.71C": "Boulangerie et boulangerie-pâtisserie artisanale",
-    "10.71D": "Pâtisserie",
-    "10.89Z": "Fabrication d'autres produits alimentaires",
-    "11.02B": "Vinification",
-    "23.63Z": "Fabrication de béton prêt à l'emploi",
-    "25.11Z": "Fabrication de structures métalliques et de parties de structures",
-    "25.62B": "Mécanique industrielle",
-    "31.09B": "Fabrication d'autres meubles et industries connexes de l'ameublement",
-    "33.12Z": "Réparation de machines et équipements mécaniques",
+    # Section C - Manufacturing
+    "10.71A": "Industrial Bakery & Pastry Production",
+    "10.71C": "Artisanal Bakery & Pastry Shops",
+    "10.71D": "Pastry & Confectionery Making",
+    "10.89Z": "Other Food Products Manufacturing",
+    "11.02B": "Winemaking & Viticulture",
+    "23.63Z": "Ready-Mix Concrete Manufacturing",
+    "25.11Z": "Metal Structures & Framework Manufacturing",
+    "25.62B": "Industrial Mechanical Machining",
+    "31.09B": "Furniture & Cabinet Making",
+    "33.12Z": "Industrial Machinery Repair & Maintenance",
     
-    # Section F - Construction
-    "41.10A": "Promotion immobilière de logements",
-    "41.10D": "Supports juridiques de programmes",
-    "41.20A": "Construction de maisons individuelles",
-    "41.20B": "Construction d'autres bâtiments",
-    "43.11Z": "Travaux de démolition",
-    "43.12A": "Travaux de terrassement courants et travaux préparatoires",
-    "43.21A": "Travaux d'installation électrique dans tous locaux",
-    "43.22A": "Travaux d'installation d'eau et de gaz en tous locaux",
-    "43.22B": "Travaux d'installation d'équipements thermiques et de climatisation",
-    "43.31Z": "Travaux de plâtrerie",
-    "43.32A": "Travaux de menuiserie bois et PVC",
-    "43.33Z": "Travaux de revêtement des sols et des murs",
-    "43.34Z": "Travaux de peinture et vitrerie",
-    "43.91A": "Travaux de charpente",
-    "43.91B": "Travaux de couverture par éléments",
-    "43.99C": "Travaux de maçonnerie générale et gros œuvre de bâtiment",
+    # Section F - Construction & Real Estate Works
+    "41.10A": "Residential Real Estate Development",
+    "41.10D": "Real Estate Project Legal Holdings",
+    "41.20A": "Single-Family Home Construction",
+    "41.20B": "Commercial & Residential Building Construction",
+    "43.11Z": "Demolition Works",
+    "43.12A": "Earthmoving & Site Preparation",
+    "43.21A": "Electrical Installation Services",
+    "43.22A": "Plumbing, Water & Gas Installation",
+    "43.22B": "HVAC & Thermal Equipment Installation",
+    "43.31Z": "Plastering & Drywall Works",
+    "43.32A": "Carpentry & Joinery (Wood & PVC)",
+    "43.33Z": "Floor & Wall Tiling Installation",
+    "43.34Z": "Painting & Glazing Works",
+    "43.91A": "Roof Framework & Timber Construction",
+    "43.91B": "Roofing & Cladding Installation",
+    "43.99C": "Masonry & Structural Brickwork",
     
-    # Section G - Commerce
-    "45.11Z": "Commerce de voitures et de véhicules automobiles légers",
-    "45.20A": "Entretien et réparation de véhicules automobiles légers",
-    "45.31Z": "Commerce de gros d'équipements automobiles",
-    "46.73A": "Commerce de gros de bois et de matériaux de construction",
-    "47.11A": "Commerce de détail de produits surgelés",
-    "47.11B": "Commerce d'alimentation générale",
-    "47.11D": "Supermarchés",
-    "47.11F": "Hypermarchés",
-    "47.22Z": "Commerce de détail de viandes et de produits à base de viande",
-    "47.24Z": "Commerce de détail de pain, pâtisserie et confiserie",
-    "47.71Z": "Commerce de détail d'habillement en magasin spécialisé",
-    "47.73Z": "Commerce de détail de produits pharmaceutiques en magasin spécialisé",
-    "47.91A": "Vente à distance sur catalogue général",
-    "47.91B": "Vente à distance sur catalogue spécialisé (E-commerce)",
+    # Section G - Wholesale & Retail Trade
+    "45.11Z": "Passenger Car & Light Vehicle Sales",
+    "45.20A": "Automotive Repair & Vehicle Maintenance",
+    "45.31Z": "Wholesale of Automotive Equipment & Parts",
+    "46.73A": "Wholesale of Wood & Building Materials",
+    "47.11A": "Retail Sale of Frozen Food Products",
+    "47.11B": "General Grocery Stores",
+    "47.11D": "Supermarkets",
+    "47.11F": "Hypermarkets",
+    "47.22Z": "Retail Butcher Shops & Meat Products",
+    "47.24Z": "Retail Bread, Pastry & Confectionery",
+    "47.71Z": "Retail Clothing & Apparel Stores",
+    "47.73Z": "Retail Pharmacies & Chemists",
+    "47.91A": "Mail Order & Catalog Retail",
+    "47.91B": "E-Commerce & Online Retail Stores",
     
-    # Section H - Transports et entreposage
-    "49.32Z": "Transports de voyageurs par taxis et VTC",
-    "49.41A": "Transports routiers de fret interurbains",
-    "49.41B": "Transports routiers de fret de proximité",
-    "52.21Z": "Services auxiliaires des transports terrestres",
-    "53.20Z": "Autres activités de poste et de courrier (Livraison)",
+    # Section H - Transportation & Logistics
+    "49.32Z": "Taxi & Private Chauffeur Services (VTC)",
+    "49.41A": "Long-Distance Road Freight Transport",
+    "49.41B": "Local Road Freight & Distribution Transport",
+    "52.21Z": "Ground Transport Support & Parking Services",
+    "53.20Z": "Courier & Express Parcel Delivery",
     
-    # Section I - Hébergement et restauration
-    "55.10Z": "Hôtels et hébergement similaire",
-    "55.20Z": "Hébergement touristique et autre hébergement de courte durée",
-    "56.10A": "Restauration traditionnelle",
-    "56.10B": "Cafétérias et autres libres-services",
-    "56.10C": "Restauration de type rapide (Fast food)",
-    "56.21Z": "Services des traiteurs",
-    "56.30Z": "Débits de boissons (Bars, Cafés)",
+    # Section I - Accommodation & Food Services
+    "55.10Z": "Hotels & Commercial Lodging",
+    "55.20Z": "Holiday Rentals & Tourist Accommodation",
+    "56.10A": "Traditional Restaurants",
+    "56.10B": "Cafeterias & Self-Service Restaurants",
+    "56.10C": "Fast Food & Quick Service Restaurants",
+    "56.21Z": "Event Catering Services",
+    "56.30Z": "Bars, Cafes & Drinking Places",
     
-    # Section J - Information et communication
-    "58.11Z": "Édition de livres",
-    "58.29C": "Édition de logiciels applicatifs",
-    "62.01Z": "Programmation informatique (Tech & Dev)",
-    "62.02A": "Conseil en systèmes et logiciels informatiques",
-    "62.02B": "Tierce maintenance de systèmes et d'applications informatiques",
-    "62.09Z": "Autres activités informatiques",
-    "63.11Z": "Traitement de données, hébergement et activités connexes (Cloud)",
-    "63.12Z": "Portails Internet",
+    # Section J - Information & Communication Technology
+    "58.11Z": "Book Publishing",
+    "58.29C": "Software Application Publishing (SaaS)",
+    "62.01Z": "Software Development & Computer Programming",
+    "62.02A": "IT Systems & Technology Consulting",
+    "62.02B": "IT Infrastructure Support & Maintenance",
+    "62.09Z": "Other IT & Computer Services",
+    "63.11Z": "Data Processing, Cloud Hosting & Web Services",
+    "63.12Z": "Web Portals & Search Platforms",
     
-    # Section K - Activités financières et d'assurance
-    "64.19Z": "Autres intermédiations monétaires (Banques)",
-    "64.20Z": "Activités des sociétés holding",
-    "66.19B": "Courtage en opérations de banque et en services de paiement",
-    "66.22Z": "Activités des agents et courtiers d'assurances",
+    # Section K - Financial & Insurance Activities
+    "64.19Z": "Commercial Banks & Monetary Intermediation",
+    "64.20Z": "Holding Companies & Financial Management",
+    "66.19B": "Loan & Mortgage Brokerage Services",
+    "66.22Z": "Insurance Brokerage & Agency Services",
     
-    # Section L - Activités immobilières
-    "68.10Z": "Activités des marchands de biens immobiliers",
-    "68.20A": "Location de logements",
-    "68.20B": "Location de terrains et d'autres biens immobiliers",
-    "68.31Z": "Agences immobilières",
-    "68.32A": "Administration d'immeubles et autres biens immobiliers (Syndics)",
-    "68.32B": "Supports juridiques de gestion de patrimoine immobilier",
+    # Section L - Real Estate Activities
+    "68.10Z": "Real Estate Dealers & Property Trading",
+    "68.20A": "Rental & Leasing of Residential Apartments",
+    "68.20B": "Rental & Leasing of Commercial Property & Land",
+    "68.31Z": "Real Estate Agencies & Brokerages",
+    "68.32A": "Property Management & Condominium Syndics",
+    "68.32B": "Real Estate Asset Holding Structures",
     
-    # Section M - Activités spécialisées, scientifiques et techniques
-    "69.10Z": "Activités juridiques (Avocats, Notaires)",
-    "69.20Z": "Activités comptables et d'expertise",
-    "70.10Z": "Activités des sièges sociaux",
-    "70.22Z": "Conseil pour les affaires et autres conseils de gestion",
-    "71.11Z": "Activités d'architecture",
-    "71.12B": "Ingénierie, études techniques",
-    "73.11Z": "Activités des agences de publicité",
-    "74.10Z": "Activités spécialisées de design",
-    "74.20Z": "Activités photographiques",
-    "74.30Z": "Traduction et interprétation",
+    # Section M - Professional, Scientific & Technical Services
+    "69.10Z": "Legal Activities (Lawyers, Notaries, Legal Counsel)",
+    "69.20Z": "Accounting, Bookkeeping & Audit Services",
+    "70.10Z": "Corporate Headquarters & Regional Offices",
+    "70.22Z": "Business Management & Strategy Consulting",
+    "71.11Z": "Architectural Consulting & Design",
+    "71.12B": "Engineering & Technical Consulting",
+    "73.11Z": "Advertising & Marketing Agencies",
+    "74.10Z": "Specialized Industrial & Graphic Design",
+    "74.20Z": "Commercial Photography & Media Production",
+    "74.30Z": "Translation & Interpretation Services",
     
-    # Section N - Services administratifs et de soutien
-    "77.11A": "Location de courte durée de voitures et véhicules automobiles",
-    "78.10Z": "Activités des agences de placement de main-d'œuvre",
-    "78.20Z": "Activités des agences de travail temporaire (Intérim)",
-    "81.10Z": "Services combinés de soutien lié aux bâtiments (Gestion de copropriétés)",
-    "81.21Z": "Nettoyage courant des bâtiments",
-    "81.22Z": "Autres activités de nettoyage des bâtiments et nettoyage industriel",
-    "81.30Z": "Services d'aménagement paysager (Jardiniers)",
-    "82.11Z": "Services administratifs combinés de bureau",
+    # Section N - Administrative & Support Services
+    "77.11A": "Short-Term Car & Light Vehicle Rental",
+    "78.10Z": "Employment Placement & Staffing Agencies",
+    "78.20Z": "Temporary Employment Services",
+    "81.10Z": "Combined Facilities Support & Building Management",
+    "81.21Z": "Commercial & Residential Building Cleaning",
+    "81.22Z": "Specialized & Industrial Cleaning Services",
+    "81.30Z": "Landscape Architecture & Gardening Services",
+    "82.11Z": "Combined Office Administrative Services",
     
-    # Section P - Enseignement
-    "85.51Z": "Enseignement de disciplines sportives et d'activités de loisirs",
-    "85.53Z": "Enseignement de la conduite (Auto-écoles)",
-    "85.59A": "Formation continue d'adultes",
-    "85.59B": "Autres enseignements",
+    # Section P - Education
+    "85.51Z": "Sports & Recreation Education & Coaching",
+    "85.53Z": "Driving Schools & Driver Training",
+    "85.59A": "Adult Continuing Education & Professional Training",
+    "85.59B": "Other Specialized Educational Instruction",
     
-    # Section Q - Santé humaine et action sociale
-    "86.21Z": "Activité des médecins généralistes",
-    "86.22A": "Activités de radiodiagnostic et de radiothérapie",
-    "86.22C": "Autre activité des médecins spécialistes",
-    "86.23Z": "Pratique dentaire",
-    "86.90A": "Ambulances",
-    "86.90D": "Activités des infirmiers et des sages-femmes",
-    "86.90E": "Activités des professionnels de la rééducation (Kinésithérapie)",
-    "86.90F": "Activités de santé humaine non classées ailleurs",
+    # Section Q - Human Health & Social Work
+    "86.21Z": "General Practice Medical Clinics",
+    "86.22A": "Diagnostic Imaging & Radiotherapy Centers",
+    "86.22C": "Specialist Medical Practice",
+    "86.23Z": "Dental Practice & Clinics",
+    "86.90A": "Ambulance & Patient Transport Services",
+    "86.90D": "Nursing & Midwifery Care",
+    "86.90E": "Physiotherapy & Physical Rehabilitation",
+    "86.90F": "Other Healthcare & Allied Health Services",
     
-    # Section R - Arts, spectacles et activités récréatives
-    "90.01Z": "Arts du spectacle vivant",
-    "90.03A": "Création artistique relevant des arts plastiques",
-    "90.03B": "Autre création artistique",
-    "93.12Z": "Activités de clubs de sports",
-    "93.13Z": "Activités des centres de culture physique (Fitness)",
+    # Section R - Arts, Entertainment & Recreation
+    "90.01Z": "Live Performing Arts & Theaters",
+    "90.03A": "Visual Arts & Fine Arts Creation",
+    "90.03B": "Other Artistic & Creative Writing Services",
+    "93.12Z": "Sports Clubs & Athletic Associations",
+    "93.13Z": "Fitness Centers & Gyms",
     
-    # Section S - Autres activités de services
-    "96.02A": "Coiffure",
-    "96.02B": "Soins de beauté (Instituts d'esthétique)",
-    "96.04Z": "Entretien corporel",
-    "96.09Z": "Autres services personnels n.c.a."
+    # Section S - Other Personal Services
+    "96.02A": "Hairdressing & Barber Salons",
+    "96.02B": "Beauty Salons & Esthetic Care",
+    "96.04Z": "Physical Wellbeing & Spa Services",
+    "96.09Z": "Other Personal Services"
 }
 
 
-def get_naf_label(code: str) -> str:
-    """Return descriptive label for a NAF code or fallback."""
+def get_naf_label_en(code: str) -> str:
+    """Return descriptive English label for a NAF code or fallback."""
     if not code:
-        return "Non spécifié"
+        return "Unspecified Activity"
     code_clean = code.strip().upper()
-    return NAF_LABELS.get(code_clean, f"Activité {code_clean}")
+    return NAF_LABELS_EN.get(code_clean, f"Activity {code_clean}")

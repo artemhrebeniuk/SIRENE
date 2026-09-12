@@ -26,7 +26,7 @@ from src.config import (
     SUMMARY_DEPTS_CSV,
     SUMMARY_TOP_NAF_CSV,
 )
-from web.naf_data import get_naf_label, NAF_LABELS
+from web.naf_data import get_naf_label_en
 
 app = Flask(__name__, static_folder="static", template_folder="static")
 
@@ -147,7 +147,7 @@ def get_departments():
             "geocoded": r[2],
             "geocoded_pct": r[3],
             "top_naf": r[4],
-            "top_naf_label": get_naf_label(r[4])
+            "top_naf_label": get_naf_label_en(r[4])
         })
     return jsonify(results)
 
@@ -187,14 +187,14 @@ def get_department_detail(dept_code):
     for s in sectors:
         sector_list.append({
             "code_naf": s[0],
-            "label": get_naf_label(s[0]),
+            "label": get_naf_label_en(s[0]),
             "count": s[1],
             "pct": s[2]
         })
         
     return jsonify({
         "code": dept_code,
-        "name": DEPT_NAMES.get(dept_code, f"Département {dept_code}"),
+        "name": DEPT_NAMES.get(dept_code, f"Department {dept_code}"),
         "total": dept_kpi[0] if dept_kpi else 0,
         "geocoded": dept_kpi[1] if dept_kpi else 0,
         "geocoded_pct": round(dept_kpi[1] * 100.0 / dept_kpi[0], 1) if dept_kpi and dept_kpi[0] > 0 else 0,
@@ -226,7 +226,7 @@ def get_sectors():
     results = []
     for r in rows:
         code = str(r[0])
-        label = get_naf_label(code)
+        label = get_naf_label_en(code)
         if search:
             if search not in code.lower() and search not in label.lower():
                 continue
@@ -271,7 +271,7 @@ def get_sector_distribution(naf_code):
         
     return jsonify({
         "code_naf": naf_code,
-        "label": get_naf_label(naf_code),
+        "label": get_naf_label_en(naf_code),
         "total_national": total_national,
         "departments": dept_distribution
     })

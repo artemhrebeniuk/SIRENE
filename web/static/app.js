@@ -1,25 +1,25 @@
 /**
- * SIRENE GeoData Observatory — Interactive Application Logic
- * Powered by Leaflet, DuckDB backend REST APIs & reactive state management.
+ * SIRENE GeoData Observatory — Client Application
+ * Powered by Leaflet (ESRI Dark Gray Basemap, zero API key), DuckDB REST API.
  */
 
-// Global State
+// Application Reactive State
 const state = {
   kpis: null,
   departments: [],
-  departmentsMap: {}, // code -> dept object
+  departmentsMap: {}, // code -> dept
   sectors: [],
   geoJsonData: null,
   geoJsonLayer: null,
   activeMode: 'density', // 'density' or 'sector'
-  selectedSector: null, // { code_naf, label, total_national, departments }
-  selectedDepartment: null, // dept object
-  activeTerritory: 'all', // 'all', 'metro', 'dom'
+  selectedSector: null,
+  selectedDepartment: null,
+  activeTerritory: 'all',
   activeTab: 'sectors',
   searchQuery: ''
 };
 
-// Map Instance
+// Leaflet Map Instance
 let map;
 
 // Territories Bounding Boxes
@@ -27,22 +27,22 @@ const BOUNDS = {
   metro: [[41.3, -5.2], [51.2, 9.6]],
   '971': [[15.8, -61.8], [16.5, -61.0]], // Guadeloupe
   '972': [[14.3, -61.3], [14.9, -60.8]], // Martinique
-  '973': [[2.1, -54.6], [5.8, -51.6]],   // Guyane
-  '974': [[-21.4, 55.2], [-20.8, 55.9]], // La Réunion
+  '973': [[2.1, -54.6], [5.8, -51.6]],   // French Guiana
+  '974': [[-21.4, 55.2], [-20.8, 55.9]], // Reunion Island
   '976': [[-13.0, 45.0], [-12.6, 45.3]], // Mayotte
 };
 
-// Initialize Application
+// Lifecycle Start
 document.addEventListener('DOMContentLoaded', async () => {
   initMap();
-  bindUIEvents();
+  bindUI();
   await loadKPIs();
   await Promise.all([loadGeoJSON(), loadDepartments(), loadSectors()]);
-  updateMapChoropleth();
+  updateChoropleth();
 });
 
 /* ==========================================================================
-   Map Initialization & Styling
+   Map Initialization with ESRI World Dark Gray (Zero Watermarks, No API Key)
    ========================================================================== */
 function initMap() {
   map = L.map('map', {
@@ -53,27 +53,26 @@ function initMap() {
     zoomControl: true
   });
 
-  // Dark Matter tiles by CartoDB (free & open)
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a> | INSEE SIRENE',
-    subdomains: 'abcd',
-    maxZoom: 19
+  // ESRI World Dark Gray Canvas — Completely free, no API key, zero watermark
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+    attribution: '&copy; Esri, HERE, DeLorme, MapmyIndia | INSEE SIRENE',
+    maxZoom: 16
   }).addTo(map);
 }
 
-// Color Scale Function
-function getColor(value, maxVal) {
+// Dynamic Color Gradient
+function getChoroplethColor(value, maxVal) {
   if (!value || value === 0 || maxVal === 0) return '#1E293B';
   const ratio = Math.min(value / maxVal, 1.0);
   
-  if (ratio > 0.75) return '#EF4444'; // Rose / Red
-  if (ratio > 0.45) return '#F59E0B'; // Amber
-  if (ratio > 0.20) return '#38BDF8'; // Cyan
-  if (ratio > 0.05) return '#0284C7'; // Deep Sky
-  return '#1E3A8A';                   // Navy
+  if (ratio > 0.70) return '#EF4444'; // Red / High
+  if (ratio > 0.40) return '#F59E0B'; // Amber
+  if (ratio > 0.15) return '#38BDF8'; // Cyan
+  if (ratio > 0.04) return '#0284C7'; // Blue
+  return '#1E3A8A';                   // Navy / Low
 }
 
-function getDepartmentStyle(feature) {
+function getFeatureStyle(feature) {
   const code = feature.properties.code || feature.properties.CODE_DEPT || feature.properties.insee;
   let val = 0;
   let maxVal = 1;
@@ -90,17 +89,16 @@ function getDepartmentStyle(feature) {
   const isSelected = state.selectedDepartment && state.selectedDepartment.code === code;
 
   return {
-    fillColor: getColor(val, maxVal),
-    weight: isSelected ? 3 : 1,
+    fillColor: getChoroplethColor(val, maxVal),
+    weight: isSelected ? 2.5 : 1,
     opacity: 1,
     color: isSelected ? '#38BDF8' : '#334155',
-    dashArray: isSelected ? '' : '1',
-    fillOpacity: isSelected ? 0.9 : 0.75
+    fillOpacity: isSelected ? 0.9 : 0.72
   };
 }
 
 /* ==========================================================================
-   Data Fetching & State
+   Data Fetching
    ========================================================================== */
 async function loadKPIs() {
   try {
@@ -108,18 +106,17 @@ async function loadKPIs() {
     const data = await res.json();
     state.kpis = data;
 
-    document.getElementById('kpiTotalActive').textContent = data.total_active_establishments.toLocaleString('fr-FR');
+    document.getElementById('kpiTotalActive').textContent = data.total_active_establishments.toLocaleString('en-US');
     document.getElementById('kpiGeocodedPct').textContent = `${data.geocoding_rate_pct}%`;
-    document.getElementById('kpiGeocodedCount').textContent = `${data.geocoded_establishments.toLocaleString('fr-FR')} localisés WGS84`;
     document.getElementById('kpiDepartments').textContent = `${data.distinct_departments} / 101`;
-    document.getElementById('kpiNafCodes').textContent = data.distinct_naf_codes.toLocaleString('fr-FR');
+    document.getElementById('kpiNafCodes').textContent = data.distinct_naf_codes.toLocaleString('en-US');
 
     if (data.is_sample) {
-      document.getElementById('badgeText').textContent = 'Mode Démonstration Rapide (Échantillon)';
+      document.getElementById('badgeText').textContent = 'Fast Demo (Sample)';
       document.getElementById('datasetBadge').style.borderColor = 'rgba(245, 158, 11, 0.4)';
       document.getElementById('datasetBadge').style.color = '#F59E0B';
     } else {
-      document.getElementById('badgeText').textContent = 'INSEE SIRENE • France Entière';
+      document.getElementById('badgeText').textContent = 'Full Registry (101 Depts)';
     }
   } catch (err) {
     console.error('Failed to load KPIs:', err);
@@ -151,7 +148,7 @@ async function loadDepartments() {
 
 async function loadSectors() {
   try {
-    const res = await fetch('/api/sectors?limit=150');
+    const res = await fetch('/api/sectors?limit=200');
     state.sectors = await res.json();
     renderSectorsList();
   } catch (err) {
@@ -160,9 +157,9 @@ async function loadSectors() {
 }
 
 /* ==========================================================================
-   Map Layers & Choropleth Logic
+   Choropleth Rendering & Interactivity
    ========================================================================== */
-function updateMapChoropleth() {
+function updateChoropleth() {
   if (!state.geoJsonData) return;
 
   if (state.geoJsonLayer) {
@@ -170,32 +167,32 @@ function updateMapChoropleth() {
   }
 
   state.geoJsonLayer = L.geoJSON(state.geoJsonData, {
-    style: getDepartmentStyle,
+    style: getFeatureStyle,
     onEachFeature: (feature, layer) => {
       const code = feature.properties.code || feature.properties.CODE_DEPT || feature.properties.insee;
-      const deptName = feature.properties.nom || feature.properties.NOM_DEPT || `Département ${code}`;
+      const deptName = feature.properties.nom || feature.properties.NOM_DEPT || `Department ${code}`;
 
       layer.on({
         mouseover: (e) => {
           const l = e.target;
-          l.setStyle({ weight: 2.5, color: '#FFF', fillOpacity: 0.95 });
+          l.setStyle({ weight: 2.2, color: '#FFF', fillOpacity: 0.95 });
           l.bringToFront();
 
-          let count = 0;
-          let extraInfo = '';
+          let details = '';
           if (state.activeMode === 'sector' && state.selectedSector) {
-            count = state.selectedSector.departments[code] || 0;
-            extraInfo = `<div class="tooltip-count">Activité: <b>${count.toLocaleString('fr-FR')}</b></div>`;
+            const count = state.selectedSector.departments[code] || 0;
+            details = `<div class="tooltip-body">Industry Count: <b>${count.toLocaleString('en-US')}</b></div>`;
           } else {
             const dept = state.departmentsMap[code];
-            count = dept ? dept.total : 0;
-            extraInfo = `<div class="tooltip-count">Établissements: <b>${count.toLocaleString('fr-FR')}</b> (${dept ? dept.geocoded_pct : 0}% géocodés)</div>`;
+            const count = dept ? dept.total : 0;
+            const pct = dept ? dept.geocoded_pct : 0;
+            details = `<div class="tooltip-body">Active Units: <b>${count.toLocaleString('en-US')}</b> (${pct}% geocoded)</div>`;
           }
 
           layer.bindTooltip(`
-            <div class="custom-tooltip">
+            <div>
               <div class="tooltip-title">${deptName} (${code})</div>
-              ${extraInfo}
+              ${details}
             </div>
           `, { sticky: true, direction: 'top', className: 'custom-tooltip-wrapper' }).openTooltip();
         },
@@ -221,31 +218,35 @@ function updateLegend() {
   }
 
   document.getElementById('legendMin').textContent = '0';
-  document.getElementById('legendMid').textContent = Math.round(maxVal / 2).toLocaleString('fr-FR');
-  document.getElementById('legendMax').textContent = maxVal.toLocaleString('fr-FR');
+  document.getElementById('legendMid').textContent = Math.round(maxVal / 2).toLocaleString('en-US');
+  document.getElementById('legendMax').textContent = maxVal.toLocaleString('en-US');
 }
 
 /* ==========================================================================
-   UI Event Bindings & Interactions
+   UI Event Bindings
    ========================================================================== */
-function bindUIEvents() {
+function bindUI() {
   // Tab Switching
-  document.querySelectorAll('.tab-btn').forEach(btn => {
+  document.querySelectorAll('.tab-trigger').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-trigger').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
 
       btn.classList.add('active');
       state.activeTab = btn.dataset.tab;
-      const targetPane = btn.dataset.tab === 'sectors' ? 'paneSectors' : 'paneDepartments';
-      document.getElementById(targetPane).classList.add('active');
+      const target = btn.dataset.tab === 'sectors' ? 'paneSectors' : 'paneDepartments';
+      document.getElementById(target).classList.add('active');
     });
   });
 
-  // Search Filter
+  // Search
   const searchInput = document.getElementById('searchInput');
+  const clearBtn = document.getElementById('clearSearch');
+
   searchInput.addEventListener('input', (e) => {
     state.searchQuery = e.target.value.trim().toLowerCase();
+    clearBtn.style.display = state.searchQuery ? 'block' : 'none';
+
     if (state.activeTab === 'sectors') {
       renderSectorsList();
     } else {
@@ -253,47 +254,55 @@ function bindUIEvents() {
     }
   });
 
-  // Territory Pills
-  document.querySelectorAll('.pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      state.activeTerritory = pill.dataset.territory;
+  clearBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    state.searchQuery = '';
+    clearBtn.style.display = 'none';
+    renderSectorsList();
+    renderDepartmentsList();
+  });
 
-      if (pill.dataset.territory === 'metro') {
+  // Territory Toggle
+  document.querySelectorAll('.toggle-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const territory = btn.dataset.territory;
+
+      if (territory === 'metro') {
         map.fitBounds(BOUNDS.metro);
-      } else if (pill.dataset.territory === 'all') {
-        map.setView([46.6, 2.0], 6);
-      } else if (pill.dataset.territory === 'dom') {
+      } else if (territory === 'all') {
+        map.setView([46.603354, 1.888334], 6);
+      } else if (territory === 'dom') {
         map.fitBounds(BOUNDS['971']);
       }
     });
   });
 
-  // DOM Chips Click
-  document.querySelectorAll('.dom-chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      const deptCode = chip.dataset.dept;
-      if (BOUNDS[deptCode]) {
-        map.fitBounds(BOUNDS[deptCode], { maxZoom: 10 });
+  // DOM Buttons
+  document.querySelectorAll('.dom-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const code = btn.dataset.dept;
+      if (BOUNDS[code]) {
+        map.fitBounds(BOUNDS[code], { maxZoom: 10 });
       }
-      selectDepartment(deptCode);
+      selectDepartment(code);
     });
   });
 
-  // Reset Button
-  document.getElementById('btnReset').addEventListener('click', resetSelection);
+  // Reset
+  document.getElementById('btnReset').addEventListener('click', resetAll);
 
-  // Close Inspector Button
+  // Close Inspector Drawer
   document.getElementById('btnCloseInspector').addEventListener('click', () => {
-    document.getElementById('inspectorCard').style.display = 'none';
+    document.getElementById('inspectorDrawer').style.display = 'none';
     state.selectedDepartment = null;
-    updateMapChoropleth();
+    updateChoropleth();
   });
 }
 
 /* ==========================================================================
-   List Renderers: Sectors & Departments
+   List Renderers (De-Cluttered & Fast)
    ========================================================================== */
 function renderSectorsList() {
   const container = document.getElementById('sectorsList');
@@ -304,28 +313,20 @@ function renderSectorsList() {
   });
 
   if (filtered.length === 0) {
-    container.innerHTML = `<div class="loading-state">Aucun secteur correspondant trouvé.</div>`;
+    container.innerHTML = `<div class="loading-state">No matching industries found.</div>`;
     return;
   }
 
-  const maxCount = state.sectors.length > 0 ? state.sectors[0].total : 1;
-
   container.innerHTML = filtered.map(s => {
     const isSelected = state.selectedSector && state.selectedSector.code_naf === s.code;
-    const barWidth = Math.max(Math.round((s.total / maxCount) * 100), 2);
 
     return `
-      <div class="list-item ${isSelected ? 'selected' : ''}" onclick="selectSector('${s.code}')">
-        <div class="item-row-top">
-          <div class="item-title-group">
-            <span class="badge-code">${s.code}</span>
-            <span class="item-name" title="${s.label}">${s.label}</span>
-          </div>
-          <span class="item-count">${s.total.toLocaleString('fr-FR')}</span>
+      <div class="entity-row ${isSelected ? 'selected' : ''}" onclick="selectSector('${s.code}')">
+        <div class="entity-info">
+          <span class="code-tag">${s.code}</span>
+          <span class="entity-name" title="${s.label}">${s.label}</span>
         </div>
-        <div class="item-bar-bg">
-          <div class="item-bar-fill" style="width: ${barWidth}%"></div>
-        </div>
+        <span class="entity-value">${s.total.toLocaleString('en-US')}</span>
       </div>
     `;
   }).join('');
@@ -340,28 +341,20 @@ function renderDepartmentsList() {
   });
 
   if (filtered.length === 0) {
-    container.innerHTML = `<div class="loading-state">Aucun département correspondant trouvé.</div>`;
+    container.innerHTML = `<div class="loading-state">No matching departments found.</div>`;
     return;
   }
 
-  const maxCount = state.departments.length > 0 ? state.departments[0].total : 1;
-
   container.innerHTML = filtered.map(d => {
     const isSelected = state.selectedDepartment && state.selectedDepartment.code === d.code;
-    const barWidth = Math.max(Math.round((d.total / maxCount) * 100), 2);
 
     return `
-      <div class="list-item ${isSelected ? 'selected' : ''}" onclick="selectDepartment('${d.code}')">
-        <div class="item-row-top">
-          <div class="item-title-group">
-            <span class="badge-code">${d.code}</span>
-            <span class="item-name">${d.name}</span>
-          </div>
-          <span class="item-count">${d.total.toLocaleString('fr-FR')}</span>
+      <div class="entity-row ${isSelected ? 'selected' : ''}" onclick="selectDepartment('${d.code}')">
+        <div class="entity-info">
+          <span class="code-tag">${d.code}</span>
+          <span class="entity-name">${d.name}</span>
         </div>
-        <div class="item-bar-bg">
-          <div class="item-bar-fill" style="width: ${barWidth}%; background: linear-gradient(90deg, #10B981, #38BDF8)"></div>
-        </div>
+        <span class="entity-value">${d.total.toLocaleString('en-US')}</span>
       </div>
     `;
   }).join('');
@@ -377,38 +370,38 @@ async function selectSector(nafCode) {
     state.selectedSector = data;
     state.activeMode = 'sector';
 
-    // Update Title Toolbar
-    document.getElementById('mapViewTitle').textContent = `Répartition : ${data.code_naf} — ${data.label}`;
-    document.getElementById('mapViewSubtitle').textContent = `Total national : ${data.total_national.toLocaleString('fr-FR')} établissements actifs`;
+    // Update Overlay Header
+    document.getElementById('mapViewTitle').textContent = `${data.code_naf} — ${data.label}`;
+    document.getElementById('mapViewSubtitle').textContent = `National total: ${data.total_national.toLocaleString('en-US')} active establishments`;
 
-    // Update Inspector
-    const inspector = document.getElementById('inspectorCard');
-    inspector.style.display = 'block';
-    document.getElementById('inspectorTag').textContent = 'Secteur d\'Activité Sélectionné';
+    // Open Inspector Drawer
+    const drawer = document.getElementById('inspectorDrawer');
+    drawer.style.display = 'block';
+    document.getElementById('inspectorTag').textContent = 'Selected Industry';
     document.getElementById('inspectorTitle').textContent = `${data.code_naf} — ${data.label}`;
-    document.getElementById('inspectorCount').textContent = data.total_national.toLocaleString('fr-FR');
-    document.getElementById('inspectorGeocoded').textContent = `${Object.keys(data.departments).length} Dépts`;
+    document.getElementById('inspectorCount').textContent = data.total_national.toLocaleString('en-US');
+    document.getElementById('inspectorGeocoded').textContent = `${Object.keys(data.departments).length} Depts`;
 
-    // Sort Top Departments for this Sector
+    // Top 5 Departments
     const topDepts = Object.entries(data.departments)
       .sort((a, b) => b[1] - a[1])
       .slice(0, 5);
 
     document.getElementById('inspectorDetails').innerHTML = `
-      <div style="margin-top: 6px; font-weight: 600; color: #94A3B8; font-size: 0.74rem;">Top 5 Départements :</div>
-      ${topDepts.map(([code, cnt]) => {
-        const deptName = state.departmentsMap[code] ? state.departmentsMap[code].name : `Dépt ${code}`;
+      <div style="font-weight:600; color:#94A3B8; margin-top:4px;">Top Regional Concentrations:</div>
+      ${topDepts.map(([code, count]) => {
+        const name = state.departmentsMap[code] ? state.departmentsMap[code].name : `Dept ${code}`;
         return `
-          <div class="sub-sector-item">
-            <span><b class="sub-sector-code">${code}</b> ${deptName}</span>
-            <span style="font-weight: 700; color: #38BDF8">${cnt.toLocaleString('fr-FR')}</span>
+          <div class="breakdown-row">
+            <span><b class="breakdown-code">${code}</b> ${name}</span>
+            <span style="font-weight:700; color:#38BDF8">${count.toLocaleString('en-US')}</span>
           </div>
         `;
       }).join('')}
     `;
 
     renderSectorsList();
-    updateMapChoropleth();
+    updateChoropleth();
   } catch (err) {
     console.error('Error selecting sector:', err);
   }
@@ -420,45 +413,46 @@ async function selectDepartment(deptCode) {
     const data = await res.json();
     state.selectedDepartment = data;
 
-    // Update Inspector
-    const inspector = document.getElementById('inspectorCard');
-    inspector.style.display = 'block';
-    document.getElementById('inspectorTag').textContent = 'Département Sélectionné';
+    // Open Inspector Drawer
+    const drawer = document.getElementById('inspectorDrawer');
+    drawer.style.display = 'block';
+    document.getElementById('inspectorTag').textContent = 'Selected Department';
     document.getElementById('inspectorTitle').textContent = `${data.name} (${data.code})`;
-    document.getElementById('inspectorCount').textContent = data.total.toLocaleString('fr-FR');
+    document.getElementById('inspectorCount').textContent = data.total.toLocaleString('en-US');
     document.getElementById('inspectorGeocoded').textContent = `${data.geocoded_pct}%`;
 
-    // Top sectors in this department
+    // Top 5 Activities
     document.getElementById('inspectorDetails').innerHTML = `
-      <div style="margin-top: 6px; font-weight: 600; color: #94A3B8; font-size: 0.74rem;">Top 5 Activités Locales :</div>
+      <div style="font-weight:600; color:#94A3B8; margin-top:4px;">Top Local Industries:</div>
       ${data.top_sectors.slice(0, 5).map(s => `
-        <div class="sub-sector-item">
-          <span title="${s.label}"><b class="sub-sector-code">${s.code_naf}</b> ${s.label.substring(0, 26)}...</span>
-          <span style="font-weight: 700; color: #10B981">${s.count.toLocaleString('fr-FR')} (${s.pct}%)</span>
+        <div class="breakdown-row">
+          <span title="${s.label}"><b class="breakdown-code">${s.code_naf}</b> ${s.label.substring(0, 24)}...</span>
+          <span style="font-weight:700; color:#10B981">${s.count.toLocaleString('en-US')} (${s.pct}%)</span>
         </div>
       `).join('')}
     `;
 
     renderDepartmentsList();
-    updateMapChoropleth();
+    updateChoropleth();
   } catch (err) {
     console.error('Error selecting department:', err);
   }
 }
 
-function resetSelection() {
+function resetAll() {
   state.activeMode = 'density';
   state.selectedSector = null;
   state.selectedDepartment = null;
   state.searchQuery = '';
   document.getElementById('searchInput').value = '';
-  document.getElementById('inspectorCard').style.display = 'none';
+  document.getElementById('clearSearch').style.display = 'none';
+  document.getElementById('inspectorDrawer').style.display = 'none';
 
-  document.getElementById('mapViewTitle').textContent = 'Densité Nationale des Établissements';
-  document.getElementById('mapViewSubtitle').textContent = 'Survolez un département pour afficher les détails';
+  document.getElementById('mapViewTitle').textContent = 'National Business Density';
+  document.getElementById('mapViewSubtitle').textContent = 'Hover over any department for details or click to inspect';
 
   map.setView([46.603354, 1.888334], 6);
   renderSectorsList();
   renderDepartmentsList();
-  updateMapChoropleth();
+  updateChoropleth();
 }
