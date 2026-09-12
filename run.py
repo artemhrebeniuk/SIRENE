@@ -95,6 +95,12 @@ def cmd_all(args):
     compute_aggregations(top_n=args.top)
 
 
+def cmd_serve(args):
+    from web.server import app
+    console.print(f"[bold cyan]Launching SIRENE Interactive Geospatial Dashboard on [green]http://localhost:{args.port}[/]...[/]")
+    app.run(host="0.0.0.0", port=args.port, debug=False)
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="SIRENE French Business Registry Pipeline & Geospatial Analytics"
@@ -135,6 +141,11 @@ def main():
     p_all.add_argument("--memory", type=str, default="12GB", help="DuckDB memory limit")
     p_all.add_argument("--top", type=int, default=25, help="Top sectors to display")
     p_all.set_defaults(func=cmd_all)
+    
+    # serve
+    p_srv = subparsers.add_parser("serve", help="Launch interactive web dashboard")
+    p_srv.add_argument("--port", type=int, default=8000, help="Port to listen on (default: 8000)")
+    p_srv.set_defaults(func=cmd_serve)
     
     args = parser.parse_args()
     if not args.command:

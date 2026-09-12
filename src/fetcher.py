@@ -99,51 +99,67 @@ def download_file(
     headers = {"User-Agent": "SIRENE-Pipeline/1.0"}
     downloaded_bytes = 0
     
-    # If final target already exists and size matches, check if complete
-    if target_path.exists():
-        actual_size = target_path.stat().st_size
-        if expected_size and actual_size == expected_size:
-            console.print(f"[bold green][OK][/] File already exists and matches expected size: {target_path.name} ({actual_size / (1024*1024):.1f} MB)")
+    max_retries = 5
+    retry_count = 0
+    
+    while retry_count < max_retries:
+        try:
+            # If final target already exists and size matches, check if complete
+            if target_path.exists():
+                actual_size = target_path.stat().st_size
+                if expected_size and actual_size == expected_size:
+                    console.print(f"[bold green][OK][/] File already exists and matches expected size: {target_path.name} ({actual_size / (1024*1024):.1f} MB)")
+                    return target_path
+
+            # Check partial download for resuming
+            headers = {"User-Agent": "SIRENE-Pipeline/1.0"}
+            downloaded_bytes = 0
+            if temp_path.exists():
+                downloaded_bytes = temp_path.stat().st_size
+                headers["Range"] = f"bytes={downloaded_bytes}-"
+                console.print(f"[yellow]Resuming download from byte {downloaded_bytes} ({downloaded_bytes / (1024*1024):.1f} MB)...[/]")
+
+            response = requests.get(url, headers=headers, stream=True, timeout=30)
+            
+            # Check if range is accepted
+            mode = "ab" if downloaded_bytes > 0 and response.status_code == 206 else "wb"
+            if mode == "wb":
+                downloaded_bytes = 0
+                
+            total_size = expected_size or int(response.headers.get("content-length", 0)) + downloaded_bytes
+            
+            with open(temp_path, mode) as f:
+                with tqdm(
+                    total=total_size,
+                    initial=downloaded_bytes,
+                    unit="B",
+                    unit_scale=True,
+                    unit_divisor=1024,
+                    desc=target_path.name,
+                    ncols=100
+                ) as bar:
+                    for chunk in response.iter_content(chunk_size=chunk_size):
+                        if chunk:
+                            f.write(chunk)
+                            bar.update(len(chunk))
+                            
+            # Verify file size if expected_size is known
+            if temp_path.exists():
+                if expected_size and temp_path.stat().st_size != expected_size:
+                    raise IOError(f"File size mismatch: got {temp_path.stat().st_size} bytes, expected {expected_size}")
+                if target_path.exists():
+                    target_path.unlink()
+                temp_path.rename(target_path)
+                
+            console.print(f"[bold green][OK] Download complete:[/] {target_path}")
             return target_path
-
-    # Check partial download for resuming
-    if temp_path.exists():
-        downloaded_bytes = temp_path.stat().st_size
-        headers["Range"] = f"bytes={downloaded_bytes}-"
-        console.print(f"[yellow]Resuming download from byte {downloaded_bytes} ({downloaded_bytes / (1024*1024):.1f} MB)...[/]")
-
-    response = requests.get(url, headers=headers, stream=True, timeout=60)
-    
-    # Check if range is accepted
-    mode = "ab" if downloaded_bytes > 0 and response.status_code == 206 else "wb"
-    if mode == "wb":
-        downloaded_bytes = 0
-        
-    total_size = expected_size or int(response.headers.get("content-length", 0)) + downloaded_bytes
-    
-    with open(temp_path, mode) as f:
-        with tqdm(
-            total=total_size,
-            initial=downloaded_bytes,
-            unit="B",
-            unit_scale=True,
-            unit_divisor=1024,
-            desc=target_path.name,
-            ncols=100
-        ) as bar:
-            for chunk in response.iter_content(chunk_size=chunk_size):
-                if chunk:
-                    f.write(chunk)
-                    bar.update(len(chunk))
-                    
-    # Atomic rename once completed
-    if temp_path.exists():
-        if target_path.exists():
-            target_path.unlink()
-        temp_path.rename(target_path)
-        
-    console.print(f"[bold green][OK] Download complete:[/] {target_path}")
-    return target_path
+            
+        except (requests.exceptions.RequestException, IOError) as e:
+            retry_count += 1
+            console.print(f"[bold red]Download interrupted ({e}).[/] Retrying {retry_count}/{max_retries} in 3s...")
+            time.sleep(3)
+            
+    raise RuntimeError(f"Failed to download {url} after {max_retries} attempts.")
 
 
 def check_discovery() -> Tuple[Dict, Dict]:

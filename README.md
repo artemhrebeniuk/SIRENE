@@ -53,6 +53,13 @@ python -m pip install -r requirements.txt
   python run.py analyze --naf "56.10A,62.01Z,47.11D"
   ```
 
+- **Запустить интерактивный веб-дашборд (карта, фильтры, 101 департамент):**
+  ```bash
+  python run.py serve
+  # Или двойной клик по start_dashboard.bat в проводнике Windows
+  ```
+  Откроется в браузере: `http://localhost:8000`
+
 - **Выполнить всё сквозным циклом:**
   ```bash
   python run.py all
