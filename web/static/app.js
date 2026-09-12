@@ -284,6 +284,55 @@ function bindUI() {
     });
   });
 
+  // Draggable Sidebar Splitter Resizer
+  const resizer = document.getElementById('sidebarResizer');
+  const sidebar = document.getElementById('sidebarContainer');
+  let isResizing = false;
+
+  // Restore saved width
+  const savedWidth = localStorage.getItem('sirene_sidebar_width');
+  if (savedWidth && sidebar) {
+    sidebar.style.width = `${Math.min(Math.max(parseInt(savedWidth), 280), 800)}px`;
+  }
+
+  if (resizer && sidebar) {
+    resizer.addEventListener('mousedown', (e) => {
+      isResizing = true;
+      resizer.classList.add('is-resizing');
+      document.body.style.cursor = 'col-resize';
+      document.body.style.userSelect = 'none';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isResizing) return;
+      const newWidth = window.innerWidth - e.clientX;
+      if (newWidth >= 280 && newWidth <= 800) {
+        sidebar.style.width = `${newWidth}px`;
+        if (map) map.invalidateSize();
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isResizing) {
+        isResizing = false;
+        resizer.classList.remove('is-resizing');
+        document.body.style.cursor = '';
+        document.body.style.userSelect = '';
+        localStorage.setItem('sirene_sidebar_width', sidebar.offsetWidth);
+        if (map) map.invalidateSize();
+      }
+    });
+  }
+
+  // Modal Fullscreen / Maximize Toggle
+  const btnMaxModal = document.getElementById('btnMaximizeBizModal');
+  const modalBox = document.getElementById('bizModalCard');
+  if (btnMaxModal && modalBox) {
+    btnMaxModal.addEventListener('click', () => {
+      modalBox.classList.toggle('is-maximized');
+    });
+  }
+
   // Tab Switching (Departments, Communes, Sectors)
   document.querySelectorAll('.tab-trigger').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -300,6 +349,14 @@ function bindUI() {
       };
       const target = paneMap[btn.dataset.tab] || 'paneDepartments';
       document.getElementById(target).classList.add('active');
+      
+      // Auto-collapse inspector if switching tabs to give full height to the active tab
+      const drawer = document.getElementById('inspectorDrawer');
+      if (state.activeTab !== 'departments') {
+        drawer.style.display = 'none';
+      } else if (state.selectedDepartment) {
+        drawer.style.display = 'block';
+      }
       
       const searchInput = document.getElementById('searchInput');
       if (state.activeTab === 'departments') {
@@ -387,6 +444,16 @@ function bindUI() {
       fetchAndRenderBusinesses(false);
     }, 280);
   });
+
+  // City Dropdown Filter
+  const bizCitySelect = document.getElementById('bizCitySelect');
+  if (bizCitySelect) {
+    bizCitySelect.addEventListener('change', (e) => {
+      modalState.city = e.target.value;
+      modalState.offset = 0;
+      fetchAndRenderBusinesses(false);
+    });
+  }
 
   // Niche / Industry Dropdown Filter
   const bizNafSelect = document.getElementById('bizNafSelect');
@@ -551,25 +618,17 @@ async function selectDepartment(deptCode) {
       Browse Individual Businesses
     `;
 
-    // Render Top Cities & Top Industries in Inspector
-    const citiesPills = cities.slice(0, 6).map(c => 
-      `<span class="city-pill" onclick="openBusinessModal('${deptCode}', '${data.name}', '${escapeStr(c.city)}')">${c.city} (${c.total.toLocaleString('en-US')})</span>`
-    ).join('');
-
-    const industriesList = data.top_sectors.slice(0, 4).map(s => `
-      <div class="breakdown-row" onclick="selectSector('${s.code_naf}')">
-        <span title="${s.label}"><b class="breakdown-code">${s.code_naf}</b> ${s.label.substring(0, 22)}...</span>
-        <span style="font-weight:700; color:#10B981">${s.count.toLocaleString('en-US')} (${s.pct}%)</span>
+    // Render Top Industries in Inspector
+    const industriesList = data.top_sectors.slice(0, 3).map(s => `
+      <div class="breakdown-row" onclick="openBusinessModal('${deptCode}', '${data.name}', '', '${s.code_naf}')">
+        <span title="${s.label}"><b class="breakdown-code">${s.code_naf}</b> ${s.label.length > 24 ? s.label.substring(0, 24) + '...' : s.label}</span>
+        <span style="font-weight:700; color:#58A6FF">${s.count.toLocaleString('en-US')}</span>
       </div>
     `).join('');
 
     document.getElementById('inspectorDetails').innerHTML = `
       <div style="margin-top:6px;">
-        <div style="font-weight:600; color:#94A3B8; margin-bottom:4px; font-size:0.68rem; text-transform:uppercase;">Top Communes / Cities:</div>
-        <div style="display:flex; flex-wrap:wrap; gap:3px; margin-bottom:8px;">${citiesPills}</div>
-      </div>
-      <div>
-        <div style="font-weight:600; color:#94A3B8; margin-bottom:4px; font-size:0.68rem; text-transform:uppercase;">Top Industries:</div>
+        <div style="font-weight:600; color:#8B949E; margin-bottom:4px; font-size:0.67rem; text-transform:uppercase; letter-spacing:0.03em;">Top Industries in ${data.name}:</div>
         ${industriesList}
       </div>
     `;
@@ -734,7 +793,7 @@ async function openBusinessModal(deptCode, deptName, initialCity = '', initialNa
     modalState.citiesList = await citiesRes.json();
     modalState.nichesList = await nichesRes.json();
 
-    renderCityChips();
+    renderCitySelect();
     renderNicheSelect();
   } catch (err) {
     console.error('Failed to load filter metadata for modal:', err);
@@ -743,35 +802,34 @@ async function openBusinessModal(deptCode, deptName, initialCity = '', initialNa
   fetchAndRenderBusinesses(false);
 }
 
-function renderCityChips() {
-  const container = document.getElementById('cityChipsContainer');
+function renderCitySelect() {
+  const select = document.getElementById('bizCitySelect');
+  if (!select) return;
   
-  let html = `
-    <button class="city-chip ${!modalState.city ? 'active' : ''}" onclick="setModalCity('')">
-      All Cities (${modalState.citiesList.reduce((acc, c) => acc + c.total, 0).toLocaleString('en-US')})
-    </button>
-  `;
-
-  modalState.citiesList.slice(0, 12).forEach(c => {
-    const isActive = modalState.city.toUpperCase() === c.city.toUpperCase();
+  const totalInCities = modalState.citiesList.reduce((acc, c) => acc + c.total, 0);
+  let html = `<option value="">All Cities in Dept (${totalInCities.toLocaleString('en-US')})</option>`;
+  
+  modalState.citiesList.forEach(c => {
+    const isSelected = modalState.city.toUpperCase() === c.city.toUpperCase() ? 'selected' : '';
     html += `
-      <button class="city-chip ${isActive ? 'active' : ''}" onclick="setModalCity('${escapeStr(c.city)}')">
+      <option value="${escapeStr(c.city)}" ${isSelected}>
         ${c.city} (${c.total.toLocaleString('en-US')})
-      </button>
+      </option>
     `;
   });
 
-  container.innerHTML = html;
+  select.innerHTML = html;
 }
 
 function renderNicheSelect() {
   const select = document.getElementById('bizNafSelect');
+  if (!select) return;
   
   let html = `<option value="">All Niches & Industries (${modalState.nichesList.length} top sectors)</option>`;
   
   modalState.nichesList.forEach(n => {
     const isSelected = modalState.naf === n.code ? 'selected' : '';
-    const labelShort = n.label.length > 45 ? n.label.substring(0, 45) + '...' : n.label;
+    const labelShort = n.label.length > 42 ? n.label.substring(0, 42) + '...' : n.label;
     html += `
       <option value="${n.code}" ${isSelected}>
         [${n.code}] ${labelShort} (${n.total.toLocaleString('en-US')})
@@ -786,7 +844,8 @@ function setModalCity(cityName) {
   modalState.city = cityName;
   modalState.offset = 0;
   modalState.limit = 50;
-  renderCityChips();
+  const citySelect = document.getElementById('bizCitySelect');
+  if (citySelect) citySelect.value = cityName;
   fetchAndRenderBusinesses(false);
 }
 
@@ -863,50 +922,40 @@ async function fetchAndRenderBusinesses(append = false) {
     }
 
     const rowsHtml = data.items.map(b => {
-      const pinBtn = b.has_gps ? `
-        <div style="display:flex; flex-direction:column; gap:4px;">
-          <button class="btn-map-pin" onclick="pinBusinessOnMap('${b.siret}', ${b.lat}, ${b.lng}, '${escapeStr(b.name)}', '${escapeStr(b.postal_code || '')} ${escapeStr(b.city || '')}', '${b.naf_code}', '${escapeStr(b.naf_label)}', '${escapeStr(b.naf_label_fr || '')}', '${escapeStr(b.google_maps_url || '')}', '${escapeStr(b.gov_verify_url)}')">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            Show on Map
-          </button>
-          <a href="${b.google_maps_url}" target="_blank" class="btn-google-ext" title="Open directly in Google Maps with Street View">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" y1="14" x2="21" y2="3"></line>
-            </svg>
-            Google Maps
-          </a>
-        </div>
-      ` : `<span class="text-dim" style="font-size:0.7rem;">No GPS</span>`;
+      const actionBtn = b.has_gps ? `
+        <button class="btn-locate" onclick="pinBusinessOnMap('${b.siret}', ${b.lat}, ${b.lng}, '${escapeStr(b.name)}', '${escapeStr(b.postal_code || '')} ${escapeStr(b.city || '')}', '${b.naf_code}', '${escapeStr(b.naf_label)}', '${escapeStr(b.naf_label_fr || '')}', '${escapeStr(b.google_maps_url || '')}', '${escapeStr(b.gov_verify_url)}')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          Locate
+        </button>
+      ` : `<span style="color:#6E7681; font-size:0.68rem; display:block; text-align:center;">No GPS</span>`;
 
       return `
         <tr>
           <td class="biz-name-cell">
-            <div style="font-size:0.84rem; font-weight:700;">${b.name}</div>
-            ${b.enseigne && b.enseigne !== b.name ? `<div style="font-size:0.68rem; color:#94A3B8;">Sign: ${b.enseigne}</div>` : ''}
+            <div class="biz-name-main">${b.name}</div>
+            ${b.enseigne && b.enseigne !== b.name ? `<div class="biz-name-sub">Sign: ${b.enseigne}</div>` : ''}
           </td>
-          <td class="biz-siret-cell">
-            <div>${b.siret}</div>
-            <a href="${b.gov_verify_url}" target="_blank" class="btn-gov-verify" title="Official French Government Certificate on data.gouv.fr">
-              Verify Gouv ↗
+          <td>
+            <span class="biz-siret-val">${b.siret}</span>
+            <a href="${b.gov_verify_url}" target="_blank" class="biz-verify-link" title="Verify on official French Government registry">
+              INSEE Gouv ↗
             </a>
           </td>
           <td>
-            <div style="font-weight:600; color:#F8FAFC;">${b.city || 'N/A'}</div>
-            <div style="font-size:0.68rem; color:#94A3B8;">${b.postal_code || ''}</div>
+            <div style="font-weight:600; color:#F0F6FC;">${b.city || 'N/A'}</div>
+            <div style="font-size:0.68rem; color:#8B949E;">${b.postal_code || ''}</div>
           </td>
           <td>
-            <div style="display:flex; align-items:center; gap:5px;">
+            <div style="display:flex; align-items:flex-start; gap:4px;">
               <span class="badge-naf">${b.naf_code}</span>
-              <span style="font-weight:600; color:#F1F5F9; font-size:0.74rem;">${b.naf_label}</span>
+              <span style="font-weight:600; color:#F0F6FC; font-size:0.73rem;">${b.naf_label}</span>
             </div>
-            ${b.naf_label_fr ? `<div style="font-size:0.68rem; color:#94A3B8; margin-top:2px;">FR: ${b.naf_label_fr}</div>` : ''}
+            ${b.naf_label_fr ? `<div style="font-size:0.67rem; color:#8B949E; margin-top:2px;">FR: ${b.naf_label_fr}</div>` : ''}
           </td>
-          <td>${pinBtn}</td>
+          <td style="text-align: center;">${actionBtn}</td>
         </tr>
       `;
     }).join('');

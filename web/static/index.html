@@ -56,6 +56,17 @@
           <span class="kpi-k">NAF Industries</span>
           <span class="kpi-v text-amber" id="kpiNafCodes">738</span>
         </div>
+        <div class="kpi-sep"></div>
+        <div class="kpi-item" title="Official French Government INSEE SIRENE & Geolocation Registry. Zero mock or synthetic data.">
+          <span class="kpi-k">Integrity</span>
+          <span class="kpi-v text-green" style="display: flex; align-items: center; gap: 4px; font-weight: 700;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <polyline points="9 12 11 14 15 10"></polyline>
+            </svg>
+            100% Real INSEE
+          </span>
+        </div>
       </div>
 
       <!-- Actions -->
@@ -119,9 +130,7 @@
         </div>
 
         <!-- The Leaflet Map Canvas -->
-        <div id="map"></div>
-
-        <!-- Map Legend (Flat Discrete Steps, Zero Gradients) -->
+        <div id="map"></div>        <!-- Map Legend (Flat Discrete Steps, Zero Gradients) -->
         <div class="map-legend-card">
           <div class="legend-header">Establishment Density</div>
           <div class="legend-steps">
@@ -139,8 +148,13 @@
         </div>
       </section>
 
+      <!-- Draggable Splitter Handle to Resize Sidebar Width -->
+      <div class="sidebar-resizer" id="sidebarResizer" title="Drag left/right to resize sidebar">
+        <div class="resizer-knob"></div>
+      </div>
+
       <!-- Right: Structured Analytics & Discovery Sidebar -->
-      <aside class="sidebar-container">
+      <aside class="sidebar-container" id="sidebarContainer">
         
         <!-- Navigation Tabs: Departments, Communes (Cities), Industries -->
         <div class="nav-tabs">
@@ -182,7 +196,7 @@
           <button id="clearSearch" class="btn-clear" style="display:none;">&times;</button>
         </div>
 
-        <!-- Inspector Drawer (Docked & Compact) -->
+        <!-- Inspector Drawer (Streamlined & Compact) -->
         <div class="inspector-drawer" id="inspectorDrawer" style="display: none;">
           <div class="drawer-header">
             <div>
@@ -229,14 +243,14 @@
             </div>
           </div>
 
-          <!-- Pane 2: Communes / Cities (NEW) -->
+          <!-- Pane 2: Communes / Cities -->
           <div class="pane" id="paneCommunes">
             <div class="pane-column-headers">
               <span>Commune / City</span>
               <span>Active Units</span>
             </div>
             <div class="entity-list" id="communesList">
-              <div class="loading-state">Loading French communes...</div>
+              <div class="loading-state">Loading top communes...</div>
             </div>
           </div>
 
@@ -255,45 +269,57 @@
 
     </div>
 
-    <!-- Live Business Directory Modal / Bottom Drawer -->
+    <!-- Live Business Directory Modal (Resizable & Streamlined) -->
     <div class="biz-modal-backdrop" id="bizModal" style="display: none;">
-      <div class="biz-modal-card">
+      <div class="biz-modal-card" id="bizModalCard">
         <div class="biz-modal-header">
           <div>
             <span class="modal-pill" id="bizModalPill">Business Registry Explorer</span>
             <h3 class="biz-modal-title" id="bizModalTitle">Registered Establishments in Paris (75)</h3>
           </div>
           <div class="biz-modal-controls">
-            <input type="text" id="bizSearchInput" class="biz-search" placeholder="Search company name, store sign, or SIRET...">
-            <button class="btn-close-modal" id="btnCloseBizModal">&times;</button>
+            <button class="btn-modal-action" id="btnMaximizeBizModal" title="Toggle Fullscreen">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+              </svg>
+            </button>
+            <button class="btn-close-modal" id="btnCloseBizModal" title="Close modal">&times;</button>
           </div>
         </div>
 
-        <!-- Filter Controls Row (Niche & City) -->
-        <div class="biz-filter-controls-row">
-          <div class="biz-filter-left">
-            <span class="filter-label">Filter by Niche / Industry:</span>
-            <select id="bizNafSelect" class="biz-naf-select">
-              <option value="">All Niches & Industries</option>
-            </select>
+        <!-- Single Streamlined Unified Toolbar (Zero clutter) -->
+        <div class="biz-unified-toolbar">
+          <div class="toolbar-group">
+            <div class="toolbar-field">
+              <label for="bizCitySelect">City / Commune:</label>
+              <select id="bizCitySelect" class="biz-select">
+                <option value="">All Cities in Department</option>
+              </select>
+            </div>
+            <div class="toolbar-field">
+              <label for="bizNafSelect">Industry Niche:</label>
+              <select id="bizNafSelect" class="biz-select">
+                <option value="">All Niches & Industries</option>
+              </select>
+            </div>
           </div>
-          <div class="biz-filter-right">
-            <a id="btnExportBizCsv" class="btn-export-biz" href="#" target="_blank" title="Download up to 5,000 businesses matching these filters to CSV">
+
+          <div class="toolbar-group toolbar-right">
+            <div class="biz-search-wrapper">
+              <svg class="search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="bizSearchInput" class="biz-search-field" placeholder="Search company, trade sign, or SIRET...">
+            </div>
+            <a id="btnExportBizCsv" class="btn-export-biz" href="#" target="_blank" title="Export filtered establishments to CSV">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="7 10 12 15 17 10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
-              Export Filtered (CSV)
+              Export CSV
             </a>
-          </div>
-        </div>
-
-        <!-- City filter bar inside modal -->
-        <div class="biz-city-filter-bar" id="bizCityFilterBar">
-          <span class="filter-label">Filter by City:</span>
-          <div class="city-chips-container" id="cityChipsContainer">
-            <!-- Dynamic city chips -->
           </div>
         </div>
 
@@ -301,11 +327,11 @@
           <table class="biz-table">
             <thead>
               <tr>
-                <th>Company / Store Name</th>
-                <th>SIRET & Verification</th>
-                <th>City & Postal Code</th>
-                <th>Economic Activity (NAF)</th>
-                <th>Location & Maps</th>
+                <th style="width: 26%;">Company / Store Name</th>
+                <th style="width: 20%;">SIRET & Official Verify</th>
+                <th style="width: 16%;">City & Postal Code</th>
+                <th style="width: 26%;">Economic Activity (NAF)</th>
+                <th style="width: 12%; text-align: center;">Action</th>
               </tr>
             </thead>
             <tbody id="bizTableBody">
