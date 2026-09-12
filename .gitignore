@@ -14,8 +14,9 @@ data/
 *.tar.gz
 *.csv
 
-# Output
+# Output & Scratch
 output/
+scratch/
 
 # IDE / OS
 .vscode/

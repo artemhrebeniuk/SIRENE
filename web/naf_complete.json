@@ -1,0 +1,3692 @@
+{
+  "01.11Z": {
+    "code": "01.11Z",
+    "label_fr": "Culture de céréales (à l'exception du riz), de légumineuses et de graines oléagineuses",
+    "label_en": "Cereal, Legume & Oilseed Farming"
+  },
+  "01.12Z": {
+    "code": "01.12Z",
+    "label_fr": "Culture du riz",
+    "label_en": "Rice Farming"
+  },
+  "01.13Z": {
+    "code": "01.13Z",
+    "label_fr": "Culture de légumes, de melons, de racines et de tubercules",
+    "label_en": "Vegetable, Melon & Root Crop Farming"
+  },
+  "01.14Z": {
+    "code": "01.14Z",
+    "label_fr": "Culture de la canne à sucre",
+    "label_en": "Culture de la canne à sucre"
+  },
+  "01.15Z": {
+    "code": "01.15Z",
+    "label_fr": "Culture du tabac",
+    "label_en": "Culture du tabac"
+  },
+  "01.16Z": {
+    "code": "01.16Z",
+    "label_fr": "Culture de plantes à fibres",
+    "label_en": "Culture de plantes à fibres"
+  },
+  "01.19Z": {
+    "code": "01.19Z",
+    "label_fr": "Autres cultures non permanentes",
+    "label_en": "Autres cultures non permanentes"
+  },
+  "01.21Z": {
+    "code": "01.21Z",
+    "label_fr": "Culture de la vigne",
+    "label_en": "Grape Growing & Vineyards"
+  },
+  "01.22Z": {
+    "code": "01.22Z",
+    "label_fr": "Culture de fruits tropicaux et subtropicaux",
+    "label_en": "Culture de fruits tropicaux et subtropicaux"
+  },
+  "01.23Z": {
+    "code": "01.23Z",
+    "label_fr": "Culture d'agrumes",
+    "label_en": "Culture d'agrumes"
+  },
+  "01.24Z": {
+    "code": "01.24Z",
+    "label_fr": "Culture de fruits à pépins et à noyau",
+    "label_en": "Pome & Stone Fruit Orchards"
+  },
+  "01.25Z": {
+    "code": "01.25Z",
+    "label_fr": "Culture d'autres fruits d'arbres ou d'arbustes et de fruits à coque",
+    "label_en": "Culture d'autres fruits d'arbres ou d'arbustes et de fruits à coque"
+  },
+  "01.26Z": {
+    "code": "01.26Z",
+    "label_fr": "Culture de fruits oléagineux",
+    "label_en": "Culture de fruits oléagineux"
+  },
+  "01.27Z": {
+    "code": "01.27Z",
+    "label_fr": "Culture de plantes à boissons",
+    "label_en": "Culture de plantes à boissons"
+  },
+  "01.28Z": {
+    "code": "01.28Z",
+    "label_fr": "Culture de plantes à épices, aromatiques, médicinales et pharmaceutiques",
+    "label_en": "Culture de plantes à épices, aromatiques, médicinales et pharmaceutiques"
+  },
+  "01.29Z": {
+    "code": "01.29Z",
+    "label_fr": "Autres cultures permanentes",
+    "label_en": "Autres cultures permanentes"
+  },
+  "01.30Z": {
+    "code": "01.30Z",
+    "label_fr": "Reproduction de plantes",
+    "label_en": "Reproduction de plantes"
+  },
+  "01.41Z": {
+    "code": "01.41Z",
+    "label_fr": "Élevage de vaches laitières",
+    "label_en": "Dairy Cattle Farming"
+  },
+  "01.42Z": {
+    "code": "01.42Z",
+    "label_fr": "Élevage d'autres bovins et de buffles",
+    "label_en": "Beef Cattle & Livestock Farming"
+  },
+  "01.43Z": {
+    "code": "01.43Z",
+    "label_fr": "Élevage de chevaux et d'autres équidés",
+    "label_en": "Élevage de chevaux et d'autres équidés"
+  },
+  "01.44Z": {
+    "code": "01.44Z",
+    "label_fr": "Élevage de chameaux et d'autres camélidés",
+    "label_en": "Élevage de chameaux et d'autres camélidés"
+  },
+  "01.45Z": {
+    "code": "01.45Z",
+    "label_fr": "Élevage d'ovins et de caprins",
+    "label_en": "Élevage d'ovins et de caprins"
+  },
+  "01.46Z": {
+    "code": "01.46Z",
+    "label_fr": "Élevage de porcins",
+    "label_en": "Élevage de porcins"
+  },
+  "01.47Z": {
+    "code": "01.47Z",
+    "label_fr": "Élevage de volailles",
+    "label_en": "Élevage de volailles"
+  },
+  "01.49Z": {
+    "code": "01.49Z",
+    "label_fr": "Élevage d'autres animaux",
+    "label_en": "Élevage d'autres animaux"
+  },
+  "01.50Z": {
+    "code": "01.50Z",
+    "label_fr": "Culture et élevage associés",
+    "label_en": "Culture et élevage associés"
+  },
+  "01.61Z": {
+    "code": "01.61Z",
+    "label_fr": "Activités de soutien aux cultures",
+    "label_en": "Activités de soutien aux cultures"
+  },
+  "01.62Z": {
+    "code": "01.62Z",
+    "label_fr": "Activités de soutien à la production animale",
+    "label_en": "Activités de soutien à la production animale"
+  },
+  "01.63Z": {
+    "code": "01.63Z",
+    "label_fr": "Traitement primaire des récoltes",
+    "label_en": "Traitement primaire des récoltes"
+  },
+  "01.64Z": {
+    "code": "01.64Z",
+    "label_fr": "Traitement des semences",
+    "label_en": "Traitement des semences"
+  },
+  "01.70Z": {
+    "code": "01.70Z",
+    "label_fr": "Chasse, piégeage et services annexes",
+    "label_en": "Chasse, piégeage et services annexes"
+  },
+  "02.10Z": {
+    "code": "02.10Z",
+    "label_fr": "Sylviculture et autres activités forestières",
+    "label_en": "Sylviculture et autres activités forestières"
+  },
+  "02.20Z": {
+    "code": "02.20Z",
+    "label_fr": "Exploitation forestière",
+    "label_en": "Logging & Forestry"
+  },
+  "02.30Z": {
+    "code": "02.30Z",
+    "label_fr": "Récolte de produits forestiers non ligneux poussant à l'état sauvage",
+    "label_en": "Récolte de produits forestiers non ligneux poussant à l'état sauvage"
+  },
+  "02.40Z": {
+    "code": "02.40Z",
+    "label_fr": "Services de soutien à l'exploitation forestière",
+    "label_en": "Services de soutien à l'exploitation forestière"
+  },
+  "03.11Z": {
+    "code": "03.11Z",
+    "label_fr": "Pêche en mer",
+    "label_en": "Marine Fishing"
+  },
+  "03.12Z": {
+    "code": "03.12Z",
+    "label_fr": "Pêche en eau douce",
+    "label_en": "Pêche en eau douce"
+  },
+  "03.21Z": {
+    "code": "03.21Z",
+    "label_fr": "Aquaculture en mer",
+    "label_en": "Aquaculture en mer"
+  },
+  "03.22Z": {
+    "code": "03.22Z",
+    "label_fr": "Aquaculture en eau douce",
+    "label_en": "Aquaculture en eau douce"
+  },
+  "05.10Z": {
+    "code": "05.10Z",
+    "label_fr": "Extraction de houille",
+    "label_en": "Extraction de houille"
+  },
+  "05.20Z": {
+    "code": "05.20Z",
+    "label_fr": "Extraction de lignite",
+    "label_en": "Extraction de lignite"
+  },
+  "06.10Z": {
+    "code": "06.10Z",
+    "label_fr": "Extraction de pétrole brut",
+    "label_en": "Extraction de pétrole brut"
+  },
+  "06.20Z": {
+    "code": "06.20Z",
+    "label_fr": "Extraction de gaz naturel",
+    "label_en": "Extraction de gaz naturel"
+  },
+  "07.10Z": {
+    "code": "07.10Z",
+    "label_fr": "Extraction de minerais de fer",
+    "label_en": "Extraction de minerais de fer"
+  },
+  "07.21Z": {
+    "code": "07.21Z",
+    "label_fr": "Extraction de minerais d'uranium et de thorium",
+    "label_en": "Extraction de minerais d'uranium et de thorium"
+  },
+  "07.29Z": {
+    "code": "07.29Z",
+    "label_fr": "Extraction d'autres minerais de métaux non ferreux",
+    "label_en": "Extraction d'autres minerais de métaux non ferreux"
+  },
+  "08.11Z": {
+    "code": "08.11Z",
+    "label_fr": "Extraction de pierres ornementales et de construction, de calcaire industriel, de gypse, de craie et d'ardoise",
+    "label_en": "Extraction de pierres ornementales et de construction, de calcaire industriel, de gypse, de craie et d'ardoise"
+  },
+  "08.12Z": {
+    "code": "08.12Z",
+    "label_fr": "Exploitation de gravières et sablières, extraction d'argiles et de kaolin",
+    "label_en": "Exploitation de gravières et sablières, extraction d'argiles et de kaolin"
+  },
+  "08.91Z": {
+    "code": "08.91Z",
+    "label_fr": "Extraction des minéraux chimiques et d'engrais minéraux",
+    "label_en": "Extraction des minéraux chimiques et d'engrais minéraux"
+  },
+  "08.92Z": {
+    "code": "08.92Z",
+    "label_fr": "Extraction de tourbe",
+    "label_en": "Extraction de tourbe"
+  },
+  "08.93Z": {
+    "code": "08.93Z",
+    "label_fr": "Production de sel",
+    "label_en": "Production de sel"
+  },
+  "08.99Z": {
+    "code": "08.99Z",
+    "label_fr": "Autres activités extractives n.c.a.",
+    "label_en": "Autres activités extractives n.c.a."
+  },
+  "09.10Z": {
+    "code": "09.10Z",
+    "label_fr": "Activités de soutien à l'extraction d'hydrocarbures",
+    "label_en": "Activités de soutien à l'extraction d'hydrocarbures"
+  },
+  "09.90Z": {
+    "code": "09.90Z",
+    "label_fr": "Activités de soutien aux autres industries extractives",
+    "label_en": "Activités de soutien aux autres industries extractives"
+  },
+  "10.11Z": {
+    "code": "10.11Z",
+    "label_fr": "Transformation et conservation de la viande de boucherie",
+    "label_en": "Transformation et conservation de la viande de boucherie"
+  },
+  "10.12Z": {
+    "code": "10.12Z",
+    "label_fr": "Transformation et conservation de la viande de volaille",
+    "label_en": "Transformation et conservation de la viande de volaille"
+  },
+  "10.13A": {
+    "code": "10.13A",
+    "label_fr": "Préparation industrielle de produits à base de viande",
+    "label_en": "Préparation industrielle de produits à base de viande"
+  },
+  "10.13B": {
+    "code": "10.13B",
+    "label_fr": "Charcuterie",
+    "label_en": "Charcuterie"
+  },
+  "10.20Z": {
+    "code": "10.20Z",
+    "label_fr": "Transformation et conservation de poisson, de crustacés et de mollusques",
+    "label_en": "Transformation et conservation de poisson, de crustacés et de mollusques"
+  },
+  "10.31Z": {
+    "code": "10.31Z",
+    "label_fr": "Transformation et conservation de pommes de terre",
+    "label_en": "Transformation et conservation de pommes de terre"
+  },
+  "10.32Z": {
+    "code": "10.32Z",
+    "label_fr": "Préparation de jus de fruits et légumes",
+    "label_en": "Préparation de jus de fruits et légumes"
+  },
+  "10.39A": {
+    "code": "10.39A",
+    "label_fr": "Autre transformation et conservation de légumes",
+    "label_en": "Autre transformation et conservation de légumes"
+  },
+  "10.39B": {
+    "code": "10.39B",
+    "label_fr": "Transformation et conservation de fruits",
+    "label_en": "Transformation et conservation de fruits"
+  },
+  "10.41A": {
+    "code": "10.41A",
+    "label_fr": "Fabrication d'huiles et graisses brutes",
+    "label_en": "Fabrication d'huiles et graisses brutes"
+  },
+  "10.41B": {
+    "code": "10.41B",
+    "label_fr": "Fabrication d'huiles et graisses raffinées",
+    "label_en": "Fabrication d'huiles et graisses raffinées"
+  },
+  "10.42Z": {
+    "code": "10.42Z",
+    "label_fr": "Fabrication de margarine et graisses comestibles similaires",
+    "label_en": "Fabrication de margarine et graisses comestibles similaires"
+  },
+  "10.51A": {
+    "code": "10.51A",
+    "label_fr": "Fabrication de lait liquide et de produits frais",
+    "label_en": "Fabrication de lait liquide et de produits frais"
+  },
+  "10.51B": {
+    "code": "10.51B",
+    "label_fr": "Fabrication de beurre",
+    "label_en": "Fabrication de beurre"
+  },
+  "10.51C": {
+    "code": "10.51C",
+    "label_fr": "Fabrication de fromage",
+    "label_en": "Fabrication de fromage"
+  },
+  "10.51D": {
+    "code": "10.51D",
+    "label_fr": "Fabrication d'autres produits laitiers",
+    "label_en": "Fabrication d'autres produits laitiers"
+  },
+  "10.52Z": {
+    "code": "10.52Z",
+    "label_fr": "Fabrication de glaces et sorbets",
+    "label_en": "Fabrication de glaces et sorbets"
+  },
+  "10.61A": {
+    "code": "10.61A",
+    "label_fr": "Meunerie",
+    "label_en": "Meunerie"
+  },
+  "10.61B": {
+    "code": "10.61B",
+    "label_fr": "Autres activités du travail des grains",
+    "label_en": "Autres activités du travail des grains"
+  },
+  "10.62Z": {
+    "code": "10.62Z",
+    "label_fr": "Fabrication de produits amylacés",
+    "label_en": "Fabrication de produits amylacés"
+  },
+  "10.71A": {
+    "code": "10.71A",
+    "label_fr": "Fabrication industrielle de pain et de pâtisserie fraîche",
+    "label_en": "Industrial Bakery & Pastry Production"
+  },
+  "10.71B": {
+    "code": "10.71B",
+    "label_fr": "Cuisson de produits de boulangerie",
+    "label_en": "Cuisson de produits de boulangerie"
+  },
+  "10.71C": {
+    "code": "10.71C",
+    "label_fr": "Boulangerie et boulangerie-pâtisserie",
+    "label_en": "Artisanal Bakery & Pastry Shops"
+  },
+  "10.71D": {
+    "code": "10.71D",
+    "label_fr": "Pâtisserie",
+    "label_en": "Pastry & Confectionery Making"
+  },
+  "10.72Z": {
+    "code": "10.72Z",
+    "label_fr": "Fabrication de biscuits, biscottes et pâtisseries de conservation",
+    "label_en": "Fabrication de biscuits, biscottes et pâtisseries de conservation"
+  },
+  "10.73Z": {
+    "code": "10.73Z",
+    "label_fr": "Fabrication de pâtes alimentaires",
+    "label_en": "Fabrication de pâtes alimentaires"
+  },
+  "10.81Z": {
+    "code": "10.81Z",
+    "label_fr": "Fabrication de sucre",
+    "label_en": "Fabrication de sucre"
+  },
+  "10.82Z": {
+    "code": "10.82Z",
+    "label_fr": "Fabrication de cacao, chocolat et de produits de confiserie",
+    "label_en": "Fabrication de cacao, chocolat et de produits de confiserie"
+  },
+  "10.83Z": {
+    "code": "10.83Z",
+    "label_fr": "Transformation du thé et du café",
+    "label_en": "Transformation du thé et du café"
+  },
+  "10.84Z": {
+    "code": "10.84Z",
+    "label_fr": "Fabrication de condiments et assaisonnements",
+    "label_en": "Fabrication de condiments et assaisonnements"
+  },
+  "10.85Z": {
+    "code": "10.85Z",
+    "label_fr": "Fabrication de plats préparés",
+    "label_en": "Fabrication de plats préparés"
+  },
+  "10.86Z": {
+    "code": "10.86Z",
+    "label_fr": "Fabrication d'aliments homogénéisés et diététiques",
+    "label_en": "Fabrication d'aliments homogénéisés et diététiques"
+  },
+  "10.89Z": {
+    "code": "10.89Z",
+    "label_fr": "Fabrication d'autres produits alimentaires n.c.a.",
+    "label_en": "Other Food Products Manufacturing"
+  },
+  "10.91Z": {
+    "code": "10.91Z",
+    "label_fr": "Fabrication d'aliments pour animaux de ferme",
+    "label_en": "Fabrication d'aliments pour animaux de ferme"
+  },
+  "10.92Z": {
+    "code": "10.92Z",
+    "label_fr": "Fabrication d'aliments pour animaux de compagnie",
+    "label_en": "Fabrication d'aliments pour animaux de compagnie"
+  },
+  "11.01Z": {
+    "code": "11.01Z",
+    "label_fr": "Production de boissons alcooliques distillées",
+    "label_en": "Production de boissons alcooliques distillées"
+  },
+  "11.02A": {
+    "code": "11.02A",
+    "label_fr": "Fabrication de vins effervescents",
+    "label_en": "Fabrication de vins effervescents"
+  },
+  "11.02B": {
+    "code": "11.02B",
+    "label_fr": "Vinification",
+    "label_en": "Winemaking & Viticulture"
+  },
+  "11.03Z": {
+    "code": "11.03Z",
+    "label_fr": "Fabrication de cidre et de vins de fruits",
+    "label_en": "Fabrication de cidre et de vins de fruits"
+  },
+  "11.04Z": {
+    "code": "11.04Z",
+    "label_fr": "Production d'autres boissons fermentées non distillées",
+    "label_en": "Production d'autres boissons fermentées non distillées"
+  },
+  "11.05Z": {
+    "code": "11.05Z",
+    "label_fr": "Fabrication de bière",
+    "label_en": "Fabrication de bière"
+  },
+  "11.06Z": {
+    "code": "11.06Z",
+    "label_fr": "Fabrication de malt",
+    "label_en": "Fabrication de malt"
+  },
+  "11.07A": {
+    "code": "11.07A",
+    "label_fr": "Industrie des eaux de table",
+    "label_en": "Industrie des eaux de table"
+  },
+  "11.07B": {
+    "code": "11.07B",
+    "label_fr": "Production de boissons rafraîchissantes",
+    "label_en": "Production de boissons rafraîchissantes"
+  },
+  "12.00Z": {
+    "code": "12.00Z",
+    "label_fr": "Fabrication de produits à base de tabac",
+    "label_en": "Fabrication de produits à base de tabac"
+  },
+  "13.10Z": {
+    "code": "13.10Z",
+    "label_fr": "Préparation de fibres textiles et filature",
+    "label_en": "Préparation de fibres textiles et filature"
+  },
+  "13.20Z": {
+    "code": "13.20Z",
+    "label_fr": "Tissage",
+    "label_en": "Tissage"
+  },
+  "13.30Z": {
+    "code": "13.30Z",
+    "label_fr": "Ennoblissement textile",
+    "label_en": "Ennoblissement textile"
+  },
+  "13.91Z": {
+    "code": "13.91Z",
+    "label_fr": "Fabrication d'étoffes à mailles",
+    "label_en": "Fabrication d'étoffes à mailles"
+  },
+  "13.92Z": {
+    "code": "13.92Z",
+    "label_fr": "Fabrication d'articles textiles, sauf habillement",
+    "label_en": "Fabrication d'articles textiles, sauf habillement"
+  },
+  "13.93Z": {
+    "code": "13.93Z",
+    "label_fr": "Fabrication de tapis et moquettes",
+    "label_en": "Fabrication de tapis et moquettes"
+  },
+  "13.94Z": {
+    "code": "13.94Z",
+    "label_fr": "Fabrication de ficelles, cordes et filets",
+    "label_en": "Fabrication de ficelles, cordes et filets"
+  },
+  "13.95Z": {
+    "code": "13.95Z",
+    "label_fr": "Fabrication de non-tissés, sauf habillement",
+    "label_en": "Fabrication de non-tissés, sauf habillement"
+  },
+  "13.96Z": {
+    "code": "13.96Z",
+    "label_fr": "Fabrication d'autres textiles techniques et industriels",
+    "label_en": "Fabrication d'autres textiles techniques et industriels"
+  },
+  "13.99Z": {
+    "code": "13.99Z",
+    "label_fr": "Fabrication d'autres textiles n.c.a.",
+    "label_en": "Fabrication d'autres textiles n.c.a."
+  },
+  "14.11Z": {
+    "code": "14.11Z",
+    "label_fr": "Fabrication de vêtements en cuir",
+    "label_en": "Fabrication de vêtements en cuir"
+  },
+  "14.12Z": {
+    "code": "14.12Z",
+    "label_fr": "Fabrication de vêtements de travail",
+    "label_en": "Fabrication de vêtements de travail"
+  },
+  "14.13Z": {
+    "code": "14.13Z",
+    "label_fr": "Fabrication de vêtements de dessus",
+    "label_en": "Fabrication de vêtements de dessus"
+  },
+  "14.14Z": {
+    "code": "14.14Z",
+    "label_fr": "Fabrication de vêtements de dessous",
+    "label_en": "Fabrication de vêtements de dessous"
+  },
+  "14.19Z": {
+    "code": "14.19Z",
+    "label_fr": "Fabrication d'autres vêtements et accessoires",
+    "label_en": "Fabrication d'autres vêtements et accessoires"
+  },
+  "14.20Z": {
+    "code": "14.20Z",
+    "label_fr": "Fabrication d'articles en fourrure",
+    "label_en": "Fabrication d'articles en fourrure"
+  },
+  "14.31Z": {
+    "code": "14.31Z",
+    "label_fr": "Fabrication d'articles chaussants à mailles",
+    "label_en": "Fabrication d'articles chaussants à mailles"
+  },
+  "14.39Z": {
+    "code": "14.39Z",
+    "label_fr": "Fabrication d'autres articles à mailles",
+    "label_en": "Fabrication d'autres articles à mailles"
+  },
+  "15.11Z": {
+    "code": "15.11Z",
+    "label_fr": "Apprêt et tannage des cuirs ; préparation et teinture des fourrures",
+    "label_en": "Apprêt et tannage des cuirs ; préparation et teinture des fourrures"
+  },
+  "15.12Z": {
+    "code": "15.12Z",
+    "label_fr": "Fabrication d'articles de voyage, de maroquinerie et de sellerie",
+    "label_en": "Fabrication d'articles de voyage, de maroquinerie et de sellerie"
+  },
+  "15.20Z": {
+    "code": "15.20Z",
+    "label_fr": "Fabrication de chaussures",
+    "label_en": "Fabrication de chaussures"
+  },
+  "16.10A": {
+    "code": "16.10A",
+    "label_fr": "Sciage et rabotage du bois, hors imprégnation",
+    "label_en": "Sciage et rabotage du bois, hors imprégnation"
+  },
+  "16.10B": {
+    "code": "16.10B",
+    "label_fr": "Imprégnation du bois",
+    "label_en": "Imprégnation du bois"
+  },
+  "16.21Z": {
+    "code": "16.21Z",
+    "label_fr": "Fabrication de placage et de panneaux de bois",
+    "label_en": "Fabrication de placage et de panneaux de bois"
+  },
+  "16.22Z": {
+    "code": "16.22Z",
+    "label_fr": "Fabrication de parquets assemblés",
+    "label_en": "Fabrication de parquets assemblés"
+  },
+  "16.23Z": {
+    "code": "16.23Z",
+    "label_fr": "Fabrication de charpentes et d'autres menuiseries",
+    "label_en": "Fabrication de charpentes et d'autres menuiseries"
+  },
+  "16.24Z": {
+    "code": "16.24Z",
+    "label_fr": "Fabrication d'emballages en bois",
+    "label_en": "Fabrication d'emballages en bois"
+  },
+  "16.29Z": {
+    "code": "16.29Z",
+    "label_fr": "Fabrication d'objets divers en bois ; fabrication d'objets en liège, vannerie et sparterie",
+    "label_en": "Fabrication d'objets divers en bois ; fabrication d'objets en liège, vannerie et sparterie"
+  },
+  "17.11Z": {
+    "code": "17.11Z",
+    "label_fr": "Fabrication de pâte à papier",
+    "label_en": "Fabrication de pâte à papier"
+  },
+  "17.12Z": {
+    "code": "17.12Z",
+    "label_fr": "Fabrication de papier et de carton",
+    "label_en": "Fabrication de papier et de carton"
+  },
+  "17.21A": {
+    "code": "17.21A",
+    "label_fr": "Fabrication de carton ondulé",
+    "label_en": "Fabrication de carton ondulé"
+  },
+  "17.21B": {
+    "code": "17.21B",
+    "label_fr": "Fabrication de cartonnages",
+    "label_en": "Fabrication de cartonnages"
+  },
+  "17.21C": {
+    "code": "17.21C",
+    "label_fr": "Fabrication d'emballages en papier",
+    "label_en": "Fabrication d'emballages en papier"
+  },
+  "17.22Z": {
+    "code": "17.22Z",
+    "label_fr": "Fabrication d'articles en papier à usage sanitaire ou domestique",
+    "label_en": "Fabrication d'articles en papier à usage sanitaire ou domestique"
+  },
+  "17.23Z": {
+    "code": "17.23Z",
+    "label_fr": "Fabrication d'articles de papeterie",
+    "label_en": "Fabrication d'articles de papeterie"
+  },
+  "17.24Z": {
+    "code": "17.24Z",
+    "label_fr": "Fabrication de papiers peints",
+    "label_en": "Fabrication de papiers peints"
+  },
+  "17.29Z": {
+    "code": "17.29Z",
+    "label_fr": "Fabrication d'autres articles en papier ou en carton",
+    "label_en": "Fabrication d'autres articles en papier ou en carton"
+  },
+  "18.11Z": {
+    "code": "18.11Z",
+    "label_fr": "Imprimerie de journaux",
+    "label_en": "Imprimerie de journaux"
+  },
+  "18.12Z": {
+    "code": "18.12Z",
+    "label_fr": "Autre imprimerie (labeur)",
+    "label_en": "Autre imprimerie (labeur)"
+  },
+  "18.13Z": {
+    "code": "18.13Z",
+    "label_fr": "Activités de pré-presse",
+    "label_en": "Activités de pré-presse"
+  },
+  "18.14Z": {
+    "code": "18.14Z",
+    "label_fr": "Reliure et activités connexes",
+    "label_en": "Reliure et activités connexes"
+  },
+  "18.20Z": {
+    "code": "18.20Z",
+    "label_fr": "Reproduction d'enregistrements",
+    "label_en": "Reproduction d'enregistrements"
+  },
+  "19.10Z": {
+    "code": "19.10Z",
+    "label_fr": "Cokéfaction",
+    "label_en": "Cokéfaction"
+  },
+  "19.20Z": {
+    "code": "19.20Z",
+    "label_fr": "Raffinage du pétrole",
+    "label_en": "Raffinage du pétrole"
+  },
+  "20.11Z": {
+    "code": "20.11Z",
+    "label_fr": "Fabrication de gaz industriels",
+    "label_en": "Fabrication de gaz industriels"
+  },
+  "20.12Z": {
+    "code": "20.12Z",
+    "label_fr": "Fabrication de colorants et de pigments",
+    "label_en": "Fabrication de colorants et de pigments"
+  },
+  "20.13A": {
+    "code": "20.13A",
+    "label_fr": "Enrichissement et retraitement de matières nucléaires",
+    "label_en": "Enrichissement et retraitement de matières nucléaires"
+  },
+  "20.13B": {
+    "code": "20.13B",
+    "label_fr": "Fabrication d'autres produits chimiques inorganiques de base n.c.a.",
+    "label_en": "Fabrication d'autres produits chimiques inorganiques de base n.c.a."
+  },
+  "20.14Z": {
+    "code": "20.14Z",
+    "label_fr": "Fabrication d'autres produits chimiques organiques de base",
+    "label_en": "Fabrication d'autres produits chimiques organiques de base"
+  },
+  "20.15Z": {
+    "code": "20.15Z",
+    "label_fr": "Fabrication de produits azotés et d'engrais",
+    "label_en": "Fabrication de produits azotés et d'engrais"
+  },
+  "20.16Z": {
+    "code": "20.16Z",
+    "label_fr": "Fabrication de matières plastiques de base",
+    "label_en": "Fabrication de matières plastiques de base"
+  },
+  "20.17Z": {
+    "code": "20.17Z",
+    "label_fr": "Fabrication de caoutchouc synthétique",
+    "label_en": "Fabrication de caoutchouc synthétique"
+  },
+  "20.20Z": {
+    "code": "20.20Z",
+    "label_fr": "Fabrication de pesticides et d'autres produits agrochimiques",
+    "label_en": "Fabrication de pesticides et d'autres produits agrochimiques"
+  },
+  "20.30Z": {
+    "code": "20.30Z",
+    "label_fr": "Fabrication de peintures, vernis, encres et mastics",
+    "label_en": "Fabrication de peintures, vernis, encres et mastics"
+  },
+  "20.41Z": {
+    "code": "20.41Z",
+    "label_fr": "Fabrication de savons, détergents et produits d'entretien",
+    "label_en": "Fabrication de savons, détergents et produits d'entretien"
+  },
+  "20.42Z": {
+    "code": "20.42Z",
+    "label_fr": "Fabrication de parfums et de produits pour la toilette",
+    "label_en": "Fabrication de parfums et de produits pour la toilette"
+  },
+  "20.51Z": {
+    "code": "20.51Z",
+    "label_fr": "Fabrication de produits explosifs",
+    "label_en": "Fabrication de produits explosifs"
+  },
+  "20.52Z": {
+    "code": "20.52Z",
+    "label_fr": "Fabrication de colles",
+    "label_en": "Fabrication de colles"
+  },
+  "20.53Z": {
+    "code": "20.53Z",
+    "label_fr": "Fabrication d'huiles essentielles",
+    "label_en": "Fabrication d'huiles essentielles"
+  },
+  "20.59Z": {
+    "code": "20.59Z",
+    "label_fr": "Fabrication d'autres produits chimiques n.c.a.",
+    "label_en": "Fabrication d'autres produits chimiques n.c.a."
+  },
+  "20.60Z": {
+    "code": "20.60Z",
+    "label_fr": "Fabrication de fibres artificielles ou synthétiques",
+    "label_en": "Fabrication de fibres artificielles ou synthétiques"
+  },
+  "21.10Z": {
+    "code": "21.10Z",
+    "label_fr": "Fabrication de produits pharmaceutiques de base",
+    "label_en": "Fabrication de produits pharmaceutiques de base"
+  },
+  "21.20Z": {
+    "code": "21.20Z",
+    "label_fr": "Fabrication de préparations pharmaceutiques",
+    "label_en": "Fabrication de préparations pharmaceutiques"
+  },
+  "22.11Z": {
+    "code": "22.11Z",
+    "label_fr": "Fabrication et rechapage de pneumatiques",
+    "label_en": "Fabrication et rechapage de pneumatiques"
+  },
+  "22.19Z": {
+    "code": "22.19Z",
+    "label_fr": "Fabrication d'autres articles en caoutchouc",
+    "label_en": "Fabrication d'autres articles en caoutchouc"
+  },
+  "22.21Z": {
+    "code": "22.21Z",
+    "label_fr": "Fabrication de plaques, feuilles, tubes et profilés en matières plastiques",
+    "label_en": "Fabrication de plaques, feuilles, tubes et profilés en matières plastiques"
+  },
+  "22.22Z": {
+    "code": "22.22Z",
+    "label_fr": "Fabrication d'emballages en matières plastiques",
+    "label_en": "Fabrication d'emballages en matières plastiques"
+  },
+  "22.23Z": {
+    "code": "22.23Z",
+    "label_fr": "Fabrication d'éléments en matières plastiques pour la construction",
+    "label_en": "Fabrication d'éléments en matières plastiques pour la construction"
+  },
+  "22.29A": {
+    "code": "22.29A",
+    "label_fr": "Fabrication de pièces techniques à base de matières plastiques",
+    "label_en": "Fabrication de pièces techniques à base de matières plastiques"
+  },
+  "22.29B": {
+    "code": "22.29B",
+    "label_fr": "Fabrication de produits de consommation courante en matières plastiques",
+    "label_en": "Fabrication de produits de consommation courante en matières plastiques"
+  },
+  "23.11Z": {
+    "code": "23.11Z",
+    "label_fr": "Fabrication de verre plat",
+    "label_en": "Fabrication de verre plat"
+  },
+  "23.12Z": {
+    "code": "23.12Z",
+    "label_fr": "Façonnage et transformation du verre plat",
+    "label_en": "Façonnage et transformation du verre plat"
+  },
+  "23.13Z": {
+    "code": "23.13Z",
+    "label_fr": "Fabrication de verre creux",
+    "label_en": "Fabrication de verre creux"
+  },
+  "23.14Z": {
+    "code": "23.14Z",
+    "label_fr": "Fabrication de fibres de verre",
+    "label_en": "Fabrication de fibres de verre"
+  },
+  "23.19Z": {
+    "code": "23.19Z",
+    "label_fr": "Fabrication et façonnage d'autres articles en verre, y compris verre technique",
+    "label_en": "Fabrication et façonnage d'autres articles en verre, y compris verre technique"
+  },
+  "23.20Z": {
+    "code": "23.20Z",
+    "label_fr": "Fabrication de produits réfractaires",
+    "label_en": "Fabrication de produits réfractaires"
+  },
+  "23.31Z": {
+    "code": "23.31Z",
+    "label_fr": "Fabrication de carreaux en céramique",
+    "label_en": "Fabrication de carreaux en céramique"
+  },
+  "23.32Z": {
+    "code": "23.32Z",
+    "label_fr": "Fabrication de briques, tuiles et produits de construction, en terre cuite",
+    "label_en": "Fabrication de briques, tuiles et produits de construction, en terre cuite"
+  },
+  "23.41Z": {
+    "code": "23.41Z",
+    "label_fr": "Fabrication d'articles céramiques à usage domestique ou ornemental",
+    "label_en": "Fabrication d'articles céramiques à usage domestique ou ornemental"
+  },
+  "23.42Z": {
+    "code": "23.42Z",
+    "label_fr": "Fabrication d'appareils sanitaires en céramique",
+    "label_en": "Fabrication d'appareils sanitaires en céramique"
+  },
+  "23.43Z": {
+    "code": "23.43Z",
+    "label_fr": "Fabrication d'isolateurs et pièces isolantes en céramique",
+    "label_en": "Fabrication d'isolateurs et pièces isolantes en céramique"
+  },
+  "23.44Z": {
+    "code": "23.44Z",
+    "label_fr": "Fabrication d'autres produits céramiques à usage technique",
+    "label_en": "Fabrication d'autres produits céramiques à usage technique"
+  },
+  "23.49Z": {
+    "code": "23.49Z",
+    "label_fr": "Fabrication d'autres produits céramiques",
+    "label_en": "Fabrication d'autres produits céramiques"
+  },
+  "23.51Z": {
+    "code": "23.51Z",
+    "label_fr": "Fabrication de ciment",
+    "label_en": "Fabrication de ciment"
+  },
+  "23.52Z": {
+    "code": "23.52Z",
+    "label_fr": "Fabrication de chaux et plâtre",
+    "label_en": "Fabrication de chaux et plâtre"
+  },
+  "23.61Z": {
+    "code": "23.61Z",
+    "label_fr": "Fabrication d'éléments en béton pour la construction",
+    "label_en": "Fabrication d'éléments en béton pour la construction"
+  },
+  "23.62Z": {
+    "code": "23.62Z",
+    "label_fr": "Fabrication d'éléments en plâtre pour la construction",
+    "label_en": "Fabrication d'éléments en plâtre pour la construction"
+  },
+  "23.63Z": {
+    "code": "23.63Z",
+    "label_fr": "Fabrication de béton prêt à l'emploi",
+    "label_en": "Ready-Mix Concrete Manufacturing"
+  },
+  "23.64Z": {
+    "code": "23.64Z",
+    "label_fr": "Fabrication de mortiers et bétons secs",
+    "label_en": "Fabrication de mortiers et bétons secs"
+  },
+  "23.65Z": {
+    "code": "23.65Z",
+    "label_fr": "Fabrication d'ouvrages en fibre-ciment",
+    "label_en": "Fabrication d'ouvrages en fibre-ciment"
+  },
+  "23.69Z": {
+    "code": "23.69Z",
+    "label_fr": "Fabrication d'autres ouvrages en béton, en ciment ou en plâtre",
+    "label_en": "Fabrication d'autres ouvrages en béton, en ciment ou en plâtre"
+  },
+  "23.70Z": {
+    "code": "23.70Z",
+    "label_fr": "Taille, façonnage et finissage de pierres",
+    "label_en": "Taille, façonnage et finissage de pierres"
+  },
+  "23.91Z": {
+    "code": "23.91Z",
+    "label_fr": "Fabrication de produits abrasifs",
+    "label_en": "Fabrication de produits abrasifs"
+  },
+  "23.99Z": {
+    "code": "23.99Z",
+    "label_fr": "Fabrication d'autres produits minéraux non métalliques n.c.a.",
+    "label_en": "Fabrication d'autres produits minéraux non métalliques n.c.a."
+  },
+  "24.10Z": {
+    "code": "24.10Z",
+    "label_fr": "Sidérurgie",
+    "label_en": "Sidérurgie"
+  },
+  "24.20Z": {
+    "code": "24.20Z",
+    "label_fr": "Fabrication de tubes, tuyaux, profilés creux et accessoires correspondants en acier",
+    "label_en": "Fabrication de tubes, tuyaux, profilés creux et accessoires correspondants en acier"
+  },
+  "24.31Z": {
+    "code": "24.31Z",
+    "label_fr": "Étirage à froid de barres",
+    "label_en": "Étirage à froid de barres"
+  },
+  "24.32Z": {
+    "code": "24.32Z",
+    "label_fr": "Laminage à froid de feuillards",
+    "label_en": "Laminage à froid de feuillards"
+  },
+  "24.33Z": {
+    "code": "24.33Z",
+    "label_fr": "Profilage à froid par formage ou pliage",
+    "label_en": "Profilage à froid par formage ou pliage"
+  },
+  "24.34Z": {
+    "code": "24.34Z",
+    "label_fr": "Tréfilage à froid",
+    "label_en": "Tréfilage à froid"
+  },
+  "24.41Z": {
+    "code": "24.41Z",
+    "label_fr": "Production de métaux précieux",
+    "label_en": "Production de métaux précieux"
+  },
+  "24.42Z": {
+    "code": "24.42Z",
+    "label_fr": "Métallurgie de l'aluminium",
+    "label_en": "Métallurgie de l'aluminium"
+  },
+  "24.43Z": {
+    "code": "24.43Z",
+    "label_fr": "Métallurgie du plomb, du zinc ou de l'étain",
+    "label_en": "Métallurgie du plomb, du zinc ou de l'étain"
+  },
+  "24.44Z": {
+    "code": "24.44Z",
+    "label_fr": "Métallurgie du cuivre",
+    "label_en": "Métallurgie du cuivre"
+  },
+  "24.45Z": {
+    "code": "24.45Z",
+    "label_fr": "Métallurgie des autres métaux non ferreux",
+    "label_en": "Métallurgie des autres métaux non ferreux"
+  },
+  "24.46Z": {
+    "code": "24.46Z",
+    "label_fr": "Élaboration et transformation de matières nucléaires",
+    "label_en": "Élaboration et transformation de matières nucléaires"
+  },
+  "24.51Z": {
+    "code": "24.51Z",
+    "label_fr": "Fonderie de fonte",
+    "label_en": "Fonderie de fonte"
+  },
+  "24.52Z": {
+    "code": "24.52Z",
+    "label_fr": "Fonderie d'acier",
+    "label_en": "Fonderie d'acier"
+  },
+  "24.53Z": {
+    "code": "24.53Z",
+    "label_fr": "Fonderie de métaux légers",
+    "label_en": "Fonderie de métaux légers"
+  },
+  "24.54Z": {
+    "code": "24.54Z",
+    "label_fr": "Fonderie d'autres métaux non ferreux",
+    "label_en": "Fonderie d'autres métaux non ferreux"
+  },
+  "25.11Z": {
+    "code": "25.11Z",
+    "label_fr": "Fabrication de structures métalliques et de parties de structures",
+    "label_en": "Metal Structures & Framework Manufacturing"
+  },
+  "25.12Z": {
+    "code": "25.12Z",
+    "label_fr": "Fabrication de portes et fenêtres en métal",
+    "label_en": "Fabrication de portes et fenêtres en métal"
+  },
+  "25.21Z": {
+    "code": "25.21Z",
+    "label_fr": "Fabrication de radiateurs et de chaudières pour le chauffage central",
+    "label_en": "Fabrication de radiateurs et de chaudières pour le chauffage central"
+  },
+  "25.29Z": {
+    "code": "25.29Z",
+    "label_fr": "Fabrication d'autres réservoirs, citernes et conteneurs métalliques",
+    "label_en": "Fabrication d'autres réservoirs, citernes et conteneurs métalliques"
+  },
+  "25.30Z": {
+    "code": "25.30Z",
+    "label_fr": "Fabrication de générateurs de vapeur, à l'exception des chaudières pour le chauffage central",
+    "label_en": "Fabrication de générateurs de vapeur, à l'exception des chaudières pour le chauffage central"
+  },
+  "25.40Z": {
+    "code": "25.40Z",
+    "label_fr": "Fabrication d'armes et de munitions",
+    "label_en": "Fabrication d'armes et de munitions"
+  },
+  "25.50A": {
+    "code": "25.50A",
+    "label_fr": "Forge, estampage, matriçage ; métallurgie des poudres",
+    "label_en": "Forge, estampage, matriçage ; métallurgie des poudres"
+  },
+  "25.50B": {
+    "code": "25.50B",
+    "label_fr": "Découpage, emboutissage",
+    "label_en": "Découpage, emboutissage"
+  },
+  "25.61Z": {
+    "code": "25.61Z",
+    "label_fr": "Traitement et revêtement des métaux",
+    "label_en": "Traitement et revêtement des métaux"
+  },
+  "25.62A": {
+    "code": "25.62A",
+    "label_fr": "Décolletage",
+    "label_en": "Décolletage"
+  },
+  "25.62B": {
+    "code": "25.62B",
+    "label_fr": "Mécanique industrielle",
+    "label_en": "Industrial Mechanical Machining"
+  },
+  "25.71Z": {
+    "code": "25.71Z",
+    "label_fr": "Fabrication de coutellerie",
+    "label_en": "Fabrication de coutellerie"
+  },
+  "25.72Z": {
+    "code": "25.72Z",
+    "label_fr": "Fabrication de serrures et de ferrures",
+    "label_en": "Fabrication de serrures et de ferrures"
+  },
+  "25.73A": {
+    "code": "25.73A",
+    "label_fr": "Fabrication de moules et modèles",
+    "label_en": "Fabrication de moules et modèles"
+  },
+  "25.73B": {
+    "code": "25.73B",
+    "label_fr": "Fabrication d'autres outillages",
+    "label_en": "Fabrication d'autres outillages"
+  },
+  "25.91Z": {
+    "code": "25.91Z",
+    "label_fr": "Fabrication de fûts et emballages métalliques similaires",
+    "label_en": "Fabrication de fûts et emballages métalliques similaires"
+  },
+  "25.92Z": {
+    "code": "25.92Z",
+    "label_fr": "Fabrication d'emballages métalliques légers",
+    "label_en": "Fabrication d'emballages métalliques légers"
+  },
+  "25.93Z": {
+    "code": "25.93Z",
+    "label_fr": "Fabrication d'articles en fils métalliques, de chaînes et de ressorts",
+    "label_en": "Fabrication d'articles en fils métalliques, de chaînes et de ressorts"
+  },
+  "25.94Z": {
+    "code": "25.94Z",
+    "label_fr": "Fabrication de vis et de boulons",
+    "label_en": "Fabrication de vis et de boulons"
+  },
+  "25.99A": {
+    "code": "25.99A",
+    "label_fr": "Fabrication d'articles métalliques ménagers",
+    "label_en": "Fabrication d'articles métalliques ménagers"
+  },
+  "25.99B": {
+    "code": "25.99B",
+    "label_fr": "Fabrication d'autres articles métalliques",
+    "label_en": "Fabrication d'autres articles métalliques"
+  },
+  "26.11Z": {
+    "code": "26.11Z",
+    "label_fr": "Fabrication de composants électroniques",
+    "label_en": "Fabrication de composants électroniques"
+  },
+  "26.12Z": {
+    "code": "26.12Z",
+    "label_fr": "Fabrication de cartes électroniques assemblées",
+    "label_en": "Fabrication de cartes électroniques assemblées"
+  },
+  "26.20Z": {
+    "code": "26.20Z",
+    "label_fr": "Fabrication d'ordinateurs et d'équipements périphériques",
+    "label_en": "Fabrication d'ordinateurs et d'équipements périphériques"
+  },
+  "26.30Z": {
+    "code": "26.30Z",
+    "label_fr": "Fabrication d'équipements de communication",
+    "label_en": "Fabrication d'équipements de communication"
+  },
+  "26.40Z": {
+    "code": "26.40Z",
+    "label_fr": "Fabrication de produits électroniques grand public",
+    "label_en": "Fabrication de produits électroniques grand public"
+  },
+  "26.51A": {
+    "code": "26.51A",
+    "label_fr": "Fabrication d'équipements d'aide à la navigation",
+    "label_en": "Fabrication d'équipements d'aide à la navigation"
+  },
+  "26.51B": {
+    "code": "26.51B",
+    "label_fr": "Fabrication d'instrumentation scientifique et technique",
+    "label_en": "Fabrication d'instrumentation scientifique et technique"
+  },
+  "26.52Z": {
+    "code": "26.52Z",
+    "label_fr": "Horlogerie",
+    "label_en": "Horlogerie"
+  },
+  "26.60Z": {
+    "code": "26.60Z",
+    "label_fr": "Fabrication d'équipements d'irradiation médicale, d'équipements électromédicaux et électrothérapeutiques",
+    "label_en": "Fabrication d'équipements d'irradiation médicale, d'équipements électromédicaux et électrothérapeutiques"
+  },
+  "26.70Z": {
+    "code": "26.70Z",
+    "label_fr": "Fabrication de matériels optique et photographique",
+    "label_en": "Fabrication de matériels optique et photographique"
+  },
+  "26.80Z": {
+    "code": "26.80Z",
+    "label_fr": "Fabrication de supports magnétiques et optiques",
+    "label_en": "Fabrication de supports magnétiques et optiques"
+  },
+  "27.11Z": {
+    "code": "27.11Z",
+    "label_fr": "Fabrication de moteurs, génératrices et transformateurs électriques",
+    "label_en": "Fabrication de moteurs, génératrices et transformateurs électriques"
+  },
+  "27.12Z": {
+    "code": "27.12Z",
+    "label_fr": "Fabrication de matériel de distribution et de commande électrique",
+    "label_en": "Fabrication de matériel de distribution et de commande électrique"
+  },
+  "27.20Z": {
+    "code": "27.20Z",
+    "label_fr": "Fabrication de piles et d'accumulateurs électriques",
+    "label_en": "Fabrication de piles et d'accumulateurs électriques"
+  },
+  "27.31Z": {
+    "code": "27.31Z",
+    "label_fr": "Fabrication de câbles de fibres optiques",
+    "label_en": "Fabrication de câbles de fibres optiques"
+  },
+  "27.32Z": {
+    "code": "27.32Z",
+    "label_fr": "Fabrication d'autres fils et câbles électroniques ou électriques",
+    "label_en": "Fabrication d'autres fils et câbles électroniques ou électriques"
+  },
+  "27.33Z": {
+    "code": "27.33Z",
+    "label_fr": "Fabrication de matériel d'installation électrique",
+    "label_en": "Fabrication de matériel d'installation électrique"
+  },
+  "27.40Z": {
+    "code": "27.40Z",
+    "label_fr": "Fabrication d'appareils d'éclairage électrique",
+    "label_en": "Fabrication d'appareils d'éclairage électrique"
+  },
+  "27.51Z": {
+    "code": "27.51Z",
+    "label_fr": "Fabrication d'appareils électroménagers",
+    "label_en": "Fabrication d'appareils électroménagers"
+  },
+  "27.52Z": {
+    "code": "27.52Z",
+    "label_fr": "Fabrication d'appareils ménagers non électriques",
+    "label_en": "Fabrication d'appareils ménagers non électriques"
+  },
+  "27.90Z": {
+    "code": "27.90Z",
+    "label_fr": "Fabrication d'autres matériels électriques",
+    "label_en": "Fabrication d'autres matériels électriques"
+  },
+  "28.11Z": {
+    "code": "28.11Z",
+    "label_fr": "Fabrication de moteurs et turbines, à l'exception des moteurs d'avions et de véhicules",
+    "label_en": "Fabrication de moteurs et turbines, à l'exception des moteurs d'avions et de véhicules"
+  },
+  "28.12Z": {
+    "code": "28.12Z",
+    "label_fr": "Fabrication d'équipements hydrauliques et pneumatiques",
+    "label_en": "Fabrication d'équipements hydrauliques et pneumatiques"
+  },
+  "28.13Z": {
+    "code": "28.13Z",
+    "label_fr": "Fabrication d'autres pompes et compresseurs",
+    "label_en": "Fabrication d'autres pompes et compresseurs"
+  },
+  "28.14Z": {
+    "code": "28.14Z",
+    "label_fr": "Fabrication d'autres articles de robinetterie",
+    "label_en": "Fabrication d'autres articles de robinetterie"
+  },
+  "28.15Z": {
+    "code": "28.15Z",
+    "label_fr": "Fabrication d'engrenages et d'organes mécaniques de transmission",
+    "label_en": "Fabrication d'engrenages et d'organes mécaniques de transmission"
+  },
+  "28.21Z": {
+    "code": "28.21Z",
+    "label_fr": "Fabrication de fours et brûleurs",
+    "label_en": "Fabrication de fours et brûleurs"
+  },
+  "28.22Z": {
+    "code": "28.22Z",
+    "label_fr": "Fabrication de matériel de levage et de manutention",
+    "label_en": "Fabrication de matériel de levage et de manutention"
+  },
+  "28.23Z": {
+    "code": "28.23Z",
+    "label_fr": "Fabrication de machines et d'équipements de bureau (à l'exception des ordinateurs et équipements périphériques)",
+    "label_en": "Fabrication de machines et d'équipements de bureau (à l'exception des ordinateurs et équipements périphériques)"
+  },
+  "28.24Z": {
+    "code": "28.24Z",
+    "label_fr": "Fabrication d'outillage portatif à moteur incorporé",
+    "label_en": "Fabrication d'outillage portatif à moteur incorporé"
+  },
+  "28.25Z": {
+    "code": "28.25Z",
+    "label_fr": "Fabrication d'équipements aérauliques et frigorifiques industriels",
+    "label_en": "Fabrication d'équipements aérauliques et frigorifiques industriels"
+  },
+  "28.29A": {
+    "code": "28.29A",
+    "label_fr": "Fabrication d'équipements d'emballage, de conditionnement et de pesage",
+    "label_en": "Fabrication d'équipements d'emballage, de conditionnement et de pesage"
+  },
+  "28.29B": {
+    "code": "28.29B",
+    "label_fr": "Fabrication d'autres machines d'usage général",
+    "label_en": "Fabrication d'autres machines d'usage général"
+  },
+  "28.30Z": {
+    "code": "28.30Z",
+    "label_fr": "Fabrication de machines agricoles et forestières",
+    "label_en": "Fabrication de machines agricoles et forestières"
+  },
+  "28.41Z": {
+    "code": "28.41Z",
+    "label_fr": "Fabrication de machines-outils pour le travail des métaux",
+    "label_en": "Fabrication de machines-outils pour le travail des métaux"
+  },
+  "28.49Z": {
+    "code": "28.49Z",
+    "label_fr": "Fabrication d'autres machines-outils",
+    "label_en": "Fabrication d'autres machines-outils"
+  },
+  "28.91Z": {
+    "code": "28.91Z",
+    "label_fr": "Fabrication de machines pour la métallurgie",
+    "label_en": "Fabrication de machines pour la métallurgie"
+  },
+  "28.92Z": {
+    "code": "28.92Z",
+    "label_fr": "Fabrication de machines pour l'extraction ou la construction",
+    "label_en": "Fabrication de machines pour l'extraction ou la construction"
+  },
+  "28.93Z": {
+    "code": "28.93Z",
+    "label_fr": "Fabrication de machines pour l'industrie agro-alimentaire",
+    "label_en": "Fabrication de machines pour l'industrie agro-alimentaire"
+  },
+  "28.94Z": {
+    "code": "28.94Z",
+    "label_fr": "Fabrication de machines pour les industries textiles",
+    "label_en": "Fabrication de machines pour les industries textiles"
+  },
+  "28.95Z": {
+    "code": "28.95Z",
+    "label_fr": "Fabrication de machines pour les industries du papier et du carton",
+    "label_en": "Fabrication de machines pour les industries du papier et du carton"
+  },
+  "28.96Z": {
+    "code": "28.96Z",
+    "label_fr": "Fabrication de machines pour le travail du caoutchouc ou des plastiques",
+    "label_en": "Fabrication de machines pour le travail du caoutchouc ou des plastiques"
+  },
+  "28.99A": {
+    "code": "28.99A",
+    "label_fr": "Fabrication de machines d'imprimerie",
+    "label_en": "Fabrication de machines d'imprimerie"
+  },
+  "28.99B": {
+    "code": "28.99B",
+    "label_fr": "Fabrication d'autres machines spécialisées",
+    "label_en": "Fabrication d'autres machines spécialisées"
+  },
+  "29.10Z": {
+    "code": "29.10Z",
+    "label_fr": "Construction de véhicules automobiles",
+    "label_en": "Construction de véhicules automobiles"
+  },
+  "29.20Z": {
+    "code": "29.20Z",
+    "label_fr": "Fabrication de carrosseries et remorques",
+    "label_en": "Fabrication de carrosseries et remorques"
+  },
+  "29.31Z": {
+    "code": "29.31Z",
+    "label_fr": "Fabrication d'équipements électriques et électroniques automobiles",
+    "label_en": "Fabrication d'équipements électriques et électroniques automobiles"
+  },
+  "29.32Z": {
+    "code": "29.32Z",
+    "label_fr": "Fabrication d'autres équipements automobiles",
+    "label_en": "Fabrication d'autres équipements automobiles"
+  },
+  "30.11Z": {
+    "code": "30.11Z",
+    "label_fr": "Construction de navires et de structures flottantes",
+    "label_en": "Construction de navires et de structures flottantes"
+  },
+  "30.12Z": {
+    "code": "30.12Z",
+    "label_fr": "Construction de bateaux de plaisance",
+    "label_en": "Construction de bateaux de plaisance"
+  },
+  "30.20Z": {
+    "code": "30.20Z",
+    "label_fr": "Construction de locomotives et d'autre matériel ferroviaire roulant",
+    "label_en": "Construction de locomotives et d'autre matériel ferroviaire roulant"
+  },
+  "30.30Z": {
+    "code": "30.30Z",
+    "label_fr": "Construction aéronautique et spatiale",
+    "label_en": "Construction aéronautique et spatiale"
+  },
+  "30.40Z": {
+    "code": "30.40Z",
+    "label_fr": "Construction de véhicules militaires de combat",
+    "label_en": "Construction de véhicules militaires de combat"
+  },
+  "30.91Z": {
+    "code": "30.91Z",
+    "label_fr": "Fabrication de motocycles",
+    "label_en": "Fabrication de motocycles"
+  },
+  "30.92Z": {
+    "code": "30.92Z",
+    "label_fr": "Fabrication de bicyclettes et de véhicules pour invalides",
+    "label_en": "Fabrication de bicyclettes et de véhicules pour invalides"
+  },
+  "30.99Z": {
+    "code": "30.99Z",
+    "label_fr": "Fabrication d'autres équipements de transport n.c.a.",
+    "label_en": "Fabrication d'autres équipements de transport n.c.a."
+  },
+  "31.01Z": {
+    "code": "31.01Z",
+    "label_fr": "Fabrication de meubles de bureau et de magasin",
+    "label_en": "Fabrication de meubles de bureau et de magasin"
+  },
+  "31.02Z": {
+    "code": "31.02Z",
+    "label_fr": "Fabrication de meubles de cuisine",
+    "label_en": "Fabrication de meubles de cuisine"
+  },
+  "31.03Z": {
+    "code": "31.03Z",
+    "label_fr": "Fabrication de matelas",
+    "label_en": "Fabrication de matelas"
+  },
+  "31.09A": {
+    "code": "31.09A",
+    "label_fr": "Fabrication de sièges d'ameublement d'intérieur",
+    "label_en": "Fabrication de sièges d'ameublement d'intérieur"
+  },
+  "31.09B": {
+    "code": "31.09B",
+    "label_fr": "Fabrication d'autres meubles et industries connexes de l'ameublement",
+    "label_en": "Furniture & Cabinet Making"
+  },
+  "32.11Z": {
+    "code": "32.11Z",
+    "label_fr": "Frappe de monnaie",
+    "label_en": "Frappe de monnaie"
+  },
+  "32.12Z": {
+    "code": "32.12Z",
+    "label_fr": "Fabrication d'articles de joaillerie et bijouterie",
+    "label_en": "Fabrication d'articles de joaillerie et bijouterie"
+  },
+  "32.13Z": {
+    "code": "32.13Z",
+    "label_fr": "Fabrication d'articles de bijouterie fantaisie et articles similaires",
+    "label_en": "Fabrication d'articles de bijouterie fantaisie et articles similaires"
+  },
+  "32.20Z": {
+    "code": "32.20Z",
+    "label_fr": "Fabrication d'instruments de musique",
+    "label_en": "Fabrication d'instruments de musique"
+  },
+  "32.30Z": {
+    "code": "32.30Z",
+    "label_fr": "Fabrication d'articles de sport",
+    "label_en": "Fabrication d'articles de sport"
+  },
+  "32.40Z": {
+    "code": "32.40Z",
+    "label_fr": "Fabrication de jeux et jouets",
+    "label_en": "Fabrication de jeux et jouets"
+  },
+  "32.50A": {
+    "code": "32.50A",
+    "label_fr": "Fabrication de matériel médico-chirurgical et dentaire",
+    "label_en": "Fabrication de matériel médico-chirurgical et dentaire"
+  },
+  "32.50B": {
+    "code": "32.50B",
+    "label_fr": "Fabrication de lunettes",
+    "label_en": "Fabrication de lunettes"
+  },
+  "32.91Z": {
+    "code": "32.91Z",
+    "label_fr": "Fabrication d'articles de brosserie",
+    "label_en": "Fabrication d'articles de brosserie"
+  },
+  "32.99Z": {
+    "code": "32.99Z",
+    "label_fr": "Autres activités manufacturières n.c.a.",
+    "label_en": "Autres activités manufacturières n.c.a."
+  },
+  "33.11Z": {
+    "code": "33.11Z",
+    "label_fr": "Réparation d'ouvrages en métaux",
+    "label_en": "Réparation d'ouvrages en métaux"
+  },
+  "33.12Z": {
+    "code": "33.12Z",
+    "label_fr": "Réparation de machines et équipements mécaniques",
+    "label_en": "Industrial Machinery Repair & Maintenance"
+  },
+  "33.13Z": {
+    "code": "33.13Z",
+    "label_fr": "Réparation de matériels électroniques et optiques",
+    "label_en": "Réparation de matériels électroniques et optiques"
+  },
+  "33.14Z": {
+    "code": "33.14Z",
+    "label_fr": "Réparation d'équipements électriques",
+    "label_en": "Réparation d'équipements électriques"
+  },
+  "33.15Z": {
+    "code": "33.15Z",
+    "label_fr": "Réparation et maintenance navale",
+    "label_en": "Réparation et maintenance navale"
+  },
+  "33.16Z": {
+    "code": "33.16Z",
+    "label_fr": "Réparation et maintenance d'aéronefs et d'engins spatiaux",
+    "label_en": "Réparation et maintenance d'aéronefs et d'engins spatiaux"
+  },
+  "33.17Z": {
+    "code": "33.17Z",
+    "label_fr": "Réparation et maintenance d'autres équipements de transport",
+    "label_en": "Réparation et maintenance d'autres équipements de transport"
+  },
+  "33.19Z": {
+    "code": "33.19Z",
+    "label_fr": "Réparation d'autres équipements",
+    "label_en": "Réparation d'autres équipements"
+  },
+  "33.20A": {
+    "code": "33.20A",
+    "label_fr": "Installation de structures métalliques, chaudronnées et de tuyauterie",
+    "label_en": "Installation de structures métalliques, chaudronnées et de tuyauterie"
+  },
+  "33.20B": {
+    "code": "33.20B",
+    "label_fr": "Installation de machines et équipements mécaniques",
+    "label_en": "Installation de machines et équipements mécaniques"
+  },
+  "33.20C": {
+    "code": "33.20C",
+    "label_fr": "Conception d'ensemble et assemblage sur site industriel d'équipements de contrôle des processus industriels",
+    "label_en": "Conception d'ensemble et assemblage sur site industriel d'équipements de contrôle des processus industriels"
+  },
+  "33.20D": {
+    "code": "33.20D",
+    "label_fr": "Installation d'équipements électriques, de matériels électroniques et optiques ou d'autres matériels",
+    "label_en": "Installation d'équipements électriques, de matériels électroniques et optiques ou d'autres matériels"
+  },
+  "35.11Z": {
+    "code": "35.11Z",
+    "label_fr": "Production d'électricité",
+    "label_en": "Production d'électricité"
+  },
+  "35.12Z": {
+    "code": "35.12Z",
+    "label_fr": "Transport d'électricité",
+    "label_en": "Transport d'électricité"
+  },
+  "35.13Z": {
+    "code": "35.13Z",
+    "label_fr": "Distribution d'électricité",
+    "label_en": "Distribution d'électricité"
+  },
+  "35.14Z": {
+    "code": "35.14Z",
+    "label_fr": "Commerce d'électricité",
+    "label_en": "Commerce d'électricité"
+  },
+  "35.21Z": {
+    "code": "35.21Z",
+    "label_fr": "Production de combustibles gazeux",
+    "label_en": "Production de combustibles gazeux"
+  },
+  "35.22Z": {
+    "code": "35.22Z",
+    "label_fr": "Distribution de combustibles gazeux par conduites",
+    "label_en": "Distribution de combustibles gazeux par conduites"
+  },
+  "35.23Z": {
+    "code": "35.23Z",
+    "label_fr": "Commerce de combustibles gazeux par conduites",
+    "label_en": "Commerce de combustibles gazeux par conduites"
+  },
+  "35.30Z": {
+    "code": "35.30Z",
+    "label_fr": "Production et distribution de vapeur et d'air conditionné",
+    "label_en": "Production et distribution de vapeur et d'air conditionné"
+  },
+  "36.00Z": {
+    "code": "36.00Z",
+    "label_fr": "Captage, traitement et distribution d'eau",
+    "label_en": "Captage, traitement et distribution d'eau"
+  },
+  "37.00Z": {
+    "code": "37.00Z",
+    "label_fr": "Collecte et traitement des eaux usées",
+    "label_en": "Collecte et traitement des eaux usées"
+  },
+  "38.11Z": {
+    "code": "38.11Z",
+    "label_fr": "Collecte des déchets non dangereux",
+    "label_en": "Collecte des déchets non dangereux"
+  },
+  "38.12Z": {
+    "code": "38.12Z",
+    "label_fr": "Collecte des déchets dangereux",
+    "label_en": "Collecte des déchets dangereux"
+  },
+  "38.21Z": {
+    "code": "38.21Z",
+    "label_fr": "Traitement et élimination des déchets non dangereux",
+    "label_en": "Traitement et élimination des déchets non dangereux"
+  },
+  "38.22Z": {
+    "code": "38.22Z",
+    "label_fr": "Traitement et élimination des déchets dangereux",
+    "label_en": "Traitement et élimination des déchets dangereux"
+  },
+  "38.31Z": {
+    "code": "38.31Z",
+    "label_fr": "Démantèlement d'épaves",
+    "label_en": "Démantèlement d'épaves"
+  },
+  "38.32Z": {
+    "code": "38.32Z",
+    "label_fr": "Récupération de déchets triés",
+    "label_en": "Récupération de déchets triés"
+  },
+  "39.00Z": {
+    "code": "39.00Z",
+    "label_fr": "Dépollution et autres services de gestion des déchets",
+    "label_en": "Dépollution et autres services de gestion des déchets"
+  },
+  "41.10A": {
+    "code": "41.10A",
+    "label_fr": "Promotion immobilière de logements",
+    "label_en": "Residential Real Estate Development"
+  },
+  "41.10B": {
+    "code": "41.10B",
+    "label_fr": "Promotion immobilière de bureaux",
+    "label_en": "Promotion immobilière de bureaux"
+  },
+  "41.10C": {
+    "code": "41.10C",
+    "label_fr": "Promotion immobilière d'autres bâtiments",
+    "label_en": "Promotion immobilière d'autres bâtiments"
+  },
+  "41.10D": {
+    "code": "41.10D",
+    "label_fr": "Supports juridiques de programmes",
+    "label_en": "Real Estate Project Legal Holdings"
+  },
+  "41.20A": {
+    "code": "41.20A",
+    "label_fr": "Construction de maisons individuelles",
+    "label_en": "Single-Family Home Construction"
+  },
+  "41.20B": {
+    "code": "41.20B",
+    "label_fr": "Construction d'autres bâtiments",
+    "label_en": "Commercial & Residential Building Construction"
+  },
+  "42.11Z": {
+    "code": "42.11Z",
+    "label_fr": "Construction de routes et autoroutes",
+    "label_en": "Construction de routes et autoroutes"
+  },
+  "42.12Z": {
+    "code": "42.12Z",
+    "label_fr": "Construction de voies ferrées de surface et souterraines",
+    "label_en": "Construction de voies ferrées de surface et souterraines"
+  },
+  "42.13A": {
+    "code": "42.13A",
+    "label_fr": "Construction d'ouvrages d'art",
+    "label_en": "Construction d'ouvrages d'art"
+  },
+  "42.13B": {
+    "code": "42.13B",
+    "label_fr": "Construction et entretien de tunnels",
+    "label_en": "Construction et entretien de tunnels"
+  },
+  "42.21Z": {
+    "code": "42.21Z",
+    "label_fr": "Construction de réseaux pour fluides",
+    "label_en": "Construction de réseaux pour fluides"
+  },
+  "42.22Z": {
+    "code": "42.22Z",
+    "label_fr": "Construction de réseaux électriques et de télécommunications",
+    "label_en": "Construction de réseaux électriques et de télécommunications"
+  },
+  "42.91Z": {
+    "code": "42.91Z",
+    "label_fr": "Construction d'ouvrages maritimes et fluviaux",
+    "label_en": "Construction d'ouvrages maritimes et fluviaux"
+  },
+  "42.99Z": {
+    "code": "42.99Z",
+    "label_fr": "Construction d'autres ouvrages de génie civil n.c.a.",
+    "label_en": "Construction d'autres ouvrages de génie civil n.c.a."
+  },
+  "43.11Z": {
+    "code": "43.11Z",
+    "label_fr": "Travaux de démolition",
+    "label_en": "Demolition Works"
+  },
+  "43.12A": {
+    "code": "43.12A",
+    "label_fr": "Travaux de terrassement courants et travaux préparatoires",
+    "label_en": "Earthmoving & Site Preparation"
+  },
+  "43.12B": {
+    "code": "43.12B",
+    "label_fr": "Travaux de terrassement spécialisés ou de grande masse",
+    "label_en": "Travaux de terrassement spécialisés ou de grande masse"
+  },
+  "43.13Z": {
+    "code": "43.13Z",
+    "label_fr": "Forages et sondages",
+    "label_en": "Forages et sondages"
+  },
+  "43.21A": {
+    "code": "43.21A",
+    "label_fr": "Travaux d'installation électrique dans tous locaux",
+    "label_en": "Electrical Installation Services"
+  },
+  "43.21B": {
+    "code": "43.21B",
+    "label_fr": "Travaux d'installation électrique sur la voie publique",
+    "label_en": "Travaux d'installation électrique sur la voie publique"
+  },
+  "43.22A": {
+    "code": "43.22A",
+    "label_fr": "Travaux d'installation d'eau et de gaz en tous locaux",
+    "label_en": "Plumbing, Water & Gas Installation"
+  },
+  "43.22B": {
+    "code": "43.22B",
+    "label_fr": "Travaux d'installation d'équipements thermiques et de climatisation",
+    "label_en": "HVAC & Thermal Equipment Installation"
+  },
+  "43.29A": {
+    "code": "43.29A",
+    "label_fr": "Travaux d'isolation",
+    "label_en": "Travaux d'isolation"
+  },
+  "43.29B": {
+    "code": "43.29B",
+    "label_fr": "Autres travaux d'installation n.c.a.",
+    "label_en": "Autres travaux d'installation n.c.a."
+  },
+  "43.31Z": {
+    "code": "43.31Z",
+    "label_fr": "Travaux de plâtrerie",
+    "label_en": "Plastering & Drywall Works"
+  },
+  "43.32A": {
+    "code": "43.32A",
+    "label_fr": "Travaux de menuiserie bois et PVC",
+    "label_en": "Carpentry & Joinery (Wood & PVC)"
+  },
+  "43.32B": {
+    "code": "43.32B",
+    "label_fr": "Travaux de menuiserie métallique et serrurerie",
+    "label_en": "Travaux de menuiserie métallique et serrurerie"
+  },
+  "43.32C": {
+    "code": "43.32C",
+    "label_fr": "Agencement de lieux de vente",
+    "label_en": "Agencement de lieux de vente"
+  },
+  "43.33Z": {
+    "code": "43.33Z",
+    "label_fr": "Travaux de revêtement des sols et des murs",
+    "label_en": "Floor & Wall Tiling Installation"
+  },
+  "43.34Z": {
+    "code": "43.34Z",
+    "label_fr": "Travaux de peinture et vitrerie",
+    "label_en": "Painting & Glazing Works"
+  },
+  "43.39Z": {
+    "code": "43.39Z",
+    "label_fr": "Autres travaux de finition",
+    "label_en": "Autres travaux de finition"
+  },
+  "43.91A": {
+    "code": "43.91A",
+    "label_fr": "Travaux de charpente",
+    "label_en": "Roof Framework & Timber Construction"
+  },
+  "43.91B": {
+    "code": "43.91B",
+    "label_fr": "Travaux de couverture par éléments",
+    "label_en": "Roofing & Cladding Installation"
+  },
+  "43.99A": {
+    "code": "43.99A",
+    "label_fr": "Travaux d'étanchéification",
+    "label_en": "Travaux d'étanchéification"
+  },
+  "43.99B": {
+    "code": "43.99B",
+    "label_fr": "Travaux de montage de structures métalliques",
+    "label_en": "Travaux de montage de structures métalliques"
+  },
+  "43.99C": {
+    "code": "43.99C",
+    "label_fr": "Travaux de maçonnerie générale et gros œuvre de bâtiment",
+    "label_en": "Masonry & Structural Brickwork"
+  },
+  "43.99D": {
+    "code": "43.99D",
+    "label_fr": "Autres travaux spécialisés de construction",
+    "label_en": "Autres travaux spécialisés de construction"
+  },
+  "43.99E": {
+    "code": "43.99E",
+    "label_fr": "Location avec opérateur de matériel de construction",
+    "label_en": "Location avec opérateur de matériel de construction"
+  },
+  "45.11Z": {
+    "code": "45.11Z",
+    "label_fr": "Commerce de voitures et de véhicules automobiles légers",
+    "label_en": "Passenger Car & Light Vehicle Sales"
+  },
+  "45.19Z": {
+    "code": "45.19Z",
+    "label_fr": "Commerce d'autres véhicules automobiles",
+    "label_en": "Commerce d'autres véhicules automobiles"
+  },
+  "45.20A": {
+    "code": "45.20A",
+    "label_fr": "Entretien et réparation de véhicules automobiles légers",
+    "label_en": "Automotive Repair & Vehicle Maintenance"
+  },
+  "45.20B": {
+    "code": "45.20B",
+    "label_fr": "Entretien et réparation d'autres véhicules automobiles",
+    "label_en": "Entretien et réparation d'autres véhicules automobiles"
+  },
+  "45.31Z": {
+    "code": "45.31Z",
+    "label_fr": "Commerce de gros d'équipements automobiles",
+    "label_en": "Wholesale of Automotive Equipment & Parts"
+  },
+  "45.32Z": {
+    "code": "45.32Z",
+    "label_fr": "Commerce de détail d'équipements automobiles",
+    "label_en": "Commerce de détail d'équipements automobiles"
+  },
+  "45.40Z": {
+    "code": "45.40Z",
+    "label_fr": "Commerce et réparation de motocycles",
+    "label_en": "Commerce et réparation de motocycles"
+  },
+  "46.11Z": {
+    "code": "46.11Z",
+    "label_fr": "Intermédiaires du commerce en matières premières agricoles, animaux vivants, matières premières textiles et produits semi-finis",
+    "label_en": "Intermédiaires du commerce en matières premières agricoles, animaux vivants, matières premières textiles et produits semi-finis"
+  },
+  "46.12A": {
+    "code": "46.12A",
+    "label_fr": "Centrales d'achat de carburant",
+    "label_en": "Centrales d'achat de carburant"
+  },
+  "46.12B": {
+    "code": "46.12B",
+    "label_fr": "Autres intermédiaires du commerce en combustibles, métaux, minéraux et produits chimiques",
+    "label_en": "Autres intermédiaires du commerce en combustibles, métaux, minéraux et produits chimiques"
+  },
+  "46.13Z": {
+    "code": "46.13Z",
+    "label_fr": "Intermédiaires du commerce en bois et matériaux de construction",
+    "label_en": "Intermédiaires du commerce en bois et matériaux de construction"
+  },
+  "46.14Z": {
+    "code": "46.14Z",
+    "label_fr": "Intermédiaires du commerce en machines, équipements industriels, navires et avions",
+    "label_en": "Intermédiaires du commerce en machines, équipements industriels, navires et avions"
+  },
+  "46.15Z": {
+    "code": "46.15Z",
+    "label_fr": "Intermédiaires du commerce en meubles, articles de ménage et quincaillerie",
+    "label_en": "Intermédiaires du commerce en meubles, articles de ménage et quincaillerie"
+  },
+  "46.16Z": {
+    "code": "46.16Z",
+    "label_fr": "Intermédiaires du commerce en textiles, habillement, fourrures, chaussures et articles en cuir",
+    "label_en": "Intermédiaires du commerce en textiles, habillement, fourrures, chaussures et articles en cuir"
+  },
+  "46.17A": {
+    "code": "46.17A",
+    "label_fr": "Centrales d'achat alimentaires",
+    "label_en": "Centrales d'achat alimentaires"
+  },
+  "46.17B": {
+    "code": "46.17B",
+    "label_fr": "Autres intermédiaires du commerce en denrées, boissons et tabac",
+    "label_en": "Autres intermédiaires du commerce en denrées, boissons et tabac"
+  },
+  "46.18Z": {
+    "code": "46.18Z",
+    "label_fr": "Intermédiaires spécialisés dans le commerce d'autres produits spécifiques",
+    "label_en": "Intermédiaires spécialisés dans le commerce d'autres produits spécifiques"
+  },
+  "46.19A": {
+    "code": "46.19A",
+    "label_fr": "Centrales d'achat non alimentaires",
+    "label_en": "Centrales d'achat non alimentaires"
+  },
+  "46.19B": {
+    "code": "46.19B",
+    "label_fr": "Autres intermédiaires du commerce en produits divers",
+    "label_en": "Autres intermédiaires du commerce en produits divers"
+  },
+  "46.21Z": {
+    "code": "46.21Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de céréales, de tabac non manufacturé, de semences et d'aliments pour le bétail",
+    "label_en": "Commerce de gros (commerce interentreprises) de céréales, de tabac non manufacturé, de semences et d'aliments pour le bétail"
+  },
+  "46.22Z": {
+    "code": "46.22Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de fleurs et plantes",
+    "label_en": "Commerce de gros (commerce interentreprises) de fleurs et plantes"
+  },
+  "46.23Z": {
+    "code": "46.23Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) d'animaux vivants",
+    "label_en": "Commerce de gros (commerce interentreprises) d'animaux vivants"
+  },
+  "46.24Z": {
+    "code": "46.24Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de cuirs et peaux",
+    "label_en": "Commerce de gros (commerce interentreprises) de cuirs et peaux"
+  },
+  "46.31Z": {
+    "code": "46.31Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de fruits et légumes",
+    "label_en": "Commerce de gros (commerce interentreprises) de fruits et légumes"
+  },
+  "46.32A": {
+    "code": "46.32A",
+    "label_fr": "Commerce de gros (commerce interentreprises) de viandes de boucherie",
+    "label_en": "Commerce de gros (commerce interentreprises) de viandes de boucherie"
+  },
+  "46.32B": {
+    "code": "46.32B",
+    "label_fr": "Commerce de gros (commerce interentreprises) de produits à base de viande",
+    "label_en": "Commerce de gros (commerce interentreprises) de produits à base de viande"
+  },
+  "46.32C": {
+    "code": "46.32C",
+    "label_fr": "Commerce de gros (commerce interentreprises) de volailles et gibier",
+    "label_en": "Commerce de gros (commerce interentreprises) de volailles et gibier"
+  },
+  "46.33Z": {
+    "code": "46.33Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de produits laitiers, œufs, huiles et matières grasses comestibles",
+    "label_en": "Commerce de gros (commerce interentreprises) de produits laitiers, œufs, huiles et matières grasses comestibles"
+  },
+  "46.34Z": {
+    "code": "46.34Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de boissons",
+    "label_en": "Commerce de gros (commerce interentreprises) de boissons"
+  },
+  "46.35Z": {
+    "code": "46.35Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de produits à base de tabac",
+    "label_en": "Commerce de gros (commerce interentreprises) de produits à base de tabac"
+  },
+  "46.36Z": {
+    "code": "46.36Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de sucre, chocolat et confiserie",
+    "label_en": "Commerce de gros (commerce interentreprises) de sucre, chocolat et confiserie"
+  },
+  "46.37Z": {
+    "code": "46.37Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de café, thé, cacao et épices",
+    "label_en": "Commerce de gros (commerce interentreprises) de café, thé, cacao et épices"
+  },
+  "46.38A": {
+    "code": "46.38A",
+    "label_fr": "Commerce de gros (commerce interentreprises) de poissons, crustacés et mollusques",
+    "label_en": "Commerce de gros (commerce interentreprises) de poissons, crustacés et mollusques"
+  },
+  "46.38B": {
+    "code": "46.38B",
+    "label_fr": "Commerce de gros (commerce interentreprises) alimentaire spécialisé divers",
+    "label_en": "Commerce de gros (commerce interentreprises) alimentaire spécialisé divers"
+  },
+  "46.39A": {
+    "code": "46.39A",
+    "label_fr": "Commerce de gros (commerce interentreprises) de produits surgelés",
+    "label_en": "Commerce de gros (commerce interentreprises) de produits surgelés"
+  },
+  "46.39B": {
+    "code": "46.39B",
+    "label_fr": "Commerce de gros (commerce interentreprises) alimentaire non spécialisé",
+    "label_en": "Commerce de gros (commerce interentreprises) alimentaire non spécialisé"
+  },
+  "46.41Z": {
+    "code": "46.41Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de textiles",
+    "label_en": "Commerce de gros (commerce interentreprises) de textiles"
+  },
+  "46.42Z": {
+    "code": "46.42Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) d'habillement et de chaussures",
+    "label_en": "Commerce de gros (commerce interentreprises) d'habillement et de chaussures"
+  },
+  "46.43Z": {
+    "code": "46.43Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) d'appareils électroménagers",
+    "label_en": "Commerce de gros (commerce interentreprises) d'appareils électroménagers"
+  },
+  "46.44Z": {
+    "code": "46.44Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de vaisselle, verrerie et produits d'entretien",
+    "label_en": "Commerce de gros (commerce interentreprises) de vaisselle, verrerie et produits d'entretien"
+  },
+  "46.45Z": {
+    "code": "46.45Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de parfumerie et de produits de beauté",
+    "label_en": "Commerce de gros (commerce interentreprises) de parfumerie et de produits de beauté"
+  },
+  "46.46Z": {
+    "code": "46.46Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de produits pharmaceutiques",
+    "label_en": "Commerce de gros (commerce interentreprises) de produits pharmaceutiques"
+  },
+  "46.47Z": {
+    "code": "46.47Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de meubles, de tapis et d'appareils d'éclairage",
+    "label_en": "Commerce de gros (commerce interentreprises) de meubles, de tapis et d'appareils d'éclairage"
+  },
+  "46.48Z": {
+    "code": "46.48Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) d'articles d'horlogerie et de bijouterie",
+    "label_en": "Commerce de gros (commerce interentreprises) d'articles d'horlogerie et de bijouterie"
+  },
+  "46.49Z": {
+    "code": "46.49Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) d'autres biens domestiques",
+    "label_en": "Commerce de gros (commerce interentreprises) d'autres biens domestiques"
+  },
+  "46.51Z": {
+    "code": "46.51Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) d'ordinateurs, d'équipements informatiques périphériques et de logiciels",
+    "label_en": "Commerce de gros (commerce interentreprises) d'ordinateurs, d'équipements informatiques périphériques et de logiciels"
+  },
+  "46.52Z": {
+    "code": "46.52Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de composants et d'équipements électroniques et de télécommunication",
+    "label_en": "Commerce de gros (commerce interentreprises) de composants et d'équipements électroniques et de télécommunication"
+  },
+  "46.61Z": {
+    "code": "46.61Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de matériel agricole",
+    "label_en": "Commerce de gros (commerce interentreprises) de matériel agricole"
+  },
+  "46.62Z": {
+    "code": "46.62Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de machines-outils",
+    "label_en": "Commerce de gros (commerce interentreprises) de machines-outils"
+  },
+  "46.63Z": {
+    "code": "46.63Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de machines pour l'extraction, la construction et le génie civil",
+    "label_en": "Commerce de gros (commerce interentreprises) de machines pour l'extraction, la construction et le génie civil"
+  },
+  "46.64Z": {
+    "code": "46.64Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de machines pour l'industrie textile et l'habillement",
+    "label_en": "Commerce de gros (commerce interentreprises) de machines pour l'industrie textile et l'habillement"
+  },
+  "46.65Z": {
+    "code": "46.65Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de mobilier de bureau",
+    "label_en": "Commerce de gros (commerce interentreprises) de mobilier de bureau"
+  },
+  "46.66Z": {
+    "code": "46.66Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) d'autres machines et équipements de bureau",
+    "label_en": "Commerce de gros (commerce interentreprises) d'autres machines et équipements de bureau"
+  },
+  "46.69A": {
+    "code": "46.69A",
+    "label_fr": "Commerce de gros (commerce interentreprises) de matériel électrique",
+    "label_en": "Commerce de gros (commerce interentreprises) de matériel électrique"
+  },
+  "46.69B": {
+    "code": "46.69B",
+    "label_fr": "Commerce de gros (commerce interentreprises) de fournitures et équipements industriels divers",
+    "label_en": "Commerce de gros (commerce interentreprises) de fournitures et équipements industriels divers"
+  },
+  "46.69C": {
+    "code": "46.69C",
+    "label_fr": "Commerce de gros (commerce interentreprises) de fournitures et équipements divers pour le commerce et les services",
+    "label_en": "Commerce de gros (commerce interentreprises) de fournitures et équipements divers pour le commerce et les services"
+  },
+  "46.71Z": {
+    "code": "46.71Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de combustibles et de produits annexes",
+    "label_en": "Commerce de gros (commerce interentreprises) de combustibles et de produits annexes"
+  },
+  "46.72Z": {
+    "code": "46.72Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de minerais et métaux",
+    "label_en": "Commerce de gros (commerce interentreprises) de minerais et métaux"
+  },
+  "46.73A": {
+    "code": "46.73A",
+    "label_fr": "Commerce de gros (commerce interentreprises) de bois et de matériaux de construction",
+    "label_en": "Wholesale of Wood & Building Materials"
+  },
+  "46.73B": {
+    "code": "46.73B",
+    "label_fr": "Commerce de gros (commerce interentreprises) d'appareils sanitaires et de produits de décoration",
+    "label_en": "Commerce de gros (commerce interentreprises) d'appareils sanitaires et de produits de décoration"
+  },
+  "46.74A": {
+    "code": "46.74A",
+    "label_fr": "Commerce de gros (commerce interentreprises) de quincaillerie",
+    "label_en": "Commerce de gros (commerce interentreprises) de quincaillerie"
+  },
+  "46.74B": {
+    "code": "46.74B",
+    "label_fr": "Commerce de gros (commerce interentreprises) de fournitures pour la plomberie et le chauffage",
+    "label_en": "Commerce de gros (commerce interentreprises) de fournitures pour la plomberie et le chauffage"
+  },
+  "46.75Z": {
+    "code": "46.75Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de produits chimiques",
+    "label_en": "Commerce de gros (commerce interentreprises) de produits chimiques"
+  },
+  "46.76Z": {
+    "code": "46.76Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) d'autres produits intermédiaires",
+    "label_en": "Commerce de gros (commerce interentreprises) d'autres produits intermédiaires"
+  },
+  "46.77Z": {
+    "code": "46.77Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) de déchets et débris",
+    "label_en": "Commerce de gros (commerce interentreprises) de déchets et débris"
+  },
+  "46.90Z": {
+    "code": "46.90Z",
+    "label_fr": "Commerce de gros (commerce interentreprises) non spécialisé",
+    "label_en": "Non-Specialized Wholesale Trade"
+  },
+  "47.11A": {
+    "code": "47.11A",
+    "label_fr": "Commerce de détail de produits surgelés",
+    "label_en": "Retail Sale of Frozen Food Products"
+  },
+  "47.11B": {
+    "code": "47.11B",
+    "label_fr": "Commerce d'alimentation générale",
+    "label_en": "General Grocery Stores"
+  },
+  "47.11C": {
+    "code": "47.11C",
+    "label_fr": "Supérettes",
+    "label_en": "Supérettes"
+  },
+  "47.11D": {
+    "code": "47.11D",
+    "label_fr": "Supermarchés",
+    "label_en": "Supermarkets"
+  },
+  "47.11E": {
+    "code": "47.11E",
+    "label_fr": "Magasins multi-commerces",
+    "label_en": "Magasins multi-commerces"
+  },
+  "47.11F": {
+    "code": "47.11F",
+    "label_fr": "Hypermarchés",
+    "label_en": "Hypermarkets"
+  },
+  "47.19A": {
+    "code": "47.19A",
+    "label_fr": "Grands magasins",
+    "label_en": "Grands magasins"
+  },
+  "47.19B": {
+    "code": "47.19B",
+    "label_fr": "Autres commerces de détail en magasin non spécialisé",
+    "label_en": "Autres commerces de détail en magasin non spécialisé"
+  },
+  "47.21Z": {
+    "code": "47.21Z",
+    "label_fr": "Commerce de détail de fruits et légumes en magasin spécialisé",
+    "label_en": "Commerce de détail de fruits et légumes en magasin spécialisé"
+  },
+  "47.22Z": {
+    "code": "47.22Z",
+    "label_fr": "Commerce de détail de viandes et de produits à base de viande en magasin spécialisé",
+    "label_en": "Retail Butcher Shops & Meat Products"
+  },
+  "47.23Z": {
+    "code": "47.23Z",
+    "label_fr": "Commerce de détail de poissons, crustacés et mollusques en magasin spécialisé",
+    "label_en": "Commerce de détail de poissons, crustacés et mollusques en magasin spécialisé"
+  },
+  "47.24Z": {
+    "code": "47.24Z",
+    "label_fr": "Commerce de détail de pain, pâtisserie et confiserie en magasin spécialisé",
+    "label_en": "Retail Bread, Pastry & Confectionery"
+  },
+  "47.25Z": {
+    "code": "47.25Z",
+    "label_fr": "Commerce de détail de boissons en magasin spécialisé",
+    "label_en": "Commerce de détail de boissons en magasin spécialisé"
+  },
+  "47.26Z": {
+    "code": "47.26Z",
+    "label_fr": "Commerce de détail de produits à base de tabac en magasin spécialisé",
+    "label_en": "Commerce de détail de produits à base de tabac en magasin spécialisé"
+  },
+  "47.29Z": {
+    "code": "47.29Z",
+    "label_fr": "Autres commerces de détail alimentaires en magasin spécialisé",
+    "label_en": "Autres commerces de détail alimentaires en magasin spécialisé"
+  },
+  "47.30Z": {
+    "code": "47.30Z",
+    "label_fr": "Commerce de détail de carburants en magasin spécialisé",
+    "label_en": "Commerce de détail de carburants en magasin spécialisé"
+  },
+  "47.41Z": {
+    "code": "47.41Z",
+    "label_fr": "Commerce de détail d'ordinateurs, d'unités périphériques et de logiciels en magasin spécialisé",
+    "label_en": "Commerce de détail d'ordinateurs, d'unités périphériques et de logiciels en magasin spécialisé"
+  },
+  "47.42Z": {
+    "code": "47.42Z",
+    "label_fr": "Commerce de détail de matériels de télécommunication en magasin spécialisé",
+    "label_en": "Commerce de détail de matériels de télécommunication en magasin spécialisé"
+  },
+  "47.43Z": {
+    "code": "47.43Z",
+    "label_fr": "Commerce de détail de matériels audio et vidéo en magasin spécialisé",
+    "label_en": "Commerce de détail de matériels audio et vidéo en magasin spécialisé"
+  },
+  "47.51Z": {
+    "code": "47.51Z",
+    "label_fr": "Commerce de détail de textiles en magasin spécialisé",
+    "label_en": "Commerce de détail de textiles en magasin spécialisé"
+  },
+  "47.52A": {
+    "code": "47.52A",
+    "label_fr": "Commerce de détail de quincaillerie, peintures et verres en petites surfaces (moins de 400 m²)",
+    "label_en": "Commerce de détail de quincaillerie, peintures et verres en petites surfaces (moins de 400 m²)"
+  },
+  "47.52B": {
+    "code": "47.52B",
+    "label_fr": "Commerce de détail de quincaillerie, peintures et verres en grandes surfaces (400 m² et plus)",
+    "label_en": "Commerce de détail de quincaillerie, peintures et verres en grandes surfaces (400 m² et plus)"
+  },
+  "47.53Z": {
+    "code": "47.53Z",
+    "label_fr": "Commerce de détail de tapis, moquettes et revêtements de murs et de sols en magasin spécialisé",
+    "label_en": "Commerce de détail de tapis, moquettes et revêtements de murs et de sols en magasin spécialisé"
+  },
+  "47.54Z": {
+    "code": "47.54Z",
+    "label_fr": "Commerce de détail d'appareils électroménagers en magasin spécialisé",
+    "label_en": "Commerce de détail d'appareils électroménagers en magasin spécialisé"
+  },
+  "47.59A": {
+    "code": "47.59A",
+    "label_fr": "Commerce de détail de meubles",
+    "label_en": "Commerce de détail de meubles"
+  },
+  "47.59B": {
+    "code": "47.59B",
+    "label_fr": "Commerce de détail d'autres équipements du foyer",
+    "label_en": "Commerce de détail d'autres équipements du foyer"
+  },
+  "47.61Z": {
+    "code": "47.61Z",
+    "label_fr": "Commerce de détail de livres en magasin spécialisé",
+    "label_en": "Commerce de détail de livres en magasin spécialisé"
+  },
+  "47.62Z": {
+    "code": "47.62Z",
+    "label_fr": "Commerce de détail de journaux et papeterie en magasin spécialisé",
+    "label_en": "Commerce de détail de journaux et papeterie en magasin spécialisé"
+  },
+  "47.63Z": {
+    "code": "47.63Z",
+    "label_fr": "Commerce de détail d'enregistrements musicaux et vidéo en magasin spécialisé",
+    "label_en": "Commerce de détail d'enregistrements musicaux et vidéo en magasin spécialisé"
+  },
+  "47.64Z": {
+    "code": "47.64Z",
+    "label_fr": "Commerce de détail d'articles de sport en magasin spécialisé",
+    "label_en": "Commerce de détail d'articles de sport en magasin spécialisé"
+  },
+  "47.65Z": {
+    "code": "47.65Z",
+    "label_fr": "Commerce de détail de jeux et jouets en magasin spécialisé",
+    "label_en": "Commerce de détail de jeux et jouets en magasin spécialisé"
+  },
+  "47.71Z": {
+    "code": "47.71Z",
+    "label_fr": "Commerce de détail d'habillement en magasin spécialisé",
+    "label_en": "Retail Clothing & Apparel Stores"
+  },
+  "47.72A": {
+    "code": "47.72A",
+    "label_fr": "Commerce de détail de la chaussure",
+    "label_en": "Commerce de détail de la chaussure"
+  },
+  "47.72B": {
+    "code": "47.72B",
+    "label_fr": "Commerce de détail de maroquinerie et d'articles de voyage",
+    "label_en": "Commerce de détail de maroquinerie et d'articles de voyage"
+  },
+  "47.73Z": {
+    "code": "47.73Z",
+    "label_fr": "Commerce de détail de produits pharmaceutiques en magasin spécialisé",
+    "label_en": "Retail Pharmacies & Chemists"
+  },
+  "47.74Z": {
+    "code": "47.74Z",
+    "label_fr": "Commerce de détail d'articles médicaux et orthopédiques en magasin spécialisé",
+    "label_en": "Commerce de détail d'articles médicaux et orthopédiques en magasin spécialisé"
+  },
+  "47.75Z": {
+    "code": "47.75Z",
+    "label_fr": "Commerce de détail de parfumerie et de produits de beauté en magasin spécialisé",
+    "label_en": "Commerce de détail de parfumerie et de produits de beauté en magasin spécialisé"
+  },
+  "47.76Z": {
+    "code": "47.76Z",
+    "label_fr": "Commerce de détail de fleurs, plantes, graines, engrais, animaux de compagnie et aliments pour ces animaux en magasin spécialisé",
+    "label_en": "Commerce de détail de fleurs, plantes, graines, engrais, animaux de compagnie et aliments pour ces animaux en magasin spécialisé"
+  },
+  "47.77Z": {
+    "code": "47.77Z",
+    "label_fr": "Commerce de détail d'articles d'horlogerie et de bijouterie en magasin spécialisé",
+    "label_en": "Commerce de détail d'articles d'horlogerie et de bijouterie en magasin spécialisé"
+  },
+  "47.78A": {
+    "code": "47.78A",
+    "label_fr": "Commerces de détail d'optique",
+    "label_en": "Commerces de détail d'optique"
+  },
+  "47.78B": {
+    "code": "47.78B",
+    "label_fr": "Commerces de détail de charbons et combustibles",
+    "label_en": "Commerces de détail de charbons et combustibles"
+  },
+  "47.78C": {
+    "code": "47.78C",
+    "label_fr": "Autres commerces de détail spécialisés divers",
+    "label_en": "Autres commerces de détail spécialisés divers"
+  },
+  "47.79Z": {
+    "code": "47.79Z",
+    "label_fr": "Commerce de détail de biens d'occasion en magasin",
+    "label_en": "Commerce de détail de biens d'occasion en magasin"
+  },
+  "47.81Z": {
+    "code": "47.81Z",
+    "label_fr": "Commerce de détail alimentaire sur éventaires et marchés",
+    "label_en": "Commerce de détail alimentaire sur éventaires et marchés"
+  },
+  "47.82Z": {
+    "code": "47.82Z",
+    "label_fr": "Commerce de détail de textiles, d'habillement et de chaussures sur éventaires et marchés",
+    "label_en": "Commerce de détail de textiles, d'habillement et de chaussures sur éventaires et marchés"
+  },
+  "47.89Z": {
+    "code": "47.89Z",
+    "label_fr": "Autres commerces de détail sur éventaires et marchés",
+    "label_en": "Autres commerces de détail sur éventaires et marchés"
+  },
+  "47.91A": {
+    "code": "47.91A",
+    "label_fr": "Vente à distance sur catalogue général",
+    "label_en": "Mail Order & Catalog Retail"
+  },
+  "47.91B": {
+    "code": "47.91B",
+    "label_fr": "Vente à distance sur catalogue spécialisé",
+    "label_en": "E-Commerce & Online Retail Stores"
+  },
+  "47.99A": {
+    "code": "47.99A",
+    "label_fr": "Vente à domicile",
+    "label_en": "Vente à domicile"
+  },
+  "47.99B": {
+    "code": "47.99B",
+    "label_fr": "Vente par automates et autres commerces de détail hors magasin, éventaires ou marchés n.c.a.",
+    "label_en": "Vente par automates et autres commerces de détail hors magasin, éventaires ou marchés n.c.a."
+  },
+  "49.10Z": {
+    "code": "49.10Z",
+    "label_fr": "Transport ferroviaire interurbain de voyageurs",
+    "label_en": "Transport ferroviaire interurbain de voyageurs"
+  },
+  "49.20Z": {
+    "code": "49.20Z",
+    "label_fr": "Transports ferroviaires de fret",
+    "label_en": "Transports ferroviaires de fret"
+  },
+  "49.31Z": {
+    "code": "49.31Z",
+    "label_fr": "Transports urbains et suburbains de voyageurs",
+    "label_en": "Transports urbains et suburbains de voyageurs"
+  },
+  "49.32Z": {
+    "code": "49.32Z",
+    "label_fr": "Transports de voyageurs par taxis",
+    "label_en": "Taxi & Private Chauffeur Services (VTC)"
+  },
+  "49.39A": {
+    "code": "49.39A",
+    "label_fr": "Transports routiers réguliers de voyageurs",
+    "label_en": "Transports routiers réguliers de voyageurs"
+  },
+  "49.39B": {
+    "code": "49.39B",
+    "label_fr": "Autres transports routiers de voyageurs",
+    "label_en": "Autres transports routiers de voyageurs"
+  },
+  "49.39C": {
+    "code": "49.39C",
+    "label_fr": "Téléphériques et remontées mécaniques",
+    "label_en": "Téléphériques et remontées mécaniques"
+  },
+  "49.41A": {
+    "code": "49.41A",
+    "label_fr": "Transports routiers de fret interurbains",
+    "label_en": "Long-Distance Road Freight Transport"
+  },
+  "49.41B": {
+    "code": "49.41B",
+    "label_fr": "Transports routiers de fret de proximité",
+    "label_en": "Local Road Freight & Distribution Transport"
+  },
+  "49.41C": {
+    "code": "49.41C",
+    "label_fr": "Location de camions avec chauffeur",
+    "label_en": "Location de camions avec chauffeur"
+  },
+  "49.42Z": {
+    "code": "49.42Z",
+    "label_fr": "Services de déménagement",
+    "label_en": "Services de déménagement"
+  },
+  "49.50Z": {
+    "code": "49.50Z",
+    "label_fr": "Transports par conduites",
+    "label_en": "Transports par conduites"
+  },
+  "50.10Z": {
+    "code": "50.10Z",
+    "label_fr": "Transports maritimes et côtiers de passagers",
+    "label_en": "Transports maritimes et côtiers de passagers"
+  },
+  "50.20Z": {
+    "code": "50.20Z",
+    "label_fr": "Transports maritimes et côtiers de fret",
+    "label_en": "Transports maritimes et côtiers de fret"
+  },
+  "50.30Z": {
+    "code": "50.30Z",
+    "label_fr": "Transports fluviaux de passagers",
+    "label_en": "Transports fluviaux de passagers"
+  },
+  "50.40Z": {
+    "code": "50.40Z",
+    "label_fr": "Transports fluviaux de fret",
+    "label_en": "Transports fluviaux de fret"
+  },
+  "51.10Z": {
+    "code": "51.10Z",
+    "label_fr": "Transports aériens de passagers",
+    "label_en": "Transports aériens de passagers"
+  },
+  "51.21Z": {
+    "code": "51.21Z",
+    "label_fr": "Transports aériens de fret",
+    "label_en": "Transports aériens de fret"
+  },
+  "51.22Z": {
+    "code": "51.22Z",
+    "label_fr": "Transports spatiaux",
+    "label_en": "Transports spatiaux"
+  },
+  "52.10A": {
+    "code": "52.10A",
+    "label_fr": "Entreposage et stockage frigorifique",
+    "label_en": "Entreposage et stockage frigorifique"
+  },
+  "52.10B": {
+    "code": "52.10B",
+    "label_fr": "Entreposage et stockage non frigorifique",
+    "label_en": "Entreposage et stockage non frigorifique"
+  },
+  "52.21Z": {
+    "code": "52.21Z",
+    "label_fr": "Services auxiliaires des transports terrestres",
+    "label_en": "Ground Transport Support & Parking Services"
+  },
+  "52.22Z": {
+    "code": "52.22Z",
+    "label_fr": "Services auxiliaires des transports par eau",
+    "label_en": "Services auxiliaires des transports par eau"
+  },
+  "52.23Z": {
+    "code": "52.23Z",
+    "label_fr": "Services auxiliaires des transports aériens",
+    "label_en": "Services auxiliaires des transports aériens"
+  },
+  "52.24A": {
+    "code": "52.24A",
+    "label_fr": "Manutention portuaire",
+    "label_en": "Manutention portuaire"
+  },
+  "52.24B": {
+    "code": "52.24B",
+    "label_fr": "Manutention non portuaire",
+    "label_en": "Cargo Handling & Port Operations"
+  },
+  "52.29A": {
+    "code": "52.29A",
+    "label_fr": "Messagerie, fret express",
+    "label_en": "Messagerie, fret express"
+  },
+  "52.29B": {
+    "code": "52.29B",
+    "label_fr": "Affrètement et organisation des transports",
+    "label_en": "Affrètement et organisation des transports"
+  },
+  "53.10Z": {
+    "code": "53.10Z",
+    "label_fr": "Activités de poste dans le cadre d'une obligation de service universel",
+    "label_en": "Activités de poste dans le cadre d'une obligation de service universel"
+  },
+  "53.20Z": {
+    "code": "53.20Z",
+    "label_fr": "Autres activités de poste et de courrier",
+    "label_en": "Courier & Express Parcel Delivery"
+  },
+  "55.10Z": {
+    "code": "55.10Z",
+    "label_fr": "Hôtels et hébergement similaire",
+    "label_en": "Hotels & Commercial Lodging"
+  },
+  "55.20Z": {
+    "code": "55.20Z",
+    "label_fr": "Hébergement touristique et autre hébergement de courte durée",
+    "label_en": "Holiday Rentals & Tourist Accommodation"
+  },
+  "55.30Z": {
+    "code": "55.30Z",
+    "label_fr": "Terrains de camping et parcs pour caravanes ou véhicules de loisirs",
+    "label_en": "Terrains de camping et parcs pour caravanes ou véhicules de loisirs"
+  },
+  "55.90Z": {
+    "code": "55.90Z",
+    "label_fr": "Autres hébergements",
+    "label_en": "Autres hébergements"
+  },
+  "56.10A": {
+    "code": "56.10A",
+    "label_fr": "Restauration traditionnelle",
+    "label_en": "Traditional Restaurants"
+  },
+  "56.10B": {
+    "code": "56.10B",
+    "label_fr": "Cafétérias et autres libres-services",
+    "label_en": "Cafeterias & Self-Service Restaurants"
+  },
+  "56.10C": {
+    "code": "56.10C",
+    "label_fr": "Restauration de type rapide",
+    "label_en": "Fast Food & Quick Service Restaurants"
+  },
+  "56.21Z": {
+    "code": "56.21Z",
+    "label_fr": "Services des traiteurs",
+    "label_en": "Event Catering Services"
+  },
+  "56.29A": {
+    "code": "56.29A",
+    "label_fr": "Restauration collective sous contrat",
+    "label_en": "Restauration collective sous contrat"
+  },
+  "56.29B": {
+    "code": "56.29B",
+    "label_fr": "Autres services de restauration n.c.a.",
+    "label_en": "Autres services de restauration n.c.a."
+  },
+  "56.30Z": {
+    "code": "56.30Z",
+    "label_fr": "Débits de boissons",
+    "label_en": "Bars, Cafes & Drinking Places"
+  },
+  "58.11Z": {
+    "code": "58.11Z",
+    "label_fr": "Édition de livres",
+    "label_en": "Book Publishing"
+  },
+  "58.12Z": {
+    "code": "58.12Z",
+    "label_fr": "Édition de répertoires et de fichiers d'adresses",
+    "label_en": "Édition de répertoires et de fichiers d'adresses"
+  },
+  "58.13Z": {
+    "code": "58.13Z",
+    "label_fr": "Édition de journaux",
+    "label_en": "Édition de journaux"
+  },
+  "58.14Z": {
+    "code": "58.14Z",
+    "label_fr": "Édition de revues et périodiques",
+    "label_en": "Édition de revues et périodiques"
+  },
+  "58.19Z": {
+    "code": "58.19Z",
+    "label_fr": "Autres activités d'édition",
+    "label_en": "Autres activités d'édition"
+  },
+  "58.21Z": {
+    "code": "58.21Z",
+    "label_fr": "Édition de jeux électroniques",
+    "label_en": "Édition de jeux électroniques"
+  },
+  "58.29A": {
+    "code": "58.29A",
+    "label_fr": "Édition de logiciels système et de réseau",
+    "label_en": "Édition de logiciels système et de réseau"
+  },
+  "58.29B": {
+    "code": "58.29B",
+    "label_fr": "Édition de logiciels outils de développement et de langages",
+    "label_en": "Édition de logiciels outils de développement et de langages"
+  },
+  "58.29C": {
+    "code": "58.29C",
+    "label_fr": "Édition de logiciels applicatifs",
+    "label_en": "Software Application Publishing (SaaS)"
+  },
+  "59.11A": {
+    "code": "59.11A",
+    "label_fr": "Production de films et de programmes pour la télévision",
+    "label_en": "Television & Film Program Production"
+  },
+  "59.11B": {
+    "code": "59.11B",
+    "label_fr": "Production de films institutionnels et publicitaires",
+    "label_en": "Institutional & Advertising Film Production"
+  },
+  "59.11C": {
+    "code": "59.11C",
+    "label_fr": "Production de films pour le cinéma",
+    "label_en": "Motion Picture Film Production"
+  },
+  "59.12Z": {
+    "code": "59.12Z",
+    "label_fr": "Post-production de films cinématographiques, de vidéo et de programmes de télévision",
+    "label_en": "Film & Video Post-Production Services"
+  },
+  "59.13A": {
+    "code": "59.13A",
+    "label_fr": "Distribution de films cinématographiques",
+    "label_en": "Distribution de films cinématographiques"
+  },
+  "59.13B": {
+    "code": "59.13B",
+    "label_fr": "Édition et distribution vidéo",
+    "label_en": "Édition et distribution vidéo"
+  },
+  "59.14Z": {
+    "code": "59.14Z",
+    "label_fr": "Projection de films cinématographiques",
+    "label_en": "Projection de films cinématographiques"
+  },
+  "59.20Z": {
+    "code": "59.20Z",
+    "label_fr": "Enregistrement sonore et édition musicale",
+    "label_en": "Sound Recording & Music Publishing"
+  },
+  "60.10Z": {
+    "code": "60.10Z",
+    "label_fr": "Édition et diffusion de programmes radio",
+    "label_en": "Édition et diffusion de programmes radio"
+  },
+  "60.20A": {
+    "code": "60.20A",
+    "label_fr": "Édition de chaînes généralistes",
+    "label_en": "Édition de chaînes généralistes"
+  },
+  "60.20B": {
+    "code": "60.20B",
+    "label_fr": "Édition de chaînes thématiques",
+    "label_en": "Édition de chaînes thématiques"
+  },
+  "61.10Z": {
+    "code": "61.10Z",
+    "label_fr": "Télécommunications filaires",
+    "label_en": "Télécommunications filaires"
+  },
+  "61.20Z": {
+    "code": "61.20Z",
+    "label_fr": "Télécommunications sans fil",
+    "label_en": "Télécommunications sans fil"
+  },
+  "61.30Z": {
+    "code": "61.30Z",
+    "label_fr": "Télécommunications par satellite",
+    "label_en": "Télécommunications par satellite"
+  },
+  "61.90Z": {
+    "code": "61.90Z",
+    "label_fr": "Autres activités de télécommunication",
+    "label_en": "Autres activités de télécommunication"
+  },
+  "62.01Z": {
+    "code": "62.01Z",
+    "label_fr": "Programmation informatique",
+    "label_en": "Software Development & Computer Programming"
+  },
+  "62.02A": {
+    "code": "62.02A",
+    "label_fr": "Conseil en systèmes et logiciels informatiques",
+    "label_en": "IT Systems & Technology Consulting"
+  },
+  "62.02B": {
+    "code": "62.02B",
+    "label_fr": "Tierce maintenance de systèmes et d'applications informatiques",
+    "label_en": "IT Infrastructure Support & Maintenance"
+  },
+  "62.03Z": {
+    "code": "62.03Z",
+    "label_fr": "Gestion d'installations informatiques",
+    "label_en": "Gestion d'installations informatiques"
+  },
+  "62.09Z": {
+    "code": "62.09Z",
+    "label_fr": "Autres activités informatiques",
+    "label_en": "Other IT & Computer Services"
+  },
+  "63.11Z": {
+    "code": "63.11Z",
+    "label_fr": "Traitement de données, hébergement et activités connexes",
+    "label_en": "Data Processing, Cloud Hosting & Web Services"
+  },
+  "63.12Z": {
+    "code": "63.12Z",
+    "label_fr": "Portails Internet",
+    "label_en": "Web Portals & Search Platforms"
+  },
+  "63.91Z": {
+    "code": "63.91Z",
+    "label_fr": "Activités des agences de presse",
+    "label_en": "Activités des agences de presse"
+  },
+  "63.99Z": {
+    "code": "63.99Z",
+    "label_fr": "Autres services d'information n.c.a.",
+    "label_en": "Autres services d'information n.c.a."
+  },
+  "64.11Z": {
+    "code": "64.11Z",
+    "label_fr": "Activités de banque centrale",
+    "label_en": "Activités de banque centrale"
+  },
+  "64.19Z": {
+    "code": "64.19Z",
+    "label_fr": "Autres intermédiations monétaires",
+    "label_en": "Commercial Banks & Monetary Intermediation"
+  },
+  "64.20Z": {
+    "code": "64.20Z",
+    "label_fr": "Activités des sociétés holding",
+    "label_en": "Holding Companies & Financial Management"
+  },
+  "64.30Z": {
+    "code": "64.30Z",
+    "label_fr": "Fonds de placement et entités financières similaires",
+    "label_en": "Fonds de placement et entités financières similaires"
+  },
+  "64.91Z": {
+    "code": "64.91Z",
+    "label_fr": "Crédit-bail",
+    "label_en": "Crédit-bail"
+  },
+  "64.92Z": {
+    "code": "64.92Z",
+    "label_fr": "Autre distribution de crédit",
+    "label_en": "Autre distribution de crédit"
+  },
+  "64.99Z": {
+    "code": "64.99Z",
+    "label_fr": "Autres activités des services financiers, hors assurance et caisses de retraite, n.c.a.",
+    "label_en": "Autres activités des services financiers, hors assurance et caisses de retraite, n.c.a."
+  },
+  "65.11Z": {
+    "code": "65.11Z",
+    "label_fr": "Assurance vie",
+    "label_en": "Assurance vie"
+  },
+  "65.12Z": {
+    "code": "65.12Z",
+    "label_fr": "Autres assurances",
+    "label_en": "Autres assurances"
+  },
+  "65.20Z": {
+    "code": "65.20Z",
+    "label_fr": "Réassurance",
+    "label_en": "Réassurance"
+  },
+  "65.30Z": {
+    "code": "65.30Z",
+    "label_fr": "Caisses de retraite",
+    "label_en": "Caisses de retraite"
+  },
+  "66.11Z": {
+    "code": "66.11Z",
+    "label_fr": "Administration de marchés financiers",
+    "label_en": "Administration de marchés financiers"
+  },
+  "66.12Z": {
+    "code": "66.12Z",
+    "label_fr": "Courtage de valeurs mobilières et de marchandises",
+    "label_en": "Courtage de valeurs mobilières et de marchandises"
+  },
+  "66.19A": {
+    "code": "66.19A",
+    "label_fr": "Supports juridiques de gestion de patrimoine mobilier",
+    "label_en": "Supports juridiques de gestion de patrimoine mobilier"
+  },
+  "66.19B": {
+    "code": "66.19B",
+    "label_fr": "Autres activités auxiliaires de services financiers, hors assurance et caisses de retraite, n.c.a.",
+    "label_en": "Loan & Mortgage Brokerage Services"
+  },
+  "66.21Z": {
+    "code": "66.21Z",
+    "label_fr": "Évaluation des risques et dommages",
+    "label_en": "Évaluation des risques et dommages"
+  },
+  "66.22Z": {
+    "code": "66.22Z",
+    "label_fr": "Activités des agents et courtiers d'assurances",
+    "label_en": "Insurance Brokerage & Agency Services"
+  },
+  "66.29Z": {
+    "code": "66.29Z",
+    "label_fr": "Autres activités auxiliaires d'assurance et de caisses de retraite",
+    "label_en": "Autres activités auxiliaires d'assurance et de caisses de retraite"
+  },
+  "66.30Z": {
+    "code": "66.30Z",
+    "label_fr": "Gestion de fonds",
+    "label_en": "Gestion de fonds"
+  },
+  "68.10Z": {
+    "code": "68.10Z",
+    "label_fr": "Activités des marchands de biens immobiliers",
+    "label_en": "Real Estate Dealers & Property Trading"
+  },
+  "68.20A": {
+    "code": "68.20A",
+    "label_fr": "Location de logements",
+    "label_en": "Rental & Leasing of Residential Apartments"
+  },
+  "68.20B": {
+    "code": "68.20B",
+    "label_fr": "Location de terrains et d'autres biens immobiliers",
+    "label_en": "Rental & Leasing of Commercial Property & Land"
+  },
+  "68.31Z": {
+    "code": "68.31Z",
+    "label_fr": "Agences immobilières",
+    "label_en": "Real Estate Agencies & Brokerages"
+  },
+  "68.32A": {
+    "code": "68.32A",
+    "label_fr": "Administration d'immeubles et autres biens immobiliers",
+    "label_en": "Property Management & Condominium Syndics"
+  },
+  "68.32B": {
+    "code": "68.32B",
+    "label_fr": "Supports juridiques de gestion de patrimoine immobilier",
+    "label_en": "Real Estate Asset Holding Structures"
+  },
+  "69.10Z": {
+    "code": "69.10Z",
+    "label_fr": "Activités juridiques",
+    "label_en": "Legal Activities (Lawyers, Notaries, Legal Counsel)"
+  },
+  "69.20Z": {
+    "code": "69.20Z",
+    "label_fr": "Activités comptables",
+    "label_en": "Accounting, Bookkeeping & Audit Services"
+  },
+  "70.10Z": {
+    "code": "70.10Z",
+    "label_fr": "Activités des sièges sociaux",
+    "label_en": "Corporate Headquarters & Regional Offices"
+  },
+  "70.21Z": {
+    "code": "70.21Z",
+    "label_fr": "Conseil en relations publiques et communication",
+    "label_en": "Public Relations & Communications Consulting"
+  },
+  "70.22Z": {
+    "code": "70.22Z",
+    "label_fr": "Conseil pour les affaires et autres conseils de gestion",
+    "label_en": "Business Management & Strategy Consulting"
+  },
+  "71.11Z": {
+    "code": "71.11Z",
+    "label_fr": "Activités d'architecture",
+    "label_en": "Architectural Consulting & Design"
+  },
+  "71.12A": {
+    "code": "71.12A",
+    "label_fr": "Activité des géomètres",
+    "label_en": "Activité des géomètres"
+  },
+  "71.12B": {
+    "code": "71.12B",
+    "label_fr": "Ingénierie, études techniques",
+    "label_en": "Engineering & Technical Consulting"
+  },
+  "71.20A": {
+    "code": "71.20A",
+    "label_fr": "Contrôle technique automobile",
+    "label_en": "Contrôle technique automobile"
+  },
+  "71.20B": {
+    "code": "71.20B",
+    "label_fr": "Analyses, essais et inspections techniques",
+    "label_en": "Analyses, essais et inspections techniques"
+  },
+  "72.11Z": {
+    "code": "72.11Z",
+    "label_fr": "Recherche-développement en biotechnologie",
+    "label_en": "Recherche-développement en biotechnologie"
+  },
+  "72.19Z": {
+    "code": "72.19Z",
+    "label_fr": "Recherche-développement en autres sciences physiques et naturelles",
+    "label_en": "Recherche-développement en autres sciences physiques et naturelles"
+  },
+  "72.20Z": {
+    "code": "72.20Z",
+    "label_fr": "Recherche-développement en sciences humaines et sociales",
+    "label_en": "Recherche-développement en sciences humaines et sociales"
+  },
+  "73.11Z": {
+    "code": "73.11Z",
+    "label_fr": "Activités des agences de publicité",
+    "label_en": "Advertising & Marketing Agencies"
+  },
+  "73.12Z": {
+    "code": "73.12Z",
+    "label_fr": "Régie publicitaire de médias",
+    "label_en": "Régie publicitaire de médias"
+  },
+  "73.20Z": {
+    "code": "73.20Z",
+    "label_fr": "Études de marché et sondages",
+    "label_en": "Études de marché et sondages"
+  },
+  "74.10Z": {
+    "code": "74.10Z",
+    "label_fr": "Activités spécialisées de design",
+    "label_en": "Specialized Industrial & Graphic Design"
+  },
+  "74.20Z": {
+    "code": "74.20Z",
+    "label_fr": "Activités photographiques",
+    "label_en": "Commercial Photography & Media Production"
+  },
+  "74.30Z": {
+    "code": "74.30Z",
+    "label_fr": "Traduction et interprétation",
+    "label_en": "Translation & Interpretation Services"
+  },
+  "74.90A": {
+    "code": "74.90A",
+    "label_fr": "Activité des économistes de la construction",
+    "label_en": "Activité des économistes de la construction"
+  },
+  "74.90B": {
+    "code": "74.90B",
+    "label_fr": "Activités spécialisées, scientifiques et techniques diverses",
+    "label_en": "Specialized Scientific & Technical Activities"
+  },
+  "75.00Z": {
+    "code": "75.00Z",
+    "label_fr": "Activités vétérinaires",
+    "label_en": "Activités vétérinaires"
+  },
+  "77.11A": {
+    "code": "77.11A",
+    "label_fr": "Location de courte durée de voitures et de véhicules automobiles légers",
+    "label_en": "Short-Term Car & Light Vehicle Rental"
+  },
+  "77.11B": {
+    "code": "77.11B",
+    "label_fr": "Location de longue durée de voitures et de véhicules automobiles légers",
+    "label_en": "Location de longue durée de voitures et de véhicules automobiles légers"
+  },
+  "77.12Z": {
+    "code": "77.12Z",
+    "label_fr": "Location et location-bail de camions",
+    "label_en": "Location et location-bail de camions"
+  },
+  "77.21Z": {
+    "code": "77.21Z",
+    "label_fr": "Location et location-bail d'articles de loisirs et de sport",
+    "label_en": "Location et location-bail d'articles de loisirs et de sport"
+  },
+  "77.22Z": {
+    "code": "77.22Z",
+    "label_fr": "Location de vidéocassettes et disques vidéo",
+    "label_en": "Location de vidéocassettes et disques vidéo"
+  },
+  "77.29Z": {
+    "code": "77.29Z",
+    "label_fr": "Location et location-bail d'autres biens personnels et domestiques",
+    "label_en": "Location et location-bail d'autres biens personnels et domestiques"
+  },
+  "77.31Z": {
+    "code": "77.31Z",
+    "label_fr": "Location et location-bail de machines et équipements agricoles",
+    "label_en": "Location et location-bail de machines et équipements agricoles"
+  },
+  "77.32Z": {
+    "code": "77.32Z",
+    "label_fr": "Location et location-bail de machines et équipements pour la construction",
+    "label_en": "Location et location-bail de machines et équipements pour la construction"
+  },
+  "77.33Z": {
+    "code": "77.33Z",
+    "label_fr": "Location et location-bail de machines de bureau et de matériel informatique",
+    "label_en": "Location et location-bail de machines de bureau et de matériel informatique"
+  },
+  "77.34Z": {
+    "code": "77.34Z",
+    "label_fr": "Location et location-bail de matériels de transport par eau",
+    "label_en": "Location et location-bail de matériels de transport par eau"
+  },
+  "77.35Z": {
+    "code": "77.35Z",
+    "label_fr": "Location et location-bail de matériels de transport aérien",
+    "label_en": "Location et location-bail de matériels de transport aérien"
+  },
+  "77.39Z": {
+    "code": "77.39Z",
+    "label_fr": "Location et location-bail d'autres machines, équipements et biens matériels n.c.a.",
+    "label_en": "Location et location-bail d'autres machines, équipements et biens matériels n.c.a."
+  },
+  "77.40Z": {
+    "code": "77.40Z",
+    "label_fr": "Location-bail de propriété intellectuelle et de produits similaires, à l'exception des œuvres soumises à copyright",
+    "label_en": "Location-bail de propriété intellectuelle et de produits similaires, à l'exception des œuvres soumises à copyright"
+  },
+  "78.10Z": {
+    "code": "78.10Z",
+    "label_fr": "Activités des agences de placement de main-d'œuvre",
+    "label_en": "Employment Placement & Staffing Agencies"
+  },
+  "78.20Z": {
+    "code": "78.20Z",
+    "label_fr": "Activités des agences de travail temporaire",
+    "label_en": "Temporary Employment Services"
+  },
+  "78.30Z": {
+    "code": "78.30Z",
+    "label_fr": "Autre mise à disposition de ressources humaines",
+    "label_en": "Autre mise à disposition de ressources humaines"
+  },
+  "79.11Z": {
+    "code": "79.11Z",
+    "label_fr": "Activités des agences de voyage",
+    "label_en": "Activités des agences de voyage"
+  },
+  "79.12Z": {
+    "code": "79.12Z",
+    "label_fr": "Activités des voyagistes",
+    "label_en": "Activités des voyagistes"
+  },
+  "79.90Z": {
+    "code": "79.90Z",
+    "label_fr": "Autres services de réservation et activités connexes",
+    "label_en": "Autres services de réservation et activités connexes"
+  },
+  "80.10Z": {
+    "code": "80.10Z",
+    "label_fr": "Activités de sécurité privée",
+    "label_en": "Activités de sécurité privée"
+  },
+  "80.20Z": {
+    "code": "80.20Z",
+    "label_fr": "Activités liées aux systèmes de sécurité",
+    "label_en": "Activités liées aux systèmes de sécurité"
+  },
+  "80.30Z": {
+    "code": "80.30Z",
+    "label_fr": "Activités d'enquête",
+    "label_en": "Activités d'enquête"
+  },
+  "81.10Z": {
+    "code": "81.10Z",
+    "label_fr": "Activités combinées de soutien lié aux bâtiments",
+    "label_en": "Combined Facilities Support & Building Management"
+  },
+  "81.21Z": {
+    "code": "81.21Z",
+    "label_fr": "Nettoyage courant des bâtiments",
+    "label_en": "Commercial & Residential Building Cleaning"
+  },
+  "81.22Z": {
+    "code": "81.22Z",
+    "label_fr": "Autres activités de nettoyage des bâtiments et nettoyage industriel",
+    "label_en": "Specialized & Industrial Cleaning Services"
+  },
+  "81.29A": {
+    "code": "81.29A",
+    "label_fr": "Désinfection, désinsectisation, dératisation",
+    "label_en": "Désinfection, désinsectisation, dératisation"
+  },
+  "81.29B": {
+    "code": "81.29B",
+    "label_fr": "Autres activités de nettoyage n.c.a.",
+    "label_en": "Autres activités de nettoyage n.c.a."
+  },
+  "81.30Z": {
+    "code": "81.30Z",
+    "label_fr": "Services d'aménagement paysager",
+    "label_en": "Landscape Architecture & Gardening Services"
+  },
+  "82.11Z": {
+    "code": "82.11Z",
+    "label_fr": "Services administratifs combinés de bureau",
+    "label_en": "Combined Office Administrative Services"
+  },
+  "82.19Z": {
+    "code": "82.19Z",
+    "label_fr": "Photocopie, préparation de documents et autres activités spécialisées de soutien de bureau",
+    "label_en": "Photocopie, préparation de documents et autres activités spécialisées de soutien de bureau"
+  },
+  "82.20Z": {
+    "code": "82.20Z",
+    "label_fr": "Activités de centres d'appels",
+    "label_en": "Activités de centres d'appels"
+  },
+  "82.30Z": {
+    "code": "82.30Z",
+    "label_fr": "Organisation de foires, salons professionnels et congrès",
+    "label_en": "Organisation de foires, salons professionnels et congrès"
+  },
+  "82.91Z": {
+    "code": "82.91Z",
+    "label_fr": "Activités des agences de recouvrement de factures et des sociétés d'information financière sur la clientèle",
+    "label_en": "Activités des agences de recouvrement de factures et des sociétés d'information financière sur la clientèle"
+  },
+  "82.92Z": {
+    "code": "82.92Z",
+    "label_fr": "Activités de conditionnement",
+    "label_en": "Activités de conditionnement"
+  },
+  "82.99Z": {
+    "code": "82.99Z",
+    "label_fr": "Autres activités de soutien aux entreprises n.c.a.",
+    "label_en": "Autres activités de soutien aux entreprises n.c.a."
+  },
+  "84.11Z": {
+    "code": "84.11Z",
+    "label_fr": "Administration publique générale",
+    "label_en": "General Public Administration"
+  },
+  "84.12Z": {
+    "code": "84.12Z",
+    "label_fr": "Administration publique (tutelle) de la santé, de la formation, de la culture et des services sociaux, autre que sécurité sociale",
+    "label_en": "Administration publique (tutelle) de la santé, de la formation, de la culture et des services sociaux, autre que sécurité sociale"
+  },
+  "84.13Z": {
+    "code": "84.13Z",
+    "label_fr": "Administration publique (tutelle) des activités économiques",
+    "label_en": "Administration publique (tutelle) des activités économiques"
+  },
+  "84.21Z": {
+    "code": "84.21Z",
+    "label_fr": "Affaires étrangères",
+    "label_en": "Affaires étrangères"
+  },
+  "84.22Z": {
+    "code": "84.22Z",
+    "label_fr": "Défense",
+    "label_en": "Défense"
+  },
+  "84.23Z": {
+    "code": "84.23Z",
+    "label_fr": "Justice",
+    "label_en": "Justice"
+  },
+  "84.24Z": {
+    "code": "84.24Z",
+    "label_fr": "Activités d'ordre public et de sécurité",
+    "label_en": "Activités d'ordre public et de sécurité"
+  },
+  "84.25Z": {
+    "code": "84.25Z",
+    "label_fr": "Services du feu et de secours",
+    "label_en": "Services du feu et de secours"
+  },
+  "84.30A": {
+    "code": "84.30A",
+    "label_fr": "Activités générales de sécurité sociale",
+    "label_en": "Activités générales de sécurité sociale"
+  },
+  "84.30B": {
+    "code": "84.30B",
+    "label_fr": "Gestion des retraites complémentaires",
+    "label_en": "Gestion des retraites complémentaires"
+  },
+  "84.30C": {
+    "code": "84.30C",
+    "label_fr": "Distribution sociale de revenus",
+    "label_en": "Distribution sociale de revenus"
+  },
+  "85.10Z": {
+    "code": "85.10Z",
+    "label_fr": "Enseignement pré-primaire",
+    "label_en": "Enseignement pré-primaire"
+  },
+  "85.20Z": {
+    "code": "85.20Z",
+    "label_fr": "Enseignement primaire",
+    "label_en": "Enseignement primaire"
+  },
+  "85.31Z": {
+    "code": "85.31Z",
+    "label_fr": "Enseignement secondaire général",
+    "label_en": "Enseignement secondaire général"
+  },
+  "85.32Z": {
+    "code": "85.32Z",
+    "label_fr": "Enseignement secondaire technique ou professionnel",
+    "label_en": "Enseignement secondaire technique ou professionnel"
+  },
+  "85.41Z": {
+    "code": "85.41Z",
+    "label_fr": "Enseignement post-secondaire non supérieur",
+    "label_en": "Enseignement post-secondaire non supérieur"
+  },
+  "85.42Z": {
+    "code": "85.42Z",
+    "label_fr": "Enseignement supérieur",
+    "label_en": "Enseignement supérieur"
+  },
+  "85.51Z": {
+    "code": "85.51Z",
+    "label_fr": "Enseignement de disciplines sportives et d'activités de loisirs",
+    "label_en": "Sports & Recreation Education & Coaching"
+  },
+  "85.52Z": {
+    "code": "85.52Z",
+    "label_fr": "Enseignement culturel",
+    "label_en": "Enseignement culturel"
+  },
+  "85.53Z": {
+    "code": "85.53Z",
+    "label_fr": "Enseignement de la conduite",
+    "label_en": "Driving Schools & Driver Training"
+  },
+  "85.59A": {
+    "code": "85.59A",
+    "label_fr": "Formation continue d'adultes",
+    "label_en": "Adult Continuing Education & Professional Training"
+  },
+  "85.59B": {
+    "code": "85.59B",
+    "label_fr": "Autres enseignements",
+    "label_en": "Other Specialized Educational Instruction"
+  },
+  "85.60Z": {
+    "code": "85.60Z",
+    "label_fr": "Activités de soutien à l'enseignement",
+    "label_en": "Activités de soutien à l'enseignement"
+  },
+  "86.10Z": {
+    "code": "86.10Z",
+    "label_fr": "Activités hospitalières",
+    "label_en": "Activités hospitalières"
+  },
+  "86.21Z": {
+    "code": "86.21Z",
+    "label_fr": "Activité des médecins généralistes",
+    "label_en": "General Practice Medical Clinics"
+  },
+  "86.22A": {
+    "code": "86.22A",
+    "label_fr": "Activités de radiodiagnostic et de radiothérapie",
+    "label_en": "Diagnostic Imaging & Radiotherapy Centers"
+  },
+  "86.22B": {
+    "code": "86.22B",
+    "label_fr": "Activités chirurgicales",
+    "label_en": "Activités chirurgicales"
+  },
+  "86.22C": {
+    "code": "86.22C",
+    "label_fr": "Autres activités des médecins spécialistes",
+    "label_en": "Specialist Medical Practice"
+  },
+  "86.23Z": {
+    "code": "86.23Z",
+    "label_fr": "Pratique dentaire",
+    "label_en": "Dental Practice & Clinics"
+  },
+  "86.90A": {
+    "code": "86.90A",
+    "label_fr": "Ambulances",
+    "label_en": "Ambulance & Patient Transport Services"
+  },
+  "86.90B": {
+    "code": "86.90B",
+    "label_fr": "Laboratoires d'analyses médicales",
+    "label_en": "Laboratoires d'analyses médicales"
+  },
+  "86.90C": {
+    "code": "86.90C",
+    "label_fr": "Centres de collecte et banques d'organes",
+    "label_en": "Centres de collecte et banques d'organes"
+  },
+  "86.90D": {
+    "code": "86.90D",
+    "label_fr": "Activités des infirmiers et des sages-femmes",
+    "label_en": "Nursing & Midwifery Care"
+  },
+  "86.90E": {
+    "code": "86.90E",
+    "label_fr": "Activités des professionnels de la rééducation, de l'appareillage et des pédicures-podologues",
+    "label_en": "Physiotherapy & Physical Rehabilitation"
+  },
+  "86.90F": {
+    "code": "86.90F",
+    "label_fr": "Activités de santé humaine non classées ailleurs",
+    "label_en": "Other Healthcare & Allied Health Services"
+  },
+  "87.10A": {
+    "code": "87.10A",
+    "label_fr": "Hébergement médicalisé pour personnes âgées",
+    "label_en": "Hébergement médicalisé pour personnes âgées"
+  },
+  "87.10B": {
+    "code": "87.10B",
+    "label_fr": "Hébergement médicalisé pour enfants handicapés",
+    "label_en": "Hébergement médicalisé pour enfants handicapés"
+  },
+  "87.10C": {
+    "code": "87.10C",
+    "label_fr": "Hébergement médicalisé pour adultes handicapés et autre hébergement médicalisé",
+    "label_en": "Hébergement médicalisé pour adultes handicapés et autre hébergement médicalisé"
+  },
+  "87.20A": {
+    "code": "87.20A",
+    "label_fr": "Hébergement social pour handicapés mentaux et malades mentaux",
+    "label_en": "Hébergement social pour handicapés mentaux et malades mentaux"
+  },
+  "87.20B": {
+    "code": "87.20B",
+    "label_fr": "Hébergement social pour toxicomanes",
+    "label_en": "Hébergement social pour toxicomanes"
+  },
+  "87.30A": {
+    "code": "87.30A",
+    "label_fr": "Hébergement social pour personnes âgées",
+    "label_en": "Hébergement social pour personnes âgées"
+  },
+  "87.30B": {
+    "code": "87.30B",
+    "label_fr": "Hébergement social pour handicapés physiques",
+    "label_en": "Hébergement social pour handicapés physiques"
+  },
+  "87.90A": {
+    "code": "87.90A",
+    "label_fr": "Hébergement social pour enfants en difficultés",
+    "label_en": "Hébergement social pour enfants en difficultés"
+  },
+  "87.90B": {
+    "code": "87.90B",
+    "label_fr": "Hébergement social pour adultes et familles en difficultés et autre hébergement social",
+    "label_en": "Hébergement social pour adultes et familles en difficultés et autre hébergement social"
+  },
+  "88.10A": {
+    "code": "88.10A",
+    "label_fr": "Aide à domicile",
+    "label_en": "Aide à domicile"
+  },
+  "88.10B": {
+    "code": "88.10B",
+    "label_fr": "Accueil ou accompagnement sans hébergement d'adultes handicapés ou de personnes âgées",
+    "label_en": "Accueil ou accompagnement sans hébergement d'adultes handicapés ou de personnes âgées"
+  },
+  "88.10C": {
+    "code": "88.10C",
+    "label_fr": "Aide par le travail",
+    "label_en": "Aide par le travail"
+  },
+  "88.91A": {
+    "code": "88.91A",
+    "label_fr": "Accueil de jeunes enfants",
+    "label_en": "Daycare & Childcare Facilities"
+  },
+  "88.91B": {
+    "code": "88.91B",
+    "label_fr": "Accueil ou accompagnement sans hébergement d'enfants handicapés",
+    "label_en": "Accueil ou accompagnement sans hébergement d'enfants handicapés"
+  },
+  "88.99A": {
+    "code": "88.99A",
+    "label_fr": "Autre accueil ou accompagnement sans hébergement d'enfants et d'adolescents",
+    "label_en": "Autre accueil ou accompagnement sans hébergement d'enfants et d'adolescents"
+  },
+  "88.99B": {
+    "code": "88.99B",
+    "label_fr": "Action sociale sans hébergement n.c.a.",
+    "label_en": "Action sociale sans hébergement n.c.a."
+  },
+  "90.01Z": {
+    "code": "90.01Z",
+    "label_fr": "Arts du spectacle vivant",
+    "label_en": "Live Performing Arts & Theaters"
+  },
+  "90.02Z": {
+    "code": "90.02Z",
+    "label_fr": "Activités de soutien au spectacle vivant",
+    "label_en": "Activités de soutien au spectacle vivant"
+  },
+  "90.03A": {
+    "code": "90.03A",
+    "label_fr": "Création artistique relevant des arts plastiques",
+    "label_en": "Visual Arts & Fine Arts Creation"
+  },
+  "90.03B": {
+    "code": "90.03B",
+    "label_fr": "Autre création artistique",
+    "label_en": "Other Artistic & Creative Writing Services"
+  },
+  "90.04Z": {
+    "code": "90.04Z",
+    "label_fr": "Gestion de salles de spectacles",
+    "label_en": "Gestion de salles de spectacles"
+  },
+  "91.01Z": {
+    "code": "91.01Z",
+    "label_fr": "Gestion des bibliothèques et des archives",
+    "label_en": "Gestion des bibliothèques et des archives"
+  },
+  "91.02Z": {
+    "code": "91.02Z",
+    "label_fr": "Gestion des musées",
+    "label_en": "Gestion des musées"
+  },
+  "91.03Z": {
+    "code": "91.03Z",
+    "label_fr": "Gestion des sites et monuments historiques et des attractions touristiques similaires",
+    "label_en": "Gestion des sites et monuments historiques et des attractions touristiques similaires"
+  },
+  "91.04Z": {
+    "code": "91.04Z",
+    "label_fr": "Gestion des jardins botaniques et zoologiques et des réserves naturelles",
+    "label_en": "Gestion des jardins botaniques et zoologiques et des réserves naturelles"
+  },
+  "92.00Z": {
+    "code": "92.00Z",
+    "label_fr": "Organisation de jeux de hasard et d'argent",
+    "label_en": "Organisation de jeux de hasard et d'argent"
+  },
+  "93.11Z": {
+    "code": "93.11Z",
+    "label_fr": "Gestion d'installations sportives",
+    "label_en": "Gestion d'installations sportives"
+  },
+  "93.12Z": {
+    "code": "93.12Z",
+    "label_fr": "Activités de clubs de sports",
+    "label_en": "Sports Clubs & Athletic Associations"
+  },
+  "93.13Z": {
+    "code": "93.13Z",
+    "label_fr": "Activités des centres de culture physique",
+    "label_en": "Fitness Centers & Gyms"
+  },
+  "93.19Z": {
+    "code": "93.19Z",
+    "label_fr": "Autres activités liées au sport",
+    "label_en": "Autres activités liées au sport"
+  },
+  "93.21Z": {
+    "code": "93.21Z",
+    "label_fr": "Activités des parcs d'attractions et parcs à thèmes",
+    "label_en": "Activités des parcs d'attractions et parcs à thèmes"
+  },
+  "93.29Z": {
+    "code": "93.29Z",
+    "label_fr": "Autres activités récréatives et de loisirs",
+    "label_en": "Autres activités récréatives et de loisirs"
+  },
+  "94.11Z": {
+    "code": "94.11Z",
+    "label_fr": "Activités des organisations patronales et consulaires",
+    "label_en": "Activités des organisations patronales et consulaires"
+  },
+  "94.12Z": {
+    "code": "94.12Z",
+    "label_fr": "Activités des organisations professionnelles",
+    "label_en": "Activités des organisations professionnelles"
+  },
+  "94.20Z": {
+    "code": "94.20Z",
+    "label_fr": "Activités des syndicats de salariés",
+    "label_en": "Activités des syndicats de salariés"
+  },
+  "94.91Z": {
+    "code": "94.91Z",
+    "label_fr": "Activités des organisations religieuses",
+    "label_en": "Activités des organisations religieuses"
+  },
+  "94.92Z": {
+    "code": "94.92Z",
+    "label_fr": "Activités des organisations politiques",
+    "label_en": "Activités des organisations politiques"
+  },
+  "94.99Z": {
+    "code": "94.99Z",
+    "label_fr": "Autres organisations fonctionnant par adhésion volontaire",
+    "label_en": "Autres organisations fonctionnant par adhésion volontaire"
+  },
+  "95.11Z": {
+    "code": "95.11Z",
+    "label_fr": "Réparation d'ordinateurs et d'équipements périphériques",
+    "label_en": "Réparation d'ordinateurs et d'équipements périphériques"
+  },
+  "95.12Z": {
+    "code": "95.12Z",
+    "label_fr": "Réparation d'équipements de communication",
+    "label_en": "Réparation d'équipements de communication"
+  },
+  "95.21Z": {
+    "code": "95.21Z",
+    "label_fr": "Réparation de produits électroniques grand public",
+    "label_en": "Réparation de produits électroniques grand public"
+  },
+  "95.22Z": {
+    "code": "95.22Z",
+    "label_fr": "Réparation d'appareils électroménagers et d'équipements pour la maison et le jardin",
+    "label_en": "Réparation d'appareils électroménagers et d'équipements pour la maison et le jardin"
+  },
+  "95.23Z": {
+    "code": "95.23Z",
+    "label_fr": "Réparation de chaussures et d'articles en cuir",
+    "label_en": "Réparation de chaussures et d'articles en cuir"
+  },
+  "95.24Z": {
+    "code": "95.24Z",
+    "label_fr": "Réparation de meubles et d'équipements du foyer",
+    "label_en": "Réparation de meubles et d'équipements du foyer"
+  },
+  "95.25Z": {
+    "code": "95.25Z",
+    "label_fr": "Réparation d'articles d'horlogerie et de bijouterie",
+    "label_en": "Réparation d'articles d'horlogerie et de bijouterie"
+  },
+  "95.29Z": {
+    "code": "95.29Z",
+    "label_fr": "Réparation d'autres biens personnels et domestiques",
+    "label_en": "Réparation d'autres biens personnels et domestiques"
+  },
+  "96.01A": {
+    "code": "96.01A",
+    "label_fr": "Blanchisserie-teinturerie de gros",
+    "label_en": "Blanchisserie-teinturerie de gros"
+  },
+  "96.01B": {
+    "code": "96.01B",
+    "label_fr": "Blanchisserie-teinturerie de détail",
+    "label_en": "Blanchisserie-teinturerie de détail"
+  },
+  "96.02A": {
+    "code": "96.02A",
+    "label_fr": "Coiffure",
+    "label_en": "Hairdressing & Barber Salons"
+  },
+  "96.02B": {
+    "code": "96.02B",
+    "label_fr": "Soins de beauté",
+    "label_en": "Beauty Salons & Esthetic Care"
+  },
+  "96.03Z": {
+    "code": "96.03Z",
+    "label_fr": "Services funéraires",
+    "label_en": "Services funéraires"
+  },
+  "96.04Z": {
+    "code": "96.04Z",
+    "label_fr": "Entretien corporel",
+    "label_en": "Physical Wellbeing & Spa Services"
+  },
+  "96.09Z": {
+    "code": "96.09Z",
+    "label_fr": "Autres services personnels n.c.a.",
+    "label_en": "Other Personal Services"
+  },
+  "97.00Z": {
+    "code": "97.00Z",
+    "label_fr": "Activités des ménages en tant qu'employeurs de personnel domestique",
+    "label_en": "Activités des ménages en tant qu'employeurs de personnel domestique"
+  },
+  "98.10Z": {
+    "code": "98.10Z",
+    "label_fr": "Activités indifférenciées des ménages en tant que producteurs de biens pour usage propre",
+    "label_en": "Activités indifférenciées des ménages en tant que producteurs de biens pour usage propre"
+  },
+  "98.20Z": {
+    "code": "98.20Z",
+    "label_fr": "Activités indifférenciées des ménages en tant que producteurs de services pour usage propre",
+    "label_en": "Activités indifférenciées des ménages en tant que producteurs de services pour usage propre"
+  },
+  "99.00Z": {
+    "code": "99.00Z",
+    "label_fr": "Activités des organisations et organismes extraterritoriaux",
+    "label_en": "Activités des organisations et organismes extraterritoriaux"
+  },
+  "00.00Z": {
+    "code": "00.00Z",
+    "label_fr": "Unspecified / Undetermined Activity",
+    "label_en": "Unspecified / Undetermined Activity"
+  },
+  "01.1A": {
+    "code": "01.1A",
+    "label_fr": "Crop & Agricultural Farming (Legacy)",
+    "label_en": "Crop & Agricultural Farming (Legacy)"
+  },
+  "51.4C": {
+    "code": "51.4C",
+    "label_fr": "Wholesale of Household Goods (Legacy)",
+    "label_en": "Wholesale of Household Goods (Legacy)"
+  },
+  "52.4Z": {
+    "code": "52.4Z",
+    "label_fr": "Specialized Retail Trade (Legacy)",
+    "label_en": "Specialized Retail Trade (Legacy)"
+  },
+  "55.4A": {
+    "code": "55.4A",
+    "label_fr": "Cafes & Drinking Places (Legacy)",
+    "label_en": "Cafes & Drinking Places (Legacy)"
+  },
+  "70.2C": {
+    "code": "70.2C",
+    "label_fr": "Real Estate Rental Operations (Legacy)",
+    "label_en": "Real Estate Rental Operations (Legacy)"
+  }
+}

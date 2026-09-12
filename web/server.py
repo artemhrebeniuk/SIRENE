@@ -26,7 +26,7 @@ from src.config import (
     SUMMARY_DEPTS_CSV,
     SUMMARY_TOP_NAF_CSV,
 )
-from web.naf_data import get_naf_label_en
+from web.naf_data import get_naf_label_en, get_naf_label_fr
 
 app = Flask(__name__, static_folder="static", template_folder="static")
 
@@ -93,6 +93,7 @@ def get_kpis():
     data_file, is_sample = get_active_dataset_path()
     con = get_db()
     
+    # Mainland France (codes 01 to 95, 2A, 2B)
     kpis = con.execute(f"""
         SELECT 
             COUNT(*) AS total_active,
@@ -100,6 +101,7 @@ def get_kpis():
             COUNT(DISTINCT code_departement) AS total_dept,
             COUNT(DISTINCT code_naf) AS total_naf
         FROM read_parquet('{data_file}')
+        WHERE code_departement NOT LIKE '97%'
     """).fetchone()
     
     total_active, with_coords, total_dept, total_naf = kpis
@@ -109,7 +111,7 @@ def get_kpis():
         "total_active_establishments": total_active,
         "geocoded_establishments": with_coords,
         "geocoding_rate_pct": pct,
-        "distinct_departments": total_dept,
+        "distinct_departments": min(total_dept, 96),
         "distinct_naf_codes": total_naf,
         "is_sample": is_sample,
         "source_file": os.path.basename(data_file)
@@ -121,6 +123,7 @@ def get_departments():
     data_file, _ = get_active_dataset_path()
     con = get_db()
     
+    # Mainland France only (exclude 97X overseas)
     rows = con.execute(f"""
         WITH dept_stats AS (
             SELECT 
@@ -130,7 +133,9 @@ def get_departments():
                 ROUND(COUNT(CASE WHEN has_coordinates THEN 1 END) * 100.0 / COUNT(*), 1) AS geocoded_pct,
                 MODE(code_naf) AS top_naf
             FROM read_parquet('{data_file}')
-            WHERE code_departement IS NOT NULL AND code_departement != ''
+            WHERE code_departement IS NOT NULL 
+              AND code_departement != ''
+              AND code_departement NOT LIKE '97%'
             GROUP BY code_departement
             ORDER BY total_etablissements DESC
         )
@@ -142,7 +147,7 @@ def get_departments():
         code = str(r[0])
         results.append({
             "code": code,
-            "name": DEPT_NAMES.get(code, f"Département {code}"),
+            "name": DEPT_NAMES.get(code, f"Department {code}"),
             "total": r[1],
             "geocoded": r[2],
             "geocoded_pct": r[3],
@@ -150,6 +155,292 @@ def get_departments():
             "top_naf_label": get_naf_label_en(r[4])
         })
     return jsonify(results)
+
+
+@app.route("/api/department/<dept_code>/cities")
+def get_department_cities(dept_code):
+    data_file, _ = get_active_dataset_path()
+    con = get_db()
+    dept_code = dept_code.strip().upper()
+    
+    rows = con.execute(f"""
+        SELECT 
+            libelle_commune,
+            COUNT(*) AS total,
+            COUNT(CASE WHEN has_coordinates THEN 1 END) AS geocoded
+        FROM read_parquet('{data_file}')
+        WHERE UPPER(code_departement) = '{dept_code}'
+          AND libelle_commune IS NOT NULL
+        GROUP BY libelle_commune
+        ORDER BY total DESC
+        LIMIT 25
+    """).fetchall()
+    
+    return jsonify([{
+        "city": r[0],
+        "total": r[1],
+        "geocoded": r[2]
+    } for r in rows])
+
+
+@app.route("/api/department/<dept_code>/niches")
+def get_department_niches(dept_code):
+    data_file, _ = get_active_dataset_path()
+    con = get_db()
+    dept_code = dept_code.strip().upper()
+    
+    rows = con.execute(f"""
+        SELECT 
+            code_naf,
+            COUNT(*) AS total
+        FROM read_parquet('{data_file}')
+        WHERE UPPER(code_departement) = '{dept_code}'
+          AND code_naf IS NOT NULL
+        GROUP BY code_naf
+        ORDER BY total DESC
+        LIMIT 80
+    """).fetchall()
+    
+    return jsonify([{
+        "code": r[0],
+        "label": get_naf_label_en(r[0]),
+        "label_fr": get_naf_label_fr(r[0]),
+        "total": r[1]
+    } for r in rows])
+
+
+@app.route("/api/businesses")
+def get_businesses():
+    data_file, _ = get_active_dataset_path()
+    con = get_db()
+    
+    dept = request.args.get("dept", "").strip().upper()
+    city = request.args.get("city", "").strip().upper()
+    naf = request.args.get("naf", "").strip().upper()
+    q = request.args.get("q", "").strip().lower()
+    try:
+        limit = min(int(request.args.get("limit", 50)), 250)
+    except (ValueError, TypeError):
+        limit = 50
+    try:
+        offset = max(int(request.args.get("offset", 0)), 0)
+    except (ValueError, TypeError):
+        offset = 0
+    
+    clauses = ["code_departement NOT LIKE '97%'"]
+    if dept:
+        clauses.append(f"UPPER(code_departement) = '{dept}'")
+    if city:
+        clauses.append(f"UPPER(libelle_commune) = '{city}'")
+    if naf:
+        clauses.append(f"UPPER(code_naf) = '{naf}'")
+    if q:
+        clauses.append(f"((denomination NOT IN ('[ND]', '') AND LOWER(denomination) LIKE '%{q}%') OR (enseigne NOT IN ('[ND]', '') AND LOWER(enseigne) LIKE '%{q}%') OR siret LIKE '%{q}%')")
+        
+    where_sql = "WHERE " + " AND ".join(clauses)
+    
+    total_count = con.execute(f"""
+        SELECT COUNT(*) FROM read_parquet('{data_file}') {where_sql}
+    """).fetchone()[0]
+    
+    rows = con.execute(f"""
+        SELECT 
+            siret,
+            siren,
+            COALESCE(
+                CASE WHEN denomination NOT IN ('[ND]', '') THEN denomination END,
+                CASE WHEN enseigne NOT IN ('[ND]', '') THEN enseigne END,
+                'Establishment ' || substring(siret, 10, 5)
+            ) AS name,
+            denomination,
+            enseigne,
+            code_postal,
+            libelle_commune,
+            code_departement,
+            code_naf,
+            date_creation,
+            latitude,
+            longitude
+        FROM read_parquet('{data_file}')
+        {where_sql}
+        ORDER BY 
+            has_coordinates DESC,
+            (denomination NOT IN ('[ND]', '') AND denomination IS NOT NULL) DESC,
+            (enseigne NOT IN ('[ND]', '') AND enseigne IS NOT NULL) DESC,
+            date_creation DESC NULLS LAST
+        LIMIT {limit} OFFSET {offset}
+    """).fetchall()
+    
+    items = []
+    for r in rows:
+        items.append({
+            "siret": r[0],
+            "siren": r[1],
+            "name": r[2],
+            "denomination": r[3],
+            "enseigne": r[4],
+            "postal_code": r[5],
+            "city": r[6],
+            "department": r[7],
+            "naf_code": r[8],
+            "naf_label": get_naf_label_en(r[8]),
+            "naf_label_fr": get_naf_label_fr(r[8]),
+            "gov_verify_url": f"https://annuaire-entreprises.data.gouv.fr/etablissement/{r[0]}",
+            "google_maps_url": f"https://www.google.com/maps/search/?api=1&query={r[10]},{r[11]}" if (r[10] and r[11]) else None,
+            "created_date": str(r[9]) if r[9] else "N/A",
+            "lat": r[10],
+            "lng": r[11],
+            "has_gps": bool(r[10] and r[11])
+        })
+        
+    return jsonify({
+        "total": total_count,
+        "limit": limit,
+        "offset": offset,
+        "items": items
+    })
+
+
+@app.route("/api/businesses/export")
+def export_filtered_businesses():
+    import csv, io
+    data_file, _ = get_active_dataset_path()
+    con = get_db()
+    
+    dept = request.args.get("dept", "").strip().upper()
+    city = request.args.get("city", "").strip().upper()
+    naf = request.args.get("naf", "").strip().upper()
+    q = request.args.get("q", "").strip().lower()
+    
+    clauses = ["code_departement NOT LIKE '97%'"]
+    if dept:
+        clauses.append(f"UPPER(code_departement) = '{dept}'")
+    if city:
+        clauses.append(f"UPPER(libelle_commune) = '{city}'")
+    if naf:
+        clauses.append(f"UPPER(code_naf) = '{naf}'")
+    if q:
+        clauses.append(f"((denomination NOT IN ('[ND]', '') AND LOWER(denomination) LIKE '%{q}%') OR (enseigne NOT IN ('[ND]', '') AND LOWER(enseigne) LIKE '%{q}%') OR siret LIKE '%{q}%')")
+        
+    where_sql = "WHERE " + " AND ".join(clauses)
+    
+    rows = con.execute(f"""
+        SELECT 
+            siret,
+            siren,
+            COALESCE(
+                CASE WHEN denomination NOT IN ('[ND]', '') THEN denomination END,
+                CASE WHEN enseigne NOT IN ('[ND]', '') THEN enseigne END,
+                'Establishment ' || substring(siret, 10, 5)
+            ) AS name,
+            code_postal,
+            libelle_commune,
+            code_departement,
+            code_naf,
+            latitude,
+            longitude,
+            date_creation
+        FROM read_parquet('{data_file}')
+        {where_sql}
+        ORDER BY 
+            has_coordinates DESC,
+            (denomination NOT IN ('[ND]', '') AND denomination IS NOT NULL) DESC,
+            (enseigne NOT IN ('[ND]', '') AND enseigne IS NOT NULL) DESC,
+            date_creation DESC NULLS LAST
+        LIMIT 5000
+    """).fetchall()
+    
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow([
+        "SIRET", "SIREN", "Company / Trade Name", "Postal Code", "City", 
+        "Department", "NAF Code", "Industry (EN)", "Legal Activity (FR)",
+        "Latitude", "Longitude", "Creation Date", "Gov Verification Link"
+    ])
+    
+    for r in rows:
+        writer.writerow([
+            r[0], r[1], r[2], r[3], r[4], r[5], r[6],
+            get_naf_label_en(r[6]), get_naf_label_fr(r[6]),
+            r[7], r[8], r[9],
+            f"https://annuaire-entreprises.data.gouv.fr/etablissement/{r[0]}"
+        ])
+        
+    return Response(
+        output.getvalue(),
+        mimetype="text/csv",
+        headers={"Content-Disposition": f"attachment;filename=sirene_businesses_{dept or 'all'}.csv"}
+    )
+
+
+@app.route("/api/communes")
+def get_communes():
+    web_file = os.path.join(BASE_DIR, "web", "top_communes.json")
+    out_file = os.path.join(BASE_DIR, "output", "top_communes.json")
+    target = web_file if os.path.exists(web_file) else out_file
+    if os.path.exists(target):
+        with open(target, "r", encoding="utf-8") as f:
+            return Response(f.read(), mimetype="application/json")
+    return jsonify([])
+
+
+@app.route("/api/commune/<city>")
+def get_commune_detail(city):
+    data_file, _ = get_active_dataset_path()
+    con = get_db()
+    dept = request.args.get("dept", "").strip().upper()
+    city = city.strip().upper()
+    
+    where_clause = f"UPPER(libelle_commune) = '{city}'"
+    if dept:
+        where_clause += f" AND UPPER(code_departement) = '{dept}'"
+        
+    stats = con.execute(f"""
+        SELECT 
+            libelle_commune,
+            code_departement,
+            COUNT(*) AS total,
+            COUNT(CASE WHEN has_coordinates THEN 1 END) AS geocoded,
+            ROUND(COUNT(CASE WHEN has_coordinates THEN 1 END) * 100.0 / COUNT(*), 1) AS geocoded_pct,
+            AVG(latitude) AS lat,
+            AVG(longitude) AS lng
+        FROM read_parquet('{data_file}')
+        WHERE {where_clause}
+        GROUP BY libelle_commune, code_departement
+        LIMIT 1
+    """).fetchone()
+    
+    if not stats:
+        return jsonify({"error": "Commune not found"}), 404
+        
+    top_sectors = con.execute(f"""
+        SELECT 
+            code_naf,
+            COUNT(*) as cnt
+        FROM read_parquet('{data_file}')
+        WHERE {where_clause}
+          AND code_naf IS NOT NULL
+        GROUP BY code_naf
+        ORDER BY cnt DESC
+        LIMIT 5
+    """).fetchall()
+    
+    return jsonify({
+        "city": stats[0],
+        "dept": stats[1],
+        "total": stats[2],
+        "geocoded": stats[3],
+        "geocoded_pct": stats[4],
+        "lat": stats[5],
+        "lng": stats[6],
+        "top_sectors": [{
+            "code_naf": s[0],
+            "count": s[1],
+            "pct": round(s[1] * 100.0 / stats[2], 1),
+            "label": get_naf_label_en(s[0]),
+            "label_fr": get_naf_label_fr(s[0])
+        } for s in top_sectors]
+    })
 
 
 @app.route("/api/department/<dept_code>")

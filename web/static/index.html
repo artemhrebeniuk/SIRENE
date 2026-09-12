@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIRENE GeoData Observatory — National French Business Registry (INSEE)</title>
+  <title>SIRENE GeoData Observatory — National French Business Registry</title>
   
-  <!-- Typography -->
+  <!-- Typography: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
-  <!-- Local Leaflet Map CSS (Zero External CDN Latency) -->
+  <!-- Local Leaflet Map CSS -->
   <link rel="stylesheet" href="/static/vendor/leaflet.css">
   
   <!-- Custom Stylesheet -->
@@ -19,11 +19,11 @@
 <body>
   <div class="app-layout">
     
-    <!-- Top Compact Header Bar -->
+    <!-- Top Clean Header Bar -->
     <header class="app-header">
       <div class="header-brand">
         <div class="logo-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
             <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
             <line x1="9" y1="3" x2="9" y2="18"></line>
             <line x1="15" y1="6" x2="15" y2="21"></line>
@@ -31,50 +31,45 @@
         </div>
         <div>
           <h1 class="app-title">SIRENE <span>GeoData Observatory</span></h1>
-          <p class="app-subtitle">French National Enterprise Registry & Geospatial Analytics (INSEE)</p>
+          <p class="app-subtitle">French National Enterprise Registry & Spatial Intelligence</p>
         </div>
       </div>
 
-      <!-- Quick Compact KPI Bar -->
+      <!-- Clean Solid KPI Strip -->
       <div class="kpi-strip">
         <div class="kpi-item">
-          <span class="kpi-k">Active Businesses</span>
-          <span class="kpi-v text-cyan" id="kpiTotalActive">...</span>
+          <span class="kpi-k">Active Establishments</span>
+          <span class="kpi-v text-blue" id="kpiTotalActive">16,211,830</span>
         </div>
         <div class="kpi-sep"></div>
         <div class="kpi-item">
-          <span class="kpi-k">Geocoded WGS84</span>
-          <span class="kpi-v text-emerald" id="kpiGeocodedPct">...%</span>
+          <span class="kpi-k">Geocoded (WGS84)</span>
+          <span class="kpi-v text-green" id="kpiGeocodedPct">83.2%</span>
         </div>
         <div class="kpi-sep"></div>
         <div class="kpi-item">
-          <span class="kpi-k">Departments</span>
-          <span class="kpi-v text-indigo" id="kpiDepartments">101 / 101</span>
+          <span class="kpi-k">Mainland Depts</span>
+          <span class="kpi-v" id="kpiDepartments">96 / 96</span>
         </div>
         <div class="kpi-sep"></div>
         <div class="kpi-item">
-          <span class="kpi-k">NAF Activities</span>
-          <span class="kpi-v text-amber" id="kpiNafCodes">...</span>
+          <span class="kpi-k">NAF Industries</span>
+          <span class="kpi-v text-amber" id="kpiNafCodes">738</span>
         </div>
       </div>
 
       <!-- Actions -->
       <div class="header-actions">
-        <div class="badge-status" id="datasetBadge">
-          <span class="pulse-indicator"></span>
-          <span id="badgeText">DuckDB Spatial Engine</span>
-        </div>
-        
         <button class="action-btn" id="btnReset" title="Reset all active selections">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
             <path d="M3 3v5h5"></path>
           </svg>
-          Reset
+          Reset View
         </button>
 
         <a href="/api/export" class="action-btn btn-export" title="Export aggregated matrix to CSV">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <polyline points="7 10 12 15 17 10"></polyline>
             <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -92,40 +87,54 @@
         <!-- Map Overlay Header -->
         <div class="map-header-overlay">
           <div>
-            <h2 id="mapViewTitle" class="map-view-title">National Business Density</h2>
-            <p id="mapViewSubtitle" class="map-view-sub">Hover over any department for details or click to inspect</p>
+            <h2 id="mapViewTitle" class="map-view-title">National Business Density (Mainland France)</h2>
+            <p id="mapViewSubtitle" class="map-view-sub">Select any department or commune to inspect businesses and economic sectors</p>
           </div>
 
-          <div class="territory-toggle">
-            <button class="toggle-btn active" data-territory="all">All France (101)</button>
-            <button class="toggle-btn" data-territory="metro">Mainland</button>
-            <button class="toggle-btn" data-territory="dom">Overseas (DOM)</button>
+          <!-- Basemap Switcher: Google Maps, Satellite, Dark -->
+          <div class="basemap-selector">
+            <button class="btn-basemap active" data-basemap="google-roads" title="Actual Google Maps with all real street names, shops, and places">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+                <line x1="9" y1="3" x2="9" y2="18"></line>
+                <line x1="15" y1="6" x2="15" y2="21"></line>
+              </svg>
+              Google Maps
+            </button>
+            <button class="btn-basemap" data-basemap="google-satellite" title="Google Satellite Imagery & Labels">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              Satellite
+            </button>
+            <button class="btn-basemap" data-basemap="esri-dark" title="Dark Analytics Canvas">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+              Dark
+            </button>
           </div>
         </div>
 
         <!-- The Leaflet Map Canvas -->
         <div id="map"></div>
 
-        <!-- Map Legend -->
+        <!-- Map Legend (Flat Discrete Steps, Zero Gradients) -->
         <div class="map-legend-card">
-          <div class="legend-header">Activity Density</div>
-          <div class="legend-bar"></div>
+          <div class="legend-header">Establishment Density</div>
+          <div class="legend-steps">
+            <div class="legend-step" style="background:#1E3A8A;" title="Low"></div>
+            <div class="legend-step" style="background:#2563EB;" title="Medium-Low"></div>
+            <div class="legend-step" style="background:#0284C7;" title="Medium"></div>
+            <div class="legend-step" style="background:#D97706;" title="High"></div>
+            <div class="legend-step" style="background:#DC2626;" title="Highest"></div>
+          </div>
           <div class="legend-labels">
             <span id="legendMin">0</span>
-            <span id="legendMid">Medium</span>
-            <span id="legendMax">High</span>
-          </div>
-        </div>
-
-        <!-- Overseas Departments Quick Selector (DOM) -->
-        <div class="dom-dock">
-          <span class="dom-dock-title">Overseas (DOM):</span>
-          <div class="dom-btn-group">
-            <button class="dom-btn" data-dept="971" title="Guadeloupe (EPSG:5490)">971 Guadeloupe</button>
-            <button class="dom-btn" data-dept="972" title="Martinique (EPSG:5490)">972 Martinique</button>
-            <button class="dom-btn" data-dept="973" title="French Guiana (EPSG:2972)">973 French Guiana</button>
-            <button class="dom-btn" data-dept="974" title="Reunion Island (EPSG:2975)">974 Reunion</button>
-            <button class="dom-btn" data-dept="976" title="Mayotte Island">976 Mayotte</button>
+            <span id="legendMid">500k</span>
+            <span id="legendMax">1.3M+</span>
           </div>
         </div>
       </section>
@@ -133,22 +142,33 @@
       <!-- Right: Structured Analytics & Discovery Sidebar -->
       <aside class="sidebar-container">
         
-        <!-- Navigation Tabs -->
+        <!-- Navigation Tabs: Departments, Communes (Cities), Industries -->
         <div class="nav-tabs">
-          <button class="tab-trigger active" data-tab="sectors">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
-              <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
-            </svg>
-            Industries (NAF)
-          </button>
-          <button class="tab-trigger" data-tab="departments">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <button class="tab-trigger active" data-tab="departments">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="2" y1="12" x2="22" y2="12"></line>
               <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
             </svg>
             Departments
+          </button>
+          <button class="tab-trigger" data-tab="communes">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 21h18"></path>
+              <path d="M5 21V7l8-4v18"></path>
+              <path d="M19 21V11l-6-4"></path>
+              <path d="M9 9h1"></path>
+              <path d="M9 13h1"></path>
+              <path d="M9 17h1"></path>
+            </svg>
+            Communes (Cities)
+          </button>
+          <button class="tab-trigger" data-tab="sectors">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+              <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+            </svg>
+            Industries (NAF)
           </button>
         </div>
 
@@ -158,7 +178,7 @@
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" id="searchInput" placeholder="Search industry or department..." autocomplete="off">
+          <input type="text" id="searchInput" placeholder="Search department (e.g. Paris, Rhône, 13)..." autocomplete="off">
           <button id="clearSearch" class="btn-clear" style="display:none;">&times;</button>
         </div>
 
@@ -183,24 +203,23 @@
             </div>
           </div>
 
+          <div class="drawer-action-row">
+            <button class="btn-explore-biz" id="btnOpenBizModal">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              </svg>
+              Browse Individual Businesses
+            </button>
+          </div>
+
           <div class="drawer-sub-breakdown" id="inspectorDetails"></div>
         </div>
 
         <!-- Scrollable Lists View -->
         <div class="tab-content">
-          <!-- Pane 1: Industries (NAF) -->
-          <div class="pane active" id="paneSectors">
-            <div class="pane-column-headers">
-              <span>Activity / Industry</span>
-              <span>Count</span>
-            </div>
-            <div class="entity-list" id="sectorsList">
-              <div class="loading-state">Loading NAF economic activities...</div>
-            </div>
-          </div>
-
-          <!-- Pane 2: Departments -->
-          <div class="pane" id="paneDepartments">
+          <!-- Pane 1: Departments (DEFAULT ACTIVE) -->
+          <div class="pane active" id="paneDepartments">
             <div class="pane-column-headers">
               <span>Department</span>
               <span>Active Units</span>
@@ -209,13 +228,104 @@
               <div class="loading-state">Loading department statistics...</div>
             </div>
           </div>
+
+          <!-- Pane 2: Communes / Cities (NEW) -->
+          <div class="pane" id="paneCommunes">
+            <div class="pane-column-headers">
+              <span>Commune / City</span>
+              <span>Active Units</span>
+            </div>
+            <div class="entity-list" id="communesList">
+              <div class="loading-state">Loading French communes...</div>
+            </div>
+          </div>
+
+          <!-- Pane 3: Industries (NAF) -->
+          <div class="pane" id="paneSectors">
+            <div class="pane-column-headers">
+              <span>Industry / Activity</span>
+              <span>Count</span>
+            </div>
+            <div class="entity-list" id="sectorsList">
+              <div class="loading-state">Loading NAF economic activities...</div>
+            </div>
+          </div>
         </div>
       </aside>
 
     </div>
+
+    <!-- Live Business Directory Modal / Bottom Drawer -->
+    <div class="biz-modal-backdrop" id="bizModal" style="display: none;">
+      <div class="biz-modal-card">
+        <div class="biz-modal-header">
+          <div>
+            <span class="modal-pill" id="bizModalPill">Business Registry Explorer</span>
+            <h3 class="biz-modal-title" id="bizModalTitle">Registered Establishments in Paris (75)</h3>
+          </div>
+          <div class="biz-modal-controls">
+            <input type="text" id="bizSearchInput" class="biz-search" placeholder="Search company name, store sign, or SIRET...">
+            <button class="btn-close-modal" id="btnCloseBizModal">&times;</button>
+          </div>
+        </div>
+
+        <!-- Filter Controls Row (Niche & City) -->
+        <div class="biz-filter-controls-row">
+          <div class="biz-filter-left">
+            <span class="filter-label">Filter by Niche / Industry:</span>
+            <select id="bizNafSelect" class="biz-naf-select">
+              <option value="">All Niches & Industries</option>
+            </select>
+          </div>
+          <div class="biz-filter-right">
+            <a id="btnExportBizCsv" class="btn-export-biz" href="#" target="_blank" title="Download up to 5,000 businesses matching these filters to CSV">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Export Filtered (CSV)
+            </a>
+          </div>
+        </div>
+
+        <!-- City filter bar inside modal -->
+        <div class="biz-city-filter-bar" id="bizCityFilterBar">
+          <span class="filter-label">Filter by City:</span>
+          <div class="city-chips-container" id="cityChipsContainer">
+            <!-- Dynamic city chips -->
+          </div>
+        </div>
+
+        <div class="biz-table-container" id="bizTableContainer">
+          <table class="biz-table">
+            <thead>
+              <tr>
+                <th>Company / Store Name</th>
+                <th>SIRET & Verification</th>
+                <th>City & Postal Code</th>
+                <th>Economic Activity (NAF)</th>
+                <th>Location & Maps</th>
+              </tr>
+            </thead>
+            <tbody id="bizTableBody">
+              <tr>
+                <td colspan="5" class="loading-state">Loading establishments...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="biz-modal-footer">
+          <span id="bizCountSummary">Showing 0 establishments</span>
+          <button id="btnLoadMoreBiz" class="btn-load-more">Load More Businesses (+50)</button>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <!-- Local Leaflet Map JS (Zero External Dependencies) -->
+  <!-- Local Leaflet Map JS -->
   <script src="/static/vendor/leaflet.js"></script>
   
   <!-- Client Application Engine -->

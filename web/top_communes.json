@@ -1,0 +1,2702 @@
+[
+  {
+    "city": "PARIS",
+    "dept": "75",
+    "total": 1322294,
+    "geocoded": 1135952,
+    "geocoded_pct": 85.9,
+    "lat": 48.86377,
+    "lng": 2.33438
+  },
+  {
+    "city": "MARSEILLE",
+    "dept": "13",
+    "total": 229010,
+    "geocoded": 191012,
+    "geocoded_pct": 83.4,
+    "lat": 43.29777,
+    "lng": 5.39394
+  },
+  {
+    "city": "LYON",
+    "dept": "69",
+    "total": 185266,
+    "geocoded": 149343,
+    "geocoded_pct": 80.6,
+    "lat": 45.75883,
+    "lng": 4.8412
+  },
+  {
+    "city": "TOULOUSE",
+    "dept": "31",
+    "total": 154156,
+    "geocoded": 121854,
+    "geocoded_pct": 79.0,
+    "lat": 43.60014,
+    "lng": 1.43976
+  },
+  {
+    "city": "NICE",
+    "dept": "06",
+    "total": 134153,
+    "geocoded": 111835,
+    "geocoded_pct": 83.4,
+    "lat": 43.7036,
+    "lng": 7.25796
+  },
+  {
+    "city": "BORDEAUX",
+    "dept": "33",
+    "total": 113160,
+    "geocoded": 93218,
+    "geocoded_pct": 82.4,
+    "lat": 44.84311,
+    "lng": -0.57777
+  },
+  {
+    "city": "MONTPELLIER",
+    "dept": "34",
+    "total": 99436,
+    "geocoded": 80253,
+    "geocoded_pct": 80.7,
+    "lat": 43.60989,
+    "lng": 3.86978
+  },
+  {
+    "city": "NANTES",
+    "dept": "44",
+    "total": 90151,
+    "geocoded": 71450,
+    "geocoded_pct": 79.3,
+    "lat": 47.2231,
+    "lng": -1.55555
+  },
+  {
+    "city": "STRASBOURG",
+    "dept": "67",
+    "total": 78245,
+    "geocoded": 65314,
+    "geocoded_pct": 83.5,
+    "lat": 48.58013,
+    "lng": 7.75003
+  },
+  {
+    "city": "LILLE",
+    "dept": "59",
+    "total": 77860,
+    "geocoded": 63848,
+    "geocoded_pct": 82.0,
+    "lat": 50.63154,
+    "lng": 3.05931
+  },
+  {
+    "city": "RENNES",
+    "dept": "35",
+    "total": 65251,
+    "geocoded": 53430,
+    "geocoded_pct": 81.9,
+    "lat": 48.10954,
+    "lng": -1.67663
+  },
+  {
+    "city": "AIX-EN-PROVENCE",
+    "dept": "13",
+    "total": 51759,
+    "geocoded": 43478,
+    "geocoded_pct": 84.0,
+    "lat": 43.52435,
+    "lng": 5.42759
+  },
+  {
+    "city": "GRENOBLE",
+    "dept": "38",
+    "total": 49842,
+    "geocoded": 39923,
+    "geocoded_pct": 80.1,
+    "lat": 45.18286,
+    "lng": 5.72354
+  },
+  {
+    "city": "BOULOGNE-BILLANCOURT",
+    "dept": "92",
+    "total": 42777,
+    "geocoded": 35835,
+    "geocoded_pct": 83.8,
+    "lat": 48.83648,
+    "lng": 2.24118
+  },
+  {
+    "city": "ANNECY",
+    "dept": "74",
+    "total": 41714,
+    "geocoded": 34201,
+    "geocoded_pct": 82.0,
+    "lat": 45.90639,
+    "lng": 6.12114
+  },
+  {
+    "city": "DIJON",
+    "dept": "21",
+    "total": 41154,
+    "geocoded": 33215,
+    "geocoded_pct": 80.7,
+    "lat": 47.32507,
+    "lng": 5.04108
+  },
+  {
+    "city": "VILLEURBANNE",
+    "dept": "69",
+    "total": 40458,
+    "geocoded": 31186,
+    "geocoded_pct": 77.1,
+    "lat": 45.76806,
+    "lng": 4.88387
+  },
+  {
+    "city": "REIMS",
+    "dept": "51",
+    "total": 40363,
+    "geocoded": 32952,
+    "geocoded_pct": 81.6,
+    "lat": 49.25292,
+    "lng": 4.03371
+  },
+  {
+    "city": "NIMES",
+    "dept": "30",
+    "total": 40341,
+    "geocoded": 34507,
+    "geocoded_pct": 85.5,
+    "lat": 43.83391,
+    "lng": 4.35466
+  },
+  {
+    "city": "SAINT-ETIENNE",
+    "dept": "42",
+    "total": 40013,
+    "geocoded": 33021,
+    "geocoded_pct": 82.5,
+    "lat": 45.4369,
+    "lng": 4.3933
+  },
+  {
+    "city": "CANNES",
+    "dept": "06",
+    "total": 39326,
+    "geocoded": 33228,
+    "geocoded_pct": 84.5,
+    "lat": 43.55426,
+    "lng": 7.01124
+  },
+  {
+    "city": "TOULON",
+    "dept": "83",
+    "total": 39260,
+    "geocoded": 32496,
+    "geocoded_pct": 82.8,
+    "lat": 43.12614,
+    "lng": 5.93409
+  },
+  {
+    "city": "ANGERS",
+    "dept": "49",
+    "total": 37295,
+    "geocoded": 29847,
+    "geocoded_pct": 80.0,
+    "lat": 47.46944,
+    "lng": -0.55272
+  },
+  {
+    "city": "CLERMONT-FERRAND",
+    "dept": "63",
+    "total": 36134,
+    "geocoded": 29244,
+    "geocoded_pct": 80.9,
+    "lat": 45.77937,
+    "lng": 3.09679
+  },
+  {
+    "city": "ROUEN",
+    "dept": "76",
+    "total": 35539,
+    "geocoded": 28909,
+    "geocoded_pct": 81.3,
+    "lat": 49.44108,
+    "lng": 1.09311
+  },
+  {
+    "city": "PERPIGNAN",
+    "dept": "66",
+    "total": 35148,
+    "geocoded": 30552,
+    "geocoded_pct": 86.9,
+    "lat": 42.69621,
+    "lng": 2.89428
+  },
+  {
+    "city": "TOURS",
+    "dept": "37",
+    "total": 35108,
+    "geocoded": 28200,
+    "geocoded_pct": 80.3,
+    "lat": 47.39224,
+    "lng": 0.69004
+  },
+  {
+    "city": "MONTREUIL",
+    "dept": "93",
+    "total": 34103,
+    "geocoded": 28145,
+    "geocoded_pct": 82.5,
+    "lat": 48.86103,
+    "lng": 2.44114
+  },
+  {
+    "city": "NEUILLY-SUR-SEINE",
+    "dept": "92",
+    "total": 33536,
+    "geocoded": 29595,
+    "geocoded_pct": 88.2,
+    "lat": 48.88444,
+    "lng": 2.26801
+  },
+  {
+    "city": "ANTIBES",
+    "dept": "06",
+    "total": 32614,
+    "geocoded": 27079,
+    "geocoded_pct": 83.0,
+    "lat": 43.58389,
+    "lng": 7.11026
+  },
+  {
+    "city": "BREST",
+    "dept": "29",
+    "total": 30648,
+    "geocoded": 24849,
+    "geocoded_pct": 81.1,
+    "lat": 48.39638,
+    "lng": -4.48818
+  },
+  {
+    "city": "METZ",
+    "dept": "57",
+    "total": 30526,
+    "geocoded": 26073,
+    "geocoded_pct": 85.4,
+    "lat": 49.11283,
+    "lng": 6.18779
+  },
+  {
+    "city": "CAEN",
+    "dept": "14",
+    "total": 30273,
+    "geocoded": 24790,
+    "geocoded_pct": 81.9,
+    "lat": 49.18353,
+    "lng": -0.36618
+  },
+  {
+    "city": "NANCY",
+    "dept": "54",
+    "total": 29890,
+    "geocoded": 24189,
+    "geocoded_pct": 80.9,
+    "lat": 48.68989,
+    "lng": 6.17648
+  },
+  {
+    "city": "LE MANS",
+    "dept": "72",
+    "total": 29394,
+    "geocoded": 24618,
+    "geocoded_pct": 83.8,
+    "lat": 47.99841,
+    "lng": 0.1986
+  },
+  {
+    "city": "LE HAVRE",
+    "dept": "76",
+    "total": 29158,
+    "geocoded": 24365,
+    "geocoded_pct": 83.6,
+    "lat": 49.49961,
+    "lng": 0.12331
+  },
+  {
+    "city": "AMIENS",
+    "dept": "80",
+    "total": 28849,
+    "geocoded": 23851,
+    "geocoded_pct": 82.7,
+    "lat": 49.89211,
+    "lng": 2.29698
+  },
+  {
+    "city": "AVIGNON",
+    "dept": "84",
+    "total": 28674,
+    "geocoded": 24312,
+    "geocoded_pct": 84.8,
+    "lat": 43.93875,
+    "lng": 4.82414
+  },
+  {
+    "city": "LIMOGES",
+    "dept": "87",
+    "total": 28089,
+    "geocoded": 23779,
+    "geocoded_pct": 84.7,
+    "lat": 45.83707,
+    "lng": 1.25652
+  },
+  {
+    "city": "BESANCON",
+    "dept": "25",
+    "total": 27875,
+    "geocoded": 23283,
+    "geocoded_pct": 83.5,
+    "lat": 47.24092,
+    "lng": 6.0122
+  },
+  {
+    "city": "SAINT-DENIS",
+    "dept": "93",
+    "total": 27660,
+    "geocoded": 22796,
+    "geocoded_pct": 82.4,
+    "lat": 48.93066,
+    "lng": 2.3574
+  },
+  {
+    "city": "COURBEVOIE",
+    "dept": "92",
+    "total": 27539,
+    "geocoded": 22236,
+    "geocoded_pct": 80.7,
+    "lat": 48.89756,
+    "lng": 2.2539
+  },
+  {
+    "city": "ORLEANS",
+    "dept": "45",
+    "total": 27425,
+    "geocoded": 21841,
+    "geocoded_pct": 79.6,
+    "lat": 47.89609,
+    "lng": 1.90835
+  },
+  {
+    "city": "LA ROCHELLE",
+    "dept": "17",
+    "total": 26762,
+    "geocoded": 21403,
+    "geocoded_pct": 80.0,
+    "lat": 46.15914,
+    "lng": -1.15976
+  },
+  {
+    "city": "VERSAILLES",
+    "dept": "78",
+    "total": 24747,
+    "geocoded": 20685,
+    "geocoded_pct": 83.6,
+    "lat": 48.80417,
+    "lng": 2.13624
+  },
+  {
+    "city": "ASNIERES-SUR-SEINE",
+    "dept": "92",
+    "total": 24095,
+    "geocoded": 18849,
+    "geocoded_pct": 78.2,
+    "lat": 48.91484,
+    "lng": 2.28711
+  },
+  {
+    "city": "MULHOUSE",
+    "dept": "68",
+    "total": 24012,
+    "geocoded": 20802,
+    "geocoded_pct": 86.6,
+    "lat": 47.74781,
+    "lng": 7.32972
+  },
+  {
+    "city": "LEVALLOIS-PERRET",
+    "dept": "92",
+    "total": 23075,
+    "geocoded": 19450,
+    "geocoded_pct": 84.3,
+    "lat": 48.8937,
+    "lng": 2.28737
+  },
+  {
+    "city": "BEZIERS",
+    "dept": "34",
+    "total": 22971,
+    "geocoded": 19840,
+    "geocoded_pct": 86.4,
+    "lat": 43.3458,
+    "lng": 3.2272
+  },
+  {
+    "city": "PAU",
+    "dept": "64",
+    "total": 22927,
+    "geocoded": 18506,
+    "geocoded_pct": 80.7,
+    "lat": 43.30703,
+    "lng": -0.36179
+  },
+  {
+    "city": "AUBERVILLIERS",
+    "dept": "93",
+    "total": 22489,
+    "geocoded": 19221,
+    "geocoded_pct": 85.5,
+    "lat": 48.91173,
+    "lng": 2.38493
+  },
+  {
+    "city": "ARGENTEUIL",
+    "dept": "95",
+    "total": 22088,
+    "geocoded": 18290,
+    "geocoded_pct": 82.8,
+    "lat": 48.94831,
+    "lng": 2.24116
+  },
+  {
+    "city": "SAINT-MAUR-DES-FOSSES",
+    "dept": "94",
+    "total": 21977,
+    "geocoded": 18384,
+    "geocoded_pct": 83.7,
+    "lat": 48.79885,
+    "lng": 2.49334
+  },
+  {
+    "city": "NANTERRE",
+    "dept": "92",
+    "total": 21969,
+    "geocoded": 18026,
+    "geocoded_pct": 82.1,
+    "lat": 48.89344,
+    "lng": 2.20919
+  },
+  {
+    "city": "POITIERS",
+    "dept": "86",
+    "total": 20632,
+    "geocoded": 16609,
+    "geocoded_pct": 80.5,
+    "lat": 46.58025,
+    "lng": 0.34772
+  },
+  {
+    "city": "MERIGNAC",
+    "dept": "33",
+    "total": 20587,
+    "geocoded": 16734,
+    "geocoded_pct": 81.3,
+    "lat": 44.83701,
+    "lng": -0.65696
+  },
+  {
+    "city": "AJACCIO",
+    "dept": "2A",
+    "total": 19235,
+    "geocoded": 17057,
+    "geocoded_pct": 88.7,
+    "lat": 41.92905,
+    "lng": 8.73944
+  },
+  {
+    "city": "ROUBAIX",
+    "dept": "59",
+    "total": 19218,
+    "geocoded": 15724,
+    "geocoded_pct": 81.8,
+    "lat": 50.68888,
+    "lng": 3.17681
+  },
+  {
+    "city": "COLOMBES",
+    "dept": "92",
+    "total": 19150,
+    "geocoded": 15077,
+    "geocoded_pct": 78.7,
+    "lat": 48.92092,
+    "lng": 2.24849
+  },
+  {
+    "city": "RUEIL-MALMAISON",
+    "dept": "92",
+    "total": 19116,
+    "geocoded": 15428,
+    "geocoded_pct": 80.7,
+    "lat": 48.87648,
+    "lng": 2.18195
+  },
+  {
+    "city": "PANTIN",
+    "dept": "93",
+    "total": 19025,
+    "geocoded": 15753,
+    "geocoded_pct": 82.8,
+    "lat": 48.89575,
+    "lng": 2.40572
+  },
+  {
+    "city": "VALENCE",
+    "dept": "26",
+    "total": 18886,
+    "geocoded": 15914,
+    "geocoded_pct": 84.3,
+    "lat": 44.92523,
+    "lng": 4.90187
+  },
+  {
+    "city": "CLICHY",
+    "dept": "92",
+    "total": 18853,
+    "geocoded": 15101,
+    "geocoded_pct": 80.1,
+    "lat": 48.90251,
+    "lng": 2.30757
+  },
+  {
+    "city": "CRETEIL",
+    "dept": "94",
+    "total": 18832,
+    "geocoded": 15410,
+    "geocoded_pct": 81.8,
+    "lat": 48.78541,
+    "lng": 2.45804
+  },
+  {
+    "city": "FREJUS",
+    "dept": "83",
+    "total": 18347,
+    "geocoded": 15160,
+    "geocoded_pct": 82.6,
+    "lat": 43.43573,
+    "lng": 6.74189
+  },
+  {
+    "city": "ISSY-LES-MOULINEAUX",
+    "dept": "92",
+    "total": 18250,
+    "geocoded": 14598,
+    "geocoded_pct": 80.0,
+    "lat": 48.82349,
+    "lng": 2.26562
+  },
+  {
+    "city": "HYERES",
+    "dept": "83",
+    "total": 17694,
+    "geocoded": 15063,
+    "geocoded_pct": 85.1,
+    "lat": 43.10477,
+    "lng": 6.13805
+  },
+  {
+    "city": "VANNES",
+    "dept": "56",
+    "total": 17648,
+    "geocoded": 14914,
+    "geocoded_pct": 84.5,
+    "lat": 47.6583,
+    "lng": -2.76245
+  },
+  {
+    "city": "SAINT-OUEN-SUR-SEINE",
+    "dept": "93",
+    "total": 17454,
+    "geocoded": 14118,
+    "geocoded_pct": 80.9,
+    "lat": 48.90781,
+    "lng": 2.33484
+  },
+  {
+    "city": "PUTEAUX",
+    "dept": "92",
+    "total": 17370,
+    "geocoded": 14597,
+    "geocoded_pct": 84.0,
+    "lat": 48.88527,
+    "lng": 2.23904
+  },
+  {
+    "city": "VITRY-SUR-SEINE",
+    "dept": "94",
+    "total": 17180,
+    "geocoded": 13886,
+    "geocoded_pct": 80.8,
+    "lat": 48.7912,
+    "lng": 2.39219
+  },
+  {
+    "city": "NARBONNE",
+    "dept": "11",
+    "total": 17094,
+    "geocoded": 14387,
+    "geocoded_pct": 84.2,
+    "lat": 43.17854,
+    "lng": 3.00953
+  },
+  {
+    "city": "VINCENNES",
+    "dept": "94",
+    "total": 16906,
+    "geocoded": 13746,
+    "geocoded_pct": 81.3,
+    "lat": 48.84748,
+    "lng": 2.43574
+  },
+  {
+    "city": "CHAMBERY",
+    "dept": "73",
+    "total": 16840,
+    "geocoded": 13735,
+    "geocoded_pct": 81.6,
+    "lat": 45.57376,
+    "lng": 5.91614
+  },
+  {
+    "city": "BAYONNE",
+    "dept": "64",
+    "total": 16835,
+    "geocoded": 14151,
+    "geocoded_pct": 84.1,
+    "lat": 43.49115,
+    "lng": -1.47371
+  },
+  {
+    "city": "QUIMPER",
+    "dept": "29",
+    "total": 16806,
+    "geocoded": 14314,
+    "geocoded_pct": 85.2,
+    "lat": 47.99238,
+    "lng": -4.09733
+  },
+  {
+    "city": "IVRY-SUR-SEINE",
+    "dept": "94",
+    "total": 16540,
+    "geocoded": 13185,
+    "geocoded_pct": 79.7,
+    "lat": 48.81377,
+    "lng": 2.38492
+  },
+  {
+    "city": "COLMAR",
+    "dept": "68",
+    "total": 16336,
+    "geocoded": 14020,
+    "geocoded_pct": 85.8,
+    "lat": 48.07887,
+    "lng": 7.35447
+  },
+  {
+    "city": "MONTAUBAN",
+    "dept": "82",
+    "total": 16117,
+    "geocoded": 13874,
+    "geocoded_pct": 86.1,
+    "lat": 44.01778,
+    "lng": 1.35989
+  },
+  {
+    "city": "CERGY",
+    "dept": "95",
+    "total": 15775,
+    "geocoded": 12389,
+    "geocoded_pct": 78.5,
+    "lat": 49.04283,
+    "lng": 2.05059
+  },
+  {
+    "city": "CAGNES-SUR-MER",
+    "dept": "06",
+    "total": 15668,
+    "geocoded": 13161,
+    "geocoded_pct": 84.0,
+    "lat": 43.66363,
+    "lng": 7.15317
+  },
+  {
+    "city": "DUNKERQUE",
+    "dept": "59",
+    "total": 15614,
+    "geocoded": 13185,
+    "geocoded_pct": 84.4,
+    "lat": 51.03614,
+    "lng": 2.37636
+  },
+  {
+    "city": "ARLES",
+    "dept": "13",
+    "total": 15612,
+    "geocoded": 13562,
+    "geocoded_pct": 86.9,
+    "lat": 43.6599,
+    "lng": 4.64066
+  },
+  {
+    "city": "TOURCOING",
+    "dept": "59",
+    "total": 15611,
+    "geocoded": 12959,
+    "geocoded_pct": 83.0,
+    "lat": 50.72203,
+    "lng": 3.15889
+  },
+  {
+    "city": "AULNAY-SOUS-BOIS",
+    "dept": "93",
+    "total": 15469,
+    "geocoded": 13272,
+    "geocoded_pct": 85.8,
+    "lat": 48.93866,
+    "lng": 2.49617
+  },
+  {
+    "city": "EVRY-COURCOURONNES",
+    "dept": "91",
+    "total": 15327,
+    "geocoded": 12547,
+    "geocoded_pct": 81.9,
+    "lat": 48.62847,
+    "lng": 2.43095
+  },
+  {
+    "city": "VILLENEUVE-D'ASCQ",
+    "dept": "59",
+    "total": 15299,
+    "geocoded": 12583,
+    "geocoded_pct": 82.2,
+    "lat": 50.63392,
+    "lng": 3.14298
+  },
+  {
+    "city": "SAINT-MALO",
+    "dept": "35",
+    "total": 15286,
+    "geocoded": 12612,
+    "geocoded_pct": 82.5,
+    "lat": 48.64503,
+    "lng": -1.99759
+  },
+  {
+    "city": "CHAMPIGNY-SUR-MARNE",
+    "dept": "94",
+    "total": 15264,
+    "geocoded": 12502,
+    "geocoded_pct": 81.9,
+    "lat": 48.81619,
+    "lng": 2.51688
+  },
+  {
+    "city": "GRASSE",
+    "dept": "06",
+    "total": 15263,
+    "geocoded": 12839,
+    "geocoded_pct": 84.1,
+    "lat": 43.65018,
+    "lng": 6.93278
+  },
+  {
+    "city": "ANGLET",
+    "dept": "64",
+    "total": 14997,
+    "geocoded": 12271,
+    "geocoded_pct": 81.8,
+    "lat": 43.48992,
+    "lng": -1.51582
+  },
+  {
+    "city": "LORIENT",
+    "dept": "56",
+    "total": 14732,
+    "geocoded": 12340,
+    "geocoded_pct": 83.8,
+    "lat": 47.74837,
+    "lng": -3.37323
+  },
+  {
+    "city": "NOISY-LE-GRAND",
+    "dept": "93",
+    "total": 14591,
+    "geocoded": 11431,
+    "geocoded_pct": 78.3,
+    "lat": 48.84202,
+    "lng": 2.55742
+  },
+  {
+    "city": "BIARRITZ",
+    "dept": "64",
+    "total": 14520,
+    "geocoded": 12190,
+    "geocoded_pct": 84.0,
+    "lat": 43.47629,
+    "lng": -1.55323
+  },
+  {
+    "city": "DRANCY",
+    "dept": "93",
+    "total": 14440,
+    "geocoded": 12456,
+    "geocoded_pct": 86.3,
+    "lat": 48.92227,
+    "lng": 2.44566
+  },
+  {
+    "city": "AGDE",
+    "dept": "34",
+    "total": 14423,
+    "geocoded": 11472,
+    "geocoded_pct": 79.5,
+    "lat": 43.29557,
+    "lng": 3.48911
+  },
+  {
+    "city": "TROYES",
+    "dept": "10",
+    "total": 14417,
+    "geocoded": 11832,
+    "geocoded_pct": 82.1,
+    "lat": 48.29594,
+    "lng": 4.0746
+  },
+  {
+    "city": "SAINT-RAPHAEL",
+    "dept": "83",
+    "total": 14311,
+    "geocoded": 11821,
+    "geocoded_pct": 82.6,
+    "lat": 43.43017,
+    "lng": 6.79418
+  },
+  {
+    "city": "SAINT-NAZAIRE",
+    "dept": "44",
+    "total": 14017,
+    "geocoded": 11378,
+    "geocoded_pct": 81.2,
+    "lat": 47.27298,
+    "lng": -2.2347
+  },
+  {
+    "city": "PESSAC",
+    "dept": "33",
+    "total": 13977,
+    "geocoded": 11496,
+    "geocoded_pct": 82.2,
+    "lat": 44.79691,
+    "lng": -0.64809
+  },
+  {
+    "city": "AUBAGNE",
+    "dept": "13",
+    "total": 13717,
+    "geocoded": 11978,
+    "geocoded_pct": 87.3,
+    "lat": 43.29338,
+    "lng": 5.56941
+  },
+  {
+    "city": "SETE",
+    "dept": "34",
+    "total": 13699,
+    "geocoded": 11696,
+    "geocoded_pct": 85.4,
+    "lat": 43.40492,
+    "lng": 3.6879
+  },
+  {
+    "city": "BOURGES",
+    "dept": "18",
+    "total": 13629,
+    "geocoded": 11311,
+    "geocoded_pct": 83.0,
+    "lat": 47.08373,
+    "lng": 2.39855
+  },
+  {
+    "city": "NIORT",
+    "dept": "79",
+    "total": 13593,
+    "geocoded": 11494,
+    "geocoded_pct": 84.6,
+    "lat": 46.32517,
+    "lng": -0.45929
+  },
+  {
+    "city": "CARCASSONNE",
+    "dept": "11",
+    "total": 13514,
+    "geocoded": 11818,
+    "geocoded_pct": 87.5,
+    "lat": 43.21251,
+    "lng": 2.34972
+  },
+  {
+    "city": "LE CANNET",
+    "dept": "06",
+    "total": 13160,
+    "geocoded": 10932,
+    "geocoded_pct": 83.1,
+    "lat": 43.57247,
+    "lng": 7.00715
+  },
+  {
+    "city": "SARCELLES",
+    "dept": "95",
+    "total": 13115,
+    "geocoded": 11563,
+    "geocoded_pct": 88.2,
+    "lat": 48.98377,
+    "lng": 2.37714
+  },
+  {
+    "city": "ALBI",
+    "dept": "81",
+    "total": 12904,
+    "geocoded": 10807,
+    "geocoded_pct": 83.7,
+    "lat": 43.92711,
+    "lng": 2.1502
+  },
+  {
+    "city": "LA ROCHE-SUR-YON",
+    "dept": "85",
+    "total": 12848,
+    "geocoded": 10862,
+    "geocoded_pct": 84.5,
+    "lat": 46.67065,
+    "lng": -1.42759
+  },
+  {
+    "city": "MONTROUGE",
+    "dept": "92",
+    "total": 12727,
+    "geocoded": 9964,
+    "geocoded_pct": 78.3,
+    "lat": 48.81558,
+    "lng": 2.3179
+  },
+  {
+    "city": "ANTONY",
+    "dept": "92",
+    "total": 12644,
+    "geocoded": 10066,
+    "geocoded_pct": 79.6,
+    "lat": 48.75014,
+    "lng": 2.30014
+  },
+  {
+    "city": "SAINT-GERMAIN-EN-LAYE",
+    "dept": "78",
+    "total": 12585,
+    "geocoded": 10403,
+    "geocoded_pct": 82.7,
+    "lat": 48.89626,
+    "lng": 2.08388
+  },
+  {
+    "city": "SURESNES",
+    "dept": "92",
+    "total": 12555,
+    "geocoded": 10123,
+    "geocoded_pct": 80.6,
+    "lat": 48.87029,
+    "lng": 2.22356
+  },
+  {
+    "city": "BOBIGNY",
+    "dept": "93",
+    "total": 12448,
+    "geocoded": 10278,
+    "geocoded_pct": 82.6,
+    "lat": 48.90822,
+    "lng": 2.44282
+  },
+  {
+    "city": "LA SEYNE-SUR-MER",
+    "dept": "83",
+    "total": 12404,
+    "geocoded": 10232,
+    "geocoded_pct": 82.5,
+    "lat": 43.09779,
+    "lng": 5.8749
+  },
+  {
+    "city": "CLAMART",
+    "dept": "92",
+    "total": 12112,
+    "geocoded": 9408,
+    "geocoded_pct": 77.7,
+    "lat": 48.79807,
+    "lng": 2.25914
+  },
+  {
+    "city": "MAISONS-ALFORT",
+    "dept": "94",
+    "total": 12091,
+    "geocoded": 9503,
+    "geocoded_pct": 78.6,
+    "lat": 48.80657,
+    "lng": 2.43709
+  },
+  {
+    "city": "VILLEJUIF",
+    "dept": "94",
+    "total": 12041,
+    "geocoded": 9249,
+    "geocoded_pct": 76.8,
+    "lat": 48.79349,
+    "lng": 2.36266
+  },
+  {
+    "city": "LAVAL",
+    "dept": "53",
+    "total": 11927,
+    "geocoded": 10330,
+    "geocoded_pct": 86.6,
+    "lat": 48.06943,
+    "lng": -0.77298
+  },
+  {
+    "city": "VENISSIEUX",
+    "dept": "69",
+    "total": 11914,
+    "geocoded": 9662,
+    "geocoded_pct": 81.1,
+    "lat": 45.70643,
+    "lng": 4.87606
+  },
+  {
+    "city": "LA CIOTAT",
+    "dept": "13",
+    "total": 11820,
+    "geocoded": 9934,
+    "geocoded_pct": 84.0,
+    "lat": 43.18828,
+    "lng": 5.61167
+  },
+  {
+    "city": "SAINT-HERBLAIN",
+    "dept": "44",
+    "total": 11756,
+    "geocoded": 9861,
+    "geocoded_pct": 83.9,
+    "lat": 47.22568,
+    "lng": -1.62396
+  },
+  {
+    "city": "FONTENAY-SOUS-BOIS",
+    "dept": "94",
+    "total": 11629,
+    "geocoded": 9452,
+    "geocoded_pct": 81.3,
+    "lat": 48.8508,
+    "lng": 2.47072
+  },
+  {
+    "city": "CHERBOURG-EN-COTENTIN",
+    "dept": "50",
+    "total": 11582,
+    "geocoded": 9799,
+    "geocoded_pct": 84.6,
+    "lat": 49.63805,
+    "lng": -1.62568
+  },
+  {
+    "city": "MENTON",
+    "dept": "06",
+    "total": 11518,
+    "geocoded": 9285,
+    "geocoded_pct": 80.6,
+    "lat": 43.77876,
+    "lng": 7.49729
+  },
+  {
+    "city": "BRIVE-LA-GAILLARDE",
+    "dept": "19",
+    "total": 11462,
+    "geocoded": 9890,
+    "geocoded_pct": 86.3,
+    "lat": 45.15781,
+    "lng": 1.5262
+  },
+  {
+    "city": "CHOLET",
+    "dept": "49",
+    "total": 11430,
+    "geocoded": 9858,
+    "geocoded_pct": 86.2,
+    "lat": 47.05676,
+    "lng": -0.87753
+  },
+  {
+    "city": "ANGOULEME",
+    "dept": "16",
+    "total": 11323,
+    "geocoded": 9404,
+    "geocoded_pct": 83.1,
+    "lat": 45.64876,
+    "lng": 0.15608
+  },
+  {
+    "city": "MASSY",
+    "dept": "91",
+    "total": 11229,
+    "geocoded": 8386,
+    "geocoded_pct": 74.7,
+    "lat": 48.72919,
+    "lng": 2.27275
+  },
+  {
+    "city": "BASTIA",
+    "dept": "2B",
+    "total": 11120,
+    "geocoded": 10047,
+    "geocoded_pct": 90.4,
+    "lat": 42.69256,
+    "lng": 9.44443
+  },
+  {
+    "city": "SALON-DE-PROVENCE",
+    "dept": "13",
+    "total": 10953,
+    "geocoded": 9190,
+    "geocoded_pct": 83.9,
+    "lat": 43.63985,
+    "lng": 5.09242
+  },
+  {
+    "city": "GAP",
+    "dept": "05",
+    "total": 10931,
+    "geocoded": 9424,
+    "geocoded_pct": 86.2,
+    "lat": 44.55705,
+    "lng": 6.07638
+  },
+  {
+    "city": "BEAUVAIS",
+    "dept": "60",
+    "total": 10923,
+    "geocoded": 9526,
+    "geocoded_pct": 87.2,
+    "lat": 49.43177,
+    "lng": 2.08865
+  },
+  {
+    "city": "TARBES",
+    "dept": "65",
+    "total": 10903,
+    "geocoded": 9124,
+    "geocoded_pct": 83.7,
+    "lat": 43.23303,
+    "lng": 0.0715
+  },
+  {
+    "city": "LES SABLES D'OLONNE",
+    "dept": "85",
+    "total": 10903,
+    "geocoded": 9364,
+    "geocoded_pct": 85.9,
+    "lat": 46.50196,
+    "lng": -1.77068
+  },
+  {
+    "city": "CALUIRE-ET-CUIRE",
+    "dept": "69",
+    "total": 10701,
+    "geocoded": 8702,
+    "geocoded_pct": 81.3,
+    "lat": 45.79363,
+    "lng": 4.84847
+  },
+  {
+    "city": "VALENCIENNES",
+    "dept": "59",
+    "total": 10653,
+    "geocoded": 8724,
+    "geocoded_pct": 81.9,
+    "lat": 50.35831,
+    "lng": 3.5196
+  },
+  {
+    "city": "MARCQ-EN-BARŒUL",
+    "dept": "59",
+    "total": 10631,
+    "geocoded": 9088,
+    "geocoded_pct": 85.5,
+    "lat": 50.66808,
+    "lng": 3.09738
+  },
+  {
+    "city": "SAINT-BRIEUC",
+    "dept": "22",
+    "total": 10606,
+    "geocoded": 8946,
+    "geocoded_pct": 84.3,
+    "lat": 48.51169,
+    "lng": -2.75962
+  },
+  {
+    "city": "MEAUX",
+    "dept": "77",
+    "total": 10600,
+    "geocoded": 8686,
+    "geocoded_pct": 81.9,
+    "lat": 48.95673,
+    "lng": 2.89404
+  },
+  {
+    "city": "MONTELIMAR",
+    "dept": "26",
+    "total": 10598,
+    "geocoded": 9185,
+    "geocoded_pct": 86.7,
+    "lat": 44.55395,
+    "lng": 4.74881
+  },
+  {
+    "city": "VALLAURIS",
+    "dept": "06",
+    "total": 10588,
+    "geocoded": 8833,
+    "geocoded_pct": 83.4,
+    "lat": 43.5762,
+    "lng": 7.06173
+  },
+  {
+    "city": "CHARTRES",
+    "dept": "28",
+    "total": 10504,
+    "geocoded": 8858,
+    "geocoded_pct": 84.3,
+    "lat": 48.44476,
+    "lng": 1.49527
+  },
+  {
+    "city": "BLOIS",
+    "dept": "41",
+    "total": 10499,
+    "geocoded": 8965,
+    "geocoded_pct": 85.4,
+    "lat": 47.58892,
+    "lng": 1.32455
+  },
+  {
+    "city": "TALENCE",
+    "dept": "33",
+    "total": 10393,
+    "geocoded": 8067,
+    "geocoded_pct": 77.6,
+    "lat": 44.80942,
+    "lng": -0.58844
+  },
+  {
+    "city": "SAINT-PRIEST",
+    "dept": "69",
+    "total": 10391,
+    "geocoded": 8683,
+    "geocoded_pct": 83.6,
+    "lat": 45.70067,
+    "lng": 4.94224
+  },
+  {
+    "city": "BOURG-EN-BRESSE",
+    "dept": "01",
+    "total": 10343,
+    "geocoded": 8633,
+    "geocoded_pct": 83.5,
+    "lat": 46.20476,
+    "lng": 5.22969
+  },
+  {
+    "city": "ALFORTVILLE",
+    "dept": "94",
+    "total": 10311,
+    "geocoded": 8205,
+    "geocoded_pct": 79.6,
+    "lat": 48.80214,
+    "lng": 2.42002
+  },
+  {
+    "city": "ROSNY-SOUS-BOIS",
+    "dept": "93",
+    "total": 10297,
+    "geocoded": 8054,
+    "geocoded_pct": 78.2,
+    "lat": 48.8745,
+    "lng": 2.48433
+  },
+  {
+    "city": "BAGNOLET",
+    "dept": "93",
+    "total": 10116,
+    "geocoded": 8285,
+    "geocoded_pct": 81.9,
+    "lat": 48.86763,
+    "lng": 2.42134
+  },
+  {
+    "city": "MEUDON",
+    "dept": "92",
+    "total": 10087,
+    "geocoded": 8064,
+    "geocoded_pct": 79.9,
+    "lat": 48.80656,
+    "lng": 2.23454
+  },
+  {
+    "city": "DRAGUIGNAN",
+    "dept": "83",
+    "total": 10082,
+    "geocoded": 8736,
+    "geocoded_pct": 86.6,
+    "lat": 43.53396,
+    "lng": 6.46225
+  },
+  {
+    "city": "VAULX-EN-VELIN",
+    "dept": "69",
+    "total": 9985,
+    "geocoded": 8481,
+    "geocoded_pct": 84.9,
+    "lat": 45.77509,
+    "lng": 4.92208
+  },
+  {
+    "city": "ARRAS",
+    "dept": "62",
+    "total": 9973,
+    "geocoded": 8639,
+    "geocoded_pct": 86.6,
+    "lat": 50.29058,
+    "lng": 2.77112
+  },
+  {
+    "city": "CHELLES",
+    "dept": "77",
+    "total": 9964,
+    "geocoded": 7967,
+    "geocoded_pct": 80.0,
+    "lat": 48.88197,
+    "lng": 2.59175
+  },
+  {
+    "city": "MOUGINS",
+    "dept": "06",
+    "total": 9789,
+    "geocoded": 8465,
+    "geocoded_pct": 86.5,
+    "lat": 43.59709,
+    "lng": 6.99697
+  },
+  {
+    "city": "SIX-FOURS-LES-PLAGES",
+    "dept": "83",
+    "total": 9760,
+    "geocoded": 8191,
+    "geocoded_pct": 83.9,
+    "lat": 43.09736,
+    "lng": 5.82939
+  },
+  {
+    "city": "SARTROUVILLE",
+    "dept": "78",
+    "total": 9759,
+    "geocoded": 7770,
+    "geocoded_pct": 79.6,
+    "lat": 48.94029,
+    "lng": 2.17461
+  },
+  {
+    "city": "LE BLANC-MESNIL",
+    "dept": "93",
+    "total": 9758,
+    "geocoded": 8017,
+    "geocoded_pct": 82.2,
+    "lat": 48.93877,
+    "lng": 2.46054
+  },
+  {
+    "city": "CORBEIL-ESSONNES",
+    "dept": "91",
+    "total": 9728,
+    "geocoded": 7921,
+    "geocoded_pct": 81.4,
+    "lat": 48.60476,
+    "lng": 2.4729
+  },
+  {
+    "city": "CALAIS",
+    "dept": "62",
+    "total": 9723,
+    "geocoded": 8304,
+    "geocoded_pct": 85.4,
+    "lat": 50.9498,
+    "lng": 1.86342
+  },
+  {
+    "city": "CHALON-SUR-SAONE",
+    "dept": "71",
+    "total": 9719,
+    "geocoded": 8109,
+    "geocoded_pct": 83.4,
+    "lat": 46.78716,
+    "lng": 4.85189
+  },
+  {
+    "city": "SAINT-LAURENT-DU-VAR",
+    "dept": "06",
+    "total": 9694,
+    "geocoded": 8106,
+    "geocoded_pct": 83.6,
+    "lat": 43.67375,
+    "lng": 7.18656
+  },
+  {
+    "city": "AGEN",
+    "dept": "47",
+    "total": 9676,
+    "geocoded": 8204,
+    "geocoded_pct": 84.8,
+    "lat": 44.20124,
+    "lng": 0.6235
+  },
+  {
+    "city": "AIX-LES-BAINS",
+    "dept": "73",
+    "total": 9623,
+    "geocoded": 7290,
+    "geocoded_pct": 75.8,
+    "lat": 45.69261,
+    "lng": 5.90932
+  },
+  {
+    "city": "MARTIGUES",
+    "dept": "13",
+    "total": 9575,
+    "geocoded": 7996,
+    "geocoded_pct": 83.5,
+    "lat": 43.39452,
+    "lng": 5.04799
+  },
+  {
+    "city": "EVREUX",
+    "dept": "27",
+    "total": 9499,
+    "geocoded": 8220,
+    "geocoded_pct": 86.5,
+    "lat": 49.02177,
+    "lng": 1.15318
+  },
+  {
+    "city": "MELUN",
+    "dept": "77",
+    "total": 9441,
+    "geocoded": 7627,
+    "geocoded_pct": 80.8,
+    "lat": 48.54057,
+    "lng": 2.6584
+  },
+  {
+    "city": "THONON-LES-BAINS",
+    "dept": "74",
+    "total": 9424,
+    "geocoded": 7696,
+    "geocoded_pct": 81.7,
+    "lat": 46.3701,
+    "lng": 6.47906
+  },
+  {
+    "city": "ANNEMASSE",
+    "dept": "74",
+    "total": 9405,
+    "geocoded": 7545,
+    "geocoded_pct": 80.2,
+    "lat": 46.19244,
+    "lng": 6.23858
+  },
+  {
+    "city": "COMPIEGNE",
+    "dept": "60",
+    "total": 9369,
+    "geocoded": 7990,
+    "geocoded_pct": 85.3,
+    "lat": 49.4105,
+    "lng": 2.8193
+  },
+  {
+    "city": "BONDY",
+    "dept": "93",
+    "total": 9364,
+    "geocoded": 7841,
+    "geocoded_pct": 83.7,
+    "lat": 48.90257,
+    "lng": 2.48371
+  },
+  {
+    "city": "ALES",
+    "dept": "30",
+    "total": 9333,
+    "geocoded": 8189,
+    "geocoded_pct": 87.7,
+    "lat": 44.12499,
+    "lng": 4.08901
+  },
+  {
+    "city": "SAINT-QUENTIN",
+    "dept": "02",
+    "total": 9222,
+    "geocoded": 7943,
+    "geocoded_pct": 86.1,
+    "lat": 49.84753,
+    "lng": 3.28748
+  },
+  {
+    "city": "SCHILTIGHEIM",
+    "dept": "67",
+    "total": 9202,
+    "geocoded": 7788,
+    "geocoded_pct": 84.6,
+    "lat": 48.60827,
+    "lng": 7.73665
+  },
+  {
+    "city": "BELFORT",
+    "dept": "90",
+    "total": 9200,
+    "geocoded": 7661,
+    "geocoded_pct": 83.3,
+    "lat": 47.64029,
+    "lng": 6.85486
+  },
+  {
+    "city": "NOGENT-SUR-MARNE",
+    "dept": "94",
+    "total": 9195,
+    "geocoded": 7620,
+    "geocoded_pct": 82.9,
+    "lat": 48.83726,
+    "lng": 2.48186
+  },
+  {
+    "city": "LA TESTE-DE-BUCH",
+    "dept": "33",
+    "total": 9154,
+    "geocoded": 7612,
+    "geocoded_pct": 83.2,
+    "lat": 44.61859,
+    "lng": -1.14861
+  },
+  {
+    "city": "BRON",
+    "dept": "69",
+    "total": 9145,
+    "geocoded": 7303,
+    "geocoded_pct": 79.9,
+    "lat": 45.73638,
+    "lng": 4.91331
+  },
+  {
+    "city": "EPINAY-SUR-SEINE",
+    "dept": "93",
+    "total": 9144,
+    "geocoded": 7583,
+    "geocoded_pct": 82.9,
+    "lat": 48.95583,
+    "lng": 2.31264
+  },
+  {
+    "city": "MANDELIEU-LA-NAPOULE",
+    "dept": "06",
+    "total": 9110,
+    "geocoded": 7241,
+    "geocoded_pct": 79.5,
+    "lat": 43.54328,
+    "lng": 6.93643
+  },
+  {
+    "city": "CHARLEVILLE-MEZIERES",
+    "dept": "08",
+    "total": 8855,
+    "geocoded": 7783,
+    "geocoded_pct": 87.9,
+    "lat": 49.76578,
+    "lng": 4.71875
+  },
+  {
+    "city": "NOISY-LE-SEC",
+    "dept": "93",
+    "total": 8787,
+    "geocoded": 7210,
+    "geocoded_pct": 82.1,
+    "lat": 48.89153,
+    "lng": 2.45853
+  },
+  {
+    "city": "CASTRES",
+    "dept": "81",
+    "total": 8776,
+    "geocoded": 7414,
+    "geocoded_pct": 84.5,
+    "lat": 43.6047,
+    "lng": 2.24158
+  },
+  {
+    "city": "VILLEFRANCHE-SUR-SAONE",
+    "dept": "69",
+    "total": 8773,
+    "geocoded": 7401,
+    "geocoded_pct": 84.4,
+    "lat": 45.98783,
+    "lng": 4.72272
+  },
+  {
+    "city": "SAINT-CLOUD",
+    "dept": "92",
+    "total": 8712,
+    "geocoded": 7319,
+    "geocoded_pct": 84.0,
+    "lat": 48.84845,
+    "lng": 2.21431
+  },
+  {
+    "city": "CHARENTON-LE-PONT",
+    "dept": "94",
+    "total": 8648,
+    "geocoded": 7100,
+    "geocoded_pct": 82.1,
+    "lat": 48.82309,
+    "lng": 2.4095
+  },
+  {
+    "city": "GENNEVILLIERS",
+    "dept": "92",
+    "total": 8605,
+    "geocoded": 7197,
+    "geocoded_pct": 83.6,
+    "lat": 48.92636,
+    "lng": 2.29811
+  },
+  {
+    "city": "CASTELNAU-LE-LEZ",
+    "dept": "34",
+    "total": 8597,
+    "geocoded": 7142,
+    "geocoded_pct": 83.1,
+    "lat": 43.63372,
+    "lng": 3.90917
+  },
+  {
+    "city": "REZE",
+    "dept": "44",
+    "total": 8506,
+    "geocoded": 6796,
+    "geocoded_pct": 79.9,
+    "lat": 47.18064,
+    "lng": -1.55121
+  },
+  {
+    "city": "SAINT-MANDE",
+    "dept": "94",
+    "total": 8503,
+    "geocoded": 7204,
+    "geocoded_pct": 84.7,
+    "lat": 48.84158,
+    "lng": 2.41764
+  },
+  {
+    "city": "VITROLLES",
+    "dept": "13",
+    "total": 8494,
+    "geocoded": 7450,
+    "geocoded_pct": 87.7,
+    "lat": 43.43879,
+    "lng": 5.25599
+  },
+  {
+    "city": "MACON",
+    "dept": "71",
+    "total": 8486,
+    "geocoded": 7266,
+    "geocoded_pct": 85.6,
+    "lat": 46.30734,
+    "lng": 4.82508
+  },
+  {
+    "city": "ROANNE",
+    "dept": "42",
+    "total": 8481,
+    "geocoded": 7380,
+    "geocoded_pct": 87.0,
+    "lat": 46.03938,
+    "lng": 4.07016
+  },
+  {
+    "city": "PONTOISE",
+    "dept": "95",
+    "total": 8474,
+    "geocoded": 6955,
+    "geocoded_pct": 82.1,
+    "lat": 49.04985,
+    "lng": 2.09277
+  },
+  {
+    "city": "THIONVILLE",
+    "dept": "57",
+    "total": 8472,
+    "geocoded": 7219,
+    "geocoded_pct": 85.2,
+    "lat": 49.36101,
+    "lng": 6.15322
+  },
+  {
+    "city": "CHOISY-LE-ROI",
+    "dept": "94",
+    "total": 8446,
+    "geocoded": 6840,
+    "geocoded_pct": 81.0,
+    "lat": 48.76455,
+    "lng": 2.41134
+  },
+  {
+    "city": "CHAMONIX-MONT-BLANC",
+    "dept": "74",
+    "total": 8435,
+    "geocoded": 6750,
+    "geocoded_pct": 80.0,
+    "lat": 45.93042,
+    "lng": 6.87549
+  },
+  {
+    "city": "PERIGUEUX",
+    "dept": "24",
+    "total": 8428,
+    "geocoded": 7241,
+    "geocoded_pct": 85.9,
+    "lat": 45.18629,
+    "lng": 0.71741
+  },
+  {
+    "city": "LIVRY-GARGAN",
+    "dept": "93",
+    "total": 8425,
+    "geocoded": 7007,
+    "geocoded_pct": 83.2,
+    "lat": 48.91772,
+    "lng": 2.53016
+  },
+  {
+    "city": "BEGLES",
+    "dept": "33",
+    "total": 8224,
+    "geocoded": 6745,
+    "geocoded_pct": 82.0,
+    "lat": 44.80512,
+    "lng": -0.55418
+  },
+  {
+    "city": "LA COURNEUVE",
+    "dept": "93",
+    "total": 8180,
+    "geocoded": 7197,
+    "geocoded_pct": 88.0,
+    "lat": 48.92583,
+    "lng": 2.39747
+  },
+  {
+    "city": "CHATEAUROUX",
+    "dept": "36",
+    "total": 8152,
+    "geocoded": 7027,
+    "geocoded_pct": 86.2,
+    "lat": 46.80806,
+    "lng": 1.69603
+  },
+  {
+    "city": "HAGUENAU",
+    "dept": "67",
+    "total": 8103,
+    "geocoded": 7163,
+    "geocoded_pct": 88.4,
+    "lat": 48.81072,
+    "lng": 7.79056
+  },
+  {
+    "city": "AUXERRE",
+    "dept": "89",
+    "total": 8103,
+    "geocoded": 7046,
+    "geocoded_pct": 87.0,
+    "lat": 47.79803,
+    "lng": 3.5711
+  },
+  {
+    "city": "VIENNE",
+    "dept": "38",
+    "total": 8054,
+    "geocoded": 6762,
+    "geocoded_pct": 84.0,
+    "lat": 45.52409,
+    "lng": 4.87551
+  },
+  {
+    "city": "LE PERREUX-SUR-MARNE",
+    "dept": "94",
+    "total": 8030,
+    "geocoded": 6502,
+    "geocoded_pct": 81.0,
+    "lat": 48.84223,
+    "lng": 2.50379
+  },
+  {
+    "city": "EPINAL",
+    "dept": "88",
+    "total": 7983,
+    "geocoded": 7008,
+    "geocoded_pct": 87.8,
+    "lat": 48.17664,
+    "lng": 6.45251
+  },
+  {
+    "city": "DAX",
+    "dept": "40",
+    "total": 7947,
+    "geocoded": 6223,
+    "geocoded_pct": 78.3,
+    "lat": 43.70649,
+    "lng": -1.05266
+  },
+  {
+    "city": "VILLENAVE-D'ORNON",
+    "dept": "33",
+    "total": 7819,
+    "geocoded": 6083,
+    "geocoded_pct": 77.8,
+    "lat": 44.77506,
+    "lng": -0.56498
+  },
+  {
+    "city": "PALAISEAU",
+    "dept": "91",
+    "total": 7802,
+    "geocoded": 6006,
+    "geocoded_pct": 77.0,
+    "lat": 48.71442,
+    "lng": 2.23894
+  },
+  {
+    "city": "POISSY",
+    "dept": "78",
+    "total": 7776,
+    "geocoded": 6170,
+    "geocoded_pct": 79.3,
+    "lat": 48.92932,
+    "lng": 2.04271
+  },
+  {
+    "city": "VALBONNE",
+    "dept": "06",
+    "total": 7712,
+    "geocoded": 6776,
+    "geocoded_pct": 87.9,
+    "lat": 43.6282,
+    "lng": 7.03367
+  },
+  {
+    "city": "TREMBLAY-EN-FRANCE",
+    "dept": "93",
+    "total": 7709,
+    "geocoded": 6699,
+    "geocoded_pct": 86.9,
+    "lat": 48.96427,
+    "lng": 2.56312
+  },
+  {
+    "city": "MANTES-LA-JOLIE",
+    "dept": "78",
+    "total": 7663,
+    "geocoded": 6407,
+    "geocoded_pct": 83.6,
+    "lat": 48.99438,
+    "lng": 1.70223
+  },
+  {
+    "city": "MAUGUIO",
+    "dept": "34",
+    "total": 7626,
+    "geocoded": 6488,
+    "geocoded_pct": 85.1,
+    "lat": 43.59331,
+    "lng": 3.98367
+  },
+  {
+    "city": "ROMANS-SUR-ISERE",
+    "dept": "26",
+    "total": 7620,
+    "geocoded": 6508,
+    "geocoded_pct": 85.4,
+    "lat": 45.04742,
+    "lng": 5.05495
+  },
+  {
+    "city": "BOURGOIN-JALLIEU",
+    "dept": "38",
+    "total": 7573,
+    "geocoded": 6493,
+    "geocoded_pct": 85.7,
+    "lat": 45.59205,
+    "lng": 5.27205
+  },
+  {
+    "city": "LES LILAS",
+    "dept": "93",
+    "total": 7517,
+    "geocoded": 6192,
+    "geocoded_pct": 82.4,
+    "lat": 48.87907,
+    "lng": 2.41813
+  },
+  {
+    "city": "MALAKOFF",
+    "dept": "92",
+    "total": 7500,
+    "geocoded": 5941,
+    "geocoded_pct": 79.2,
+    "lat": 48.81788,
+    "lng": 2.29945
+  },
+  {
+    "city": "BAGNEUX",
+    "dept": "92",
+    "total": 7487,
+    "geocoded": 5757,
+    "geocoded_pct": 76.9,
+    "lat": 48.79677,
+    "lng": 2.31236
+  },
+  {
+    "city": "SAINT-MARTIN-D'HERES",
+    "dept": "38",
+    "total": 7486,
+    "geocoded": 6005,
+    "geocoded_pct": 80.2,
+    "lat": 45.17903,
+    "lng": 5.75991
+  },
+  {
+    "city": "DOUAI",
+    "dept": "59",
+    "total": 7473,
+    "geocoded": 6401,
+    "geocoded_pct": 85.7,
+    "lat": 50.37413,
+    "lng": 3.08211
+  },
+  {
+    "city": "CARPENTRAS",
+    "dept": "84",
+    "total": 7472,
+    "geocoded": 6430,
+    "geocoded_pct": 86.1,
+    "lat": 44.05412,
+    "lng": 5.04944
+  },
+  {
+    "city": "SEVRAN",
+    "dept": "93",
+    "total": 7458,
+    "geocoded": 6157,
+    "geocoded_pct": 82.6,
+    "lat": 48.93886,
+    "lng": 2.52737
+  },
+  {
+    "city": "VILLENEUVE-LOUBET",
+    "dept": "06",
+    "total": 7456,
+    "geocoded": 6259,
+    "geocoded_pct": 83.9,
+    "lat": 43.64141,
+    "lng": 7.12733
+  },
+  {
+    "city": "OULLINS-PIERRE-BENITE",
+    "dept": "69",
+    "total": 7383,
+    "geocoded": 5939,
+    "geocoded_pct": 80.4,
+    "lat": 45.71164,
+    "lng": 4.80943
+  },
+  {
+    "city": "VICHY",
+    "dept": "03",
+    "total": 7361,
+    "geocoded": 6184,
+    "geocoded_pct": 84.0,
+    "lat": 46.12733,
+    "lng": 3.42466
+  },
+  {
+    "city": "ISTRES",
+    "dept": "13",
+    "total": 7353,
+    "geocoded": 6068,
+    "geocoded_pct": 82.5,
+    "lat": 43.51675,
+    "lng": 4.97812
+  },
+  {
+    "city": "LA BAULE-ESCOUBLAC",
+    "dept": "44",
+    "total": 7296,
+    "geocoded": 6217,
+    "geocoded_pct": 85.2,
+    "lat": 47.28525,
+    "lng": -2.37897
+  },
+  {
+    "city": "SAINTE-MAXIME",
+    "dept": "83",
+    "total": 7271,
+    "geocoded": 6291,
+    "geocoded_pct": 86.5,
+    "lat": 43.31806,
+    "lng": 6.63127
+  },
+  {
+    "city": "ROMAINVILLE",
+    "dept": "93",
+    "total": 7255,
+    "geocoded": 5768,
+    "geocoded_pct": 79.5,
+    "lat": 48.88337,
+    "lng": 2.4374
+  },
+  {
+    "city": "COLOMIERS",
+    "dept": "31",
+    "total": 7249,
+    "geocoded": 5899,
+    "geocoded_pct": 81.4,
+    "lat": 43.60861,
+    "lng": 1.32952
+  },
+  {
+    "city": "LIBOURNE",
+    "dept": "33",
+    "total": 7163,
+    "geocoded": 6220,
+    "geocoded_pct": 86.8,
+    "lat": 44.917,
+    "lng": -0.2368
+  },
+  {
+    "city": "RODEZ",
+    "dept": "12",
+    "total": 7144,
+    "geocoded": 6239,
+    "geocoded_pct": 87.3,
+    "lat": 44.35493,
+    "lng": 2.57035
+  },
+  {
+    "city": "MONT-DE-MARSAN",
+    "dept": "40",
+    "total": 7142,
+    "geocoded": 6177,
+    "geocoded_pct": 86.5,
+    "lat": 43.89241,
+    "lng": -0.49356
+  },
+  {
+    "city": "ROYAN",
+    "dept": "17",
+    "total": 7121,
+    "geocoded": 5847,
+    "geocoded_pct": 82.1,
+    "lat": 45.62869,
+    "lng": -1.02576
+  },
+  {
+    "city": "LA GARENNE-COLOMBES",
+    "dept": "92",
+    "total": 7115,
+    "geocoded": 5688,
+    "geocoded_pct": 79.9,
+    "lat": 48.90714,
+    "lng": 2.24624
+  },
+  {
+    "city": "GAGNY",
+    "dept": "93",
+    "total": 7109,
+    "geocoded": 5734,
+    "geocoded_pct": 80.7,
+    "lat": 48.88256,
+    "lng": 2.54236
+  },
+  {
+    "city": "NEVERS",
+    "dept": "58",
+    "total": 7083,
+    "geocoded": 6133,
+    "geocoded_pct": 86.6,
+    "lat": 46.99098,
+    "lng": 3.15635
+  },
+  {
+    "city": "VILLEPINTE",
+    "dept": "93",
+    "total": 7049,
+    "geocoded": 5937,
+    "geocoded_pct": 84.2,
+    "lat": 48.95791,
+    "lng": 2.5422
+  },
+  {
+    "city": "BEZONS",
+    "dept": "95",
+    "total": 7036,
+    "geocoded": 5471,
+    "geocoded_pct": 77.8,
+    "lat": 48.9284,
+    "lng": 2.21266
+  },
+  {
+    "city": "LE BOUSCAT",
+    "dept": "33",
+    "total": 7015,
+    "geocoded": 5763,
+    "geocoded_pct": 82.2,
+    "lat": 44.86357,
+    "lng": -0.59978
+  },
+  {
+    "city": "BERGERAC",
+    "dept": "24",
+    "total": 6965,
+    "geocoded": 5852,
+    "geocoded_pct": 84.0,
+    "lat": 44.8521,
+    "lng": 0.48363
+  },
+  {
+    "city": "LATTES",
+    "dept": "34",
+    "total": 6948,
+    "geocoded": 6026,
+    "geocoded_pct": 86.7,
+    "lat": 43.57389,
+    "lng": 3.90436
+  },
+  {
+    "city": "ORANGE",
+    "dept": "84",
+    "total": 6891,
+    "geocoded": 5903,
+    "geocoded_pct": 85.7,
+    "lat": 44.1332,
+    "lng": 4.81329
+  },
+  {
+    "city": "BOULOGNE-SUR-MER",
+    "dept": "62",
+    "total": 6875,
+    "geocoded": 5987,
+    "geocoded_pct": 87.1,
+    "lat": 50.72508,
+    "lng": 1.60776
+  },
+  {
+    "city": "MANOSQUE",
+    "dept": "04",
+    "total": 6874,
+    "geocoded": 5920,
+    "geocoded_pct": 86.1,
+    "lat": 43.82743,
+    "lng": 5.789
+  },
+  {
+    "city": "CESSON-SEVIGNE",
+    "dept": "35",
+    "total": 6821,
+    "geocoded": 5987,
+    "geocoded_pct": 87.8,
+    "lat": 48.11795,
+    "lng": -1.612
+  },
+  {
+    "city": "PORTO-VECCHIO",
+    "dept": "2A",
+    "total": 6810,
+    "geocoded": 6223,
+    "geocoded_pct": 91.4,
+    "lat": 41.59203,
+    "lng": 9.27246
+  },
+  {
+    "city": "CAMBRAI",
+    "dept": "59",
+    "total": 6799,
+    "geocoded": 5879,
+    "geocoded_pct": 86.5,
+    "lat": 50.17325,
+    "lng": 3.23712
+  },
+  {
+    "city": "LUNEL",
+    "dept": "34",
+    "total": 6773,
+    "geocoded": 5909,
+    "geocoded_pct": 87.2,
+    "lat": 43.67732,
+    "lng": 4.13327
+  },
+  {
+    "city": "SAINTES",
+    "dept": "17",
+    "total": 6762,
+    "geocoded": 5871,
+    "geocoded_pct": 86.8,
+    "lat": 45.74551,
+    "lng": -0.63778
+  },
+  {
+    "city": "MARIGNANE",
+    "dept": "13",
+    "total": 6743,
+    "geocoded": 5777,
+    "geocoded_pct": 85.7,
+    "lat": 43.41389,
+    "lng": 5.21859
+  },
+  {
+    "city": "LA MADELEINE",
+    "dept": "59",
+    "total": 6743,
+    "geocoded": 5572,
+    "geocoded_pct": 82.6,
+    "lat": 50.6514,
+    "lng": 3.0724
+  },
+  {
+    "city": "CHATILLON",
+    "dept": "92",
+    "total": 6739,
+    "geocoded": 5231,
+    "geocoded_pct": 77.6,
+    "lat": 48.80391,
+    "lng": 2.28796
+  },
+  {
+    "city": "PONTAULT-COMBAULT",
+    "dept": "77",
+    "total": 6723,
+    "geocoded": 5511,
+    "geocoded_pct": 82.0,
+    "lat": 48.79361,
+    "lng": 2.60808
+  },
+  {
+    "city": "ROQUEBRUNE-SUR-ARGENS",
+    "dept": "83",
+    "total": 6721,
+    "geocoded": 5578,
+    "geocoded_pct": 83.0,
+    "lat": 43.42625,
+    "lng": 6.66029
+  },
+  {
+    "city": "BEAUNE",
+    "dept": "21",
+    "total": 6715,
+    "geocoded": 5920,
+    "geocoded_pct": 88.2,
+    "lat": 47.02426,
+    "lng": 4.84136
+  },
+  {
+    "city": "BOURG-SAINT-MAURICE",
+    "dept": "73",
+    "total": 6715,
+    "geocoded": 5045,
+    "geocoded_pct": 75.1,
+    "lat": 45.5996,
+    "lng": 6.78225
+  },
+  {
+    "city": "CHALONS-EN-CHAMPAGNE",
+    "dept": "51",
+    "total": 6705,
+    "geocoded": 5760,
+    "geocoded_pct": 85.9,
+    "lat": 48.95633,
+    "lng": 4.36441
+  },
+  {
+    "city": "LA GARDE",
+    "dept": "83",
+    "total": 6701,
+    "geocoded": 5797,
+    "geocoded_pct": 86.5,
+    "lat": 43.12847,
+    "lng": 6.01379
+  },
+  {
+    "city": "CAVAILLON",
+    "dept": "84",
+    "total": 6684,
+    "geocoded": 5734,
+    "geocoded_pct": 85.8,
+    "lat": 43.84084,
+    "lng": 5.04147
+  },
+  {
+    "city": "ROCHEFORT",
+    "dept": "17",
+    "total": 6678,
+    "geocoded": 5422,
+    "geocoded_pct": 81.2,
+    "lat": 45.94117,
+    "lng": -0.96593
+  },
+  {
+    "city": "VANVES",
+    "dept": "92",
+    "total": 6677,
+    "geocoded": 4937,
+    "geocoded_pct": 73.9,
+    "lat": 48.82172,
+    "lng": 2.28884
+  },
+  {
+    "city": "LES BELLEVILLE",
+    "dept": "73",
+    "total": 6650,
+    "geocoded": 4724,
+    "geocoded_pct": 71.0,
+    "lat": 45.33788,
+    "lng": 6.54224
+  },
+  {
+    "city": "CENON",
+    "dept": "33",
+    "total": 6626,
+    "geocoded": 5341,
+    "geocoded_pct": 80.6,
+    "lat": 44.85526,
+    "lng": -0.52186
+  },
+  {
+    "city": "BOIS-COLOMBES",
+    "dept": "92",
+    "total": 6622,
+    "geocoded": 5202,
+    "geocoded_pct": 78.6,
+    "lat": 48.91547,
+    "lng": 2.26935
+  },
+  {
+    "city": "SAVIGNY-SUR-ORGE",
+    "dept": "91",
+    "total": 6609,
+    "geocoded": 5333,
+    "geocoded_pct": 80.7,
+    "lat": 48.68322,
+    "lng": 2.34884
+  },
+  {
+    "city": "ARCACHON",
+    "dept": "33",
+    "total": 6511,
+    "geocoded": 5261,
+    "geocoded_pct": 80.8,
+    "lat": 44.65721,
+    "lng": -1.16922
+  },
+  {
+    "city": "LE CHESNAY-ROCQUENCOURT",
+    "dept": "78",
+    "total": 6506,
+    "geocoded": 5228,
+    "geocoded_pct": 80.4,
+    "lat": 48.82546,
+    "lng": 2.12514
+  },
+  {
+    "city": "HOUILLES",
+    "dept": "78",
+    "total": 6453,
+    "geocoded": 5013,
+    "geocoded_pct": 77.7,
+    "lat": 48.92591,
+    "lng": 2.18802
+  },
+  {
+    "city": "ECHIROLLES",
+    "dept": "38",
+    "total": 6450,
+    "geocoded": 5426,
+    "geocoded_pct": 84.1,
+    "lat": 45.14846,
+    "lng": 5.71556
+  },
+  {
+    "city": "CHATOU",
+    "dept": "78",
+    "total": 6437,
+    "geocoded": 5234,
+    "geocoded_pct": 81.3,
+    "lat": 48.89606,
+    "lng": 2.15279
+  },
+  {
+    "city": "MONTIGNY-LE-BRETONNEUX",
+    "dept": "78",
+    "total": 6423,
+    "geocoded": 5212,
+    "geocoded_pct": 81.1,
+    "lat": 48.77861,
+    "lng": 2.03727
+  },
+  {
+    "city": "VILLEMOMBLE",
+    "dept": "93",
+    "total": 6413,
+    "geocoded": 5378,
+    "geocoded_pct": 83.9,
+    "lat": 48.88565,
+    "lng": 2.50931
+  },
+  {
+    "city": "AURILLAC",
+    "dept": "15",
+    "total": 6387,
+    "geocoded": 5670,
+    "geocoded_pct": 88.8,
+    "lat": 44.92133,
+    "lng": 2.43976
+  },
+  {
+    "city": "VENCE",
+    "dept": "06",
+    "total": 6380,
+    "geocoded": 5344,
+    "geocoded_pct": 83.8,
+    "lat": 43.72184,
+    "lng": 7.11218
+  },
+  {
+    "city": "AUCH",
+    "dept": "32",
+    "total": 6356,
+    "geocoded": 5598,
+    "geocoded_pct": 88.1,
+    "lat": 43.64859,
+    "lng": 0.5899
+  },
+  {
+    "city": "VILLENEUVE-SAINT-GEORGES",
+    "dept": "94",
+    "total": 6335,
+    "geocoded": 5365,
+    "geocoded_pct": 84.7,
+    "lat": 48.73742,
+    "lng": 2.45081
+  },
+  {
+    "city": "MEYZIEU",
+    "dept": "69",
+    "total": 6318,
+    "geocoded": 5172,
+    "geocoded_pct": 81.9,
+    "lat": 45.77151,
+    "lng": 5.00518
+  },
+  {
+    "city": "MONTLUCON",
+    "dept": "03",
+    "total": 6316,
+    "geocoded": 5496,
+    "geocoded_pct": 87.0,
+    "lat": 46.34115,
+    "lng": 2.59937
+  },
+  {
+    "city": "CONFLANS-SAINTE-HONORINE",
+    "dept": "78",
+    "total": 6304,
+    "geocoded": 5099,
+    "geocoded_pct": 80.9,
+    "lat": 49.00036,
+    "lng": 2.09868
+  },
+  {
+    "city": "DECINES-CHARPIEU",
+    "dept": "69",
+    "total": 6252,
+    "geocoded": 5150,
+    "geocoded_pct": 82.4,
+    "lat": 45.76633,
+    "lng": 4.95606
+  },
+  {
+    "city": "STAINS",
+    "dept": "93",
+    "total": 6245,
+    "geocoded": 5341,
+    "geocoded_pct": 85.5,
+    "lat": 48.95641,
+    "lng": 2.38158
+  },
+  {
+    "city": "SAINT-JEAN-DE-LUZ",
+    "dept": "64",
+    "total": 6240,
+    "geocoded": 5284,
+    "geocoded_pct": 84.7,
+    "lat": 43.39405,
+    "lng": -1.64807
+  },
+  {
+    "city": "BUSSY-SAINT-GEORGES",
+    "dept": "77",
+    "total": 6229,
+    "geocoded": 4811,
+    "geocoded_pct": 77.2,
+    "lat": 48.83885,
+    "lng": 2.71479
+  },
+  {
+    "city": "SAINTE-GENEVIEVE-DES-BOIS",
+    "dept": "91",
+    "total": 6225,
+    "geocoded": 5276,
+    "geocoded_pct": 84.8,
+    "lat": 48.64091,
+    "lng": 2.33151
+  },
+  {
+    "city": "ATHIS-MONS",
+    "dept": "91",
+    "total": 6219,
+    "geocoded": 4979,
+    "geocoded_pct": 80.1,
+    "lat": 48.70604,
+    "lng": 2.38102
+  },
+  {
+    "city": "SANARY-SUR-MER",
+    "dept": "83",
+    "total": 6217,
+    "geocoded": 5262,
+    "geocoded_pct": 84.6,
+    "lat": 43.12536,
+    "lng": 5.79842
+  },
+  {
+    "city": "SAUMUR",
+    "dept": "49",
+    "total": 6214,
+    "geocoded": 5344,
+    "geocoded_pct": 86.0,
+    "lat": 47.25951,
+    "lng": -0.07957
+  },
+  {
+    "city": "CACHAN",
+    "dept": "94",
+    "total": 6162,
+    "geocoded": 4693,
+    "geocoded_pct": 76.2,
+    "lat": 48.79249,
+    "lng": 2.33119
+  },
+  {
+    "city": "GARGES-LES-GONESSE",
+    "dept": "95",
+    "total": 6135,
+    "geocoded": 5343,
+    "geocoded_pct": 87.1,
+    "lat": 48.97203,
+    "lng": 2.40288
+  },
+  {
+    "city": "THIAIS",
+    "dept": "94",
+    "total": 6112,
+    "geocoded": 4919,
+    "geocoded_pct": 80.5,
+    "lat": 48.76222,
+    "lng": 2.38804
+  },
+  {
+    "city": "HERBLAY-SUR-SEINE",
+    "dept": "95",
+    "total": 6069,
+    "geocoded": 5040,
+    "geocoded_pct": 83.0,
+    "lat": 48.99934,
+    "lng": 2.15466
+  },
+  {
+    "city": "BLAGNAC",
+    "dept": "31",
+    "total": 5992,
+    "geocoded": 4927,
+    "geocoded_pct": 82.2,
+    "lat": 43.63864,
+    "lng": 1.38405
+  },
+  {
+    "city": "BETHUNE",
+    "dept": "62",
+    "total": 5992,
+    "geocoded": 5151,
+    "geocoded_pct": 86.0,
+    "lat": 50.52878,
+    "lng": 2.63952
+  },
+  {
+    "city": "VOIRON",
+    "dept": "38",
+    "total": 5972,
+    "geocoded": 4986,
+    "geocoded_pct": 83.5,
+    "lat": 45.3656,
+    "lng": 5.58611
+  },
+  {
+    "city": "ILLKIRCH-GRAFFENSTADEN",
+    "dept": "67",
+    "total": 5970,
+    "geocoded": 5117,
+    "geocoded_pct": 85.7,
+    "lat": 48.52745,
+    "lng": 7.72131
+  },
+  {
+    "city": "LENS",
+    "dept": "62",
+    "total": 5959,
+    "geocoded": 5114,
+    "geocoded_pct": 85.8,
+    "lat": 50.43349,
+    "lng": 2.82648
+  }
+]
