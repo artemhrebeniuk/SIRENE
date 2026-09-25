@@ -38,27 +38,52 @@ const modalState = {
   isLoading: false
 };
 
+// Operational Layers State (Regions, Traffic, Crowd Hotspots, Parking Radar)
+let isRegionsActive = true;
+let isTrafficActive = false;
+let isCrowdActive = false;
+let isParkingRadarActive = true;
+let activeParkingRadius = 300;
+let activeParkingTarget = null;
+
+let trafficTileLayer = null;
+let parkingLayerGroup = null;
+let parkingRadiusCircle = null;
+let crowdLayerGroup = null;
+let businessMarkersLayerGroup = null;
+let cachedCrowdHotspots = null;
+let viewportBizDebounce = null;
+
 // Map & Basemap Layers
 let map;
 let currentBizMarker = null;
 let searchDebounceTimer = null;
 let activeBasemapKey = 'google-roads';
 
+// High-Resolution @2x Retina Basemaps for Crystal Clear Geometry on All Screens
 const BASEMAPS = {
-  'google-roads': L.tileLayer('https://mt{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+  'google-roads': L.tileLayer('https://mt{s}.google.com/vt/lyrs=m&hl=fr&x={x}&y={y}&z={z}&scale=2', {
     subdomains: ['0', '1', '2', '3'],
     maxZoom: 20,
+    tileSize: 256,
     attribution: '&copy; Google Maps'
   }),
-  'google-satellite': L.tileLayer('https://mt{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+  'google-satellite': L.tileLayer('https://mt{s}.google.com/vt/lyrs=y&hl=fr&x={x}&y={y}&z={z}&scale=2', {
     subdomains: ['0', '1', '2', '3'],
     maxZoom: 20,
+    tileSize: 256,
     attribution: '&copy; Google Maps Satellite'
   }),
-  'esri-dark': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: 16,
-    attribution: '&copy; Esri, HERE | INSEE SIRENE'
-  })
+  'esri-dark': L.layerGroup([
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 16,
+      attribution: '&copy; Esri, HERE | INSEE SIRENE'
+    }),
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 16,
+      attribution: ''
+    })
+  ])
 };
 
 // Lifecycle Start
@@ -71,7 +96,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 /* ==========================================================================
-   Map Initialization with Genuine Google Maps Basemap
+   Map Initialization with Genuine Google Maps Basemap & Layer Groups
    ========================================================================== */
 function initMap() {
   map = L.map('map', {
@@ -79,11 +104,55 @@ function initMap() {
     zoom: 6,
     minZoom: 4,
     maxZoom: 20,
-    zoomControl: true
+    zoomControl: false // Clean presentation without +/- glitches
   });
 
   // Add Google Maps Roadmap as default basemap
   BASEMAPS['google-roads'].addTo(map);
+
+  // Initialize operational layer groups
+  parkingLayerGroup = L.layerGroup().addTo(map);
+  businessMarkersLayerGroup = L.layerGroup().addTo(map);
+  crowdLayerGroup = L.layerGroup();
+
+  // Smart Zoom-Adaptive GIS Listener:
+  // Re-evaluates polygon opacity, updates heatmap radius, and fetches live businesses when zooming in
+  map.on('zoomend', () => {
+    if (isRegionsActive && state.geoJsonLayer && map.hasLayer(state.geoJsonLayer)) {
+      state.geoJsonLayer.setStyle(getFeatureStyle);
+    }
+    updateHeatmapOnZoom();
+    handleMapMoveZoom();
+  });
+
+  map.on('moveend', () => {
+    handleMapMoveZoom();
+  });
+}
+
+function handleMapMoveZoom() {
+  if (!map) return;
+  const zoom = map.getZoom();
+
+  // Dynamic high-precision heatmap update when zoomed in
+  if (isCrowdActive && crowdHeatLayer && map.hasLayer(crowdHeatLayer)) {
+    clearTimeout(viewportHeatmapDebounce);
+    viewportHeatmapDebounce = setTimeout(() => {
+      checkViewportHeatmap();
+    }, 300);
+  }
+
+  if (zoom >= 14) {
+    clearTimeout(viewportBizDebounce);
+    viewportBizDebounce = setTimeout(() => {
+      loadViewportBusinesses();
+    }, 350);
+  } else {
+    // If not inspecting a specific commune/city, clear the viewport markers to keep map clean
+    if (!state.selectedCommune && businessMarkersLayerGroup) {
+      businessMarkersLayerGroup.clearLayers();
+    }
+  }
 }
 
 function switchBasemap(key) {
@@ -93,9 +162,21 @@ function switchBasemap(key) {
   BASEMAPS[key].addTo(map);
   activeBasemapKey = key;
 
-  if (state.geoJsonLayer) {
+  if (isRegionsActive && state.geoJsonLayer && map.hasLayer(state.geoJsonLayer)) {
     state.geoJsonLayer.bringToFront();
     state.geoJsonLayer.setStyle(getFeatureStyle);
+  }
+  if (trafficTileLayer && isTrafficActive) {
+    trafficTileLayer.bringToFront();
+  }
+  if (crowdHeatLayer && isCrowdActive && map.hasLayer(crowdHeatLayer)) {
+    crowdHeatLayer.bringToFront();
+  }
+  if (businessMarkersLayerGroup) {
+    businessMarkersLayerGroup.eachLayer(l => { if (l.bringToFront) l.bringToFront(); });
+  }
+  if (parkingLayerGroup) {
+    parkingLayerGroup.eachLayer(l => { if (l.bringToFront) l.bringToFront(); });
   }
   if (currentBizMarker && typeof currentBizMarker.bringToFront === 'function') {
     currentBizMarker.bringToFront();
@@ -106,16 +187,42 @@ function switchBasemap(key) {
   });
 }
 
-// Dynamic Color Gradient for Business Density
+// Department Quintiles (Equal Distribution across 96 departments)
+let deptQuantiles = { p20: 55000, p40: 85000, p60: 140000, p80: 245000 };
+
+function computeDeptQuantiles() {
+  if (!state.departments || state.departments.length === 0) return;
+  const totals = state.departments.map(d => d.total).sort((a, b) => a - b);
+  const n = totals.length;
+  deptQuantiles = {
+    p20: totals[Math.floor(n * 0.20)] || 55000,
+    p40: totals[Math.floor(n * 0.40)] || 85000,
+    p60: totals[Math.floor(n * 0.60)] || 140000,
+    p80: totals[Math.floor(n * 0.80)] || 245000
+  };
+}
+
+// Dynamic Color Gradient for Business Density (Logical Sequential Economic Ramp)
+// Avoids discordant "rainbow" patchwork. Moves coherently from calm Cool Blue to Radiant Fuchsia.
 function getChoroplethColor(value, maxVal) {
-  if (!value || value === 0 || maxVal === 0) return '#1E293B';
-  const ratio = Math.min(value / maxVal, 1.0);
-  
-  if (ratio > 0.70) return '#DC2626'; // Red / Highest Density (Paris, Lyon, Marseille)
-  if (ratio > 0.40) return '#D97706'; // Amber
-  if (ratio > 0.15) return '#0284C7'; // Cyan
-  if (ratio > 0.04) return '#2563EB'; // Blue
-  return '#1E3A8A';                   // Deep Blue
+  if (!value || value <= 0) return '#1E293B';
+
+  if (state.activeMode === 'sector' && state.selectedSector) {
+    const ratio = maxVal > 0 ? value / maxVal : 0;
+    if (ratio > 0.60) return '#F43F5E'; // Tier 1: Peak Commercial Hub
+    if (ratio > 0.35) return '#A855F7'; // Tier 2: High Concentration
+    if (ratio > 0.18) return '#7C3AED'; // Tier 3: Moderate Concentration
+    if (ratio > 0.06) return '#4F46E5'; // Tier 4: Moderate-Low Concentration
+    return '#3B82F6';                   // Tier 5: Low Concentration
+  }
+
+  // National 5-tier Quintile Scale (Equal Distribution across 96 departments)
+  // Progressive sequential ramp: Cool Blue -> Royal Indigo -> Deep Violet -> Rich Purple -> Radiant Fuchsia
+  if (value >= deptQuantiles.p80) return '#F43F5E'; // Tier 1: Peak Metropolises (Paris, Lyon, Marseille)
+  if (value >= deptQuantiles.p60) return '#A855F7'; // Tier 2: High Regional Hubs (Bordeaux, Toulouse, Nantes)
+  if (value >= deptQuantiles.p40) return '#7C3AED'; // Tier 3: Moderate Commercial Hubs
+  if (value >= deptQuantiles.p20) return '#4F46E5'; // Tier 4: Moderate-Low Density
+  return '#3B82F6';                                 // Tier 5: Sparse / Rural Baseline (<55k)
 }
 
 function getFeatureStyle(feature) {
@@ -134,15 +241,42 @@ function getFeatureStyle(feature) {
 
   const isSelected = state.selectedDepartment && state.selectedDepartment.code === code;
   const isGoogle = activeBasemapKey.startsWith('google');
-  const baseOpacity = isGoogle ? 0.28 : 0.72;
-  const selectOpacity = isGoogle ? 0.45 : 0.90;
+  const currentZoom = map ? map.getZoom() : 6;
+
+  // SMART ZOOM-FADE GIS SYSTEM:
+  // - Zoom <= 7 (France Overview): Vibrant, colorful departments with distinct quintiles
+  // - Zoom 8 (Regional scale): Gentle fade
+  // - Zoom 9 (Department scale): Very soft outline/tint
+  // - Zoom >= 10 (City, district & street scale): fillOpacity is ZERO (0.0)!
+  //   Leaves Google Maps streets, buildings, labels, and parks 100% natural, crisp, and clean!
+  let fillOpacity = 0;
+  if (currentZoom <= 7) {
+    fillOpacity = isGoogle ? (isSelected ? 0.50 : 0.36) : (isSelected ? 0.75 : 0.55);
+  } else if (currentZoom === 8) {
+    fillOpacity = isGoogle ? (isSelected ? 0.26 : 0.16) : (isSelected ? 0.45 : 0.25);
+  } else if (currentZoom === 9) {
+    fillOpacity = isGoogle ? (isSelected ? 0.10 : 0.05) : (isSelected ? 0.20 : 0.08);
+  } else {
+    fillOpacity = 0;
+  }
+
+  // If a business is selected / located or parking radar is active, force fillOpacity to 0
+  if (currentBizMarker || activeParkingTarget) {
+    fillOpacity = 0;
+  }
+
+  // Border: keep delicate hairline border at high zoom, or highlight if selected
+  const borderWeight = isSelected ? (currentZoom >= 10 ? 2 : 2.5) : (currentZoom >= 10 ? 0.7 : 1.1);
+  const borderColor = isSelected 
+    ? '#38BDF8' 
+    : (isGoogle ? (currentZoom >= 10 ? 'rgba(56, 189, 248, 0.22)' : '#1E293B') : '#475569');
 
   return {
     fillColor: getChoroplethColor(val, maxVal),
-    weight: isSelected ? 3 : 1.2,
-    opacity: 1,
-    color: isSelected ? '#38BDF8' : (isGoogle ? '#1E293B' : '#475569'),
-    fillOpacity: isSelected ? selectOpacity : baseOpacity
+    weight: borderWeight,
+    opacity: currentZoom >= 11 ? (isSelected ? 0.8 : 0.15) : 1,
+    color: borderColor,
+    fillOpacity: fillOpacity
   };
 }
 
@@ -156,7 +290,8 @@ async function loadKPIs() {
     state.kpis = data;
 
     document.getElementById('kpiTotalActive').textContent = data.total_active_establishments.toLocaleString('en-US');
-    document.getElementById('kpiGeocodedPct').textContent = `${data.geocoding_rate_pct}%`;
+    const geocodedEl = document.getElementById('kpiGeocodedPct');
+    if (geocodedEl) geocodedEl.textContent = `${data.geocoding_rate_pct}%`;
     document.getElementById('kpiDepartments').textContent = `${data.distinct_departments} / 96`;
     document.getElementById('kpiNafCodes').textContent = data.distinct_naf_codes.toLocaleString('en-US');
   } catch (err) {
@@ -181,6 +316,7 @@ async function loadDepartments() {
     state.departments.forEach(d => {
       state.departmentsMap[d.code] = d;
     });
+    computeDeptQuantiles();
     renderDepartmentsList();
   } catch (err) {
     console.error('Failed to load departments:', err);
@@ -226,6 +362,11 @@ function updateChoropleth() {
       layer.on({
         mouseover: (e) => {
           const l = e.target;
+          const currentZoom = map ? map.getZoom() : 6;
+          if (currentZoom >= 10) {
+            l.setStyle({ weight: 2, color: '#38BDF8', fillOpacity: 0 });
+            return;
+          }
           l.setStyle({ weight: 2.5, color: '#38BDF8', fillOpacity: 0.65 });
           l.bringToFront();
 
@@ -237,7 +378,7 @@ function updateChoropleth() {
             const dept = state.departmentsMap[code];
             const count = dept ? dept.total : 0;
             const pct = dept ? dept.geocoded_pct : 0;
-            details = `<div class="tooltip-body">Active Units: <b>${count.toLocaleString('en-US')}</b> (${pct}% geocoded)</div>`;
+            details = `<div class="tooltip-body">Total: <b>${count.toLocaleString('en-US')}</b> • ${pct}% geocoded</div>`;
           }
 
           layer.bindTooltip(`
@@ -255,7 +396,11 @@ function updateChoropleth() {
         }
       });
     }
-  }).addTo(map);
+  });
+
+  if (isRegionsActive) {
+    state.geoJsonLayer.addTo(map);
+  }
 
   updateLegend();
 }
@@ -283,6 +428,34 @@ function bindUI() {
       switchBasemap(btn.dataset.basemap);
     });
   });
+
+  // Operational Layer Toggle Buttons (Regions, Traffic, Crowd Zones, Parking Radar)
+  const btnRegions = document.getElementById('btnToggleRegions');
+  if (btnRegions) {
+    btnRegions.addEventListener('click', toggleRegionsLayer);
+  }
+
+  const btnTraffic = document.getElementById('btnToggleTraffic');
+  if (btnTraffic) {
+    btnTraffic.addEventListener('click', toggleTrafficLayer);
+  }
+
+  const btnCrowd = document.getElementById('btnToggleCrowd');
+  if (btnCrowd) {
+    btnCrowd.addEventListener('click', toggleCrowdHeatmap);
+  }
+
+  // Heatmap Radius Control Chips
+  document.querySelectorAll('#heatmapRadiusGroup .segment-btn, #heatmapRadiusGroup .radius-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setHeatmapRadius(btn.dataset.radius);
+    });
+  });
+
+  const btnParking = document.getElementById('btnToggleParking');
+  if (btnParking) {
+    btnParking.addEventListener('click', toggleParkingRadar);
+  }
 
   // Draggable Sidebar Splitter Resizer
   const resizer = document.getElementById('sidebarResizer');
@@ -360,11 +533,11 @@ function bindUI() {
       
       const searchInput = document.getElementById('searchInput');
       if (state.activeTab === 'departments') {
-        searchInput.placeholder = 'Search department (e.g. Paris, Rhône, 13)...';
+        searchInput.placeholder = 'Search department...';
       } else if (state.activeTab === 'communes') {
-        searchInput.placeholder = 'Search commune / city (e.g. Lyon, Nice, Bordeaux)...';
+        searchInput.placeholder = 'Search city...';
       } else {
-        searchInput.placeholder = 'Search industry (e.g. Software, Restaurant, 62.01)...';
+        searchInput.placeholder = 'Search industry...';
       }
     });
   });
@@ -396,7 +569,10 @@ function bindUI() {
   });
 
   // Reset View
-  document.getElementById('btnReset').addEventListener('click', resetAll);
+  const btnReset = document.getElementById('btnReset');
+  if (btnReset) {
+    btnReset.addEventListener('click', resetAll);
+  }
 
   // Close Inspector Drawer
   document.getElementById('btnCloseInspector').addEventListener('click', () => {
@@ -482,6 +658,53 @@ function bindUI() {
       }
     });
   }
+
+  // Design Maestro Global Keyboard Navigation (⌘K, /, ESC)
+  document.addEventListener('keydown', (e) => {
+    // ESC closes modal or inspector drawer
+    if (e.key === 'Escape') {
+      const bizModal = document.getElementById('bizModal');
+      const inspectorDrawer = document.getElementById('inspectorDrawer');
+      if (bizModal && bizModal.style.display !== 'none') {
+        bizModal.style.display = 'none';
+        e.preventDefault();
+        return;
+      }
+      if (inspectorDrawer && inspectorDrawer.style.display !== 'none') {
+        inspectorDrawer.style.display = 'none';
+        state.selectedDepartment = null;
+        state.selectedCommune = null;
+        if (state.communeMarker) {
+          map.removeLayer(state.communeMarker);
+          state.communeMarker = null;
+        }
+        updateChoropleth();
+        e.preventDefault();
+        return;
+      }
+    }
+
+    // ⌘K or Ctrl+K or '/' to focus search
+    const isModifierKey = (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k';
+    const isSlashKey = e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'SELECT' && document.activeElement.tagName !== 'TEXTAREA';
+    if (isModifierKey || isSlashKey) {
+      e.preventDefault();
+      const bizModal = document.getElementById('bizModal');
+      if (bizModal && bizModal.style.display !== 'none') {
+        const bizSearch = document.getElementById('bizSearchInput');
+        if (bizSearch) {
+          bizSearch.focus();
+          bizSearch.select();
+        }
+      } else {
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+          searchInput.focus();
+          searchInput.select();
+        }
+      }
+    }
+  });
 }
 
 /* ==========================================================================
@@ -524,7 +747,7 @@ function renderCommunesList() {
   });
 
   if (filtered.length === 0) {
-    container.innerHTML = `<div class="loading-state">No matching communes found.</div>`;
+    container.innerHTML = `<div class="loading-state">No matching cities found.</div>`;
     return;
   }
 
@@ -599,12 +822,12 @@ async function selectDepartment(deptCode) {
 
     // Update Overlay Header
     document.getElementById('mapViewTitle').textContent = `${data.name} (${data.code})`;
-    document.getElementById('mapViewSubtitle').textContent = `${data.total.toLocaleString('en-US')} active establishments • ${data.geocoded_pct}% geocoded`;
+    document.getElementById('mapViewSubtitle').textContent = `${data.total.toLocaleString('en-US')} establishments • ${data.geocoded_pct}% geocoded`;
 
     // Open Inspector Drawer
     const drawer = document.getElementById('inspectorDrawer');
     drawer.style.display = 'block';
-    document.getElementById('inspectorTag').textContent = 'Selected Department';
+    document.getElementById('inspectorTag').textContent = 'Department';
     document.getElementById('inspectorTitle').textContent = `${data.name} (${data.code})`;
     document.getElementById('inspectorCount').textContent = data.total.toLocaleString('en-US');
     document.getElementById('inspectorGeocoded').textContent = `${data.geocoded_pct}%`;
@@ -615,7 +838,7 @@ async function selectDepartment(deptCode) {
         <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
         <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
       </svg>
-      Browse Individual Businesses
+      Browse Businesses
     `;
 
     // Render Top Industries in Inspector
@@ -654,12 +877,12 @@ async function selectCommune(cityName, deptCode, lat, lng) {
 
     // Update Overlay Header
     document.getElementById('mapViewTitle').textContent = `${data.city} (Dept ${data.dept})`;
-    document.getElementById('mapViewSubtitle').textContent = `${data.total.toLocaleString('en-US')} active establishments • ${data.geocoded_pct}% geocoded`;
+    document.getElementById('mapViewSubtitle').textContent = `${data.total.toLocaleString('en-US')} establishments • ${data.geocoded_pct}% geocoded`;
 
     // Open Inspector Drawer
     const drawer = document.getElementById('inspectorDrawer');
     drawer.style.display = 'block';
-    document.getElementById('inspectorTag').textContent = 'Selected Commune / City';
+    document.getElementById('inspectorTag').textContent = 'City';
     document.getElementById('inspectorTitle').textContent = `${data.city} (${data.dept})`;
     document.getElementById('inspectorCount').textContent = data.total.toLocaleString('en-US');
     document.getElementById('inspectorGeocoded').textContent = `${data.geocoded_pct}%`;
@@ -670,7 +893,7 @@ async function selectCommune(cityName, deptCode, lat, lng) {
         <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
         <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
       </svg>
-      Browse Businesses in ${data.city}
+      Browse Businesses
     `;
 
     const industriesList = data.top_sectors.map(s => `
@@ -687,7 +910,7 @@ async function selectCommune(cityName, deptCode, lat, lng) {
       </div>
     `;
 
-    // Fly to city center on Google Maps with pulse marker
+    // Fly to city center on Google Maps with pulse marker and load actual businesses
     if (lat && lng) {
       if (state.communeMarker) {
         map.removeLayer(state.communeMarker);
@@ -701,7 +924,10 @@ async function selectCommune(cityName, deptCode, lat, lng) {
         fillOpacity: 0.8
       }).addTo(map);
 
-      map.flyTo([lat, lng], 13, { duration: 1.2 });
+      map.flyTo([lat, lng], 14, { duration: 1.2 });
+      
+      // Load real geocoded businesses of this commune onto the map
+      loadCityEstablishments(data.city, data.dept);
     }
 
     renderCommunesList();
@@ -936,12 +1162,12 @@ async function fetchAndRenderBusinesses(append = false) {
         <tr>
           <td class="biz-name-cell">
             <div class="biz-name-main">${b.name}</div>
-            ${b.enseigne && b.enseigne !== b.name ? `<div class="biz-name-sub">Sign: ${b.enseigne}</div>` : ''}
+            ${b.enseigne && b.enseigne !== b.name ? `<div class="biz-name-sub">Trade sign: ${b.enseigne}</div>` : ''}
           </td>
           <td>
             <span class="biz-siret-val">${b.siret}</span>
-            <a href="${b.gov_verify_url}" target="_blank" class="biz-verify-link" title="Verify on official French Government registry">
-              INSEE Gouv ↗
+            <a href="${b.gov_verify_url}" target="_blank" class="biz-verify-link" title="Verify on official registry">
+              Verify ↗
             </a>
           </td>
           <td>
@@ -953,7 +1179,7 @@ async function fetchAndRenderBusinesses(append = false) {
               <span class="badge-naf">${b.naf_code}</span>
               <span style="font-weight:600; color:#F0F6FC; font-size:0.73rem;">${b.naf_label}</span>
             </div>
-            ${b.naf_label_fr ? `<div style="font-size:0.67rem; color:#8B949E; margin-top:2px;">FR: ${b.naf_label_fr}</div>` : ''}
+            ${b.naf_label_fr ? `<div style="font-size:0.67rem; color:#8B949E; margin-top:2px;">Official (FR): ${b.naf_label_fr}</div>` : ''}
           </td>
           <td style="text-align: center;">${actionBtn}</td>
         </tr>
@@ -1003,12 +1229,12 @@ function pinBusinessOnMap(siret, lat, lng, name, address, nafCode, nafLabel, naf
 
   currentBizMarker.bindPopup(`
     <div class="biz-popup">
-      <div class="biz-popup-tag">Selected Establishment</div>
+      <div class="biz-popup-tag">Establishment Target</div>
       <div class="biz-popup-title">${name}</div>
       <div class="biz-popup-sub">SIRET: <code>${siret}</code></div>
       <div class="biz-popup-sub">Location: <b>${address}</b></div>
       <div class="biz-popup-badge">${nafCode} • ${nafLabel}</div>
-      ${nafLabelFr ? `<div style="font-size:0.67rem; color:#94A3B8; margin-top:3px;">FR: ${nafLabelFr}</div>` : ''}
+      ${nafLabelFr ? `<div style="font-size:0.67rem; color:#94A3B8; margin-top:3px;">Official (FR): ${nafLabelFr}</div>` : ''}
       
       <div style="display:flex; flex-direction:column; gap:5px; margin-top:8px;">
         <a href="${googleUrl}" target="_blank" class="btn-google-ext" style="display:flex; align-items:center; justify-content:center; padding:5px 8px;">
@@ -1017,10 +1243,10 @@ function pinBusinessOnMap(siret, lat, lng, name, address, nafCode, nafLabel, naf
             <polyline points="15 3 21 3 21 9"></polyline>
             <line x1="10" y1="14" x2="21" y2="3"></line>
           </svg>
-          Open in Google Maps (Street View)
+          Open in Google Maps
         </a>
         <a href="${govUrl}" target="_blank" class="btn-gov-verify" style="display:flex; align-items:center; justify-content:center;">
-          Official French Gov Registry ↗
+          Official Verification ↗
         </a>
       </div>
     </div>
@@ -1030,7 +1256,739 @@ function pinBusinessOnMap(siret, lat, lng, name, address, nafCode, nafLabel, naf
   }).openPopup();
 
   map.flyTo([lat, lng], 17, { duration: 1.2 });
+
+  // Store active parking target
+  activeParkingTarget = { siret, lat, lng, name, address, nafCode, nafLabel, googleUrl, govUrl };
+
+  // Update Drawer to show Business Profile & Truck Parking Radar
+  showBusinessInInspector(siret, lat, lng, name, address, nafCode, nafLabel, googleUrl, govUrl);
+
+  // If Parking Radar is enabled, scan nearby spots
+  if (isParkingRadarActive) {
+    loadNearbyParkings(lat, lng, name, activeParkingRadius);
+  }
 }
+
+/* ==========================================================================
+   Business Inspector Drawer & Truck Logistics Integration
+   ========================================================================== */
+function showBusinessInInspector(siret, lat, lng, name, address, nafCode, nafLabel, googleUrl, govUrl) {
+  const drawer = document.getElementById('inspectorDrawer');
+  if (!drawer) return;
+
+  drawer.style.display = 'block';
+
+  const tagEl = document.getElementById('inspectorTag');
+  if (tagEl) tagEl.textContent = 'Establishment';
+
+  const titleEl = document.getElementById('inspectorTitle');
+  if (titleEl) titleEl.textContent = name;
+
+  const subEl = document.getElementById('inspectorSubtitle');
+  if (subEl) {
+    subEl.style.display = 'block';
+    subEl.innerHTML = `SIRET: <code style="color:#818CF8;">${siret}</code> • ${address}`;
+  }
+
+  const countEl = document.getElementById('inspectorCount');
+  if (countEl) countEl.textContent = 'Active';
+
+  const geocodedEl = document.getElementById('inspectorGeocoded');
+  if (geocodedEl) geocodedEl.textContent = 'Verified';
+
+  const btnOpenModal = document.getElementById('btnOpenBizModal');
+  if (btnOpenModal) {
+    btnOpenModal.innerHTML = `
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+        <line x1="9" y1="3" x2="9" y2="18"></line>
+        <line x1="15" y1="6" x2="15" y2="21"></line>
+      </svg>
+      Center on Target
+    `;
+    btnOpenModal.onclick = () => {
+      map.flyTo([lat, lng], 18, { duration: 0.8 });
+      if (currentBizMarker) currentBizMarker.openPopup();
+    };
+  }
+
+  // Initial placeholder while parking radar queries Overpass
+  renderParkingDrawerPanel(name, activeParkingRadius, null, true);
+}
+
+/* ==========================================================================
+   Regional Business Density Layer (Department Shading & Boundaries)
+   ========================================================================== */
+function toggleRegionsLayer() {
+  isRegionsActive = !isRegionsActive;
+
+  const btn = document.getElementById('btnToggleRegions');
+  if (btn) btn.classList.toggle('active', isRegionsActive);
+
+  const miniToggle = document.getElementById('legendToggleRegions');
+  if (miniToggle) {
+    miniToggle.classList.toggle('off', !isRegionsActive);
+    const span = miniToggle.querySelector('.toggle-state-text');
+    if (span) span.textContent = isRegionsActive ? 'ON' : 'OFF';
+  }
+
+  const block = document.getElementById('legendRegionsBlock');
+  if (block) {
+    block.classList.toggle('is-disabled', !isRegionsActive);
+  }
+
+  if (state.geoJsonLayer) {
+    if (isRegionsActive) {
+      if (!map.hasLayer(state.geoJsonLayer)) {
+        map.addLayer(state.geoJsonLayer);
+      }
+      state.geoJsonLayer.setStyle(getFeatureStyle);
+    } else {
+      if (map.hasLayer(state.geoJsonLayer)) {
+        map.removeLayer(state.geoJsonLayer);
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   STEP 1: Real-Time Traffic Congestion Layer (Google Traffic Overlay)
+   ========================================================================== */
+function toggleTrafficLayer() {
+  const btn = document.getElementById('btnToggleTraffic');
+  isTrafficActive = !isTrafficActive;
+
+  if (btn) btn.classList.toggle('active', isTrafficActive);
+
+  const miniToggle = document.getElementById('legendToggleTraffic');
+  if (miniToggle) {
+    miniToggle.classList.toggle('off', !isTrafficActive);
+    const span = miniToggle.querySelector('.toggle-state-text');
+    if (span) span.textContent = isTrafficActive ? 'ON' : 'OFF';
+  }
+
+  const block = document.getElementById('legendTrafficBlock');
+  if (block) {
+    block.classList.toggle('is-disabled', !isTrafficActive);
+  }
+
+  if (isTrafficActive) {
+    if (!trafficTileLayer) {
+      trafficTileLayer = L.tileLayer('https://mt{s}.google.com/vt?lyrs=h,traffic|seconds_into_week:-1&hl=fr&x={x}&y={y}&z={z}&scale=2', {
+        subdomains: ['0', '1', '2', '3'],
+        maxZoom: 20,
+        tileSize: 256,
+        opacity: 0.95,
+        zIndex: 500
+      });
+    }
+    trafficTileLayer.addTo(map);
+    trafficTileLayer.bringToFront();
+  } else {
+    if (trafficTileLayer && map.hasLayer(trafficTileLayer)) {
+      map.removeLayer(trafficTileLayer);
+    }
+  }
+}
+
+/* ==========================================================================
+   STEP 2: Truck Parking Radar & Search Radius
+   ========================================================================== */
+function toggleParkingRadar() {
+  const btn = document.getElementById('btnToggleParking');
+  isParkingRadarActive = !isParkingRadarActive;
+
+  if (btn) btn.classList.toggle('active', isParkingRadarActive);
+
+  const miniToggle = document.getElementById('legendToggleParking');
+  if (miniToggle) {
+    miniToggle.classList.toggle('off', !isParkingRadarActive);
+    const span = miniToggle.querySelector('.toggle-state-text');
+    if (span) span.textContent = isParkingRadarActive ? 'ON' : 'OFF';
+  }
+
+  const block = document.getElementById('legendParkingBlock');
+  if (block) {
+    block.classList.toggle('is-disabled', !isParkingRadarActive);
+  }
+
+  if (!isParkingRadarActive) {
+    if (parkingRadiusCircle && map.hasLayer(parkingRadiusCircle)) {
+      map.removeLayer(parkingRadiusCircle);
+      parkingRadiusCircle = null;
+    }
+    if (parkingLayerGroup) parkingLayerGroup.clearLayers();
+  } else if (activeParkingTarget) {
+    loadNearbyParkings(activeParkingTarget.lng ? activeParkingTarget.lat : activeParkingTarget.lat, activeParkingTarget.lng, activeParkingTarget.name, activeParkingRadius);
+  }
+}
+
+let activeParkingData = [];
+
+async function loadNearbyParkings(lat, lon, businessName, radius) {
+  if (!isParkingRadarActive) return;
+
+  activeParkingRadius = radius || activeParkingRadius || 300;
+
+  // 1. Draw or update circular radar zone on map
+  if (parkingRadiusCircle && map.hasLayer(parkingRadiusCircle)) {
+    map.removeLayer(parkingRadiusCircle);
+  }
+
+  parkingRadiusCircle = L.circle([lat, lon], {
+    radius: activeParkingRadius,
+    color: '#38BDF8',
+    fillColor: '#38BDF8',
+    fillOpacity: 0.07,
+    weight: 1.5,
+    dashArray: '5, 5'
+  }).addTo(map);
+
+  if (parkingLayerGroup) parkingLayerGroup.clearLayers();
+
+  // 2. Render loading skeleton in drawer
+  renderParkingDrawerPanel(businessName, activeParkingRadius, null, true);
+
+  try {
+    const res = await fetch(`/api/parking/nearby?lat=${lat}&lon=${lon}&radius=${activeParkingRadius}`);
+    const data = await res.json();
+    const parkings = data.parkings || [];
+    activeParkingData = parkings;
+
+    // Render custom pins on map
+    parkings.forEach((p, idx) => {
+      const isTruck = p.is_truck_friendly;
+      const icon = L.divIcon({
+        className: isTruck ? 'parking-pin-truck' : 'parking-pin-garage',
+        html: isTruck ? '<span>P</span>' : '<span>P</span>',
+        iconSize: isTruck ? [28, 28] : [24, 24],
+        iconAnchor: isTruck ? [14, 14] : [12, 12]
+      });
+
+      const marker = L.marker([p.lat, p.lon], { icon });
+
+      marker.bindPopup(`
+        <div class="parking-popup">
+          <div class="parking-popup-badge ${isTruck ? 'badge-truck' : 'badge-garage'}">
+            ${isTruck ? '✓ Truck-Friendly Surface' : '⚠ Underground / Restricted'}
+          </div>
+          <div class="parking-popup-name">${p.name}</div>
+          <div class="parking-popup-meta">
+            Distance: <b>${p.distance_m}m</b> from business<br>
+            Type: <b>${p.type || 'Standard'}</b><br>
+            ${p.capacity ? `Capacity: <b>${p.capacity} spots</b><br>` : ''}
+            ${p.maxheight ? `Max Clearance: <b>${p.maxheight}</b><br>` : ''}
+            Fee: <b>${p.fee === 'yes' ? 'Paid Parking' : (p.fee === 'no' ? 'Free Parking' : 'Standard')}</b>
+          </div>
+        </div>
+      `, { offset: [0, -8], maxWidth: 240 });
+
+      p._markerId = idx;
+      marker._spotIdx = idx;
+      parkingLayerGroup.addLayer(marker);
+    });
+
+    // 3. Render loaded drawer panel
+    renderParkingDrawerPanel(businessName, activeParkingRadius, data, false);
+
+  } catch (err) {
+    console.error('Failed to load nearby parkings:', err);
+    renderParkingDrawerPanel(businessName, activeParkingRadius, { count: 0, truck_friendly_count: 0, parkings: [] }, false);
+  }
+}
+
+function setParkingRadius(newRadius) {
+  activeParkingRadius = newRadius;
+  if (activeParkingTarget) {
+    loadNearbyParkings(activeParkingTarget.lat, activeParkingTarget.lng, activeParkingTarget.name, activeParkingRadius);
+  }
+}
+
+function focusOnParking(spotIdx) {
+  const spot = activeParkingData[spotIdx];
+  if (!spot) return;
+
+  map.flyTo([spot.lat, spot.lon], 18, { duration: 0.8 });
+
+  parkingLayerGroup.eachLayer(layer => {
+    if (layer._spotIdx === spotIdx) {
+      setTimeout(() => layer.openPopup(), 400);
+    }
+  });
+}
+
+function renderParkingDrawerPanel(businessName, radius, data, isLoading) {
+  const container = document.getElementById('inspectorDetails');
+  if (!container) return;
+
+  if (isLoading) {
+    container.innerHTML = `
+      <div class="truck-parking-panel">
+        <div class="truck-parking-header">
+          <div class="truck-parking-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+              <path d="M9 17V7h4a3 3 0 0 1 0 6H9"></path>
+            </svg>
+            Truck Parking Radar
+          </div>
+          <div class="radius-chips-group">
+            <button class="radius-chip ${radius === 150 ? 'active' : ''}" onclick="setParkingRadius(150)">150m</button>
+            <button class="radius-chip ${radius === 300 ? 'active' : ''}" onclick="setParkingRadius(300)">300m</button>
+            <button class="radius-chip ${radius === 500 ? 'active' : ''}" onclick="setParkingRadius(500)">500m</button>
+          </div>
+        </div>
+        <div class="loading-state" style="padding:14px 0; font-size:0.75rem;">
+          Scanning live spots within ${radius}m radius...
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  const parkings = data.parkings || [];
+  const truckCount = data.truck_friendly_count || 0;
+  const undergroundCount = Math.max(data.count - truckCount, 0);
+
+  const spotsHtml = parkings.length > 0 ? parkings.map((p, idx) => {
+    const isTruck = p.is_truck_friendly;
+    return `
+      <div class="parking-row-item">
+        <div class="parking-row-info">
+          <div class="parking-row-name" title="${escapeStr(p.name)}">${p.name}</div>
+          <div class="parking-row-sub">
+            <span class="${isTruck ? 'badge-truck-tag' : 'badge-garage-tag'}">
+              ${isTruck ? '✓ Surface' : '⚠ Underground'}
+            </span>
+            <span>•</span>
+            <span>${p.distance_m}m</span>
+            ${p.capacity ? `<span>• ${p.capacity} spots</span>` : ''}
+          </div>
+        </div>
+        <button class="btn-focus-spot" onclick="focusOnParking(${idx})" title="Center map on this parking">
+          Focus
+        </button>
+      </div>
+    `;
+  }).join('') : `
+    <div style="font-size:0.73rem; color:#94A3B8; text-align:center; padding:12px;">
+      No registered parking spots found within ${radius}m.<br>
+      <span style="font-size:0.67rem; color:#64748B;">Try selecting 500m radius.</span>
+    </div>
+  `;
+
+  container.innerHTML = `
+    <div class="truck-parking-panel">
+      <div class="truck-parking-header">
+        <div class="truck-parking-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+            <path d="M9 17V7h4a3 3 0 0 1 0 6H9"></path>
+          </svg>
+          Truck Parking Radar
+        </div>
+        <div class="radius-chips-group">
+          <button class="radius-chip ${radius === 150 ? 'active' : ''}" onclick="setParkingRadius(150)">150m</button>
+          <button class="radius-chip ${radius === 300 ? 'active' : ''}" onclick="setParkingRadius(300)">300m</button>
+          <button class="radius-chip ${radius === 500 ? 'active' : ''}" onclick="setParkingRadius(500)">500m</button>
+        </div>
+      </div>
+
+      <div class="truck-stats-row">
+        <div class="truck-stat-card">
+          <div class="truck-stat-label">Truck Friendly</div>
+          <div class="truck-stat-value text-emerald">${truckCount}</div>
+        </div>
+        <div class="truck-stat-card">
+          <div class="truck-stat-label">Underground / Height</div>
+          <div class="truck-stat-value text-amber">${undergroundCount}</div>
+        </div>
+      </div>
+
+      <div class="parking-list-scroller">
+        ${spotsHtml}
+      </div>
+    </div>
+  `;
+}
+
+/* ==========================================================================
+   STEP 3: Continuous Smooth Thermal Footfall Heatmap (matching Screenshot 3)
+   ========================================================================== */
+const HEATMAP_GRADIENT = {
+  0.25: '#00d2ff',  // Soft Cyan (secondary activity)
+  0.45: '#00f59b',  // Bright Lime Green (active trade zone)
+  0.65: '#ffe600',  // Warm Solar Yellow (regional metropolis)
+  0.82: '#ff7700',  // Deep Orange (major commercial hub)
+  1.00: '#ff0033'   // Fiery Crimson Red (peak national density: Paris core)
+};
+
+let crowdHeatLayer = null;
+let heatmapRadius = 28;
+let heatmapBlur = 18;
+let cachedHeatmapData = null;
+let viewportHeatmapDebounce = null;
+let isViewportHeatmapLoaded = false;
+
+let heatmapRadiusMultiplier = 1.0; // 0.7 (Tight), 1.0 (Balanced), 1.4 (Broad)
+
+function getZoomAdaptiveHeatmapParams() {
+  const currentZoom = map ? map.getZoom() : 6;
+  let baseR = 12;
+  let baseBlur = 10;
+  let maxZ = 8;
+  let minOp = 0.22;
+  let maxVal = 2.0;
+
+  if (currentZoom <= 6) {
+    baseR = 11;
+    baseBlur = 9;
+    maxZ = 8;
+    minOp = 0.25;
+    maxVal = 2.4; // Calibrated for Greater Paris 4-cell overlap so only Paris center reaches crimson
+  } else if (currentZoom === 7) {
+    baseR = 13;
+    baseBlur = 10;
+    maxZ = 9;
+    minOp = 0.24;
+    maxVal = 2.0;
+  } else if (currentZoom === 8) {
+    baseR = 15;
+    baseBlur = 12;
+    maxZ = 10;
+    minOp = 0.22;
+    maxVal = 1.8;
+  } else if (currentZoom === 9) {
+    baseR = 18;
+    baseBlur = 14;
+    maxZ = 11;
+    minOp = 0.20;
+    maxVal = 1.5;
+  } else if (currentZoom === 10) {
+    baseR = 20;
+    baseBlur = 16;
+    maxZ = 12;
+    minOp = 0.18;
+    maxVal = 1.3;
+  } else if (currentZoom === 11) {
+    baseR = 22;
+    baseBlur = 18;
+    maxZ = 13;
+    minOp = 0.16;
+    maxVal = 1.1;
+  } else if (currentZoom === 12) {
+    baseR = 25;
+    baseBlur = 20;
+    maxZ = 14;
+    minOp = 0.15;
+    maxVal = 1.0;
+  } else if (currentZoom >= 13) {
+    baseR = 28;
+    baseBlur = 22;
+    maxZ = 16;
+    minOp = 0.14;
+    maxVal = 1.0;
+  }
+
+  const finalR = Math.round(baseR * heatmapRadiusMultiplier);
+  const finalBlur = Math.round(baseBlur * heatmapRadiusMultiplier);
+  return { radius: finalR, blur: finalBlur, maxZoom: maxZ, minOpacity: minOp, max: maxVal };
+}
+
+function updateHeatmapOnZoom() {
+  if (!crowdHeatLayer || !isCrowdActive || !map.hasLayer(crowdHeatLayer)) return;
+  const p = getZoomAdaptiveHeatmapParams();
+  crowdHeatLayer.setOptions({
+    radius: p.radius,
+    blur: p.blur,
+    maxZoom: p.maxZoom,
+    max: p.max,
+    minOpacity: p.minOpacity
+  });
+}
+
+async function checkViewportHeatmap() {
+  if (!crowdHeatLayer || !isCrowdActive || !map || !map.hasLayer(crowdHeatLayer)) return;
+  const zoom = map.getZoom();
+
+  if (zoom >= 10) {
+    const bounds = map.getBounds();
+    const minLat = bounds.getSouth().toFixed(3);
+    const maxLat = bounds.getNorth().toFixed(3);
+    const minLng = bounds.getWest().toFixed(3);
+    const maxLng = bounds.getEast().toFixed(3);
+
+    try {
+      const res = await fetch(`/api/crowd/heatmap?min_lat=${minLat}&max_lat=${maxLat}&min_lon=${minLng}&max_lon=${maxLng}`);
+      if (!res.ok) return;
+      const pts = await res.json();
+      if (pts && pts.length > 0 && crowdHeatLayer) {
+        crowdHeatLayer.setLatLngs(pts);
+        isViewportHeatmapLoaded = true;
+      }
+    } catch (e) {
+      console.error('Failed to load viewport heatmap:', e);
+    }
+  } else {
+    // Revert back to calibrated national density if zoomed out
+    if (isViewportHeatmapLoaded && cachedHeatmapData && crowdHeatLayer) {
+      crowdHeatLayer.setLatLngs(cachedHeatmapData);
+      isViewportHeatmapLoaded = false;
+    }
+  }
+}
+
+async function toggleCrowdHeatmap() {
+  const btn = document.getElementById('btnToggleCrowd');
+  isCrowdActive = !isCrowdActive;
+
+  if (btn) btn.classList.toggle('active', isCrowdActive);
+
+  const miniToggle = document.getElementById('legendToggleCrowd');
+  if (miniToggle) {
+    miniToggle.classList.toggle('off', !isCrowdActive);
+    const span = miniToggle.querySelector('.toggle-state-text');
+    if (span) span.textContent = isCrowdActive ? 'ON' : 'OFF';
+  }
+
+  const block = document.getElementById('legendHeatmapBlock');
+  if (block) {
+    block.classList.toggle('is-disabled', !isCrowdActive);
+  }
+
+  if (!isCrowdActive) {
+    if (crowdHeatLayer && map.hasLayer(crowdHeatLayer)) {
+      map.removeLayer(crowdHeatLayer);
+    }
+    return;
+  }
+
+  if (!cachedHeatmapData) {
+    try {
+      const res = await fetch('/api/crowd/heatmap');
+      cachedHeatmapData = await res.json();
+    } catch (e) {
+      console.error('Failed to load heatmap coordinates:', e);
+      return;
+    }
+  }
+
+  renderHeatmapLayer(cachedHeatmapData);
+}
+
+function renderHeatmapLayer(points) {
+  if (crowdHeatLayer && map.hasLayer(crowdHeatLayer)) {
+    map.removeLayer(crowdHeatLayer);
+  }
+
+  const params = getZoomAdaptiveHeatmapParams();
+
+  // Create smooth canvas heatmap layer with continuous thermal gradient from actual registry
+  crowdHeatLayer = L.heatLayer(points, {
+    radius: params.radius,
+    blur: params.blur,
+    maxZoom: params.maxZoom,
+    max: params.max,
+    minOpacity: params.minOpacity,
+    gradient: HEATMAP_GRADIENT
+  }).addTo(map);
+
+  // If already at high zoom, load viewport high-res points
+  if (map.getZoom() >= 10) {
+    checkViewportHeatmap();
+  }
+}
+
+function setHeatmapRadius(r) {
+  const val = parseInt(r);
+  if (val <= 20) heatmapRadiusMultiplier = 0.72;
+  else if (val >= 40) heatmapRadiusMultiplier = 1.45;
+  else heatmapRadiusMultiplier = 1.0;
+
+  document.querySelectorAll('#heatmapRadiusGroup .segment-btn, #heatmapRadiusGroup .radius-chip').forEach(btn => {
+    btn.classList.toggle('active', parseInt(btn.dataset.radius) === val);
+  });
+
+  updateHeatmapOnZoom();
+}
+
+/* ==========================================================================
+   Actual Geocoded Establishments on Map (Real INSEE SIRENE Coordinates)
+   ========================================================================== */
+async function loadViewportBusinesses() {
+  if (!map || map.getZoom() < 14) return;
+  const bounds = map.getBounds();
+  const minLat = bounds.getSouth();
+  const maxLat = bounds.getNorth();
+  const minLng = bounds.getWest();
+  const maxLng = bounds.getEast();
+
+  try {
+    const res = await fetch(`/api/businesses/map?min_lat=${minLat}&max_lat=${maxLat}&min_lng=${minLng}&max_lng=${maxLng}&limit=60`);
+    if (!res.ok) return;
+    const data = await res.json();
+    renderBusinessMarkers(data.items);
+  } catch (e) {
+    console.error('Failed to load viewport businesses:', e);
+  }
+}
+
+async function loadCityEstablishments(cityName, deptCode) {
+  try {
+    const res = await fetch(`/api/businesses/map?city=${encodeURIComponent(cityName)}&dept=${encodeURIComponent(deptCode)}&limit=60`);
+    if (!res.ok) return;
+    const data = await res.json();
+    renderBusinessMarkers(data.items);
+  } catch (e) {
+    console.error('Failed to load city establishments:', e);
+  }
+}
+
+function renderBusinessMarkers(items) {
+  if (!businessMarkersLayerGroup) return;
+  businessMarkersLayerGroup.clearLayers();
+
+  if (!items || items.length === 0) return;
+
+  items.forEach(b => {
+    if (!b.lat || !b.lng) return;
+
+    const icon = L.divIcon({
+      className: 'biz-node-icon',
+      html: `
+        <div class="biz-node-pin">
+          <div class="biz-node-dot"></div>
+        </div>
+      `,
+      iconSize: [16, 16],
+      iconAnchor: [8, 8]
+    });
+
+    const marker = L.marker([b.lat, b.lng], { icon: icon });
+
+    marker.bindTooltip(`
+      <div class="biz-mini-tooltip">
+        <b>${escapeStr(b.name)}</b>
+        <div style="font-size:0.67rem; color:#94A3B8; margin-top:1px;">${b.naf_code} • ${escapeStr(b.naf_label)}</div>
+      </div>
+    `, { direction: 'top', offset: [0, -6] });
+
+    marker.bindPopup(`
+      <div class="biz-popup">
+        <div class="biz-popup-tag">Verified Establishment</div>
+        <div class="biz-popup-title">${escapeStr(b.name)}</div>
+        ${b.enseigne && b.enseigne !== b.name ? `<div class="biz-popup-sub">Trade sign: <b>${escapeStr(b.enseigne)}</b></div>` : ''}
+        <div class="biz-popup-sub">SIRET: <code>${b.siret}</code></div>
+        <div class="biz-popup-sub">Location: <b>${escapeStr(b.postal_code || '')} ${escapeStr(b.city || '')}</b></div>
+        <div class="biz-popup-badge">${b.naf_code} • ${escapeStr(b.naf_label)}</div>
+        ${b.naf_label_fr ? `<div style="font-size:0.67rem; color:#94A3B8; margin-top:3px;">Official (FR): ${escapeStr(b.naf_label_fr)}</div>` : ''}
+        
+        <div style="display:flex; flex-direction:column; gap:5px; margin-top:8px;">
+          <a href="${b.google_maps_url}" target="_blank" class="btn-google-ext" style="display:flex; align-items:center; justify-content:center; padding:5px 8px;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+            Open in Google Maps
+          </a>
+          <a href="${b.gov_verify_url}" target="_blank" class="btn-gov-verify" style="display:flex; align-items:center; justify-content:center;">
+            Official Registry ↗
+          </a>
+        </div>
+      </div>
+    `, { offset: [0, -6], maxWidth: 300 });
+
+    marker.on('click', () => {
+      showBusinessInInspector(b.siret, b.lat, b.lng, b.name, `${b.postal_code || ''} ${b.city || ''}`, b.naf_code, b.naf_label, b.google_maps_url, b.gov_verify_url);
+      if (isParkingRadarActive) {
+        loadNearbyParkings(b.lat, b.lng, b.name, activeParkingRadius);
+      }
+    });
+
+    businessMarkersLayerGroup.addLayer(marker);
+  });
+}
+
+/* ==========================================================================
+   Unified Collapsible Map Legend Controller
+   ========================================================================== */
+let isUnifiedLegendExpanded = false;
+
+function toggleUnifiedLegend() {
+  const panel = document.getElementById('unifiedLegendPanel');
+  const trigger = document.getElementById('legendPillTrigger');
+  const container = document.getElementById('unifiedLegendContainer');
+  if (!panel || !container) return;
+
+  isUnifiedLegendExpanded = !isUnifiedLegendExpanded;
+  panel.style.display = isUnifiedLegendExpanded ? 'block' : 'none';
+  if (trigger) {
+    trigger.style.display = isUnifiedLegendExpanded ? 'none' : 'inline-flex';
+  }
+  container.classList.toggle('expanded', isUnifiedLegendExpanded);
+}
+
+/* ==========================================================================
+   YouTube-Style Immersive Fullscreen Map Mode
+   ========================================================================== */
+function toggleMapFullscreen() {
+  const isFs = document.body.classList.contains('map-fullscreen');
+  const btn = document.getElementById('btnToggleFullscreen');
+
+  if (!isFs) {
+    document.body.classList.add('map-fullscreen');
+    if (btn) {
+      btn.classList.add('active', 'is-fullscreen-exit');
+      const span = btn.querySelector('span');
+      if (span) span.textContent = 'Exit Fullscreen';
+      const svg = btn.querySelector('svg');
+      if (svg) {
+        svg.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>';
+      }
+    }
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    }
+  } else {
+    document.body.classList.remove('map-fullscreen');
+    if (btn) {
+      btn.classList.remove('active', 'is-fullscreen-exit');
+      const span = btn.querySelector('span');
+      if (span) span.textContent = 'Fullscreen';
+      const svg = btn.querySelector('svg');
+      if (svg) {
+        svg.innerHTML = '<path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>';
+      }
+    }
+    if (document.fullscreenElement && document.exitFullscreen) {
+      document.exitFullscreen().catch(() => {});
+    }
+  }
+
+  setTimeout(() => {
+    if (map) map.invalidateSize();
+  }, 150);
+}
+
+document.addEventListener('fullscreenchange', () => {
+  if (!document.fullscreenElement && document.body.classList.contains('map-fullscreen')) {
+    document.body.classList.remove('map-fullscreen');
+    const btn = document.getElementById('btnToggleFullscreen');
+    if (btn) {
+      btn.classList.remove('active', 'is-fullscreen-exit');
+      const span = btn.querySelector('span');
+      if (span) span.textContent = 'Fullscreen';
+      const svg = btn.querySelector('svg');
+      if (svg) {
+        svg.innerHTML = '<path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>';
+      }
+    }
+    setTimeout(() => {
+      if (map) map.invalidateSize();
+    }, 150);
+  }
+});
 
 /* ==========================================================================
    Reset All
@@ -1041,6 +1999,8 @@ function resetAll() {
   state.selectedDepartment = null;
   state.selectedCommune = null;
   state.searchQuery = '';
+  activeParkingTarget = null;
+
   document.getElementById('searchInput').value = '';
   document.getElementById('clearSearch').style.display = 'none';
   document.getElementById('inspectorDrawer').style.display = 'none';
@@ -1050,13 +2010,22 @@ function resetAll() {
     currentBizMarker = null;
   }
 
+  if (parkingRadiusCircle && map.hasLayer(parkingRadiusCircle)) {
+    map.removeLayer(parkingRadiusCircle);
+    parkingRadiusCircle = null;
+  }
+
+  if (parkingLayerGroup) {
+    parkingLayerGroup.clearLayers();
+  }
+
   if (state.communeMarker) {
     map.removeLayer(state.communeMarker);
     state.communeMarker = null;
   }
 
-  document.getElementById('mapViewTitle').textContent = 'National Business Density (Mainland France)';
-  document.getElementById('mapViewSubtitle').textContent = 'Hover over any department or click to inspect its cities & businesses';
+  document.getElementById('mapViewTitle').textContent = 'National Overview';
+  document.getElementById('mapViewSubtitle').textContent = 'Click any department or city to inspect';
 
   map.setView([46.603354, 1.888334], 6);
   renderDepartmentsList();

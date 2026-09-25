@@ -29,6 +29,7 @@ from src.config import (
 from web.naf_data import get_naf_label_en, get_naf_label_fr
 
 app = Flask(__name__, static_folder="static", template_folder="static")
+app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
 
 # Map of Department Codes to Names
 DEPT_NAMES = {
@@ -77,7 +78,11 @@ def get_db():
 
 @app.route("/")
 def index():
-    return send_from_directory(app.static_folder, "index.html")
+    resp = send_from_directory(app.static_folder, "index.html")
+    resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    resp.headers["Pragma"] = "no-cache"
+    resp.headers["Expires"] = "0"
+    return resp
 
 
 @app.route("/api/geojson")
@@ -584,11 +589,269 @@ def export_csv():
         ORDER BY code_departement, total_etablissements DESC
     """).df().to_csv(index=False)
     
-    return Response(
-        csv_data,
-        mimetype="text/csv",
-        headers={"Content-Disposition": "attachment; filename=sirene_distribution_naf_departement.csv"}
-    )
+import math
+import requests
+
+# In-memory cache for nearby parking queries
+PARKING_CACHE: Dict[str, dict] = {}
+
+
+def calculate_distance_m(lat1: float, lon1: float, lat2: float, lon2: float) -> int:
+    """Calculate distance in meters between two coordinates."""
+    R = 6371000  # radius of Earth in meters
+    phi1 = math.radians(lat1)
+    phi2 = math.radians(lat2)
+    delta_phi = math.radians(lat2 - lat1)
+    delta_lambda = math.radians(lon2 - lon1)
+    a = math.sin(delta_phi / 2.0) ** 2 + math.cos(phi1) * math.cos(phi2) * math.sin(delta_lambda / 2.0) ** 2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    return int(R * c)
+
+
+@app.route("/api/parking/nearby")
+def get_nearby_parking():
+    """
+    Find nearby parking spots around a business location for LED advertising trucks.
+    Identifies surface/street parking suitable for large vehicles vs underground structures.
+    """
+    try:
+        lat = float(request.args.get("lat"))
+        lon = float(request.args.get("lon"))
+        radius = int(request.args.get("radius", 400))
+    except (TypeError, ValueError):
+        return jsonify({"error": "Valid lat and lon are required"}), 400
+
+    radius = min(max(radius, 50), 1000)
+    cache_key = f"{round(lat, 4)}_{round(lon, 4)}_{radius}"
+    if cache_key in PARKING_CACHE:
+        return jsonify(PARKING_CACHE[cache_key])
+
+    overpass_query = f"""
+    [out:json][timeout:8];
+    (
+      node["amenity"="parking"](around:{radius},{lat},{lon});
+      way["amenity"="parking"](around:{radius},{lat},{lon});
+    );
+    out center 15;
+    """
+    mirrors = [
+        "https://overpass.openstreetmap.fr/api/interpreter",
+        "https://overpass-api.de/api/interpreter",
+        "https://overpass.kumi.systems/api/interpreter"
+    ]
+    headers = {"User-Agent": "SIRENE-TruckAd-Platform/1.0"}
+    elements = []
+    
+    for mirror in mirrors:
+        try:
+            resp = requests.post(mirror, data={"data": overpass_query}, headers=headers, timeout=5)
+            if resp.status_code == 200:
+                elements = resp.json().get("elements", [])
+                break
+        except Exception:
+            continue
+            
+    try:
+        if elements:
+            results = []
+            for el in elements:
+                tags = el.get("tags", {})
+                p_lat = el.get("lat") or el.get("center", {}).get("lat")
+                p_lon = el.get("lon") or el.get("center", {}).get("lon")
+                if not p_lat or not p_lon:
+                    continue
+                dist = calculate_distance_m(lat, lon, p_lat, p_lon)
+                parking_type = tags.get("parking", "surface")
+                maxheight = tags.get("maxheight")
+                capacity = tags.get("capacity")
+                try:
+                    capacity_val = int(capacity) if capacity else None
+                except ValueError:
+                    capacity_val = None
+
+                is_underground = parking_type in ["underground", "multi-storey", "shed"] or tags.get("layer", "0") in ["-1", "-2", "-3"]
+                is_truck_friendly = not is_underground
+                if maxheight:
+                    try:
+                        h = float(maxheight.replace("m", "").strip())
+                        if h < 2.6:
+                            is_truck_friendly = False
+                    except ValueError:
+                        pass
+
+                name = tags.get("name") or (f"{tags.get('addr:street', '')} Parking" if tags.get('addr:street') else "Public Parking")
+                results.append({
+                    "id": el.get("id"),
+                    "name": name.strip(),
+                    "lat": p_lat,
+                    "lon": p_lon,
+                    "distance_m": dist,
+                    "type": parking_type,
+                    "is_underground": is_underground,
+                    "is_truck_friendly": is_truck_friendly,
+                    "capacity": capacity_val,
+                    "fee": tags.get("fee", "unknown"),
+                    "maxheight": maxheight
+                })
+
+            results.sort(key=lambda x: x["distance_m"])
+            response_data = {
+                "center": {"lat": lat, "lon": lon},
+                "radius": radius,
+                "count": len(results),
+                "truck_friendly_count": sum(1 for r in results if r["is_truck_friendly"]),
+                "parkings": results
+            }
+            PARKING_CACHE[cache_key] = response_data
+            return jsonify(response_data)
+        else:
+            return jsonify({"center": {"lat": lat, "lon": lon}, "count": 0, "parkings": []})
+    except Exception as e:
+        return jsonify({"center": {"lat": lat, "lon": lon}, "count": 0, "parkings": [], "error": str(e)})
+
+
+@app.route("/api/crowd/hotspots")
+def get_crowd_hotspots():
+    """
+    Returns curated high-footfall pedestrian zones, major transit hubs and shopping arteries in France.
+    """
+    hotspots = [
+        {"name": "Châtelet - Les Halles", "city": "Paris", "lat": 48.8619, "lon": 2.3470, "intensity": 0.98, "type": "Transit & Shopping"},
+        {"name": "Gare Saint-Lazare", "city": "Paris", "lat": 48.8768, "lon": 2.3253, "intensity": 0.95, "type": "Major Commuter Hub"},
+        {"name": "Gare du Nord", "city": "Paris", "lat": 48.8809, "lon": 2.3553, "intensity": 0.99, "type": "Europe's Busiest Station"},
+        {"name": "Gare de Lyon", "city": "Paris", "lat": 48.8443, "lon": 2.3744, "intensity": 0.94, "type": "TGV & Metro Hub"},
+        {"name": "Opéra Garnier / Bd Haussmann", "city": "Paris", "lat": 48.8719, "lon": 2.3316, "intensity": 0.96, "type": "Department Stores & Luxury"},
+        {"name": "Champs-Élysées", "city": "Paris", "lat": 48.8698, "lon": 2.3075, "intensity": 0.95, "type": "High Tourist & Footfall Avenue"},
+        {"name": "Place de la République", "city": "Paris", "lat": 48.8675, "lon": 2.3638, "intensity": 0.91, "type": "Pedestrian Plaza & Hub"},
+        {"name": "Place de la Bastille", "city": "Paris", "lat": 48.8531, "lon": 2.3698, "intensity": 0.89, "type": "Nightlife & Commercial"},
+        {"name": "Montparnasse Bienvenüe", "city": "Paris", "lat": 48.8421, "lon": 2.3219, "intensity": 0.92, "type": "Train Hub & Offices"},
+        {"name": "Rue de Rivoli", "city": "Paris", "lat": 48.8575, "lon": 2.3514, "intensity": 0.93, "type": "Pedestrian Shopping Strip"},
+        {"name": "La Défense Grande Arche", "city": "Paris / Nanterre", "lat": 48.8926, "lon": 2.2361, "intensity": 0.97, "type": "Europe's Largest Business District"},
+        {"name": "Lyon Part-Dieu", "city": "Lyon", "lat": 45.7606, "lon": 4.8594, "intensity": 0.94, "type": "TGV Station & Mega Mall"},
+        {"name": "Place Bellecour / Rue de la République", "city": "Lyon", "lat": 45.7578, "lon": 4.8320, "intensity": 0.93, "type": "Pedestrian Shopping Spine"},
+        {"name": "Marseille Saint-Charles", "city": "Marseille", "lat": 43.3032, "lon": 5.3806, "intensity": 0.91, "type": "Main Rail Station"},
+        {"name": "Vieux-Port", "city": "Marseille", "lat": 43.2951, "lon": 5.3744, "intensity": 0.92, "type": "Pedestrian Harbor & Tourism"},
+        {"name": "Lille Flandres", "city": "Lille", "lat": 50.6366, "lon": 3.0707, "intensity": 0.88, "type": "Grand Place & Transit Hub"},
+        {"name": "Bordeaux Saint-Jean", "city": "Bordeaux", "lat": 44.8259, "lon": -0.5567, "intensity": 0.89, "type": "TGV Hub"},
+        {"name": "Rue Sainte-Catherine", "city": "Bordeaux", "lat": 44.8378, "lon": -0.5746, "intensity": 0.95, "type": "Longest Pedestrian Street in Europe"},
+        {"name": "Toulouse Capitole", "city": "Toulouse", "lat": 43.6047, "lon": 1.4442, "intensity": 0.91, "type": "Historic Commercial Center"},
+        {"name": "Nice Promenade des Anglais / Masséna", "city": "Nice", "lat": 43.6970, "lon": 7.2704, "intensity": 0.92, "type": "Tourist & Coastal Promenade"}
+    ]
+    return jsonify(hotspots)
+
+
+@app.route("/api/businesses/map")
+def get_businesses_map():
+    """
+    Returns actual geocoded establishments directly from the official INSEE database
+    for interactive map display within a bounding box or for a specific city/commune.
+    """
+    data_file, _ = get_active_dataset_path()
+    con = get_db()
+    
+    city = request.args.get("city", "").strip().upper()
+    dept = request.args.get("dept", "").strip().upper()
+    min_lat = request.args.get("min_lat")
+    max_lat = request.args.get("max_lat")
+    min_lng = request.args.get("min_lng")
+    max_lng = request.args.get("max_lng")
+    naf = request.args.get("naf", "").strip().upper()
+    
+    try:
+        limit = min(int(request.args.get("limit", 60)), 200)
+    except (ValueError, TypeError):
+        limit = 60
+
+    clauses = ["has_coordinates = true", "latitude IS NOT NULL", "longitude IS NOT NULL", "code_departement NOT LIKE '97%'"]
+    if dept:
+        clauses.append(f"UPPER(code_departement) = '{dept}'")
+    if city:
+        clauses.append(f"UPPER(libelle_commune) = '{city}'")
+    if naf:
+        clauses.append(f"UPPER(code_naf) = '{naf}'")
+    if min_lat and max_lat and min_lng and max_lng:
+        try:
+            clauses.append(f"latitude BETWEEN {float(min_lat)} AND {float(max_lat)}")
+            clauses.append(f"longitude BETWEEN {float(min_lng)} AND {float(max_lng)}")
+        except ValueError:
+            pass
+
+    where_sql = "WHERE " + " AND ".join(clauses)
+    rows = con.execute(f"""
+        SELECT 
+            siret,
+            siren,
+            COALESCE(
+                CASE WHEN denomination NOT IN ('[ND]', '') THEN denomination END,
+                CASE WHEN enseigne NOT IN ('[ND]', '') THEN enseigne END,
+                'Establishment ' || substring(siret, 10, 5)
+            ) AS name,
+            denomination,
+            enseigne,
+            code_postal,
+            libelle_commune,
+            code_departement,
+            code_naf,
+            date_creation,
+            latitude,
+            longitude
+        FROM read_parquet('{data_file}')
+        {where_sql}
+        ORDER BY 
+            (denomination NOT IN ('[ND]', '') AND denomination IS NOT NULL) DESC,
+            (enseigne NOT IN ('[ND]', '') AND enseigne IS NOT NULL) DESC,
+            date_creation DESC NULLS LAST
+        LIMIT {limit}
+    """).fetchall()
+
+    items = []
+    for r in rows:
+        items.append({
+            "siret": r[0],
+            "siren": r[1],
+            "name": r[2],
+            "denomination": r[3],
+            "enseigne": r[4],
+            "postal_code": r[5],
+            "city": r[6],
+            "department": r[7],
+            "naf_code": r[8],
+            "naf_label": get_naf_label_en(r[8]),
+            "naf_label_fr": get_naf_label_fr(r[8]),
+            "gov_verify_url": f"https://annuaire-entreprises.data.gouv.fr/etablissement/{r[0]}",
+            "google_maps_url": f"https://www.google.com/maps/search/?api=1&query={r[10]},{r[11]}",
+            "created_date": str(r[9]) if r[9] else "N/A",
+            "lat": r[10],
+            "lng": r[11]
+        })
+    return jsonify({"count": len(items), "items": items})
+
+
+@app.route("/api/crowd/heatmap")
+def get_crowd_heatmap():
+    """
+    Returns authentic continuous heatmap coordinates [[lat, lon, weight], ...]
+    aggregated directly from the French National SIRENE registry (14M+ geocoded businesses).
+    """
+    try:
+        from web.crowd_data import get_crowd_heatmap_points
+        min_lat = request.args.get("min_lat")
+        max_lat = request.args.get("max_lat")
+        min_lon = request.args.get("min_lon")
+        max_lon = request.args.get("max_lon")
+        if min_lat and max_lat and min_lon and max_lon:
+            pts = get_crowd_heatmap_points(
+                min_lat=float(min_lat),
+                min_lon=float(min_lon),
+                max_lat=float(max_lat),
+                max_lon=float(max_lon)
+            )
+        else:
+            pts = get_crowd_heatmap_points()
+        return jsonify(pts)
+    except Exception as e:
+        print("Error in /api/crowd/heatmap:", e)
+        return jsonify([])
 
 
 if __name__ == "__main__":
