@@ -1,21 +1,39 @@
 """
 Official NAF (Nomenclature of French Activities) dictionary.
-Source: INSEE Official NAF 2008 Revision 2 (738 codes).
-Provides both 100% legal official French designations and English industry titles.
+Supports:
+  - INSEE Official NAF 2008 Revision 2 (738 codes)
+  - INSEE Official NAF 2025 (747 codes, Decree 2025-736)
+Provides 100% official legal French designations, English translations, and cross-mapping.
 """
 
 import json
 import os
 
-NAF_CATALOG = {}
-NAF_JSON_PATH = os.path.join(os.path.dirname(__file__), 'naf_complete.json')
+_DIR = os.path.dirname(__file__)
+NAF_CATALOG_2008 = {}
+NAF_CATALOG_2025 = {}
 
-if os.path.exists(NAF_JSON_PATH):
-    with open(NAF_JSON_PATH, 'r', encoding='utf-8') as f:
-        NAF_CATALOG = json.load(f)
+NAF_2008_PATH = os.path.join(_DIR, 'naf_complete.json')
+NAF_2025_PATH = os.path.join(_DIR, 'naf_2025_complete.json')
+
+if os.path.exists(NAF_2008_PATH):
+    with open(NAF_2008_PATH, 'r', encoding='utf-8') as f:
+        NAF_CATALOG_2008 = json.load(f)
+
+if os.path.exists(NAF_2025_PATH):
+    with open(NAF_2025_PATH, 'r', encoding='utf-8') as f:
+        NAF_CATALOG_2025 = json.load(f)
+
+# Default alias for backwards compatibility
+NAF_CATALOG = NAF_CATALOG_2008
 
 
-def get_naf_info(code: str) -> dict:
+def get_naf_catalog(version: str = "2008") -> dict:
+    """Return dictionary of NAF entries for specified version ('2008' or '2025')."""
+    return NAF_CATALOG_2025 if str(version) in ("2025", "25") else NAF_CATALOG_2008
+
+
+def get_naf_info(code: str, version: str = "2008") -> dict:
     """Return dictionary with code, label_fr (official INSEE) and label_en."""
     if not code:
         return {
@@ -24,8 +42,13 @@ def get_naf_info(code: str) -> dict:
             "label_en": "Unspecified Activity"
         }
     clean_code = code.strip().upper()
-    if clean_code in NAF_CATALOG:
-        return NAF_CATALOG[clean_code]
+    catalog = get_naf_catalog(version)
+    if clean_code in catalog:
+        return catalog[clean_code]
+    # Fallback to other catalog if not found
+    other_catalog = NAF_CATALOG_2008 if str(version) in ("2025", "25") else NAF_CATALOG_2025
+    if clean_code in other_catalog:
+        return other_catalog[clean_code]
     return {
         "code": clean_code,
         "label_fr": f"Activité {clean_code}",
@@ -33,13 +56,14 @@ def get_naf_info(code: str) -> dict:
     }
 
 
-def get_naf_label_en(code: str) -> str:
+def get_naf_label_en(code: str, version: str = "2008") -> str:
     """Return descriptive English label for a NAF code."""
-    info = get_naf_info(code)
+    info = get_naf_info(code, version=version)
     return info.get("label_en") or info.get("label_fr") or f"Activity {code}"
 
 
-def get_naf_label_fr(code: str) -> str:
+def get_naf_label_fr(code: str, version: str = "2008") -> str:
     """Return official INSEE French legal title for a NAF code."""
-    info = get_naf_info(code)
+    info = get_naf_info(code, version=version)
     return info.get("label_fr") or f"Activité {code}"
+

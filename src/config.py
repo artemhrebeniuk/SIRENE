@@ -29,8 +29,12 @@ COMBINED_PARQUET_PATH = PROCESSED_DATA_DIR / "active_establishments_geo.parquet"
 # Summary output paths
 SUMMARY_NAF_DEPT_CSV = OUTPUT_DIR / "sirene_summary_naf_departement.csv"
 SUMMARY_TOP_NAF_CSV = OUTPUT_DIR / "sirene_summary_top_naf.csv"
+SUMMARY_NAF_2025_DEPT_CSV = OUTPUT_DIR / "sirene_summary_naf2025_departement.csv"
+SUMMARY_TOP_NAF_2025_CSV = OUTPUT_DIR / "sirene_summary_top_naf2025.csv"
 SUMMARY_DEPTS_CSV = OUTPUT_DIR / "sirene_summary_departements.csv"
 SUMMARY_REPORT_JSON = OUTPUT_DIR / "sirene_milestone6_report.json"
+SUMMARY_TOP_COMMUNES_JSON = OUTPUT_DIR / "top_communes.json"
+WEB_TOP_COMMUNES_JSON = BASE_DIR / "web" / "top_communes.json"
 
 # Projections (EPSG)
 CRS_METROPOLE = 2154    # RGF93 Lambert 93

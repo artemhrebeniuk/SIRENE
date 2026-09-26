@@ -1,14 +1,17 @@
-/* ==========================================================================
+import os
+
+css_content = """/* ==========================================================================
    SIRENE — Material 3 (Material You / M3) Design System
    Google Material Design 3 canonical specification.
    Reference: material-design-design.md / https://m3.material.io/
    Tokens: Expressive tonal color, generous shape scale, dual shadows, confident motion.
    ========================================================================== */
 
-:root, [data-theme="dark"] {
+:root {
   /* ========================================================================
-     1. COLOR TOKENS (Material 3 Baseline Dark Scheme)
+     1. COLOR TOKENS (Material 3 Baseline Dark & Light Schemes)
      ======================================================================== */
+  /* M3 Dark Baseline Scheme (Default Display) */
   --md-sys-color-primary: #d0bcff;
   --md-sys-color-on-primary: #381e72;
   --md-sys-color-primary-container: #4f378b;
@@ -45,75 +48,14 @@
   --md-sys-color-surface-container-high: #2b2930;
   --md-sys-color-surface-container-highest: #36343b;
 
-  --bg-hover: rgba(230, 225, 229, 0.08);
-  --shadow-color: rgba(0, 0, 0, 0.3);
-  --shadow-ambient: rgba(0, 0, 0, 0.15);
-
-  --accent-coral-hover: #e8def8;
-  --accent-coral-glow: rgba(208, 188, 255, 0.25);
-  --accent-primary-hover: #e8def8;
-  --accent-primary-glow: rgba(208, 188, 255, 0.25);
-}
-
-[data-theme="light"] {
-  /* ========================================================================
-     1. COLOR TOKENS (Material 3 Baseline Light Scheme - Canonical MD3)
-     Reference: material-design-design.md
-     ======================================================================== */
-  --md-sys-color-primary: #6750a4;
-  --md-sys-color-on-primary: #ffffff;
-  --md-sys-color-primary-container: #eaddff;
-  --md-sys-color-on-primary-container: #21005d;
-  
-  --md-sys-color-secondary: #625b71;
-  --md-sys-color-on-secondary: #ffffff;
-  --md-sys-color-secondary-container: #e8def8;
-  --md-sys-color-on-secondary-container: #1d192b;
-  
-  --md-sys-color-tertiary: #7d5260;
-  --md-sys-color-on-tertiary: #ffffff;
-  --md-sys-color-tertiary-container: #ffd8e4;
-  --md-sys-color-on-tertiary-container: #31111d;
-  
-  --md-sys-color-error: #b3261e;
-  --md-sys-color-on-error: #ffffff;
-  --md-sys-color-error-container: #f9dedc;
-  --md-sys-color-on-error-container: #410e0b;
-  
-  --md-sys-color-background: #fffbfe;
-  --md-sys-color-on-background: #1c1b1f;
-  --md-sys-color-surface: #fffbfe;
-  --md-sys-color-on-surface: #1c1b1f;
-  --md-sys-color-surface-variant: #e7e0ec;
-  --md-sys-color-on-surface-variant: #49454f;
-  --md-sys-color-outline: #79747e;
-  --md-sys-color-outline-variant: #c4c7c5;
-  
-  /* Tonal Surface Elevation Scales (Light Scheme) */
-  --md-sys-color-surface-container-lowest: #ffffff;
-  --md-sys-color-surface-container-low: #f7f2fa;
-  --md-sys-color-surface-container: #f3edf7;
-  --md-sys-color-surface-container-high: #ece6f0;
-  --md-sys-color-surface-container-highest: #e6e0e9;
-
-  --bg-hover: rgba(28, 27, 31, 0.08);
-  --shadow-color: rgba(0, 0, 0, 0.12);
-  --shadow-ambient: rgba(0, 0, 0, 0.08);
-
-  --accent-coral-hover: #4f378b;
-  --accent-coral-glow: rgba(103, 80, 164, 0.25);
-  --accent-primary-hover: #4f378b;
-  --accent-primary-glow: rgba(103, 80, 164, 0.25);
-}
-
-:root {
-  /* Backward Compatibility & Semantic Tokens */
+  /* Semantic UI Mapping */
   --bg-canvas: var(--md-sys-color-background);
   --bg-surface: var(--md-sys-color-surface-container);
   --bg-surface-solid: var(--md-sys-color-surface-container-low);
   --bg-elevated: var(--md-sys-color-surface-container-high);
   --bg-elevated-solid: var(--md-sys-color-surface-container-highest);
   --bg-card: var(--md-sys-color-surface-container);
+  --bg-hover: rgba(230, 225, 229, 0.08);
   --bg-active: var(--md-sys-color-secondary-container);
 
   --border-subtle: var(--md-sys-color-outline-variant);
@@ -127,85 +69,49 @@
   --text-inverse: var(--md-sys-color-surface);
 
   --accent-coral: var(--md-sys-color-primary);
+  --accent-coral-hover: #e8def8;
+  --accent-coral-glow: rgba(208, 188, 255, 0.25);
   --accent-primary: var(--md-sys-color-primary);
-  --accent-emerald: #81C784;
-  --accent-emerald-glow: rgba(129, 199, 132, 0.25);
+  --accent-primary-hover: #e8def8;
+  --accent-primary-glow: rgba(208, 188, 255, 0.25);
+  --accent-emerald: #a8dba8;
+  --accent-emerald-glow: rgba(168, 219, 168, 0.25);
   --accent-cyan: var(--md-sys-color-secondary);
-  --accent-amber: #FFB74D;
+  --accent-amber: #f8c084;
 
   /* ========================================================================
      2. TYPOGRAPHY (Material 3 Roboto & Type Scale)
-     Reference: material-design-design.md
      ======================================================================== */
   --font-display: Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-body: Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-sans: Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'Roboto Mono', monospace;
 
-  /* Type Scale: Size (sp -> px) and Line-Height */
   --text-display-large: 57px;
-  --lh-display-large: 64px;
-
   --text-headline-large: 32px;
-  --lh-headline-large: 40px;
-
   --text-title-large: 22px;
-  --lh-title-large: 28px;
-
   --text-body-large: 16px;
-  --lh-body-large: 24px;
-
   --text-body-medium: 14px;
-  --lh-body-medium: 20px;
-
   --text-label-large: 14px;
-  --lh-label-large: 20px;
-
   --text-label-medium: 12px;
-  --lh-label-medium: 16px;
-
   --text-label-small: 11px;
-  --lh-label-small: 16px;
-
-  /* Shorthand type scale composite tokens */
-  --md-sys-typescale-display-large: 400 57px/64px var(--font-display);
-  --md-sys-typescale-headline-large: 400 32px/40px var(--font-display);
-  --md-sys-typescale-title-large: 500 22px/28px var(--font-display);
-  --md-sys-typescale-body-large: 400 16px/24px var(--font-body);
-  --md-sys-typescale-body-medium: 400 14px/20px var(--font-body);
-  --md-sys-typescale-label-large: 500 14px/20px var(--font-body);
 
   /* ========================================================================
-     3. SPACING & SHAPE SCALE (Material 3 Base 4dp Rhythm & Corners)
-     Reference: material-design-design.md
+     3. SPACING & SHAPE SCALE (Material 3 Base 4dp Rhythm)
      ======================================================================== */
-  --md-sys-space-1: 4px;
-  --md-sys-space-2: 8px;
-  --md-sys-space-3: 12px;
-  --md-sys-space-4: 16px;
-  --md-sys-space-5: 24px;
-  --md-sys-space-6: 32px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
 
-  --space-1: var(--md-sys-space-1);
-  --space-2: var(--md-sys-space-2);
-  --space-3: var(--md-sys-space-3);
-  --space-4: var(--md-sys-space-4);
-  --space-5: var(--md-sys-space-5);
-  --space-6: var(--md-sys-space-6);
-
-  --md-sys-shape-corner-extra-small: 4px;
-  --md-sys-shape-corner-small: 8px;
-  --md-sys-shape-corner-medium: 12px;
-  --md-sys-shape-corner-large: 16px;
-  --md-sys-shape-corner-extra-large: 28px;
-  --md-sys-shape-corner-full: 9999px;
-
-  --radius-extra-small: var(--md-sys-shape-corner-extra-small);
-  --radius-small: var(--md-sys-shape-corner-small);
-  --radius-medium: var(--md-sys-shape-corner-medium);
-  --radius-large: var(--md-sys-shape-corner-large);
-  --radius-extra-large: var(--md-sys-shape-corner-extra-large);
-  --radius-full: var(--md-sys-shape-corner-full);
+  --radius-extra-small: 4px;
+  --radius-small: 8px;
+  --radius-medium: 12px;
+  --radius-large: 16px;
+  --radius-extra-large: 28px;
+  --radius-full: 9999px;
 
   --radius-pill: var(--radius-full);
   --radius-card: var(--radius-large);       /* 16px */
@@ -216,203 +122,21 @@
 
   /* ========================================================================
      4. ELEVATION & SHADOWS (Material 3 Dual Shadows)
-     Reference: material-design-design.md
      ======================================================================== */
-  --shadow-elevation-1: 0 1px 2px var(--shadow-color), 0 1px 3px 1px var(--shadow-ambient);
-  --shadow-elevation-2: 0 1px 2px var(--shadow-color), 0 2px 6px 2px var(--shadow-ambient);
-  --shadow-elevation-3: 0 1px 3px var(--shadow-color), 0 4px 8px 3px var(--shadow-ambient);
+  --shadow-elevation-1: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
+  --shadow-elevation-2: 0 1px 2px rgba(0,0,0,0.3), 0 2px 6px 2px rgba(0,0,0,0.15);
+  --shadow-elevation-3: 0 1px 3px rgba(0,0,0,0.3), 0 4px 8px 3px rgba(0,0,0,0.15);
 
   --inner-glare: none;
   --inner-glare-card: none;
 
   /* ========================================================================
      5. MOTION (Material 3 Motion Tokens)
-     Reference: material-design-design.md
      ======================================================================== */
   --motion-duration-short2: 100ms;
   --motion-duration-medium2: 300ms;
   --motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
   --blur-glass: 16px;
-}
-
-/* ==========================================================================
-   Canonical Material 3 Component Specifications
-   Reference: material-design-design.md
-   ========================================================================== */
-
-/* 1. M3 Type Scale Utility Classes */
-.md-display-large  { font-family: var(--font-display); font-size: var(--text-display-large); line-height: var(--lh-display-large); font-weight: 400; }
-.md-headline-large { font-family: var(--font-display); font-size: var(--text-headline-large); line-height: var(--lh-headline-large); font-weight: 400; }
-.md-title-large    { font-family: var(--font-display); font-size: var(--text-title-large); line-height: var(--lh-title-large); font-weight: 500; }
-.md-body-large     { font-family: var(--font-body); font-size: var(--text-body-large); line-height: var(--lh-body-large); font-weight: 400; }
-.md-body-medium    { font-family: var(--font-body); font-size: var(--text-body-medium); line-height: var(--lh-body-medium); font-weight: 400; }
-.md-label-large    { font-family: var(--font-body); font-size: var(--text-label-large); line-height: var(--lh-label-large); font-weight: 500; }
-
-/* 2. Three Card Variants (Elevated, Filled, Outlined - material-design-design.md:L192) */
-.m3-card,
-.m3-card-elevated {
-  background: var(--md-sys-color-surface-container-low);
-  border: none;
-  border-radius: var(--radius-large);
-  box-shadow: var(--shadow-elevation-1);
-  transition: box-shadow var(--motion-duration-short2) var(--motion-easing-standard);
-}
-.m3-card-elevated:hover {
-  box-shadow: var(--shadow-elevation-2);
-}
-.m3-card-filled {
-  background: var(--md-sys-color-surface-container-highest);
-  border: none;
-  border-radius: var(--radius-large);
-  box-shadow: none;
-}
-.m3-card-outlined {
-  background: var(--md-sys-color-surface);
-  border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--radius-large);
-  box-shadow: none;
-}
-
-/* 3. Three Input Field Styles (Filled, Outlined, Text - material-design-design.md:L191) */
-.m3-field-filled {
-  background: var(--md-sys-color-surface-container-highest);
-  border: none;
-  border-bottom: 2px solid var(--md-sys-color-outline);
-  border-radius: var(--radius-extra-small) var(--radius-extra-small) 0 0;
-  color: var(--md-sys-color-on-surface);
-  font-family: var(--font-body);
-  padding: 8px 12px;
-  transition: border-color var(--motion-duration-short2) var(--motion-easing-standard);
-}
-.m3-field-filled:focus {
-  border-bottom-color: var(--md-sys-color-primary);
-  outline: none;
-}
-.m3-field-outlined {
-  background: transparent;
-  border: 1px solid var(--md-sys-color-outline);
-  border-radius: var(--radius-small);
-  color: var(--md-sys-color-on-surface);
-  font-family: var(--font-body);
-  padding: 8px 12px;
-  transition: all var(--motion-duration-short2) var(--motion-easing-standard);
-}
-.m3-field-outlined:focus {
-  border-color: var(--md-sys-color-primary);
-  box-shadow: 0 0 0 2px var(--accent-primary-glow);
-  outline: none;
-}
-
-/* 4. M3 Button Variants */
-.m3-btn-filled {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-primary);
-  border: none;
-  border-radius: var(--radius-full);
-  padding: 10px 24px;
-  box-shadow: var(--shadow-elevation-1);
-  font-family: var(--font-body);
-  font-size: var(--text-label-large);
-  line-height: var(--lh-label-large);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all var(--motion-duration-short2) var(--motion-easing-standard);
-  text-decoration: none;
-}
-.m3-btn-filled:hover {
-  box-shadow: var(--shadow-elevation-2);
-  filter: brightness(1.08);
-}
-.m3-btn-tonal {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
-  border: none;
-  border-radius: var(--radius-full);
-  padding: 10px 24px;
-  font-family: var(--font-body);
-  font-size: var(--text-label-large);
-  line-height: var(--lh-label-large);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all var(--motion-duration-short2) var(--motion-easing-standard);
-  text-decoration: none;
-}
-.m3-btn-tonal:hover {
-  filter: brightness(1.08);
-  box-shadow: var(--shadow-elevation-1);
-}
-.m3-btn-outlined {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: transparent;
-  border: 1px solid var(--md-sys-color-outline);
-  color: var(--md-sys-color-primary);
-  border-radius: var(--radius-full);
-  padding: 9px 23px;
-  font-family: var(--font-body);
-  font-size: var(--text-label-large);
-  line-height: var(--lh-label-large);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all var(--motion-duration-short2) var(--motion-easing-standard);
-  text-decoration: none;
-}
-.m3-btn-outlined:hover {
-  background: var(--bg-hover);
-}
-.m3-btn-text {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: transparent;
-  border: none;
-  color: var(--md-sys-color-primary);
-  border-radius: var(--radius-full);
-  padding: 10px 16px;
-  font-family: var(--font-body);
-  font-size: var(--text-label-large);
-  line-height: var(--lh-label-large);
-  font-weight: 500;
-  cursor: pointer;
-  text-decoration: none;
-}
-.m3-btn-text:hover {
-  background: var(--bg-hover);
-}
-
-/* 5. M3 Chips */
-.m3-chip-assist,
-.m3-chip-filter {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  border: 1px solid var(--md-sys-color-outline);
-  border-radius: var(--radius-small);
-  color: var(--md-sys-color-on-surface);
-  padding: 6px 14px;
-  font-size: var(--text-label-large);
-  line-height: var(--lh-label-large);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all var(--motion-duration-short2) var(--motion-easing-standard);
-}
-.m3-chip-filter.active {
-  background: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
-  border-color: transparent;
-  box-shadow: var(--shadow-elevation-1);
 }
 
 /* Base Resets & Global Box Sizing */
@@ -446,24 +170,14 @@
   background: var(--md-sys-color-outline);
 }
 
-html {
+html, body {
   height: 100%;
-  width: 100%;
-  overflow: hidden;
-  font-size: 15.4px; /* Standard 110% root font scaling without viewport distortion */
-}
-
-body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
   overflow: hidden;
   background-color: var(--md-sys-color-background);
   color: var(--md-sys-color-on-surface);
   font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.45;
+  font-size: 14px;
+  line-height: 20px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -473,13 +187,8 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  max-height: 100vh;
-  width: 100vw;
-  max-width: 100vw;
-  box-sizing: border-box;
-  padding: 8px 12px;
-  gap: 8px;
-  overflow: hidden;
+  padding: 12px 16px;
+  gap: 12px;
 }
 
 /* ==========================================================================
@@ -539,12 +248,6 @@ body {
   letter-spacing: 0.01em;
 }
 
-.header-actions-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
 /* Material 3 Assist / Stat Chips */
 .kpi-strip {
   display: flex;
@@ -555,35 +258,6 @@ body {
   box-shadow: var(--shadow-elevation-1);
   padding: 4px 16px;
   gap: 16px;
-}
-
-/* Material 3 Standard / Tonal Icon Button */
-.m3-icon-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-full);
-  background: var(--md-sys-color-surface-container-high);
-  border: 1px solid var(--md-sys-color-outline-variant);
-  color: var(--md-sys-color-on-surface-variant);
-  cursor: pointer;
-  box-shadow: var(--shadow-elevation-1);
-  transition: all var(--motion-duration-short2) var(--motion-easing-standard);
-  flex-shrink: 0;
-}
-
-.m3-icon-btn:hover {
-  background: var(--md-sys-color-surface-container-highest);
-  color: var(--md-sys-color-primary);
-  border-color: var(--md-sys-color-outline);
-  box-shadow: var(--shadow-elevation-2);
-  transform: translateY(-1px);
-}
-
-.m3-icon-btn svg {
-  stroke: currentColor;
 }
 
 .kpi-item {
@@ -645,18 +319,16 @@ body {
 .workspace-grid {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 12px;
   flex: 1;
   min-height: 0;
-  min-width: 0;
-  width: 100%;
   position: relative;
   overflow: hidden;
 }
 
 /* Map Container (M3 Elevated Container) */
 .map-container {
-  flex: 1 1 0;
+  flex: 1;
   min-width: 320px;
   display: flex;
   flex-direction: column;
@@ -686,7 +358,7 @@ body {
 
 .sidebar-resizer:hover,
 .sidebar-resizer.is-resizing {
-  background: var(--bg-hover);
+  background: rgba(208, 188, 255, 0.12);
 }
 
 .resizer-knob {
@@ -709,19 +381,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 16px;
+  padding: 10px 18px;
   background: var(--md-sys-color-surface-container-high);
   border-bottom: 1px solid var(--md-sys-color-outline-variant);
   z-index: 10;
-  gap: 12px;
-  min-height: 48px;
-}
-
-.map-header-meta {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  flex-shrink: 1;
 }
 
 .map-view-title {
@@ -729,28 +392,19 @@ body {
   font-weight: 500;
   font-family: var(--font-display);
   color: var(--md-sys-color-on-surface);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.25;
 }
 
 .map-view-sub {
   font-size: 0.74rem;
   color: var(--md-sys-color-on-surface-variant);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.25;
 }
 
-/* Map Controls Cluster: STRICT SINGLE ROW, NEVER WRAPS */
+/* Map Controls Cluster */
 .map-controls-cluster {
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex-wrap: nowrap;
-  flex-shrink: 0;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 /* Material 3 Filter Chips Group */
@@ -842,9 +496,8 @@ body {
 }
 
 /* Fullscreen Map Button */
-.btn-fullscreen-action,
 .btn-map-action {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 6px;
   background: var(--md-sys-color-surface-container-lowest);
@@ -855,31 +508,13 @@ body {
   padding: 6px 12px;
   border-radius: var(--radius-full);
   cursor: pointer;
-  white-space: nowrap;
   transition: all var(--motion-duration-short2) var(--motion-easing-standard);
-  flex-shrink: 0;
 }
 
-.btn-fullscreen-action:hover,
 .btn-map-action:hover {
-  background: var(--md-sys-color-surface-container-highest);
+  background: var(--md-sys-color-surface-container-high);
   color: var(--md-sys-color-on-surface);
   border-color: var(--md-sys-color-outline);
-  box-shadow: var(--shadow-elevation-1);
-}
-
-.btn-fullscreen-action svg,
-.btn-map-action svg {
-  stroke: currentColor;
-}
-
-@media (max-width: 1100px) {
-  .btn-fullscreen-action span {
-    display: none;
-  }
-  .btn-fullscreen-action {
-    padding: 6px 8px;
-  }
 }
 
 /* Map Canvas */
@@ -896,7 +531,7 @@ body {
    ========================================================================== */
 .sidebar-container {
   width: 390px;
-  min-width: 300px;
+  min-width: 290px;
   max-width: 800px;
   flex-shrink: 0;
   display: flex;
@@ -907,8 +542,6 @@ body {
   box-shadow: var(--shadow-elevation-1);
   overflow: hidden;
   min-height: 0;
-  container-type: inline-size;
-  container-name: sidebar;
 }
 
 /* Material 3 Segmented Tabs */
@@ -917,43 +550,26 @@ body {
   background: var(--md-sys-color-surface-container-lowest);
   border-radius: var(--radius-full);
   border: 1px solid var(--md-sys-color-outline-variant);
-  margin: 10px 12px 8px 12px;
+  margin: 12px 14px 8px 14px;
   padding: 3px;
-  gap: 2px;
+  gap: 4px;
 }
 
 .tab-trigger {
   flex: 1;
-  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  padding: 7px 6px;
+  gap: 6px;
+  padding: 8px 12px;
   background: transparent;
   border: none;
   border-radius: var(--radius-full);
   color: var(--md-sys-color-on-surface-variant);
-  font-size: 0.74rem;
+  font-size: 0.76rem;
   font-weight: 500;
   cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   transition: all var(--motion-duration-short2) var(--motion-easing-standard);
-}
-
-.tab-trigger svg {
-  flex-shrink: 0;
-  width: 13px;
-  height: 13px;
-}
-
-.tab-label {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-width: 0;
 }
 
 .tab-trigger:hover {
@@ -966,23 +582,6 @@ body {
   color: var(--md-sys-color-on-secondary-container);
   font-weight: 600;
   box-shadow: var(--shadow-elevation-1);
-}
-
-@container sidebar (max-width: 345px) {
-  .nav-tabs {
-    margin: 8px 8px 6px 8px;
-    padding: 2px;
-    gap: 2px;
-  }
-  .tab-trigger {
-    padding: 6px 4px;
-    gap: 3px;
-    font-size: 0.69rem;
-  }
-  .tab-trigger svg {
-    width: 12px;
-    height: 12px;
-  }
 }
 
 /* Material 3 Docked Search Bar */
@@ -1022,7 +621,7 @@ body {
 .search-box-wrapper input:focus {
   border-color: var(--md-sys-color-primary);
   background: var(--md-sys-color-surface-container-highest);
-  box-shadow: 0 0 0 3px var(--accent-primary-glow);
+  box-shadow: 0 0 0 3px rgba(208, 188, 255, 0.25);
 }
 
 .search-box-wrapper input::placeholder {
@@ -1042,30 +641,6 @@ body {
   color: var(--md-sys-color-on-surface-variant);
   pointer-events: none;
   line-height: 1.2;
-}
-
-.modal-shortcut {
-  right: 12px;
-}
-
-.esc-kbd-hint {
-  font-size: 0.72rem;
-  color: var(--md-sys-color-on-surface-variant);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-right: 6px;
-}
-
-.esc-kbd-hint kbd {
-  background: var(--md-sys-color-surface-container);
-  border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--radius-extra-small);
-  padding: 2px 6px;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 500;
-  color: var(--md-sys-color-on-surface);
 }
 
 .btn-clear {
@@ -1195,7 +770,7 @@ body {
 }
 
 .btn-explore-biz:hover {
-  filter: brightness(1.08);
+  background: #eaddff;
   box-shadow: var(--shadow-elevation-2);
   transform: translateY(-1px);
 }
@@ -1221,7 +796,7 @@ body {
 }
 
 .btn-drawer-export:hover {
-  filter: brightness(1.12);
+  background: #5b556b;
   box-shadow: var(--shadow-elevation-1);
   transform: translateY(-1px);
 }
@@ -1277,8 +852,8 @@ body {
   font-size: 0.68rem;
   padding: 2px 7px;
   border-radius: var(--radius-full);
-  background: var(--md-sys-color-primary-container);
-  color: var(--md-sys-color-on-primary-container);
+  background: rgba(129, 199, 132, 0.2);
+  color: #A5D6A7;
   font-weight: 500;
 }
 
@@ -1671,7 +1246,7 @@ body {
 
 .biz-select:focus {
   border-color: var(--md-sys-color-primary);
-  box-shadow: 0 0 0 2px var(--accent-primary-glow);
+  box-shadow: 0 0 0 2px rgba(208, 188, 255, 0.25);
 }
 
 .select-chevron {
@@ -1711,7 +1286,7 @@ body {
 .biz-search-field:focus {
   border-color: var(--md-sys-color-primary);
   width: 290px;
-  box-shadow: 0 0 0 2px var(--accent-primary-glow);
+  box-shadow: 0 0 0 2px rgba(208, 188, 255, 0.25);
 }
 
 .btn-export-biz {
@@ -1731,7 +1306,7 @@ body {
 }
 
 .btn-export-biz:hover {
-  filter: brightness(1.12);
+  background: #5b556b;
   box-shadow: var(--shadow-elevation-1);
 }
 
@@ -1815,50 +1390,11 @@ body {
   text-decoration: underline;
 }
 
-.biz-location-city {
-  font-weight: 600;
-  color: var(--md-sys-color-on-surface);
-}
-
-.biz-location-zip {
-  font-size: 0.68rem;
-  color: var(--md-sys-color-on-surface-variant);
-}
-
-.biz-industry-title {
-  font-weight: 600;
-  color: var(--md-sys-color-on-surface);
-  font-size: 0.73rem;
-}
-
-.biz-industry-sub {
-  color: var(--md-sys-color-on-surface-variant);
-  font-size: 0.68rem;
-}
-
-.biz-industry-official {
-  font-size: 0.67rem;
-  color: var(--md-sys-color-on-surface-variant);
-  margin-top: 1px;
-}
-
 .badge-naf {
   display: inline-block;
   padding: 2px 7px;
   background: var(--md-sys-color-secondary-container);
   color: var(--md-sys-color-on-secondary-container);
-  border-radius: var(--radius-extra-small);
-  font-size: 0.70rem;
-  font-family: var(--font-mono);
-  font-weight: 600;
-  margin-right: 5px;
-}
-
-.badge-naf-2025 {
-  display: inline-block;
-  padding: 2px 7px;
-  background: var(--md-sys-color-tertiary-container);
-  color: var(--md-sys-color-on-tertiary-container);
   border-radius: var(--radius-extra-small);
   font-size: 0.70rem;
   font-family: var(--font-mono);
@@ -1938,7 +1474,7 @@ body {
   border-radius: 50%;
   background: var(--md-sys-color-primary);
   border: 1.5px solid #FFFFFF;
-  box-shadow: 0 0 8px var(--accent-primary-glow);
+  box-shadow: 0 0 8px rgba(208, 188, 255, 0.85);
 }
 
 .biz-node-icon.pulse-active .biz-node-dot {
@@ -1973,7 +1509,7 @@ body {
 .biz-popup {
   font-family: var(--font-body);
   color: var(--md-sys-color-on-surface);
-  padding: 14px 16px;
+  padding: 12px 14px;
 }
 
 .biz-popup-tag {
@@ -1985,7 +1521,7 @@ body {
 }
 
 .biz-popup-title {
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 600;
   font-family: var(--font-display);
   color: var(--md-sys-color-on-surface);
@@ -2018,44 +1554,6 @@ body {
   display: flex;
   gap: 6px;
   margin-top: 8px;
-}
-
-.btn-google-ext {
-  flex: 1;
-  text-align: center;
-  padding: 7px 10px;
-  font-size: 0.72rem;
-  text-decoration: none;
-  border-radius: var(--radius-full);
-  background: var(--md-sys-color-surface-container);
-  border: 1px solid var(--md-sys-color-outline);
-  color: var(--md-sys-color-on-surface);
-  font-weight: 500;
-  transition: all var(--motion-duration-short2) var(--motion-easing-standard);
-}
-
-.btn-google-ext:hover {
-  background: var(--md-sys-color-surface-container-highest);
-}
-
-.btn-gov-verify {
-  flex: 1;
-  text-align: center;
-  padding: 7px 10px;
-  font-size: 0.72rem;
-  text-decoration: none;
-  border-radius: var(--radius-full);
-  background: var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-primary);
-  font-weight: 600;
-  box-shadow: var(--shadow-elevation-1);
-  transition: all var(--motion-duration-short2) var(--motion-easing-standard);
-}
-
-.btn-gov-verify:hover {
-  filter: brightness(1.08);
-  box-shadow: var(--shadow-elevation-2);
-  transform: translateY(-1px);
 }
 
 /* ==========================================================================
@@ -2221,107 +1719,6 @@ body {
 }
 
 /* ==========================================================================
-   Truck Parking Custom Map Pins & Radar Panel
-   ========================================================================== */
-.parking-pin-truck {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  background: #10B981;
-  border: 2px solid #FFFFFF;
-  border-radius: var(--radius-small);
-  color: #FFFFFF;
-  font-weight: 700;
-  font-size: 13px;
-  box-shadow: var(--shadow-elevation-2);
-  cursor: pointer;
-  transition: transform var(--motion-duration-short2) var(--motion-easing-standard);
-}
-
-.parking-pin-truck:hover {
-  transform: scale(1.15);
-  box-shadow: var(--shadow-elevation-3);
-}
-
-.parking-pin-garage {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  background: var(--md-sys-color-surface-container-high);
-  border: 1.5px solid #F59E0B;
-  border-radius: var(--radius-extra-small);
-  color: #FBBF24;
-  font-weight: 700;
-  font-size: 11px;
-  box-shadow: var(--shadow-elevation-1);
-  cursor: pointer;
-  transition: transform var(--motion-duration-short2) var(--motion-easing-standard);
-}
-
-.parking-pin-garage:hover {
-  transform: scale(1.15);
-}
-
-.truck-parking-panel {
-  margin-top: 14px;
-  background: var(--md-sys-color-surface-container-low);
-  border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--radius-medium);
-  padding: 12px 14px;
-  box-shadow: var(--shadow-elevation-1);
-}
-
-.truck-parking-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.truck-parking-title {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--md-sys-color-on-surface);
-}
-
-.truck-parking-title svg {
-  color: var(--md-sys-color-primary);
-}
-
-.radius-chips-group {
-  display: flex;
-  background: var(--md-sys-color-surface-container-lowest);
-  border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--radius-full);
-  padding: 2px;
-  gap: 2px;
-}
-
-.radius-chip {
-  padding: 3px 8px;
-  border-radius: var(--radius-full);
-  background: transparent;
-  border: none;
-  color: var(--md-sys-color-on-surface-variant);
-  font-size: 0.68rem;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-.radius-chip.active {
-  background: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
-  font-weight: 600;
-}
-
-/* ==========================================================================
    Animations & Transitions
    ========================================================================== */
 @keyframes fadeInFast {
@@ -2345,3 +1742,9 @@ body.map-fullscreen .map-container {
   border-radius: 0;
   border: none;
 }
+"""
+
+with open("web/static/style.css", "w", encoding="utf-8") as f:
+    f.write(css_content)
+
+print(f"Generated Material 3 CSS ({len(css_content)} bytes)")

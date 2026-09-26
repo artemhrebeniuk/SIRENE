@@ -104,12 +104,13 @@ def get_kpis():
             COUNT(*) AS total_active,
             COUNT(CASE WHEN has_coordinates THEN 1 END) AS with_coords,
             COUNT(DISTINCT code_departement) AS total_dept,
-            COUNT(DISTINCT code_naf) AS total_naf
+            COUNT(DISTINCT code_naf) AS total_naf,
+            COUNT(DISTINCT code_naf_2025) AS total_naf_2025
         FROM read_parquet('{data_file}')
         WHERE code_departement NOT LIKE '97%'
     """).fetchone()
     
-    total_active, with_coords, total_dept, total_naf = kpis
+    total_active, with_coords, total_dept, total_naf, total_naf_2025 = kpis
     pct = round(with_coords * 100.0 / total_active, 2) if total_active > 0 else 0
     
     return jsonify({
@@ -118,6 +119,7 @@ def get_kpis():
         "geocoding_rate_pct": pct,
         "distinct_departments": min(total_dept, 96),
         "distinct_naf_codes": total_naf,
+        "distinct_naf_2025_codes": total_naf_2025,
         "is_sample": is_sample,
         "source_file": os.path.basename(data_file)
     })
@@ -193,23 +195,26 @@ def get_department_niches(dept_code):
     data_file, _ = get_active_dataset_path()
     con = get_db()
     dept_code = dept_code.strip().upper()
+    version = request.args.get("version", request.args.get("naf_version", "2008")).strip()
+    col = "code_naf_2025" if version in ("2025", "25") else "code_naf"
     
     rows = con.execute(f"""
         SELECT 
-            code_naf,
+            {col},
             COUNT(*) AS total
         FROM read_parquet('{data_file}')
         WHERE UPPER(code_departement) = '{dept_code}'
-          AND code_naf IS NOT NULL
-        GROUP BY code_naf
+          AND {col} IS NOT NULL AND {col} != ''
+        GROUP BY {col}
         ORDER BY total DESC
         LIMIT 80
     """).fetchall()
     
     return jsonify([{
         "code": r[0],
-        "label": get_naf_label_en(r[0]),
-        "label_fr": get_naf_label_fr(r[0]),
+        "label": get_naf_label_en(r[0], version=version),
+        "label_fr": get_naf_label_fr(r[0], version=version),
+        "version": version,
         "total": r[1]
     } for r in rows])
 
@@ -222,6 +227,7 @@ def get_businesses():
     dept = request.args.get("dept", "").strip().upper()
     city = request.args.get("city", "").strip().upper()
     naf = request.args.get("naf", "").strip().upper()
+    version = request.args.get("version", request.args.get("naf_version", "2008")).strip()
     q = request.args.get("q", "").strip().lower()
     try:
         limit = min(int(request.args.get("limit", 50)), 250)
@@ -238,7 +244,8 @@ def get_businesses():
     if city:
         clauses.append(f"UPPER(libelle_commune) = '{city}'")
     if naf:
-        clauses.append(f"UPPER(code_naf) = '{naf}'")
+        col = "code_naf_2025" if version in ("2025", "25") else "code_naf"
+        clauses.append(f"(UPPER({col}) = '{naf}' OR UPPER(code_naf) = '{naf}' OR UPPER(code_naf_2025) = '{naf}')")
     if q:
         clauses.append(f"((denomination NOT IN ('[ND]', '') AND LOWER(denomination) LIKE '%{q}%') OR (enseigne NOT IN ('[ND]', '') AND LOWER(enseigne) LIKE '%{q}%') OR siret LIKE '%{q}%')")
         
@@ -263,6 +270,7 @@ def get_businesses():
             libelle_commune,
             code_departement,
             code_naf,
+            code_naf_2025,
             date_creation,
             latitude,
             longitude
@@ -288,14 +296,17 @@ def get_businesses():
             "city": r[6],
             "department": r[7],
             "naf_code": r[8],
-            "naf_label": get_naf_label_en(r[8]),
-            "naf_label_fr": get_naf_label_fr(r[8]),
+            "naf_label": get_naf_label_en(r[8], version="2008"),
+            "naf_label_fr": get_naf_label_fr(r[8], version="2008"),
+            "naf_code_2025": r[9],
+            "naf_2025_label": get_naf_label_en(r[9], version="2025") if r[9] else None,
+            "naf_2025_label_fr": get_naf_label_fr(r[9], version="2025") if r[9] else None,
             "gov_verify_url": f"https://annuaire-entreprises.data.gouv.fr/etablissement/{r[0]}",
-            "google_maps_url": f"https://www.google.com/maps/search/?api=1&query={r[10]},{r[11]}" if (r[10] and r[11]) else None,
-            "created_date": str(r[9]) if r[9] else "N/A",
-            "lat": r[10],
-            "lng": r[11],
-            "has_gps": bool(r[10] and r[11])
+            "google_maps_url": f"https://www.google.com/maps/search/?api=1&query={r[11]},{r[12]}" if (r[11] and r[12]) else None,
+            "created_date": str(r[10]) if r[10] else "N/A",
+            "lat": r[11],
+            "lng": r[12],
+            "has_gps": bool(r[11] and r[12])
         })
         
     return jsonify({
@@ -505,32 +516,37 @@ def get_sectors():
     data_file, _ = get_active_dataset_path()
     con = get_db()
     
-    limit = int(request.args.get("limit", 100))
+    limit = int(request.args.get("limit", 150))
     search = request.args.get("q", "").strip().lower()
+    version = request.args.get("version", request.args.get("naf_version", "2008")).strip()
+    col = "code_naf_2025" if version in ("2025", "25") else "code_naf"
     
     rows = con.execute(f"""
         SELECT 
-            code_naf,
+            {col},
             COUNT(*) AS total,
             ROUND(COUNT(*) * 100.0 / (SELECT COUNT(*) FROM read_parquet('{data_file}')), 2) AS share_pct
         FROM read_parquet('{data_file}')
-        WHERE code_naf IS NOT NULL AND code_naf != ''
-        GROUP BY code_naf
+        WHERE {col} IS NOT NULL AND {col} != ''
+        GROUP BY {col}
         ORDER BY total DESC
     """).fetchall()
     
     results = []
     for r in rows:
         code = str(r[0])
-        label = get_naf_label_en(code)
+        label = get_naf_label_en(code, version=version)
+        label_fr = get_naf_label_fr(code, version=version)
         if search:
-            if search not in code.lower() and search not in label.lower():
+            if search not in code.lower() and search not in label.lower() and search not in label_fr.lower():
                 continue
         results.append({
             "code": code,
             "label": label,
+            "label_fr": label_fr,
             "total": r[1],
-            "share_pct": r[2]
+            "share_pct": r[2],
+            "version": version
         })
         if len(results) >= limit:
             break
@@ -544,14 +560,16 @@ def get_sector_distribution(naf_code):
     con = get_db()
     
     naf_code = naf_code.strip().upper()
+    version = request.args.get("version", request.args.get("naf_version", "2008")).strip()
+    col = "code_naf_2025" if version in ("2025", "25") else "code_naf"
     
-    # Distribution of this NAF code across all 101 departments
+    # Distribution of this NAF code across all departments
     rows = con.execute(f"""
         SELECT 
             code_departement,
             COUNT(*) AS total
         FROM read_parquet('{data_file}')
-        WHERE UPPER(code_naf) = '{naf_code}'
+        WHERE UPPER({col}) = '{naf_code}'
           AND code_departement IS NOT NULL AND code_departement != ''
         GROUP BY code_departement
         ORDER BY total DESC
@@ -567,7 +585,9 @@ def get_sector_distribution(naf_code):
         
     return jsonify({
         "code_naf": naf_code,
-        "label": get_naf_label_en(naf_code),
+        "label": get_naf_label_en(naf_code, version=version),
+        "label_fr": get_naf_label_fr(naf_code, version=version),
+        "version": version,
         "total_national": total_national,
         "departments": dept_distribution
     })
@@ -768,7 +788,7 @@ def get_businesses_map():
     if city:
         clauses.append(f"UPPER(libelle_commune) = '{city}'")
     if naf:
-        clauses.append(f"UPPER(code_naf) = '{naf}'")
+        clauses.append(f"(UPPER(code_naf) = '{naf}' OR UPPER(code_naf_2025) = '{naf}')")
     if min_lat and max_lat and min_lng and max_lng:
         try:
             clauses.append(f"latitude BETWEEN {float(min_lat)} AND {float(max_lat)}")
@@ -792,6 +812,7 @@ def get_businesses_map():
             libelle_commune,
             code_departement,
             code_naf,
+            code_naf_2025,
             date_creation,
             latitude,
             longitude
@@ -816,13 +837,16 @@ def get_businesses_map():
             "city": r[6],
             "department": r[7],
             "naf_code": r[8],
-            "naf_label": get_naf_label_en(r[8]),
-            "naf_label_fr": get_naf_label_fr(r[8]),
+            "naf_label": get_naf_label_en(r[8], version="2008"),
+            "naf_label_fr": get_naf_label_fr(r[8], version="2008"),
+            "naf_code_2025": r[9],
+            "naf_2025_label": get_naf_label_en(r[9], version="2025") if r[9] else None,
+            "naf_2025_label_fr": get_naf_label_fr(r[9], version="2025") if r[9] else None,
             "gov_verify_url": f"https://annuaire-entreprises.data.gouv.fr/etablissement/{r[0]}",
-            "google_maps_url": f"https://www.google.com/maps/search/?api=1&query={r[10]},{r[11]}",
-            "created_date": str(r[9]) if r[9] else "N/A",
-            "lat": r[10],
-            "lng": r[11]
+            "google_maps_url": f"https://www.google.com/maps/search/?api=1&query={r[11]},{r[12]}",
+            "created_date": str(r[10]) if r[10] else "N/A",
+            "lat": r[11],
+            "lng": r[12]
         })
     return jsonify({"count": len(items), "items": items})
 

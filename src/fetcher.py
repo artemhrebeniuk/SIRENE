@@ -4,6 +4,7 @@ Module for discovering and downloading latest SIRENE and Geolocation parquet dat
 import hashlib
 import os
 import sys
+import time
 import requests
 from pathlib import Path
 from typing import Dict, Optional, Tuple
@@ -119,7 +120,15 @@ def download_file(
                 headers["Range"] = f"bytes={downloaded_bytes}-"
                 console.print(f"[yellow]Resuming download from byte {downloaded_bytes} ({downloaded_bytes / (1024*1024):.1f} MB)...[/]")
 
-            response = requests.get(url, headers=headers, stream=True, timeout=30)
+            response = requests.get(url, headers=headers, stream=True, timeout=60)
+            if response.status_code == 416 and temp_path.exists():
+                # Range not satisfiable - check if file is complete
+                if expected_size and temp_path.stat().st_size == expected_size:
+                    if target_path.exists():
+                        target_path.unlink()
+                    temp_path.rename(target_path)
+                    return target_path
+            response.raise_for_status()
             
             # Check if range is accepted
             mode = "ab" if downloaded_bytes > 0 and response.status_code == 206 else "wb"

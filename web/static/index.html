@@ -5,21 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SIRENE — French Enterprise Registry</title>
   
-  <!-- Typography: Inter & JetBrains Mono -->
+  <!-- Typography: Material 3 Typography (Roboto & Roboto Mono) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
   
   <!-- Local Leaflet Map CSS -->
   <link rel="stylesheet" href="/static/vendor/leaflet.css">
   
-  <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="/static/style.css?v=3.2">
+  <!-- Custom Material 3 Stylesheet -->
+  <link rel="stylesheet" href="/static/style.css?v=m3.12">
 </head>
 <body>
   <div class="app-layout">
     
     <!-- Top Clean Header Bar (Design Maestro Floating Capsule Navbar) -->
+    <!-- Top Clean Header Bar (Material 3 App Bar) -->
     <header class="app-header">
       <div class="header-brand">
         <div class="logo-icon">
@@ -35,23 +36,43 @@
         </div>
       </div>
 
-      <!-- Design Maestro Pill KPI Capsule -->
-      <div class="kpi-strip">
-        <div class="kpi-item">
-          <span class="kpi-k">Establishments</span>
-          <span class="kpi-v text-blue" id="kpiTotalActive">15,965,766</span>
+      <!-- Header Actions Group (M3 Assist KPI Strip + Theme Toggle) -->
+      <div class="header-actions-group">
+        <div class="kpi-strip">
+          <div class="kpi-item">
+            <span class="kpi-k">Establishments</span>
+            <span class="kpi-v text-blue" id="kpiTotalActive">15,965,766</span>
+          </div>
+
+          <div class="kpi-sep"></div>
+          <div class="kpi-item">
+            <span class="kpi-k">Departments</span>
+            <span class="kpi-v" id="kpiDepartments">96 / 96</span>
+          </div>
+          <div class="kpi-sep"></div>
+          <div class="kpi-item">
+            <span class="kpi-k">Industries</span>
+            <span class="kpi-v text-amber" id="kpiNafCodes">735</span>
+          </div>
         </div>
 
-        <div class="kpi-sep"></div>
-        <div class="kpi-item">
-          <span class="kpi-k">Departments</span>
-          <span class="kpi-v" id="kpiDepartments">96 / 96</span>
-        </div>
-        <div class="kpi-sep"></div>
-        <div class="kpi-item">
-          <span class="kpi-k">Industries</span>
-          <span class="kpi-v text-amber" id="kpiNafCodes">735</span>
-        </div>
+        <!-- Material 3 Theme Toggle (Light / Dark) -->
+        <button class="m3-icon-btn" id="btnThemeToggle" onclick="toggleM3Theme()" title="Toggle Theme (Material 3 Light / Dark)">
+          <svg class="icon-theme-dark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg class="icon-theme-light" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
       </div>
     </header>
 
@@ -62,7 +83,7 @@
       <section class="map-container">
         <!-- Map Overlay Header -->
         <div class="map-header-overlay">
-          <div>
+          <div class="map-header-meta">
             <h2 id="mapViewTitle" class="map-view-title">National Overview</h2>
             <p id="mapViewSubtitle" class="map-view-sub">Click any department or city to inspect</p>
           </div>
@@ -104,7 +125,7 @@
             </div>
 
             <!-- Basemap Switcher: Google Maps, Satellite, Dark -->
-            <div class="basemap-selector">
+            <div class="basemap-selector" id="basemapSelectorGroup">
               <button class="btn-basemap active" data-basemap="google-roads" title="Actual Google Maps with all real street names, shops, and places">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
@@ -114,10 +135,12 @@
                 Google Maps
               </button>
               <button class="btn-basemap" data-basemap="google-satellite" title="Google Satellite Imagery & Labels">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="2" y1="12" x2="22" y2="12"></line>
-                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M13 7 9 3 5 7l4 4"></path>
+                  <path d="m17 11 4 4-4 4-4-4"></path>
+                  <path d="m8 12 4 4 6-6-4-4Z"></path>
+                  <path d="m16 8 3-3"></path>
+                  <path d="M9 21a6 6 0 0 0-6-6"></path>
                 </svg>
                 Satellite
               </button>
@@ -129,8 +152,8 @@
               </button>
             </div>
 
-            <!-- Fullscreen Map Action (YouTube-style immersive view) -->
-            <button class="btn-layer-pill" id="btnToggleFullscreen" onclick="toggleMapFullscreen()" title="Fullscreen Map (Press ESC to exit)">
+            <!-- Fullscreen Map Action (Single row, elegant M3 button) -->
+            <button class="btn-fullscreen-action" id="btnToggleFullscreen" onclick="toggleMapFullscreen()" title="Fullscreen Map (Press ESC to exit)">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
               </svg>
@@ -297,15 +320,15 @@
         
         <!-- Navigation Tabs: Departments, Cities, Industries -->
         <div class="nav-tabs">
-          <button class="tab-trigger active" data-tab="departments">
+          <button class="tab-trigger active" data-tab="departments" title="Departments Overview">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="2" y1="12" x2="22" y2="12"></line>
               <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
             </svg>
-            Departments
+            <span class="tab-label">Departments</span>
           </button>
-          <button class="tab-trigger" data-tab="communes">
+          <button class="tab-trigger" data-tab="communes" title="Cities & Communes">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M3 21h18"></path>
               <path d="M5 21V7l8-4v18"></path>
@@ -314,14 +337,14 @@
               <path d="M9 13h1"></path>
               <path d="M9 17h1"></path>
             </svg>
-            Cities
+            <span class="tab-label">Cities</span>
           </button>
-          <button class="tab-trigger" data-tab="sectors">
+          <button class="tab-trigger" data-tab="sectors" title="Industries & NAF Codes">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
               <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
             </svg>
-            Industries
+            <span class="tab-label">Industries</span>
           </button>
         </div>
 
@@ -332,10 +355,12 @@
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <input type="text" id="searchInput" placeholder="Search departments, cities or industries..." autocomplete="off">
+            <input type="text" id="searchInput" placeholder="Search SIRET, company, city or sector..." autocomplete="off">
             <span class="search-shortcut" id="searchKbdHint">⌘K</span>
             <button id="clearSearch" class="btn-clear" style="display:none;" aria-label="Clear search">&times;</button>
           </div>
+          <!-- Real-Time Enterprise Lookup Dropdown (SIREN / SIRET / Company) -->
+          <div class="enterprise-lookup-dropdown" id="enterpriseLookupDropdown" style="display: none;"></div>
         </div>
 
         <!-- Inspector Drawer (Streamlined & Compact) -->
@@ -368,6 +393,14 @@
               </svg>
               Browse Businesses
             </button>
+            <a class="btn-drawer-export" id="btnExportDrawerCsv" href="#" target="_blank" title="Export this selection to CSV">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Export CSV
+            </a>
           </div>
 
           <div class="drawer-sub-breakdown" id="inspectorDetails"></div>
@@ -399,8 +432,16 @@
 
           <!-- Pane 3: Industries (NAF) -->
           <div class="pane" id="paneSectors">
+            <div class="naf-version-selector-bar">
+              <div class="segmented-control naf-segmented" id="nafVersionGroup">
+                <button class="segment-btn active" id="btnNaf2008" onclick="setNafVersion('2008')">NAF 2008</button>
+                <button class="segment-btn" id="btnNaf2025" onclick="setNafVersion('2025')">
+                  NAF 2025 <span class="badge-new-pill">NEW</span>
+                </button>
+              </div>
+            </div>
             <div class="pane-column-headers">
-              <span>Industry</span>
+              <span id="colHeaderIndustry">Industry (NAF 2008)</span>
               <span>Total</span>
             </div>
             <div class="entity-list" id="sectorsList">
@@ -512,6 +553,6 @@
   <script src="/static/vendor/leaflet-heat.js"></script>
   
   <!-- Client Application Engine -->
-  <script src="/static/app.js?v=3.2"></script>
+  <script src="/static/app.js?v=m3.12"></script>
 </body>
 </html>

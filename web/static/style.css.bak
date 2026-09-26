@@ -1,0 +1,2590 @@
+/* ==========================================================================
+   SIRENE — Design Maestro Design System
+   Visual Identity: Deep obsidian canvas, chromatic ambient glows,
+   floating pill containers, capsule forms, macOS command launcher aesthetic.
+   Reference: https://designmaestro.io
+   ========================================================================== */
+
+:root {
+  /* Design Maestro Canvas & Elevated Glass Surfaces */
+  --bg-canvas: #08090D;
+  --bg-surface: rgba(15, 17, 26, 0.78);
+  --bg-surface-solid: #0F111A;
+  --bg-elevated: rgba(22, 25, 38, 0.82);
+  --bg-elevated-solid: #161926;
+  --bg-card: rgba(19, 22, 34, 0.88);
+  --bg-hover: rgba(255, 255, 255, 0.05);
+  --bg-active: rgba(255, 107, 74, 0.14);
+
+  /* Luminous Hairline Borders */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.13);
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --border-focus: rgba(255, 107, 74, 0.6);
+
+  /* Inner Edge Glare Highlights */
+  --inner-glare: inset 0 1px 0 rgba(255, 255, 255, 0.10);
+  --inner-glare-card: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 0 16px rgba(255, 255, 255, 0.015);
+
+  /* Typography Colors */
+  --text-primary: #FFFFFF;
+  --text-secondary: #94A3B8;
+  --text-dim: #64748B;
+  --text-inverse: #08090D;
+
+  /* Signature Design Maestro Warm Sunset & Tech Accents */
+  --accent-coral: #FF6B4A;
+  --accent-coral-hover: #FE385C;
+  --accent-coral-glow: rgba(255, 107, 74, 0.25);
+  --accent-primary: #6366F1;
+  --accent-primary-hover: #4F46E5;
+  --accent-primary-glow: rgba(99, 102, 241, 0.25);
+  --accent-emerald: #10B981;
+  --accent-emerald-glow: rgba(16, 185, 129, 0.22);
+  --accent-cyan: #38BDF8;
+  --accent-amber: #F59E0B;
+
+  /* Typography Stack */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', SFMono-Regular, Consolas, monospace;
+
+  /* Geometry: Pure Capsule Pill & Smooth Radii */
+  --radius-pill: 9999px;
+  --radius-card: 20px;
+  --radius-modal: 22px;
+  --radius-box: 14px;
+  --radius-sm: 8px;
+  --radius-xs: 6px;
+
+  /* Ambient Glass Blur */
+  --blur-glass: 24px;
+  --blur-subtle: 14px;
+}
+
+/* Base Resets & Global Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom Slim Dark Scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-pill);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-canvas);
+  background-image: 
+    radial-gradient(ellipse 700px 450px at 10% 10%, rgba(99, 102, 241, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 650px 400px at 90% 15%, rgba(255, 107, 74, 0.10) 0%, transparent 65%),
+    radial-gradient(ellipse 600px 350px at 50% 95%, rgba(56, 189, 248, 0.06) 0%, transparent 70%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* App Main Layout */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 12px 14px;
+  gap: 12px;
+}
+
+/* ==========================================================================
+   Header Bar (Design Maestro Floating Capsule Navbar)
+   ========================================================================== */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-surface);
+  backdrop-filter: blur(var(--blur-glass)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur-glass)) saturate(180%);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--inner-glare), 0 12px 32px -10px rgba(0, 0, 0, 0.55);
+  padding: 7px 22px;
+  flex-shrink: 0;
+  gap: 16px;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(255, 107, 74, 0.25) 0%, rgba(99, 102, 241, 0.2) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 4px 12px rgba(255, 107, 74, 0.18), var(--inner-glare);
+  color: #FFF;
+}
+
+.app-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.app-subtitle {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-weight: 450;
+  letter-spacing: -0.01em;
+}
+
+/* Design Maestro Floating Pill KPI Strip */
+.kpi-strip {
+  display: flex;
+  align-items: center;
+  background: rgba(8, 10, 16, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--inner-glare), 0 4px 16px rgba(0, 0, 0, 0.35);
+  padding: 5px 18px;
+  gap: 18px;
+}
+
+.kpi-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kpi-k {
+  font-size: 0.70rem;
+  color: var(--text-dim);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.kpi-v {
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.kpi-val-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.kpi-pulse-dot {
+  width: 6.5px;
+  height: 6.5px;
+  border-radius: 50%;
+  background: #34D399;
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.8);
+  display: inline-block;
+  animation: kpiPulseAnim 2s infinite ease-in-out;
+}
+
+@keyframes kpiPulseAnim {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.6; }
+}
+
+.text-blue { color: #818CF8 !important; }
+.text-green { color: #34D399 !important; }
+.text-amber { color: #FB923C !important; }
+
+.kpi-sep {
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+/* ==========================================================================
+   Workspace Grid (Map Left + Smooth Resizer + Sidebar Right)
+   ========================================================================== */
+.workspace-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Map Container */
+.map-container {
+  flex: 1;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  backdrop-filter: blur(var(--blur-glass));
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  box-shadow: var(--inner-glare), 0 14px 40px -12px rgba(0, 0, 0, 0.65);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Draggable Vertical Splitter */
+.sidebar-resizer {
+  width: 6px;
+  background: transparent;
+  cursor: col-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  touch-action: none;
+  position: relative;
+  z-index: 50;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.sidebar-resizer:hover,
+.sidebar-resizer.is-resizing {
+  background: rgba(255, 107, 74, 0.2);
+}
+
+.resizer-knob {
+  width: 3px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-pill);
+  transition: all 0.2s ease;
+}
+
+.sidebar-resizer:hover .resizer-knob,
+.sidebar-resizer.is-resizing .resizer-knob {
+  background: var(--accent-coral);
+  height: 52px;
+  box-shadow: 0 0 12px var(--accent-coral);
+}
+
+/* Map Overlay Floating Glass Bar */
+.map-header-overlay {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 18px;
+  background: rgba(12, 14, 22, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+  z-index: 10;
+}
+
+.map-view-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+}
+
+.map-view-sub {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+/* Map Controls Cluster (Layers + Basemaps) */
+.map-controls-cluster {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Operational Layers Group (Traffic, Crowd, Parking) */
+.map-layers-group {
+  display: flex;
+  background: rgba(8, 10, 16, 0.75);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+  gap: 3px;
+  box-shadow: var(--inner-glare);
+}
+
+.btn-layer-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  font-size: 0.73rem;
+  font-weight: 550;
+  padding: 5px 11px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.btn-layer-pill:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.btn-layer-pill.active {
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFF;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  font-weight: 600;
+}
+
+.layer-dot {
+  width: 6.5px;
+  height: 6.5px;
+  border-radius: 50%;
+  background: #475569;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.btn-layer-pill.active .layer-dot.dot-regions {
+  background: #8B5CF6;
+  box-shadow: 0 0 8px #8B5CF6;
+}
+
+.btn-layer-pill.active .layer-dot.dot-traffic {
+  background: #22C55E;
+  box-shadow: 0 0 8px #22C55E;
+}
+
+.btn-layer-pill.active .layer-dot.dot-crowd {
+  background: #EC4899;
+  box-shadow: 0 0 8px #EC4899;
+}
+
+.btn-layer-pill.active .layer-dot.dot-parking {
+  background: #38BDF8;
+  box-shadow: 0 0 8px #38BDF8;
+}
+
+/* Basemap Switcher (Segmented Capsule Control) */
+.basemap-selector {
+  display: flex;
+  background: rgba(8, 10, 16, 0.75);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+  gap: 3px;
+  box-shadow: var(--inner-glare);
+}
+
+.btn-basemap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.73rem;
+  font-weight: 550;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-basemap:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.btn-basemap.active {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.05) 100%);
+  color: #FFF;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+}
+
+#map {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  background: #08090D;
+}
+
+/* Hide Default Leaflet Zoom Controls completely (per user request) */
+.leaflet-control-zoom {
+  display: none !important;
+}
+
+/* ==========================================================================
+   YouTube-Style Immersive Fullscreen Map Mode (Zero Margins, Zero Borders)
+   ========================================================================== */
+body.map-fullscreen {
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.map-fullscreen .app-layout {
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 100vh !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  overflow: hidden !important;
+}
+
+body.map-fullscreen .app-header,
+body.map-fullscreen .sidebar-resizer,
+body.map-fullscreen .sidebar-container,
+body.map-fullscreen #inspectorDrawer {
+  display: none !important;
+}
+
+body.map-fullscreen .workspace-grid {
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100vw !important;
+}
+
+body.map-fullscreen .map-container {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 99999 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+body.map-fullscreen #map {
+  width: 100vw !important;
+  height: 100vh !important;
+  border-radius: 0 !important;
+}
+
+/* Exit Fullscreen Active Button State */
+.btn-layer-pill.is-fullscreen-exit {
+  background: rgba(225, 29, 72, 0.22) !important;
+  border-color: rgba(225, 29, 72, 0.5) !important;
+  color: #FFE4E6 !important;
+  box-shadow: 0 0 14px rgba(225, 29, 72, 0.35) !important;
+}
+
+.btn-layer-pill.is-fullscreen-exit:hover {
+  background: rgba(225, 29, 72, 0.38) !important;
+  border-color: rgba(225, 29, 72, 0.75) !important;
+}
+
+/* ==========================================================================
+   Unified Collapsible Map Legend (Design Maestro Style)
+   ========================================================================== */
+.unified-legend-container {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  pointer-events: auto;
+}
+
+.legend-pill-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(14, 16, 25, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-pill);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  cursor: pointer;
+  box-shadow: var(--inner-glare), 0 10px 30px rgba(0, 0, 0, 0.55);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.legend-pill-trigger:hover {
+  background: rgba(24, 28, 43, 0.96);
+  border-color: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
+}
+
+.legend-pill-trigger .chevron-arrow {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.unified-legend-container.expanded .legend-pill-trigger {
+  display: none !important;
+}
+
+.unified-legend-panel {
+  background: rgba(11, 13, 22, 0.95);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 24px 60px rgba(0, 0, 0, 0.85);
+  width: 350px;
+  max-width: 92vw;
+  margin: 0;
+  overflow: hidden;
+  animation: fadeInFast 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.unified-legend-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 18px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.unified-legend-header .header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-close-legend {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.btn-close-legend:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.unified-legend-body {
+  padding: 14px 18px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  max-height: 490px;
+  overflow-y: auto;
+}
+
+/* Individual Sections with clean dividers */
+.legend-section {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding-bottom: 13px;
+  margin-bottom: 13px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.legend-section.no-divider {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.legend-section.is-disabled .density-gradient-bar,
+.legend-section.is-disabled .heatmap-gradient-bar,
+.legend-section.is-disabled .legend-scale-labels,
+.legend-section.is-disabled .blur-controls-row,
+.legend-section.is-disabled .traffic-grid,
+.legend-section.is-disabled .parking-grid {
+  opacity: 0.40;
+  filter: grayscale(30%);
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.section-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.section-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title {
+  font-size: 0.74rem;
+  font-weight: 650;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+/* Uniform Glowing Dots for section titles */
+.layer-dot-glow {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.layer-dot-glow.dot-purple {
+  background: #8B5CF6;
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.75);
+}
+
+.layer-dot-glow.dot-rose {
+  background: #F43F5E;
+  box-shadow: 0 0 8px rgba(244, 63, 94, 0.75);
+}
+
+.layer-dot-glow.dot-green {
+  background: #22C55E;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.75);
+}
+
+.layer-dot-glow.dot-cyan {
+  background: #38BDF8;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.75);
+}
+
+/* Unified ON / OFF pill toggle button with geometric column alignment */
+.legend-toggle-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  min-width: 44px;
+  text-align: center;
+  background: rgba(99, 102, 241, 0.20);
+  border: 1px solid rgba(99, 102, 241, 0.45);
+  color: #C7D2FE;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 1.5px 0;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: all 0.16s ease;
+  user-select: none;
+}
+
+.legend-toggle-pill:hover {
+  background: rgba(99, 102, 241, 0.35);
+  border-color: rgba(99, 102, 241, 0.7);
+  color: #FFFFFF;
+}
+
+.legend-toggle-pill.off {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.13);
+  color: var(--text-dim);
+}
+
+.legend-toggle-pill.off:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: var(--text-secondary);
+}
+
+/* Gradient Bars */
+.density-gradient-bar {
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, #3B82F6 0%, #4F46E5 25%, #7C3AED 50%, #A855F7 75%, #F43F5E 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.28);
+  margin-top: 1px;
+}
+
+.heatmap-gradient-bar {
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, #00d2ff 0%, #00f59b 25%, #ffe600 50%, #ff7700 75%, #ff0033 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 10px rgba(255, 0, 51, 0.28);
+  margin-top: 1px;
+}
+
+/* Three-point scale labels (start, mid, end) */
+.legend-scale-labels {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 2px;
+}
+
+.scale-label {
+  flex: 1;
+  font-size: 0.66rem;
+  font-family: var(--font-sans);
+  color: rgba(255, 255, 255, 0.48);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.scale-label.start {
+  text-align: left;
+}
+
+.scale-label.mid {
+  text-align: center;
+}
+
+.scale-label.end {
+  text-align: right;
+}
+
+/* Heatmap Blur Segmented Control */
+.blur-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.control-label {
+  font-size: 0.67rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.segmented-control {
+  display: inline-flex;
+  background: rgba(0, 0, 0, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-pill);
+  padding: 2px;
+  gap: 2px;
+}
+
+.segment-btn {
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-pill);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.66rem;
+  font-weight: 550;
+  padding: 3px 9px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.segment-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.segment-btn.active {
+  background: rgba(56, 189, 248, 0.22);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  color: #FFFFFF;
+  font-weight: 600;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.3);
+}
+
+/* Traffic 2x2 Grid */
+.traffic-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.traffic-tile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 5px 9px;
+  transition: background 0.15s ease;
+}
+
+.traffic-tile:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.traffic-line-bar {
+  width: 14px;
+  height: 3.5px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.traffic-tile-text {
+  font-size: 0.69rem;
+  font-weight: 550;
+  color: var(--text-primary);
+}
+
+/* Parking Stacked Cards */
+.parking-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.parking-row-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 6px 10px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.parking-row-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.parking-card-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.parking-dot-icon {
+  width: 7.5px;
+  height: 7.5px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.parking-dot-icon.badge-truck-dot {
+  background: #10B981;
+  box-shadow: 0 0 7px rgba(16, 185, 129, 0.8);
+}
+
+.parking-dot-icon.badge-garage-dot {
+  background: #F59E0B;
+  box-shadow: 0 0 7px rgba(245, 158, 11, 0.8);
+}
+
+.parking-primary {
+  font-size: 0.70rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.parking-secondary-badge {
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-pill);
+  padding: 1.5px 7px;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Sidebar (Floating Glass Column with Capsule Navigation)
+   ========================================================================== */
+.sidebar-container {
+  width: 390px;
+  min-width: 290px;
+  max-width: 800px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  backdrop-filter: blur(var(--blur-glass)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur-glass)) saturate(180%);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  box-shadow: var(--inner-glare), 0 14px 40px -12px rgba(0, 0, 0, 0.65);
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Capsule Pill Tabs */
+.nav-tabs {
+  display: flex;
+  background: rgba(8, 10, 16, 0.7);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--inner-glare);
+  margin: 10px 12px 6px 12px;
+  padding: 4px;
+  gap: 3px;
+}
+
+.tab-trigger {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 10px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-pill);
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  font-weight: 550;
+  cursor: pointer;
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tab-trigger:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab-trigger.active {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: #FFF;
+  font-weight: 600;
+}
+
+/* Design Maestro Launcher Style Search Bar */
+.search-container {
+  padding: 6px 12px 10px 12px;
+}
+
+.search-box-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.search-box-wrapper .search-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+.search-box-wrapper input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+  padding: 8px 52px 8px 38px;
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  outline: none;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.search-box-wrapper input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--accent-coral-glow), inset 0 1px 2px rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.search-box-wrapper input::placeholder {
+  color: var(--text-dim);
+}
+
+/* Keycap Shortcut Hints (Design Maestro Macro Badge Style) */
+.search-shortcut {
+  position: absolute;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 5px;
+  padding: 2px 6px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  pointer-events: none;
+  line-height: 1.2;
+}
+
+.modal-shortcut {
+  right: 10px;
+}
+
+.esc-kbd-hint {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-right: 6px;
+}
+
+.esc-kbd-hint kbd {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 5px;
+  padding: 2px 6px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.btn-clear {
+  position: absolute;
+  right: 36px;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.btn-clear:hover {
+  color: var(--text-primary);
+}
+
+/* Inspector Drawer (Glass Card) */
+.inspector-drawer {
+  margin: 0 12px 10px 12px;
+  padding: 12px 14px;
+  background: rgba(20, 24, 36, 0.85);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-box);
+  box-shadow: var(--inner-glare-card), 0 10px 30px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.drawer-pill {
+  font-size: 0.64rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  letter-spacing: 0.05em;
+  background: rgba(56, 189, 248, 0.1);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(56, 189, 248, 0.24);
+  display: inline-block;
+}
+
+.drawer-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 4px;
+  letter-spacing: -0.015em;
+}
+
+.btn-close-drawer {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 2px 4px;
+}
+
+.btn-close-drawer:hover {
+  color: var(--text-primary);
+}
+
+.drawer-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.drawer-stat-box {
+  background: rgba(10, 12, 19, 0.6);
+  padding: 8px 12px;
+  border-radius: 9px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.stat-value {
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+  margin-left: 4px;
+}
+
+.drawer-action-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+/* Design Maestro Hero Action Button (Pure High-Contrast White Pill) */
+.btn-explore-biz {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border-radius: var(--radius-pill);
+  background: #FFFFFF;
+  border: none;
+  color: #08090D;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.22);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.btn-explore-biz svg {
+  stroke: #08090D;
+}
+
+.btn-explore-biz:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 26px rgba(255, 255, 255, 0.38);
+  background: #FFFFFF;
+}
+
+.btn-explore-biz:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+}
+
+.btn-drawer-export {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #E2E8F0;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.btn-drawer-export:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Real-Time Enterprise Lookup Dropdown */
+.enterprise-lookup-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: rgba(15, 23, 42, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+  z-index: 1200;
+  max-height: 380px;
+  overflow-y: auto;
+  padding: 6px;
+}
+
+.lookup-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: background 0.15s ease;
+}
+
+.lookup-item:last-child {
+  border-bottom: none;
+}
+
+.lookup-item:hover {
+  background: rgba(56, 189, 248, 0.12);
+}
+
+.lookup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lookup-name {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #F8FAFC;
+}
+
+.lookup-badge {
+  font-size: 0.65rem;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(16, 185, 129, 0.18);
+  color: #34D399;
+  font-weight: 600;
+}
+
+.lookup-details {
+  display: flex;
+  gap: 6px;
+  font-size: 0.68rem;
+  color: #94A3B8;
+  align-items: center;
+}
+
+.lookup-siret {
+  font-family: monospace;
+  color: #38BDF8;
+}
+
+.lookup-action {
+  font-size: 0.66rem;
+  color: #38BDF8;
+  margin-top: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.drawer-sub-breakdown {
+  font-size: 0.72rem;
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.breakdown-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.breakdown-code {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #A5B4FC;
+  margin-right: 6px;
+  background: rgba(99, 102, 241, 0.12);
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+/* Lists and Panes */
+.tab-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.pane {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.pane.active {
+  display: flex;
+}
+
+.pane-column-headers {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+  font-size: 0.67rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(10, 12, 18, 0.5);
+  flex-shrink: 0;
+}
+
+.entity-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px;
+}
+
+.entity-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-bottom: 2px;
+}
+
+.entity-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(3px);
+}
+
+.entity-row.selected {
+  background: rgba(255, 107, 74, 0.12);
+  border: 1px solid rgba(255, 107, 74, 0.32);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.entity-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+  margin-right: 8px;
+}
+
+/* Keycap / Macro Tag in Design Maestro Style */
+.code-tag {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #F1F5F9;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.entity-name {
+  font-size: 0.81rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.entity-value {
+  font-size: 0.81rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+}
+
+/* ==========================================================================
+   Design Maestro Spotlight Command Modal (Business Directory)
+   Modeled directly after the Design Maestro macOS Launcher
+   ========================================================================== */
+.biz-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 5, 8, 0.84);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.biz-modal-card {
+  width: 100%;
+  max-width: 1180px;
+  height: 86vh;
+  min-width: 640px;
+  min-height: 480px;
+  max-width: 96vw;
+  max-height: 94vh;
+  resize: both;
+  overflow: hidden;
+  position: relative;
+  background: rgba(14, 16, 25, 0.95);
+  backdrop-filter: blur(36px) saturate(180%);
+  -webkit-backdrop-filter: blur(36px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-modal);
+  box-shadow: 
+    0 36px 90px rgba(0, 0, 0, 0.88),
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 0 60px rgba(255, 107, 74, 0.12),
+    var(--inner-glare-card);
+  display: flex;
+  flex-direction: column;
+}
+
+.biz-modal-card.is-maximized {
+  max-width: 98vw;
+  width: 98vw;
+  height: 96vh;
+  max-height: 96vh;
+  resize: none;
+  border-radius: var(--radius-box);
+}
+
+.biz-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 22px;
+  background: rgba(18, 21, 32, 0.65);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.modal-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-pill {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-coral);
+  background: rgba(255, 107, 74, 0.14);
+  border: 1px solid rgba(255, 107, 74, 0.3);
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.05em;
+  display: inline-block;
+}
+
+.biz-modal-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.biz-modal-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-modal-action {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  border-radius: var(--radius-pill);
+  padding: 6px 9px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.14s ease;
+}
+
+.btn-modal-action:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  border-color: var(--border-medium);
+}
+
+.btn-close-modal {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 2px 6px;
+  transition: color 0.12s ease;
+}
+
+.btn-close-modal:hover {
+  color: var(--text-primary);
+}
+
+/* Toolbar in Design Maestro Capsule Omnibar Style */
+.biz-unified-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 22px;
+  background: rgba(10, 12, 18, 0.65);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.toolbar-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolbar-field label {
+  font-size: 0.70rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* Custom Design Maestro Pill Selects with SVG Chevron */
+.select-pill-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.biz-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-pill);
+  color: var(--text-primary);
+  padding: 6px 32px 6px 14px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  max-width: 230px;
+  transition: all 0.16s ease;
+}
+
+.biz-select:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-strong);
+}
+
+.biz-select:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--accent-coral-glow);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.biz-select option {
+  background: #11131C;
+  color: #FFF;
+}
+
+.select-chevron {
+  position: absolute;
+  right: 12px;
+  color: var(--text-dim);
+  pointer-events: none;
+  transition: transform 0.16s ease;
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.biz-search-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.biz-search-wrapper .search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+.biz-search-field {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-pill);
+  color: var(--text-primary);
+  padding: 6px 36px 6px 34px;
+  font-size: 0.76rem;
+  width: 250px;
+  outline: none;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.biz-search-field:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--accent-coral-glow);
+  width: 290px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.biz-search-field::placeholder {
+  color: var(--text-dim);
+}
+
+.btn-export-biz {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.14);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34D399;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.16s ease;
+}
+
+.btn-export-biz:hover {
+  background: rgba(16, 185, 129, 0.25);
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 0 14px var(--accent-emerald-glow);
+}
+
+/* Modal Table */
+.biz-table-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px;
+}
+
+.biz-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.79rem;
+}
+
+.biz-table th {
+  background: rgba(14, 16, 25, 0.98);
+  backdrop-filter: blur(14px);
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid var(--border-subtle);
+  z-index: 5;
+}
+
+.biz-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  vertical-align: middle;
+  word-break: break-word;
+}
+
+.biz-table tr {
+  transition: background 0.12s ease;
+}
+
+.biz-table tr:hover td {
+  background: rgba(255, 255, 255, 0.038);
+}
+
+.biz-name-main {
+  font-weight: 700;
+  font-size: 0.84rem;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.biz-name-sub {
+  font-size: 0.69rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.biz-siret-val {
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+  display: block;
+}
+
+.biz-verify-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.68rem;
+  color: var(--accent-coral);
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 3px;
+  transition: color 0.12s ease;
+}
+
+.biz-verify-link:hover {
+  color: #FFA085;
+  text-decoration: underline;
+}
+
+.badge-naf {
+  display: inline-block;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xs);
+  color: #A5B4FC;
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+/* Locate Capsule Button */
+.btn-locate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #F1F5F9;
+  font-size: 0.73rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.btn-locate:hover {
+  background: rgba(255, 107, 74, 0.2);
+  border-color: rgba(255, 107, 74, 0.45);
+  color: #FFF;
+  box-shadow: 0 0 14px var(--accent-coral-glow);
+}
+
+/* Modal Footer */
+.biz-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 22px;
+  background: rgba(12, 14, 22, 0.85);
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+}
+
+.btn-load-more {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  padding: 7px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--inner-glare);
+  transition: all 0.16s ease;
+}
+
+.btn-load-more:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: var(--border-strong);
+}
+
+/* ==========================================================================
+   Map Pins & Tooltips (Glassmorphic Popups)
+   ========================================================================== */
+.custom-biz-pin {
+  position: relative;
+}
+
+.pin-dot {
+  width: 14px;
+  height: 14px;
+  background: var(--accent-coral);
+  border: 2px solid #FFF;
+  border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  box-shadow: 0 0 12px rgba(255, 107, 74, 0.85);
+}
+
+.pin-pulse {
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 107, 74, 0.4);
+  border-radius: 50%;
+  animation: pinPulseAnim 1.6s infinite ease-out;
+}
+
+@keyframes pinPulseAnim {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.biz-popup {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  padding: 6px;
+}
+
+.biz-popup-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-coral);
+  letter-spacing: 0.05em;
+  margin-bottom: 3px;
+}
+
+.biz-popup-title {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: #FFF;
+  margin-bottom: 4px;
+  letter-spacing: -0.015em;
+}
+
+.biz-popup-sub {
+  font-size: 0.73rem;
+  color: var(--text-secondary);
+  margin-bottom: 3px;
+}
+
+.biz-popup-sub code {
+  font-family: var(--font-mono);
+  color: #818CF8;
+}
+
+.biz-popup-badge {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 107, 74, 0.15);
+  border: 1px solid rgba(255, 107, 74, 0.3);
+  color: #FFA085;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.btn-google-ext {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-pill);
+  color: #FFF;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.14s ease;
+}
+
+.btn-google-ext:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.btn-gov-verify {
+  background: linear-gradient(135deg, #FF6B4A 0%, #FE385C 100%);
+  border-radius: var(--radius-pill);
+  color: #FFF;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 5px 8px;
+  box-shadow: 0 2px 10px rgba(255, 107, 74, 0.3);
+  transition: all 0.14s ease;
+}
+
+.btn-gov-verify:hover {
+  box-shadow: 0 4px 14px rgba(255, 107, 74, 0.5);
+}
+
+/* Leaflet Popup Glass Styling */
+.leaflet-popup-content-wrapper {
+  background: rgba(14, 16, 25, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: var(--radius-box) !important;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.75), var(--inner-glare) !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(14, 16, 25, 0.95) !important;
+}
+
+/* Leaflet Tooltip Glass Styling */
+.custom-tooltip-wrapper .leaflet-tooltip {
+  background: rgba(12, 14, 22, 0.92) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 10px !important;
+  color: var(--text-primary) !important;
+  padding: 8px 12px !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55), var(--inner-glare) !important;
+  font-family: var(--font-sans) !important;
+}
+
+.tooltip-title {
+  font-weight: 700;
+  font-size: 0.84rem;
+  color: #FFA085;
+  letter-spacing: -0.01em;
+}
+
+.tooltip-body {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 3px;
+}
+
+/* ==========================================================================
+   Real-Time Traffic Legend Card (Design Maestro Style)
+   ========================================================================== */
+.traffic-legend-card {
+  position: absolute;
+  bottom: 24px;
+  left: 236px;
+  background: rgba(14, 16, 25, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-box);
+  box-shadow: var(--inner-glare), 0 16px 40px rgba(0, 0, 0, 0.65);
+  padding: 10px 14px;
+  z-index: 999;
+  min-width: 170px;
+  animation: fadeInFast 0.2s ease;
+}
+
+.live-pulse-dot {
+  width: 6.5px;
+  height: 6.5px;
+  border-radius: 50%;
+  background: #22C55E;
+  box-shadow: 0 0 8px #22C55E;
+  display: inline-block;
+  margin-right: 6px;
+  animation: kpiPulseAnim 1.8s infinite ease-in-out;
+}
+
+.traffic-indicators {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 4px;
+}
+
+.traffic-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.69rem;
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
+}
+
+.traffic-bar {
+  width: 18px;
+  height: 4px;
+  border-radius: 2px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   Smooth Footfall Heatmap Controls Card (Design Maestro Style, matching Screenshot 3)
+   ========================================================================== */
+.heatmap-legend-card {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(14, 16, 25, 0.90);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-box);
+  box-shadow: var(--inner-glare), 0 16px 40px rgba(0, 0, 0, 0.65);
+  padding: 12px 16px;
+  z-index: 999;
+  min-width: 250px;
+  animation: fadeInFast 0.2s ease;
+}
+
+.heatmap-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #F43F5E;
+  box-shadow: 0 0 10px #F43F5E;
+  display: inline-block;
+  margin-right: 6px;
+  animation: kpiPulseAnim 1.8s infinite ease-in-out;
+}
+
+.heatmap-scale-container {
+  margin: 8px 0 10px 0;
+}
+
+.heatmap-gradient-bar {
+  height: 9px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #00d2ff 0%, #00f59b 25%, #ffe600 50%, #ff7700 75%, #ff0033 100%);
+  box-shadow: 0 0 12px rgba(255, 0, 51, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.heatmap-scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.64rem;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  margin-top: 5px;
+}
+
+.heatmap-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.ctrl-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================================================
+   Truck Parking Custom Map Pins & Radar Radius
+   ========================================================================== */
+.parking-pin-truck {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  border: 2px solid #FFFFFF;
+  border-radius: 8px;
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 13px;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.55), 0 0 0 1px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.parking-pin-truck:hover {
+  transform: scale(1.18);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.8);
+}
+
+.parking-pin-garage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba(30, 41, 59, 0.95);
+  border: 1.5px solid #F59E0B;
+  border-radius: 6px;
+  color: #FBBF24;
+  font-weight: 700;
+  font-size: 11px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.parking-pin-garage:hover {
+  transform: scale(1.15);
+}
+
+.parking-popup {
+  font-family: var(--font-sans);
+  padding: 4px;
+  min-width: 190px;
+}
+
+.parking-popup-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 6px;
+}
+
+.parking-popup-badge.badge-truck {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34D399;
+}
+
+.parking-popup-badge.badge-garage {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #FBBF24;
+}
+
+.parking-popup-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+}
+
+.parking-popup-meta {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.parking-popup-meta b {
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   Crowd Density Hotspot Pins (Footfall Hubs)
+   ========================================================================== */
+.crowd-hotspot-pin {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.crowd-hotspot-core {
+  width: 16px;
+  height: 16px;
+  background: #EC4899;
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  box-shadow: 0 0 14px rgba(236, 72, 153, 0.9);
+  z-index: 2;
+}
+
+.crowd-pulse-ring {
+  width: 32px;
+  height: 32px;
+  background: rgba(236, 72, 153, 0.35);
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: crowdPulseAnim 2s infinite ease-out;
+  z-index: 1;
+}
+
+@keyframes crowdPulseAnim {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* ==========================================================================
+   Truck Logistics & Parking Drawer Panel
+   ========================================================================== */
+.truck-parking-panel {
+  margin-top: 14px;
+  background: rgba(10, 12, 18, 0.85);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-card);
+  padding: 12px 14px;
+  box-shadow: var(--inner-glare);
+}
+
+.truck-parking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.truck-parking-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.truck-parking-title svg {
+  color: #38BDF8;
+}
+
+.radius-chips-group {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 2px;
+  gap: 2px;
+}
+
+.radius-chip {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.67rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+
+.radius-chip:hover {
+  color: #FFF;
+}
+
+.radius-chip.active {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38BDF8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.truck-stats-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.truck-stat-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 7px 10px;
+}
+
+.truck-stat-label {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.truck-stat-value {
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  margin-top: 2px;
+}
+
+.truck-stat-value.text-emerald {
+  color: #34D399;
+}
+
+.truck-stat-value.text-amber {
+  color: #FBBF24;
+}
+
+.parking-list-scroller {
+  max-height: 190px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-right: 4px;
+}
+
+.parking-list-scroller::-webkit-scrollbar {
+  width: 4px;
+}
+
+.parking-list-scroller::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+.parking-row-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+
+.parking-row-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.parking-row-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.parking-row-name {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 170px;
+}
+
+.parking-row-sub {
+  font-size: 0.67rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.parking-row-sub .badge-truck-tag {
+  color: #34D399;
+  font-weight: 600;
+}
+
+.parking-row-sub .badge-garage-tag {
+  color: #FBBF24;
+  font-weight: 600;
+}
+
+.btn-focus-spot {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-pill);
+  color: var(--text-secondary);
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  cursor: pointer;
+  transition: all 0.14s ease;
+  white-space: nowrap;
+}
+
+.btn-focus-spot:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.4);
+  color: #38BDF8;
+}
+
+/* ==========================================================================
+   Real Business Map Pin Markers (Direct from INSEE Registry)
+   ========================================================================== */
+.biz-node-icon {
+  background: transparent;
+  border: none;
+}
+
+.biz-node-pin {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(99, 102, 241, 0.35);
+  border: 1.5px solid #818CF8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.7);
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.biz-node-pin:hover {
+  transform: scale(1.35);
+  background: rgba(99, 102, 241, 0.75);
+  border-color: #FFFFFF;
+  box-shadow: 0 0 16px rgba(129, 140, 248, 0.95);
+  z-index: 1000;
+}
+
+.biz-node-dot {
+  width: 4.5px;
+  height: 4.5px;
+  border-radius: 50%;
+  background: #FFFFFF;
+}
+
+.biz-mini-tooltip {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: #FFFFFF;
+  max-width: 220px;
+}
+
+/* NAF 2025 Version Switcher & Badges */
+.naf-version-selector-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  background: rgba(15, 23, 42, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.naf-segmented {
+  width: 100%;
+  display: flex;
+}
+
+.naf-segmented .segment-btn {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 6px 10px;
+  font-size: 0.72rem;
+}
+
+.badge-new-pill {
+  background: linear-gradient(135deg, #10B981, #059669);
+  color: #FFFFFF;
+  font-size: 0.58rem;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.badge-naf-2025 {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #34D399;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+

@@ -13,6 +13,7 @@ const state = {
   selectedCommune: null,
   communeMarker: null,
   sectors: [],
+  nafVersion: '2008', // '2008' or '2025'
   geoJsonData: null,
   geoJsonLayer: null,
   activeMode: 'density', // 'density' or 'sector'
@@ -58,7 +59,6 @@ let viewportBizDebounce = null;
 let map;
 let currentBizMarker = null;
 let searchDebounceTimer = null;
-let activeBasemapKey = 'google-roads';
 
 // High-Resolution @2x Retina Basemaps for Crystal Clear Geometry on All Screens
 const BASEMAPS = {
@@ -88,6 +88,7 @@ const BASEMAPS = {
 
 // Lifecycle Start
 document.addEventListener('DOMContentLoaded', async () => {
+  initM3Theme();
   initMap();
   bindUI();
   await loadKPIs();
@@ -96,8 +97,85 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 /* ==========================================================================
-   Map Initialization with Genuine Google Maps Basemap & Layer Groups
+   Material 3 Dynamic Theme Manager (Baseline Light & Dark Schemes)
    ========================================================================== */
+function initM3Theme() {
+  const savedTheme = localStorage.getItem('sirene_m3_theme') || 'dark';
+  applyM3Theme(savedTheme);
+}
+
+function toggleM3Theme() {
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  applyM3Theme(newTheme);
+  localStorage.setItem('sirene_m3_theme', newTheme);
+}
+
+function applyM3Theme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const darkIcon = document.querySelector('.icon-theme-dark');
+  const lightIcon = document.querySelector('.icon-theme-light');
+  if (darkIcon && lightIcon) {
+    if (theme === 'light') {
+      darkIcon.style.display = 'none';
+      lightIcon.style.display = 'block';
+    } else {
+      darkIcon.style.display = 'block';
+      lightIcon.style.display = 'none';
+    }
+  }
+}
+window.toggleM3Theme = toggleM3Theme;
+
+/* ==========================================================================
+   Map Initialization & Basemap Management
+   ========================================================================== */
+let activeBasemapKey = localStorage.getItem('sirene_basemap_mode');
+if (!activeBasemapKey || activeBasemapKey === 'auto' || !BASEMAPS[activeBasemapKey]) {
+  activeBasemapKey = 'google-roads';
+}
+
+function switchBasemap(key) {
+  if (!BASEMAPS[key]) return;
+  activeBasemapKey = key;
+  localStorage.setItem('sirene_basemap_mode', key);
+  applyBasemapLayer(key, true);
+  document.querySelectorAll('.btn-basemap').forEach(b => {
+    b.classList.toggle('active', b.dataset.basemap === key);
+  });
+}
+
+function applyBasemapLayer(key, force = false) {
+  if (!BASEMAPS[key]) return;
+  if (!force && key === activeBasemapKey && map.hasLayer(BASEMAPS[key])) return;
+  
+  if (map.hasLayer(BASEMAPS[activeBasemapKey])) {
+    map.removeLayer(BASEMAPS[activeBasemapKey]);
+  }
+  BASEMAPS[key].addTo(map);
+  activeBasemapKey = key;
+
+  if (isRegionsActive && state.geoJsonLayer && map.hasLayer(state.geoJsonLayer)) {
+    state.geoJsonLayer.bringToFront();
+    state.geoJsonLayer.setStyle(getFeatureStyle);
+  }
+  if (trafficTileLayer && isTrafficActive) {
+    trafficTileLayer.bringToFront();
+  }
+  if (crowdHeatLayer && isCrowdActive && map.hasLayer(crowdHeatLayer)) {
+    crowdHeatLayer.bringToFront();
+  }
+  if (businessMarkersLayerGroup) {
+    businessMarkersLayerGroup.eachLayer(l => { if (l.bringToFront) l.bringToFront(); });
+  }
+  if (parkingLayerGroup) {
+    parkingLayerGroup.eachLayer(l => { if (l.bringToFront) l.bringToFront(); });
+  }
+  if (currentBizMarker && typeof currentBizMarker.bringToFront === 'function') {
+    currentBizMarker.bringToFront();
+  }
+}
+
 function initMap() {
   map = L.map('map', {
     center: [46.603354, 1.888334], // Center of Mainland France
@@ -107,8 +185,11 @@ function initMap() {
     zoomControl: false // Clean presentation without +/- glitches
   });
 
-  // Add Google Maps Roadmap as default basemap
-  BASEMAPS['google-roads'].addTo(map);
+  // Apply user-selected basemap or default to Google Maps
+  applyBasemapLayer(activeBasemapKey, true);
+  document.querySelectorAll('.btn-basemap').forEach(b => {
+    b.classList.toggle('active', b.dataset.basemap === activeBasemapKey);
+  });
 
   // Initialize operational layer groups
   parkingLayerGroup = L.layerGroup().addTo(map);
@@ -127,6 +208,18 @@ function initMap() {
 
   map.on('moveend', () => {
     handleMapMoveZoom();
+  });
+
+  // Automatic Container Resize Observer to prevent any unrendered tile gaps or black strips
+  const mapElem = document.getElementById('map');
+  if (window.ResizeObserver && mapElem) {
+    const mapResizeObserver = new ResizeObserver(() => {
+      if (map) map.invalidateSize();
+    });
+    mapResizeObserver.observe(mapElem);
+  }
+  window.addEventListener('resize', () => {
+    if (map) map.invalidateSize();
   });
 }
 
@@ -153,38 +246,6 @@ function handleMapMoveZoom() {
       businessMarkersLayerGroup.clearLayers();
     }
   }
-}
-
-function switchBasemap(key) {
-  if (!BASEMAPS[key] || key === activeBasemapKey) return;
-  
-  map.removeLayer(BASEMAPS[activeBasemapKey]);
-  BASEMAPS[key].addTo(map);
-  activeBasemapKey = key;
-
-  if (isRegionsActive && state.geoJsonLayer && map.hasLayer(state.geoJsonLayer)) {
-    state.geoJsonLayer.bringToFront();
-    state.geoJsonLayer.setStyle(getFeatureStyle);
-  }
-  if (trafficTileLayer && isTrafficActive) {
-    trafficTileLayer.bringToFront();
-  }
-  if (crowdHeatLayer && isCrowdActive && map.hasLayer(crowdHeatLayer)) {
-    crowdHeatLayer.bringToFront();
-  }
-  if (businessMarkersLayerGroup) {
-    businessMarkersLayerGroup.eachLayer(l => { if (l.bringToFront) l.bringToFront(); });
-  }
-  if (parkingLayerGroup) {
-    parkingLayerGroup.eachLayer(l => { if (l.bringToFront) l.bringToFront(); });
-  }
-  if (currentBizMarker && typeof currentBizMarker.bringToFront === 'function') {
-    currentBizMarker.bringToFront();
-  }
-
-  document.querySelectorAll('.btn-basemap').forEach(b => {
-    b.classList.toggle('active', b.dataset.basemap === key);
-  });
 }
 
 // Department Quintiles (Equal Distribution across 96 departments)
@@ -293,7 +354,10 @@ async function loadKPIs() {
     const geocodedEl = document.getElementById('kpiGeocodedPct');
     if (geocodedEl) geocodedEl.textContent = `${data.geocoding_rate_pct}%`;
     document.getElementById('kpiDepartments').textContent = `${data.distinct_departments} / 96`;
-    document.getElementById('kpiNafCodes').textContent = data.distinct_naf_codes.toLocaleString('en-US');
+    const nafCount = (state.nafVersion === '2025' && data.distinct_naf_2025_codes) 
+      ? data.distinct_naf_2025_codes 
+      : data.distinct_naf_codes;
+    document.getElementById('kpiNafCodes').textContent = nafCount.toLocaleString('en-US');
   } catch (err) {
     console.error('Failed to load KPIs:', err);
   }
@@ -335,12 +399,45 @@ async function loadCommunes() {
 
 async function loadSectors() {
   try {
-    const res = await fetch('/api/sectors?limit=200');
+    const version = state.nafVersion || '2008';
+    const res = await fetch(`/api/sectors?limit=250&version=${version}`);
     state.sectors = await res.json();
     renderSectorsList();
   } catch (err) {
     console.error('Failed to load sectors:', err);
   }
+}
+
+function setNafVersion(ver) {
+  if (state.nafVersion === ver) return;
+  state.nafVersion = ver;
+
+  const btn08 = document.getElementById('btnNaf2008');
+  const btn25 = document.getElementById('btnNaf2025');
+  const colHeader = document.getElementById('colHeaderIndustry');
+
+  if (btn08 && btn25) {
+    if (ver === '2025') {
+      btn08.classList.remove('active');
+      btn25.classList.add('active');
+      if (colHeader) colHeader.textContent = 'Industry (NAF 2025 Official)';
+    } else {
+      btn25.classList.remove('active');
+      btn08.classList.add('active');
+      if (colHeader) colHeader.textContent = 'Industry (NAF 2008)';
+    }
+  }
+
+  if (state.kpis) {
+    const nafEl = document.getElementById('kpiNafCodes');
+    if (nafEl) {
+      const count = ver === '2025' ? (state.kpis.distinct_naf_2025_codes || state.kpis.distinct_naf_codes) : state.kpis.distinct_naf_codes;
+      nafEl.textContent = count.toLocaleString('en-US');
+    }
+  }
+
+  state.selectedSector = null;
+  loadSectors();
 }
 
 /* ==========================================================================
@@ -462,10 +559,16 @@ function bindUI() {
   const sidebar = document.getElementById('sidebarContainer');
   let isResizing = false;
 
-  // Restore saved width
+  // Restore saved width safely (guaranteeing map has at least 380px)
   const savedWidth = localStorage.getItem('sirene_sidebar_width');
   if (savedWidth && sidebar) {
-    sidebar.style.width = `${Math.min(Math.max(parseInt(savedWidth), 280), 800)}px`;
+    const parsed = parseInt(savedWidth, 10);
+    const maxAllowed = Math.max(300, Math.min(750, window.innerWidth - 380));
+    if (!isNaN(parsed) && parsed >= 300 && parsed <= maxAllowed) {
+      sidebar.style.width = `${parsed}px`;
+    } else {
+      sidebar.style.width = '390px';
+    }
   }
 
   if (resizer && sidebar) {
@@ -478,11 +581,11 @@ function bindUI() {
 
     window.addEventListener('mousemove', (e) => {
       if (!isResizing) return;
-      const newWidth = window.innerWidth - e.clientX;
-      if (newWidth >= 280 && newWidth <= 800) {
-        sidebar.style.width = `${newWidth}px`;
-        if (map) map.invalidateSize();
-      }
+      const maxAllowed = Math.max(300, Math.min(750, window.innerWidth - 380));
+      const targetWidth = window.innerWidth - e.clientX;
+      const clampedWidth = Math.min(Math.max(targetWidth, 300), maxAllowed);
+      sidebar.style.width = `${clampedWidth}px`;
+      if (map) map.invalidateSize();
     });
 
     window.addEventListener('mouseup', () => {
@@ -545,6 +648,8 @@ function bindUI() {
   // Main Search Input
   const searchInput = document.getElementById('searchInput');
   const clearBtn = document.getElementById('clearSearch');
+  const lookupDropdown = document.getElementById('enterpriseLookupDropdown');
+  let lookupDebounce = null;
 
   searchInput.addEventListener('input', (e) => {
     state.searchQuery = e.target.value.trim().toLowerCase();
@@ -557,15 +662,37 @@ function bindUI() {
     } else {
       renderSectorsList();
     }
+
+    // Smart Enterprise Lookup: SIRET, SIREN or Company Name
+    clearTimeout(lookupDebounce);
+    if (state.searchQuery.length >= 3) {
+      lookupDebounce = setTimeout(() => {
+        performEnterpriseLookup(state.searchQuery);
+      }, 280);
+    } else if (lookupDropdown) {
+      lookupDropdown.style.display = 'none';
+      lookupDropdown.innerHTML = '';
+    }
   });
 
   clearBtn.addEventListener('click', () => {
     searchInput.value = '';
     state.searchQuery = '';
     clearBtn.style.display = 'none';
+    if (lookupDropdown) {
+      lookupDropdown.style.display = 'none';
+      lookupDropdown.innerHTML = '';
+    }
     renderDepartmentsList();
     renderCommunesList();
     renderSectorsList();
+  });
+
+  // Close lookup dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-container') && lookupDropdown) {
+      lookupDropdown.style.display = 'none';
+    }
   });
 
   // Reset View
@@ -771,7 +898,8 @@ function renderSectorsList() {
   const filtered = state.sectors.filter(s => {
     if (!state.searchQuery) return true;
     return s.code.toLowerCase().includes(state.searchQuery) ||
-           s.label.toLowerCase().includes(state.searchQuery);
+           s.label.toLowerCase().includes(state.searchQuery) ||
+           (s.label_fr && s.label_fr.toLowerCase().includes(state.searchQuery));
   });
 
   if (filtered.length === 0) {
@@ -779,14 +907,16 @@ function renderSectorsList() {
     return;
   }
 
+  const is2025 = state.nafVersion === '2025';
+
   container.innerHTML = filtered.map(s => {
     const isSelected = state.selectedSector && state.selectedSector.code_naf === s.code;
 
     return `
       <div class="entity-row ${isSelected ? 'selected' : ''}" onclick="selectSector('${s.code}')">
         <div class="entity-info">
-          <span class="code-tag">${s.code}</span>
-          <span class="entity-name" title="${s.label}">${s.label}</span>
+          <span class="code-tag ${is2025 ? 'badge-naf-2025' : ''}">${s.code}</span>
+          <span class="entity-name" title="${s.label_fr ? s.label + ' (' + s.label_fr + ')' : s.label}">${s.label}</span>
         </div>
         <span class="entity-value">${s.total.toLocaleString('en-US')}</span>
       </div>
@@ -841,17 +971,22 @@ async function selectDepartment(deptCode) {
       Browse Businesses
     `;
 
+    const drawerExportBtn = document.getElementById('btnExportDrawerCsv');
+    if (drawerExportBtn) {
+      drawerExportBtn.href = `/api/businesses/export?dept=${encodeURIComponent(deptCode)}`;
+    }
+
     // Render Top Industries in Inspector
     const industriesList = data.top_sectors.slice(0, 3).map(s => `
       <div class="breakdown-row" onclick="openBusinessModal('${deptCode}', '${data.name}', '', '${s.code_naf}')">
         <span title="${s.label}"><b class="breakdown-code">${s.code_naf}</b> ${s.label.length > 24 ? s.label.substring(0, 24) + '...' : s.label}</span>
-        <span style="font-weight:700; color:#58A6FF">${s.count.toLocaleString('en-US')}</span>
+        <span style="font-weight:700; color:var(--md-sys-color-primary);">${s.count.toLocaleString('en-US')}</span>
       </div>
     `).join('');
 
     document.getElementById('inspectorDetails').innerHTML = `
       <div style="margin-top:6px;">
-        <div style="font-weight:600; color:#8B949E; margin-bottom:4px; font-size:0.67rem; text-transform:uppercase; letter-spacing:0.03em;">Top Industries in ${data.name}:</div>
+        <div style="font-weight:600; color:var(--md-sys-color-on-surface-variant); margin-bottom:4px; font-size:0.67rem; text-transform:uppercase; letter-spacing:0.03em;">Top Industries in ${data.name}:</div>
         ${industriesList}
       </div>
     `;
@@ -896,16 +1031,21 @@ async function selectCommune(cityName, deptCode, lat, lng) {
       Browse Businesses
     `;
 
+    const drawerExportBtn = document.getElementById('btnExportDrawerCsv');
+    if (drawerExportBtn) {
+      drawerExportBtn.href = `/api/businesses/export?dept=${encodeURIComponent(deptCode)}&city=${encodeURIComponent(cityName)}`;
+    }
+
     const industriesList = data.top_sectors.map(s => `
       <div class="breakdown-row" onclick="openBusinessModal('${data.dept}', '${data.city}', '${data.city}', '${s.code_naf}')">
         <span title="${s.label}"><b class="breakdown-code">${s.code_naf}</b> ${s.label.substring(0, 22)}...</span>
-        <span style="font-weight:700; color:#10B981">${s.count.toLocaleString('en-US')} (${s.pct}%)</span>
+        <span style="font-weight:700; color:var(--md-sys-color-primary);">${s.count.toLocaleString('en-US')} (${s.pct}%)</span>
       </div>
     `).join('');
 
     document.getElementById('inspectorDetails').innerHTML = `
       <div style="margin-top:6px;">
-        <div style="font-weight:600; color:#94A3B8; margin-bottom:4px; font-size:0.68rem; text-transform:uppercase;">Top Industries in ${data.city}:</div>
+        <div style="font-weight:600; color:var(--md-sys-color-on-surface-variant); margin-bottom:4px; font-size:0.68rem; text-transform:uppercase;">Top Industries in ${data.city}:</div>
         ${industriesList}
       </div>
     `;
@@ -938,7 +1078,8 @@ async function selectCommune(cityName, deptCode, lat, lng) {
 
 async function selectSector(nafCode) {
   try {
-    const res = await fetch(`/api/sector/${nafCode}`);
+    const version = state.nafVersion || '2008';
+    const res = await fetch(`/api/sector/${nafCode}?version=${version}`);
     const data = await res.json();
     state.selectedSector = data;
     state.activeMode = 'sector';
@@ -960,13 +1101,13 @@ async function selectSector(nafCode) {
       .slice(0, 5);
 
     document.getElementById('inspectorDetails').innerHTML = `
-      <div style="font-weight:600; color:#94A3B8; margin-top:4px; font-size:0.68rem; text-transform:uppercase;">Top Regional Concentrations:</div>
+      <div style="font-weight:600; color:var(--md-sys-color-on-surface-variant); margin-top:4px; font-size:0.68rem; text-transform:uppercase;">Top Regional Concentrations:</div>
       ${topDepts.map(([code, count]) => {
         const name = state.departmentsMap[code] ? state.departmentsMap[code].name : `Dept ${code}`;
         return `
           <div class="breakdown-row" onclick="selectDepartment('${code}')">
             <span><b class="breakdown-code">${code}</b> ${name}</span>
-            <span style="font-weight:700; color:#38BDF8">${count.toLocaleString('en-US')}</span>
+            <span style="font-weight:700; color:var(--md-sys-color-primary);">${count.toLocaleString('en-US')}</span>
           </div>
         `;
       }).join('')}
@@ -1011,9 +1152,10 @@ async function openBusinessModal(deptCode, deptName, initialCity = '', initialNa
   document.getElementById('bizSearchInput').value = '';
 
   try {
+    const version = state.nafVersion || '2008';
     const [citiesRes, nichesRes] = await Promise.all([
       fetch(`/api/department/${deptCode}/cities`),
-      fetch(`/api/department/${deptCode}/niches`)
+      fetch(`/api/department/${deptCode}/niches?version=${version}`)
     ]);
 
     modalState.citiesList = await citiesRes.json();
@@ -1108,7 +1250,8 @@ async function fetchAndRenderBusinesses(append = false) {
   try {
     const limitVal = modalState.limit || 50;
     const offsetVal = modalState.offset || 0;
-    let url = `/api/businesses?dept=${modalState.dept}&limit=${limitVal}&offset=${offsetVal}`;
+    const version = state.nafVersion || '2008';
+    let url = `/api/businesses?dept=${modalState.dept}&limit=${limitVal}&offset=${offsetVal}&version=${version}`;
     if (modalState.city) {
       url += `&city=${encodeURIComponent(modalState.city)}`;
     }
@@ -1171,15 +1314,23 @@ async function fetchAndRenderBusinesses(append = false) {
             </a>
           </td>
           <td>
-            <div style="font-weight:600; color:#F0F6FC;">${b.city || 'N/A'}</div>
-            <div style="font-size:0.68rem; color:#8B949E;">${b.postal_code || ''}</div>
+            <div class="biz-location-city">${b.city || 'N/A'}</div>
+            <div class="biz-location-zip">${b.postal_code || ''}</div>
           </td>
           <td>
-            <div style="display:flex; align-items:flex-start; gap:4px;">
-              <span class="badge-naf">${b.naf_code}</span>
-              <span style="font-weight:600; color:#F0F6FC; font-size:0.73rem;">${b.naf_label}</span>
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <div style="display:flex; align-items:flex-start; gap:4px;">
+                <span class="badge-naf">${b.naf_code}</span>
+                <span class="biz-industry-title">${b.naf_label}</span>
+              </div>
+              ${b.naf_code_2025 ? `
+                <div style="display:flex; align-items:center; gap:4px; margin-top:2px;">
+                  <span class="badge-naf-2025" title="NAF 2025">${b.naf_code_2025}</span>
+                  <span class="biz-industry-sub">${b.naf_2025_label || ''}</span>
+                </div>
+              ` : ''}
+              ${b.naf_label_fr ? `<div class="biz-industry-official">Official: ${b.naf_label_fr}</div>` : ''}
             </div>
-            ${b.naf_label_fr ? `<div style="font-size:0.67rem; color:#8B949E; margin-top:2px;">Official (FR): ${b.naf_label_fr}</div>` : ''}
           </td>
           <td style="text-align: center;">${actionBtn}</td>
         </tr>
@@ -1287,7 +1438,7 @@ function showBusinessInInspector(siret, lat, lng, name, address, nafCode, nafLab
   const subEl = document.getElementById('inspectorSubtitle');
   if (subEl) {
     subEl.style.display = 'block';
-    subEl.innerHTML = `SIRET: <code style="color:#818CF8;">${siret}</code> • ${address}`;
+    subEl.innerHTML = `SIRET: <code style="color:var(--md-sys-color-primary); font-family:var(--font-mono);">${siret}</code> • ${address}`;
   }
 
   const countEl = document.getElementById('inspectorCount');
@@ -1881,7 +2032,8 @@ function renderBusinessMarkers(items) {
         <div class="biz-popup-sub">SIRET: <code>${b.siret}</code></div>
         <div class="biz-popup-sub">Location: <b>${escapeStr(b.postal_code || '')} ${escapeStr(b.city || '')}</b></div>
         <div class="biz-popup-badge">${b.naf_code} • ${escapeStr(b.naf_label)}</div>
-        ${b.naf_label_fr ? `<div style="font-size:0.67rem; color:#94A3B8; margin-top:3px;">Official (FR): ${escapeStr(b.naf_label_fr)}</div>` : ''}
+        ${b.naf_code_2025 ? `<div style="margin-top:4px;"><span class="badge-naf-2025">${b.naf_code_2025}</span> <span style="font-size:0.68rem; color:var(--md-sys-color-on-surface-variant);">NAF 2025: ${escapeStr(b.naf_2025_label || '')}</span></div>` : ''}
+        ${b.naf_label_fr ? `<div style="font-size:0.67rem; color:var(--md-sys-color-on-surface-variant); margin-top:3px;">Official (FR): ${escapeStr(b.naf_label_fr)}</div>` : ''}
         
         <div style="display:flex; flex-direction:column; gap:5px; margin-top:8px;">
           <a href="${b.google_maps_url}" target="_blank" class="btn-google-ext" style="display:flex; align-items:center; justify-content:center; padding:5px 8px;">
@@ -2044,3 +2196,129 @@ function escapeStr(str) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 }
+
+/* ==========================================================================
+   Real-Time Enterprise Lookup & Direct Map Pinpointing
+   ========================================================================== */
+async function performEnterpriseLookup(query) {
+  const dropdown = document.getElementById('enterpriseLookupDropdown');
+  if (!dropdown) return;
+  if (!query || query.length < 3) {
+    dropdown.style.display = 'none';
+    dropdown.innerHTML = '';
+    return;
+  }
+
+  try {
+    const version = state.nafVersion || '2008';
+    const res = await fetch(`/api/businesses?q=${encodeURIComponent(query)}&limit=6&version=${version}`);
+    if (!res.ok) return;
+    const data = await res.json();
+
+    if (!data.items || data.items.length === 0) {
+      if (/^\d{5,}$/.test(query)) {
+        dropdown.innerHTML = `
+          <div style="padding:10px; font-size:0.75rem; color:#94A3B8; text-align:center;">
+            No registered establishment found for "<b>${escapeStr(query)}</b>"
+          </div>`;
+        dropdown.style.display = 'block';
+      } else {
+        dropdown.style.display = 'none';
+      }
+      return;
+    }
+
+    dropdown.innerHTML = `
+      <div style="padding: 4px 8px 6px; font-size:0.67rem; text-transform:uppercase; color:#94A3B8; font-weight:700; letter-spacing:0.04em;">
+        Enterprises matching "${escapeStr(query)}" (${data.total.toLocaleString()} total):
+      </div>
+      ${data.items.map(b => `
+        <div class="lookup-item" onclick="focusBusinessOnMap('${escapeStr(b.siret)}', ${b.lat || 'null'}, ${b.lng || 'null'}, '${escapeStr(b.name)}', '${escapeStr(b.naf_code || '')}', '${escapeStr(b.naf_label || '')}', '${escapeStr(b.postal_code || '')}', '${escapeStr(b.city || '')}', '${escapeStr(b.naf_code_2025 || '')}', '${escapeStr(b.naf_2025_label || '')}')">
+          <div class="lookup-header">
+            <span class="lookup-name">${escapeStr(b.name || 'Enterprise')}</span>
+            <span class="lookup-badge">${b.has_gps ? 'GPS Verified' : 'Registered'}</span>
+          </div>
+          <div class="lookup-details">
+            <span class="lookup-siret">${b.siret}</span>
+            <span>•</span>
+            <span>${b.postal_code || ''} ${b.city || ''} (${b.department})</span>
+          </div>
+          <div class="lookup-action">
+            ${b.has_gps ? '📍 Locate on Map' : '📋 Inspect Enterprise'} →
+          </div>
+        </div>
+      `).join('')}
+    `;
+    dropdown.style.display = 'block';
+  } catch (err) {
+    console.error('Enterprise lookup error:', err);
+  }
+}
+
+window.focusBusinessOnMap = function(siret, lat, lng, name, nafCode, nafLabel, postalCode, city, naf2025Code, naf2025Label) {
+  const dropdown = document.getElementById('enterpriseLookupDropdown');
+  if (dropdown) dropdown.style.display = 'none';
+
+  if (lat && lng) {
+    map.flyTo([lat, lng], 17, { duration: 1.2 });
+
+    const icon = L.divIcon({
+      className: 'biz-node-icon pulse-active',
+      html: `
+        <div class="biz-node-pin" style="transform:scale(1.4);">
+          <div class="biz-node-dot" style="background:#10B981; box-shadow:0 0 16px #10B981;"></div>
+        </div>
+      `,
+      iconSize: [24, 24],
+      iconAnchor: [12, 12]
+    });
+
+    const marker = L.marker([lat, lng], { icon: icon }).addTo(businessMarkersLayerGroup);
+    
+    marker.bindPopup(`
+      <div class="biz-popup">
+        <div class="biz-popup-tag">Direct Verified SIRENE Match</div>
+        <div class="biz-popup-title">${escapeStr(name)}</div>
+        <div class="biz-popup-meta">
+          <div class="biz-popup-row">
+            <span class="biz-popup-label">SIRET</span>
+            <span class="biz-popup-val font-mono" style="color:var(--md-sys-color-primary);">${siret}</span>
+          </div>
+          <div class="biz-popup-row">
+            <span class="biz-popup-label">Address</span>
+            <span class="biz-popup-val">${postalCode} ${city}</span>
+          </div>
+          <div class="biz-popup-row">
+            <span class="biz-popup-label">NAF 2008</span>
+            <span class="biz-popup-val"><b>${nafCode}</b> ${escapeStr(nafLabel)}</span>
+          </div>
+          ${naf2025Code ? `
+          <div class="biz-popup-row">
+            <span class="biz-popup-label" style="color:var(--md-sys-color-tertiary);">NAF 2025</span>
+            <span class="biz-popup-val"><b>${naf2025Code}</b> ${escapeStr(naf2025Label)}</span>
+          </div>
+          ` : ''}
+        </div>
+        <div class="biz-popup-actions" style="margin-top:8px; display:flex; gap:6px;">
+          <a href="https://annuaire-entreprises.data.gouv.fr/etablissement/${siret}" target="_blank" class="btn-gov-verify" style="flex:1;">
+            Gouv.fr Record ↗
+          </a>
+          <a href="https://www.google.com/maps/search/?api=1&query=${lat},${lng}" target="_blank" class="btn-google-ext" style="flex:1;">
+            Google Maps ↗
+          </a>
+        </div>
+      </div>
+    `).openPopup();
+  } else {
+    // If no coordinates, open directory modal filtered by SIRET
+    openBusinessModal('', '', '', '');
+    setTimeout(() => {
+      const searchField = document.getElementById('bizSearchInput');
+      if (searchField) {
+        searchField.value = siret;
+        modalState.query = siret;
+        fetchAndRenderBusinesses(false);
+      }
+    }, 150);
+  }
+};
