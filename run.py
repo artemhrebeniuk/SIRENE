@@ -17,23 +17,29 @@ from src.config import (
     GEOLOC_PARQUET_PATH,
     COMBINED_PARQUET_PATH,
 )
+from src.logger import setup_logging, get_logger
 from src.fetcher import check_discovery, fetch_all
 from src.pipeline import run_pipeline, build_pipeline_sql
 from src.analytics import compute_aggregations
 
 console = Console()
+logger = get_logger("cli")
 
 
 def cmd_discover(args):
+    logger.info("CLI command: discover")
     check_discovery()
 
 
 def cmd_download(args):
+    logger.info(f"CLI command: download (force={args.force})")
     fetch_all(force=args.force)
 
 
 def cmd_process(args):
+    logger.info(f"CLI command: process (threads={args.threads}, memory={args.memory}, limit={args.limit})")
     if not STOCK_PARQUET_PATH.exists() or not GEOLOC_PARQUET_PATH.exists():
+        logger.error("Raw parquet datasets missing in data/raw/")
         console.print("[bold red]Error:[/] Raw parquet datasets not found in data/raw/.")
         console.print("Run [bold cyan]python run.py download[/] first, or run [bold cyan]python run.py sample[/] for quick test.")
         sys.exit(1)
@@ -97,6 +103,7 @@ def cmd_all(args):
 
 def cmd_serve(args):
     from web.server import app
+    logger.info(f"CLI command: serve on port {args.port}")
     console.print(f"[bold cyan]Launching SIRENE Interactive Geospatial Dashboard on [green]http://localhost:{args.port}[/]...[/]")
     app.run(host="0.0.0.0", port=args.port, debug=False)
 
@@ -105,6 +112,7 @@ def main():
     parser = argparse.ArgumentParser(
         description="SIRENE French Business Registry Pipeline & Geospatial Analytics"
     )
+    parser.add_argument("--verbose", "-v", action="store_true", help="Enable verbose DEBUG logging")
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
     
     # discover
@@ -148,6 +156,10 @@ def main():
     p_srv.set_defaults(func=cmd_serve)
     
     args = parser.parse_args()
+    log_level = "DEBUG" if args.verbose else "INFO"
+    setup_logging(log_level)
+    logger.debug(f"CLI invoked with arguments: {sys.argv[1:]}")
+
     if not args.command:
         parser.print_help()
         sys.exit(1)

@@ -7,15 +7,9 @@ import os
 import sys
 from pathlib import Path
 from typing import Tuple, List, Dict
-from flask import Flask, jsonify, request, send_from_directory, Response
+import time
+from flask import Flask, jsonify, request, send_from_directory, Response, g
 import duckdb
-
-if sys.platform == "win32":
-    try:
-        sys.stdout.reconfigure(encoding="utf-8")
-        sys.stderr.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
 
 from src.config import (
     BASE_DIR,
@@ -26,10 +20,71 @@ from src.config import (
     SUMMARY_DEPTS_CSV,
     SUMMARY_TOP_NAF_CSV,
 )
+from src.logger import get_logger, log_duration
 from web.naf_data import get_naf_label_en, get_naf_label_fr
+
+logger = get_logger("server")
 
 app = Flask(__name__, static_folder="static", template_folder="static")
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
+
+
+@app.before_request
+def handle_before_request():
+    """Record request start timestamp and log route entry."""
+    g.req_start_time = time.perf_counter()
+    query_str = f" ? {dict(request.args)}" if request.args else ""
+    logger.debug(f"--> {request.method} {request.path}{query_str} from {request.remote_addr}")
+
+
+@app.after_request
+def handle_after_request(response):
+    """Log response status, latency in milliseconds, and payload size."""
+    start_time = getattr(g, "req_start_time", None)
+    latency_ms = (time.perf_counter() - start_time) * 1000 if start_time else 0.0
+    content_len = response.calculate_content_length() or 0
+    status = response.status_code
+    
+    msg = f"<-- {request.method} {request.path} {status} | {latency_ms:.2f}ms | {content_len}B"
+    if status >= 500:
+        logger.error(msg)
+    elif status >= 400:
+        logger.warning(msg)
+    elif request.path.startswith("/api/"):
+        logger.info(msg)
+    else:
+        logger.debug(msg)
+        
+    return response
+
+
+from werkzeug.exceptions import HTTPException
+
+
+@app.route("/favicon.ico")
+def favicon():
+    return ("", 204)
+
+
+@app.errorhandler(Exception)
+def handle_global_exception(e):
+    """Catch-all unhandled exception handler logging full traceback for real errors and returning structured JSON."""
+    if isinstance(e, HTTPException):
+        logger.warning(f"HTTP {e.code} on {request.method} {request.path}: {e.description}")
+        return jsonify({
+            "error": e.name,
+            "detail": e.description,
+            "status": e.code,
+            "path": request.path
+        }), e.code
+
+    logger.critical(f"Unhandled server exception on {request.method} {request.path}: {e}", exc_info=True)
+    return jsonify({
+        "error": "Internal Server Error",
+        "detail": str(e),
+        "type": type(e).__name__,
+        "path": request.path
+    }), 500
 
 # Map of Department Codes to Names
 DEPT_NAMES = {
@@ -58,16 +113,15 @@ DEPT_NAMES = {
 
 
 def get_active_dataset_path() -> Tuple[str, bool]:
-    """Return path to latest available parquet layer (full or sample)."""
+    """Return path to genuine full active establishments parquet layer."""
     full_path = COMBINED_PARQUET_PATH
-    sample_path = PROCESSED_DATA_DIR / "sample_active_geo.parquet"
     
     if full_path.exists():
+        logger.debug(f"Resolved active dataset: full parquet ({full_path})")
         return str(full_path).replace("\\", "/"), False
-    elif sample_path.exists():
-        return str(sample_path).replace("\\", "/"), True
     else:
-        raise FileNotFoundError("No processed dataset found. Run pipeline first.")
+        logger.critical(f"No processed dataset found! Expected: {full_path}")
+        raise FileNotFoundError(f"Processed dataset ({full_path}) not found. Run pipeline first.")
 
 
 def get_db():
@@ -90,6 +144,7 @@ def get_geojson():
     geojson_path = BASE_DIR / "data" / "france_departements_101.geojson"
     if not geojson_path.exists():
         geojson_path = BASE_DIR / "data" / "france_departements.geojson"
+    logger.debug(f"Serving GeoJSON boundary layer from: {geojson_path}")
     return send_from_directory(geojson_path.parent, geojson_path.name)
 
 
@@ -112,6 +167,11 @@ def get_kpis():
     
     total_active, with_coords, total_dept, total_naf, total_naf_2025 = kpis
     pct = round(with_coords * 100.0 / total_active, 2) if total_active > 0 else 0
+    
+    logger.info(
+        f"/api/kpis: active={total_active:,}, coords={with_coords:,} ({pct}%), "
+        f"depts={total_dept}, naf={total_naf}, naf25={total_naf_2025} (source: {os.path.basename(data_file)})"
+    )
     
     return jsonify({
         "total_active_establishments": total_active,
@@ -161,6 +221,7 @@ def get_departments():
             "top_naf": r[4],
             "top_naf_label": get_naf_label_en(r[4])
         })
+    logger.debug(f"/api/departments: returned aggregates for {len(results)} departments")
     return jsonify(results)
 
 
@@ -183,6 +244,7 @@ def get_department_cities(dept_code):
         LIMIT 25
     """).fetchall()
     
+    logger.debug(f"/api/department/{dept_code}/cities: found {len(rows)} top cities")
     return jsonify([{
         "city": r[0],
         "total": r[1],
@@ -210,6 +272,7 @@ def get_department_niches(dept_code):
         LIMIT 80
     """).fetchall()
     
+    logger.debug(f"/api/department/{dept_code}/niches: version={version} -> found {len(rows)} sectors")
     return jsonify([{
         "code": r[0],
         "label": get_naf_label_en(r[0], version=version),
@@ -309,6 +372,11 @@ def get_businesses():
             "has_gps": bool(r[11] and r[12])
         })
         
+    logger.info(
+        f"/api/businesses: dept='{dept}', city='{city}', naf='{naf}', version='{version}', q='{q}', "
+        f"offset={offset}, limit={limit} -> matching={total_count:,}, returning={len(items)} items"
+    )
+
     return jsonify({
         "total": total_count,
         "limit": limit,
@@ -328,6 +396,8 @@ def export_filtered_businesses():
     naf = request.args.get("naf", "").strip().upper()
     q = request.args.get("q", "").strip().lower()
     
+    logger.info(f"/api/businesses/export: CSV export requested (dept='{dept}', city='{city}', naf='{naf}', q='{q}')")
+
     clauses = ["code_departement NOT LIKE '97%'"]
     if dept:
         clauses.append(f"UPPER(code_departement) = '{dept}'")
@@ -382,6 +452,7 @@ def export_filtered_businesses():
             f"https://annuaire-entreprises.data.gouv.fr/etablissement/{r[0]}"
         ])
         
+    logger.info(f"/api/businesses/export: stream generated with {len(rows)} records for dept='{dept or 'all'}'")
     return Response(
         output.getvalue(),
         mimetype="text/csv",
@@ -395,8 +466,10 @@ def get_communes():
     out_file = os.path.join(BASE_DIR, "output", "top_communes.json")
     target = web_file if os.path.exists(web_file) else out_file
     if os.path.exists(target):
+        logger.debug(f"/api/communes: loading precomputed centroids from {target}")
         with open(target, "r", encoding="utf-8") as f:
             return Response(f.read(), mimetype="application/json")
+    logger.warning("/api/communes: top_communes.json file missing in both web/ and output/")
     return jsonify([])
 
 
@@ -723,42 +796,14 @@ def get_nearby_parking():
                 "parkings": results
             }
             PARKING_CACHE[cache_key] = response_data
+            logger.info(f"/api/parking/nearby: lat={lat}, lon={lon}, radius={radius}m -> {len(results)} spots found ({response_data['truck_friendly_count']} truck-friendly)")
             return jsonify(response_data)
         else:
+            logger.info(f"/api/parking/nearby: lat={lat}, lon={lon}, radius={radius}m -> 0 spots returned by OSM mirrors")
             return jsonify({"center": {"lat": lat, "lon": lon}, "count": 0, "parkings": []})
     except Exception as e:
+        logger.error(f"/api/parking/nearby error for ({lat}, {lon}): {e}", exc_info=True)
         return jsonify({"center": {"lat": lat, "lon": lon}, "count": 0, "parkings": [], "error": str(e)})
-
-
-@app.route("/api/crowd/hotspots")
-def get_crowd_hotspots():
-    """
-    Returns curated high-footfall pedestrian zones, major transit hubs and shopping arteries in France.
-    """
-    hotspots = [
-        {"name": "Châtelet - Les Halles", "city": "Paris", "lat": 48.8619, "lon": 2.3470, "intensity": 0.98, "type": "Transit & Shopping"},
-        {"name": "Gare Saint-Lazare", "city": "Paris", "lat": 48.8768, "lon": 2.3253, "intensity": 0.95, "type": "Major Commuter Hub"},
-        {"name": "Gare du Nord", "city": "Paris", "lat": 48.8809, "lon": 2.3553, "intensity": 0.99, "type": "Europe's Busiest Station"},
-        {"name": "Gare de Lyon", "city": "Paris", "lat": 48.8443, "lon": 2.3744, "intensity": 0.94, "type": "TGV & Metro Hub"},
-        {"name": "Opéra Garnier / Bd Haussmann", "city": "Paris", "lat": 48.8719, "lon": 2.3316, "intensity": 0.96, "type": "Department Stores & Luxury"},
-        {"name": "Champs-Élysées", "city": "Paris", "lat": 48.8698, "lon": 2.3075, "intensity": 0.95, "type": "High Tourist & Footfall Avenue"},
-        {"name": "Place de la République", "city": "Paris", "lat": 48.8675, "lon": 2.3638, "intensity": 0.91, "type": "Pedestrian Plaza & Hub"},
-        {"name": "Place de la Bastille", "city": "Paris", "lat": 48.8531, "lon": 2.3698, "intensity": 0.89, "type": "Nightlife & Commercial"},
-        {"name": "Montparnasse Bienvenüe", "city": "Paris", "lat": 48.8421, "lon": 2.3219, "intensity": 0.92, "type": "Train Hub & Offices"},
-        {"name": "Rue de Rivoli", "city": "Paris", "lat": 48.8575, "lon": 2.3514, "intensity": 0.93, "type": "Pedestrian Shopping Strip"},
-        {"name": "La Défense Grande Arche", "city": "Paris / Nanterre", "lat": 48.8926, "lon": 2.2361, "intensity": 0.97, "type": "Europe's Largest Business District"},
-        {"name": "Lyon Part-Dieu", "city": "Lyon", "lat": 45.7606, "lon": 4.8594, "intensity": 0.94, "type": "TGV Station & Mega Mall"},
-        {"name": "Place Bellecour / Rue de la République", "city": "Lyon", "lat": 45.7578, "lon": 4.8320, "intensity": 0.93, "type": "Pedestrian Shopping Spine"},
-        {"name": "Marseille Saint-Charles", "city": "Marseille", "lat": 43.3032, "lon": 5.3806, "intensity": 0.91, "type": "Main Rail Station"},
-        {"name": "Vieux-Port", "city": "Marseille", "lat": 43.2951, "lon": 5.3744, "intensity": 0.92, "type": "Pedestrian Harbor & Tourism"},
-        {"name": "Lille Flandres", "city": "Lille", "lat": 50.6366, "lon": 3.0707, "intensity": 0.88, "type": "Grand Place & Transit Hub"},
-        {"name": "Bordeaux Saint-Jean", "city": "Bordeaux", "lat": 44.8259, "lon": -0.5567, "intensity": 0.89, "type": "TGV Hub"},
-        {"name": "Rue Sainte-Catherine", "city": "Bordeaux", "lat": 44.8378, "lon": -0.5746, "intensity": 0.95, "type": "Longest Pedestrian Street in Europe"},
-        {"name": "Toulouse Capitole", "city": "Toulouse", "lat": 43.6047, "lon": 1.4442, "intensity": 0.91, "type": "Historic Commercial Center"},
-        {"name": "Nice Promenade des Anglais / Masséna", "city": "Nice", "lat": 43.6970, "lon": 7.2704, "intensity": 0.92, "type": "Tourist & Coastal Promenade"}
-    ]
-    return jsonify(hotspots)
-
 
 @app.route("/api/businesses/map")
 def get_businesses_map():
@@ -848,6 +893,7 @@ def get_businesses_map():
             "lat": r[11],
             "lng": r[12]
         })
+    logger.debug(f"/api/businesses/map: dept='{dept}', city='{city}', naf='{naf}' -> returned {len(items)} markers")
     return jsonify({"count": len(items), "items": items})
 
 
@@ -870,15 +916,18 @@ def get_crowd_heatmap():
                 max_lat=float(max_lat),
                 max_lon=float(max_lon)
             )
+            logger.debug(f"/api/crowd/heatmap: local viewport bbox [{min_lat}, {min_lon}, {max_lat}, {max_lon}] -> {len(pts)} points")
         else:
             pts = get_crowd_heatmap_points()
+            logger.debug(f"/api/crowd/heatmap: national overview -> {len(pts)} points")
         return jsonify(pts)
     except Exception as e:
-        print("Error in /api/crowd/heatmap:", e)
+        logger.error(f"/api/crowd/heatmap generation failure: {e}", exc_info=True)
         return jsonify([])
 
 
 if __name__ == "__main__":
     port = 8000
+    logger.info(f"Starting SIRENE Dashboard server on http://localhost:{port}")
     print(f"Starting SIRENE Dashboard server on http://localhost:{port}")
     app.run(host="0.0.0.0", port=port, debug=False)

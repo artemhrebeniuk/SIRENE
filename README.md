@@ -261,27 +261,35 @@ Returns GeoJSON boundary multipolygons for French departments for interactive ma
 ```
 SIRENE/
 ├── src/
+│   ├── __init__.py           # Package marker
 │   ├── config.py             # Global configuration, CRS definitions, directory paths
+│   ├── logger.py             # Centralized logging engine with rotation & metric tracking
 │   ├── fetcher.py            # data.gouv.fr API discovery & streaming download with SHA1
 │   ├── pipeline.py           # DuckDB ETL: filtering, CRS conversion, spatial join
 │   └── analytics.py          # Summary generator (NAF x Department cross-tabulation)
 ├── web/
+│   ├── __init__.py           # Package marker
 │   ├── server.py             # Flask REST API with DuckDB-backed endpoints
 │   ├── crowd_data.py         # Heatmap engine: national clusters & viewport aggregation
-│   ├── naf_data.py           # Official INSEE NAF 2008 taxonomy loader
-│   ├── naf_complete.json     # Complete 738 NAF codes metadata (EN + FR)
+│   ├── naf_data.py           # Dual INSEE NAF 2008 / 2025 taxonomy loader
+│   ├── naf_complete.json     # Complete 738 NAF 2008 codes metadata (EN + FR)
+│   ├── naf_2025_complete.json# Complete 747 NAF 2025 codes metadata (EN + FR)
 │   ├── top_communes.json     # Precomputed French cities index with GPS centroids
-│   ├── crowd_heatmap_points.json  # Pre-cached 769 national density clusters
+│   ├── crowd_heatmap_points.json # Pre-cached national density clusters
 │   └── static/
-│       ├── index.html        # HTML5 observatory layout (Inter typography)
-│       ├── style.css         # Dark obsidian UI with flat surfaces & crisp borders
-│       ├── app.js            # Leaflet GIS engine: basemaps, heatmap, pins, layers
-│       └── vendor/           # Leaflet.js, leaflet-heat.js (vendored)
+│       ├── index.html        # HTML5 observatory layout (Material 3 tokens & Inter)
+│       ├── style.css         # Material 3 Canonical Theme (Dynamic Light / Dark)
+│       ├── app.js            # Leaflet GIS engine: SireneLogger, basemaps, pins, modal
+│       └── vendor/           # Leaflet.js, leaflet-heat.js (vendored offline)
 ├── data/
+│   ├── france_departements.geojson # National departmental boundaries
+│   ├── naf/                  # Official INSEE Excel taxonomy structures
 │   ├── raw/                  # Downloaded INSEE parquet files
-│   └── processed/            # active_establishments_geo.parquet (14M+ rows)
+│   └── processed/            # active_establishments_geo.parquet (13.5M+ geocoded)
+├── logs/                     # Rotating system log directory (sirene.log)
 ├── requirements.txt          # Production dependencies
 ├── run.py                    # Unified CLI management entrypoint
+├── start_dashboard.sh        # macOS / Linux one-click launcher
 ├── start_dashboard.bat       # Windows one-click launcher
 └── README.md                 # Project documentation
 ```

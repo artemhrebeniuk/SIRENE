@@ -8,6 +8,9 @@ Provides 100% official legal French designations, English translations, and cros
 
 import json
 import os
+from src.logger import get_logger
+
+logger = get_logger("naf")
 
 _DIR = os.path.dirname(__file__)
 NAF_CATALOG_2008 = {}
@@ -17,12 +20,24 @@ NAF_2008_PATH = os.path.join(_DIR, 'naf_complete.json')
 NAF_2025_PATH = os.path.join(_DIR, 'naf_2025_complete.json')
 
 if os.path.exists(NAF_2008_PATH):
-    with open(NAF_2008_PATH, 'r', encoding='utf-8') as f:
-        NAF_CATALOG_2008 = json.load(f)
+    try:
+        with open(NAF_2008_PATH, 'r', encoding='utf-8') as f:
+            NAF_CATALOG_2008 = json.load(f)
+            logger.info(f"Loaded NAF 2008 catalog: {len(NAF_CATALOG_2008)} entries from {NAF_2008_PATH}")
+    except Exception as e:
+        logger.error(f"Failed to load NAF 2008 catalog from {NAF_2008_PATH}: {e}", exc_info=True)
+else:
+    logger.warning(f"NAF 2008 catalog file missing at: {NAF_2008_PATH}")
 
 if os.path.exists(NAF_2025_PATH):
-    with open(NAF_2025_PATH, 'r', encoding='utf-8') as f:
-        NAF_CATALOG_2025 = json.load(f)
+    try:
+        with open(NAF_2025_PATH, 'r', encoding='utf-8') as f:
+            NAF_CATALOG_2025 = json.load(f)
+            logger.info(f"Loaded NAF 2025 catalog: {len(NAF_CATALOG_2025)} entries from {NAF_2025_PATH}")
+    except Exception as e:
+        logger.error(f"Failed to load NAF 2025 catalog from {NAF_2025_PATH}: {e}", exc_info=True)
+else:
+    logger.warning(f"NAF 2025 catalog file missing at: {NAF_2025_PATH}")
 
 # Default alias for backwards compatibility
 NAF_CATALOG = NAF_CATALOG_2008

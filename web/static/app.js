@@ -4,6 +4,115 @@
  * Official INSEE SIRENE Registry, 96 Departments, 300+ Communes (Cities) & NAF 2008 (738 codes).
  */
 
+/* ==========================================================================
+   SIRENE Enterprise Client-Side Logging Engine
+   Provides structured diagnostics, timing, network observability, and error tracking.
+   ========================================================================== */
+const SireneLogger = (() => {
+  const LOG_LEVELS = { DEBUG: 0, INFO: 1, WARN: 2, ERROR: 3, NONE: 4 };
+  let currentLevel = LOG_LEVELS.DEBUG;
+  const history = [];
+  const MAX_HISTORY = 1000;
+
+  const COLORS = {
+    INIT: 'color: #d0bcff; font-weight: bold;',
+    NET: 'color: #38bdf8; font-weight: bold;',
+    MAP: 'color: #4ade80; font-weight: bold;',
+    FILTER: 'color: #fbbf24; font-weight: bold;',
+    MODAL: 'color: #c084fc; font-weight: bold;',
+    THEME: 'color: #2dd4bf; font-weight: bold;',
+    RADAR: 'color: #f472b6; font-weight: bold;',
+    ERROR: 'color: #f87171; font-weight: bold;'
+  };
+
+  function record(level, tag, message, data) {
+    const entry = {
+      timestamp: new Date().toISOString(),
+      timeFormatted: new Date().toLocaleTimeString('fr-FR', { hour12: false }) + '.' + String(Date.now() % 1000).padStart(3, '0'),
+      level,
+      tag,
+      message,
+      data: data !== undefined ? (typeof data === 'object' ? JSON.parse(JSON.stringify(data)) : data) : null
+    };
+    history.push(entry);
+    if (history.length > MAX_HISTORY) history.shift();
+    return entry;
+  }
+
+  function log(levelStr, tag, message, ...extra) {
+    const lvl = LOG_LEVELS[levelStr] ?? LOG_LEVELS.INFO;
+    if (lvl < currentLevel) return;
+
+    const entry = record(levelStr, tag, message, extra.length > 0 ? extra : undefined);
+    const colorStyle = COLORS[tag] || 'color: #94a3b8; font-weight: bold;';
+    const tagFmt = `%c[${entry.timeFormatted}] [SIRENE:${tag}]%c ${message}`;
+    const tagCss = colorStyle;
+    const bodyCss = 'color: inherit; font-weight: normal;';
+
+    if (levelStr === 'ERROR') {
+      console.error(tagFmt, tagCss, bodyCss, ...extra);
+    } else if (levelStr === 'WARN') {
+      console.warn(tagFmt, tagCss, bodyCss, ...extra);
+    } else if (levelStr === 'DEBUG') {
+      console.debug(tagFmt, tagCss, bodyCss, ...extra);
+    } else {
+      console.log(tagFmt, tagCss, bodyCss, ...extra);
+    }
+  }
+
+  // Global unhandled error interception
+  window.addEventListener('error', (event) => {
+    log('ERROR', 'ERROR', `Unhandled Window Error: ${event.message} at ${event.filename}:${event.lineno}:${event.colno}`, event.error);
+  });
+
+  window.addEventListener('unhandledrejection', (event) => {
+    log('ERROR', 'ERROR', `Unhandled Promise Rejection: ${event.reason?.message || event.reason}`, event.reason);
+  });
+
+  return {
+    debug: (tag, msg, ...args) => log('DEBUG', tag, msg, ...args),
+    info: (tag, msg, ...args) => log('INFO', tag, msg, ...args),
+    warn: (tag, msg, ...args) => log('WARN', tag, msg, ...args),
+    error: (tag, msg, ...args) => log('ERROR', tag, msg, ...args),
+    setLevel: (lvl) => { currentLevel = LOG_LEVELS[lvl.toUpperCase()] ?? LOG_LEVELS.INFO; },
+    getHistory: () => [...history],
+    exportLogs: () => {
+      const blob = new Blob([JSON.stringify(history, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `sirene-client-logs-${new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-')}.json`;
+      a.click();
+    }
+  };
+})();
+
+window.SireneLogger = SireneLogger;
+window.exportSireneLogs = SireneLogger.exportLogs;
+
+/**
+ * Universal Instrumented Fetch Wrapper with latency timing and diagnostic error reporting.
+ */
+async function apiFetch(url, options = {}) {
+  const start = performance.now();
+  const method = (options.method || 'GET').toUpperCase();
+  SireneLogger.debug('NET', `--> ${method} ${url}`);
+  try {
+    const res = await fetch(url, options);
+    const duration = (performance.now() - start).toFixed(1);
+    if (!res.ok) {
+      const errText = await res.clone().text().catch(() => '');
+      SireneLogger.error('NET', `<-- ${method} ${url} HTTP ${res.status} (${duration}ms): ${errText.substring(0, 150)}`);
+      throw new Error(`HTTP ${res.status} on ${url}`);
+    }
+    SireneLogger.info('NET', `<-- ${method} ${url} ${res.status} (${duration}ms)`);
+    return res;
+  } catch (err) {
+    const duration = (performance.now() - start).toFixed(1);
+    SireneLogger.error('NET', `[FAIL] ${method} ${url} after ${duration}ms: ${err.message}`, err);
+    throw err;
+  }
+}
+
 // Application Reactive State
 const state = {
   kpis: null,
@@ -43,7 +152,7 @@ const modalState = {
 let isRegionsActive = true;
 let isTrafficActive = false;
 let isCrowdActive = false;
-let isParkingRadarActive = true;
+let isParkingRadarActive = false;
 let activeParkingRadius = 300;
 let activeParkingTarget = null;
 
@@ -52,7 +161,6 @@ let parkingLayerGroup = null;
 let parkingRadiusCircle = null;
 let crowdLayerGroup = null;
 let businessMarkersLayerGroup = null;
-let cachedCrowdHotspots = null;
 let viewportBizDebounce = null;
 
 // Map & Basemap Layers
@@ -73,17 +181,7 @@ const BASEMAPS = {
     maxZoom: 20,
     tileSize: 256,
     attribution: '&copy; Google Maps Satellite'
-  }),
-  'esri-dark': L.layerGroup([
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-      maxZoom: 16,
-      attribution: '&copy; Esri, HERE | INSEE SIRENE'
-    }),
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
-      maxZoom: 16,
-      attribution: ''
-    })
-  ])
+  })
 };
 
 // Lifecycle Start
@@ -94,13 +192,25 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadKPIs();
   await Promise.all([loadGeoJSON(), loadDepartments(), loadCommunes(), loadSectors()]);
   updateChoropleth();
+
+  // Support direct modal link via ?dept=75&deptName=Paris
+  const urlParams = new URLSearchParams(window.location.search);
+  const deptParam = urlParams.get('dept');
+  if (deptParam) {
+    const deptName = urlParams.get('deptName') || (deptParam === '75' ? 'Paris' : `Dept ${deptParam}`);
+    setTimeout(() => {
+      openBusinessModal(deptParam, deptName);
+    }, 300);
+  }
 });
 
 /* ==========================================================================
    Material 3 Dynamic Theme Manager (Baseline Light & Dark Schemes)
    ========================================================================== */
 function initM3Theme() {
-  const savedTheme = localStorage.getItem('sirene_m3_theme') || 'dark';
+  const urlParams = new URLSearchParams(window.location.search);
+  const themeParam = urlParams.get('theme');
+  const savedTheme = themeParam || localStorage.getItem('sirene_m3_theme') || 'dark';
   applyM3Theme(savedTheme);
 }
 
@@ -346,9 +456,11 @@ function getFeatureStyle(feature) {
    ========================================================================== */
 async function loadKPIs() {
   try {
-    const res = await fetch('/api/kpis');
+    const res = await apiFetch('/api/kpis');
     const data = await res.json();
     state.kpis = data;
+
+    SireneLogger.info('INIT', `Loaded KPIs: ${data.total_active_establishments.toLocaleString()} active establishments across ${data.distinct_departments} departments`);
 
     document.getElementById('kpiTotalActive').textContent = data.total_active_establishments.toLocaleString('en-US');
     const geocodedEl = document.getElementById('kpiGeocodedPct');
@@ -359,22 +471,23 @@ async function loadKPIs() {
       : data.distinct_naf_codes;
     document.getElementById('kpiNafCodes').textContent = nafCount.toLocaleString('en-US');
   } catch (err) {
-    console.error('Failed to load KPIs:', err);
+    SireneLogger.error('INIT', `Failed to load KPIs: ${err.message}`, err);
   }
 }
 
 async function loadGeoJSON() {
   try {
-    const res = await fetch('/api/geojson');
+    const res = await apiFetch('/api/geojson');
     state.geoJsonData = await res.json();
+    SireneLogger.info('MAP', `Loaded GeoJSON boundaries: ${state.geoJsonData?.features?.length || 0} department polygons`);
   } catch (err) {
-    console.error('Failed to load GeoJSON:', err);
+    SireneLogger.error('MAP', `Failed to load GeoJSON: ${err.message}`, err);
   }
 }
 
 async function loadDepartments() {
   try {
-    const res = await fetch('/api/departments');
+    const res = await apiFetch('/api/departments');
     state.departments = await res.json();
     state.departmentsMap = {};
     state.departments.forEach(d => {
@@ -382,29 +495,32 @@ async function loadDepartments() {
     });
     computeDeptQuantiles();
     renderDepartmentsList();
+    SireneLogger.info('INIT', `Loaded ${state.departments.length} department statistics`);
   } catch (err) {
-    console.error('Failed to load departments:', err);
+    SireneLogger.error('INIT', `Failed to load departments: ${err.message}`, err);
   }
 }
 
 async function loadCommunes() {
   try {
-    const res = await fetch('/api/communes');
+    const res = await apiFetch('/api/communes');
     state.communes = await res.json();
     renderCommunesList();
+    SireneLogger.info('INIT', `Loaded ${state.communes.length} commune centroids`);
   } catch (err) {
-    console.error('Failed to load communes:', err);
+    SireneLogger.error('INIT', `Failed to load communes: ${err.message}`, err);
   }
 }
 
 async function loadSectors() {
   try {
     const version = state.nafVersion || '2008';
-    const res = await fetch(`/api/sectors?limit=250&version=${version}`);
+    const res = await apiFetch(`/api/sectors?limit=250&version=${version}`);
     state.sectors = await res.json();
     renderSectorsList();
+    SireneLogger.info('INIT', `Loaded ${state.sectors.length} sectors for NAF ${version}`);
   } catch (err) {
-    console.error('Failed to load sectors:', err);
+    SireneLogger.error('INIT', `Failed to load sectors: ${err.message}`, err);
   }
 }
 
@@ -510,9 +626,12 @@ function updateLegend() {
     maxVal = state.departments[0].total;
   }
 
-  document.getElementById('legendMin').textContent = '0';
-  document.getElementById('legendMid').textContent = Math.round(maxVal / 2).toLocaleString('en-US');
-  document.getElementById('legendMax').textContent = maxVal.toLocaleString('en-US');
+  const minEl = document.getElementById('legendMin');
+  if (minEl) minEl.textContent = '0';
+  const midEl = document.getElementById('legendMid');
+  if (midEl) midEl.textContent = Math.round(maxVal / 2).toLocaleString('en-US');
+  const maxEl = document.getElementById('legendMax');
+  if (maxEl) maxEl.textContent = maxVal.toLocaleString('en-US');
 }
 
 /* ==========================================================================
@@ -929,13 +1048,15 @@ function renderSectorsList() {
    ========================================================================== */
 async function selectDepartment(deptCode) {
   try {
+    SireneLogger.info('FILTER', `Selecting department: ${deptCode}`);
     const [deptRes, citiesRes] = await Promise.all([
-      fetch(`/api/department/${deptCode}`),
-      fetch(`/api/department/${deptCode}/cities`)
+      apiFetch(`/api/department/${deptCode}`),
+      apiFetch(`/api/department/${deptCode}/cities`)
     ]);
 
     const data = await deptRes.json();
     const cities = await citiesRes.json();
+    SireneLogger.info('FILTER', `Loaded department ${deptCode} (${data.name}): ${data.total} establishments, ${cities.length} cities`);
 
     state.selectedDepartment = data;
     state.selectedCommune = null;
@@ -950,9 +1071,15 @@ async function selectDepartment(deptCode) {
       state.communeMarker = null;
     }
 
+function setMapHeaderMeta(title, subtitle) {
+  const titleEl = document.getElementById('mapViewTitle');
+  if (titleEl) titleEl.textContent = title;
+  const subEl = document.getElementById('mapViewSubtitle');
+  if (subEl) subEl.textContent = subtitle;
+}
+
     // Update Overlay Header
-    document.getElementById('mapViewTitle').textContent = `${data.name} (${data.code})`;
-    document.getElementById('mapViewSubtitle').textContent = `${data.total.toLocaleString('en-US')} establishments • ${data.geocoded_pct}% geocoded`;
+    setMapHeaderMeta(`${data.name} (${data.code})`, `${data.total.toLocaleString('en-US')} establishments • ${data.geocoded_pct}% geocoded`);
 
     // Open Inspector Drawer
     const drawer = document.getElementById('inspectorDrawer');
@@ -995,13 +1122,14 @@ async function selectDepartment(deptCode) {
     renderDepartmentsList();
     updateChoropleth();
   } catch (err) {
-    console.error('Error selecting department:', err);
+    SireneLogger.error('FILTER', `Error selecting department ${deptCode}: ${err.message}`, err);
   }
 }
 
 async function selectCommune(cityName, deptCode, lat, lng) {
   try {
-    const res = await fetch(`/api/commune/${encodeURIComponent(cityName)}?dept=${deptCode}`);
+    SireneLogger.info('FILTER', `Selecting commune: ${cityName} (Dept ${deptCode})`, { lat, lng });
+    const res = await apiFetch(`/api/commune/${encodeURIComponent(cityName)}?dept=${deptCode}`);
     const data = await res.json();
     state.selectedCommune = data;
     state.selectedDepartment = null;
@@ -1011,8 +1139,7 @@ async function selectCommune(cityName, deptCode, lat, lng) {
     modalState.city = data.city;
 
     // Update Overlay Header
-    document.getElementById('mapViewTitle').textContent = `${data.city} (Dept ${data.dept})`;
-    document.getElementById('mapViewSubtitle').textContent = `${data.total.toLocaleString('en-US')} establishments • ${data.geocoded_pct}% geocoded`;
+    setMapHeaderMeta(`${data.city} (Dept ${data.dept})`, `${data.total.toLocaleString('en-US')} establishments • ${data.geocoded_pct}% geocoded`);
 
     // Open Inspector Drawer
     const drawer = document.getElementById('inspectorDrawer');
@@ -1072,21 +1199,21 @@ async function selectCommune(cityName, deptCode, lat, lng) {
 
     renderCommunesList();
   } catch (err) {
-    console.error('Error selecting commune:', err);
+    SireneLogger.error('FILTER', `Error selecting commune ${cityName}: ${err.message}`, err);
   }
 }
 
 async function selectSector(nafCode) {
   try {
     const version = state.nafVersion || '2008';
-    const res = await fetch(`/api/sector/${nafCode}?version=${version}`);
+    SireneLogger.info('FILTER', `Selecting NAF sector: ${nafCode} (version: ${version})`);
+    const res = await apiFetch(`/api/sector/${nafCode}?version=${version}`);
     const data = await res.json();
     state.selectedSector = data;
     state.activeMode = 'sector';
 
     // Update Overlay Header
-    document.getElementById('mapViewTitle').textContent = `${data.code_naf} — ${data.label}`;
-    document.getElementById('mapViewSubtitle').textContent = `National total: ${data.total_national.toLocaleString('en-US')} active establishments`;
+    setMapHeaderMeta(`${data.code_naf} — ${data.label}`, `National total: ${data.total_national.toLocaleString('en-US')} active establishments`);
 
     // Open Inspector Drawer
     const drawer = document.getElementById('inspectorDrawer');
@@ -1116,7 +1243,7 @@ async function selectSector(nafCode) {
     renderSectorsList();
     updateChoropleth();
   } catch (err) {
-    console.error('Error selecting sector:', err);
+    SireneLogger.error('FILTER', `Error selecting sector ${nafCode}: ${err.message}`, err);
   }
 }
 
@@ -1144,6 +1271,8 @@ async function openBusinessModal(deptCode, deptName, initialCity = '', initialNa
   modalState.loadedCount = 0;
   modalState.isLoading = false;
 
+  SireneLogger.info('MODAL', `Opening business modal for Dept ${deptCode} (${deptName})`, { initialCity, initialNaf });
+
   const modal = document.getElementById('bizModal');
   modal.style.display = 'flex';
 
@@ -1154,8 +1283,8 @@ async function openBusinessModal(deptCode, deptName, initialCity = '', initialNa
   try {
     const version = state.nafVersion || '2008';
     const [citiesRes, nichesRes] = await Promise.all([
-      fetch(`/api/department/${deptCode}/cities`),
-      fetch(`/api/department/${deptCode}/niches?version=${version}`)
+      apiFetch(`/api/department/${deptCode}/cities`),
+      apiFetch(`/api/department/${deptCode}/niches?version=${version}`)
     ]);
 
     modalState.citiesList = await citiesRes.json();
@@ -1164,7 +1293,7 @@ async function openBusinessModal(deptCode, deptName, initialCity = '', initialNa
     renderCitySelect();
     renderNicheSelect();
   } catch (err) {
-    console.error('Failed to load filter metadata for modal:', err);
+    SireneLogger.error('MODAL', `Failed to load filter metadata for modal: ${err.message}`, err);
   }
 
   fetchAndRenderBusinesses(false);
@@ -1262,7 +1391,8 @@ async function fetchAndRenderBusinesses(append = false) {
       url += `&q=${encodeURIComponent(modalState.query)}`;
     }
 
-    const res = await fetch(url);
+    SireneLogger.info('MODAL', `Fetching businesses page [offset=${offsetVal}, limit=${limitVal}]`, { dept: modalState.dept, city: modalState.city, naf: modalState.naf, query: modalState.query });
+    const res = await apiFetch(url);
     if (!res.ok) {
       throw new Error(`Server returned ${res.status}`);
     }
@@ -1270,6 +1400,7 @@ async function fetchAndRenderBusinesses(append = false) {
 
     modalState.total = data.total;
     modalState.loadedCount += data.items.length;
+    SireneLogger.info('MODAL', `Loaded ${data.items.length} businesses (total: ${data.total})`);
 
     document.getElementById('bizCountSummary').textContent = 
       `Showing ${modalState.loadedCount.toLocaleString('en-US')} of ${modalState.total.toLocaleString('en-US')} total establishments`;
@@ -1293,43 +1424,52 @@ async function fetchAndRenderBusinesses(append = false) {
     const rowsHtml = data.items.map(b => {
       const actionBtn = b.has_gps ? `
         <button class="btn-locate" onclick="pinBusinessOnMap('${b.siret}', ${b.lat}, ${b.lng}, '${escapeStr(b.name)}', '${escapeStr(b.postal_code || '')} ${escapeStr(b.city || '')}', '${b.naf_code}', '${escapeStr(b.naf_label)}', '${escapeStr(b.naf_label_fr || '')}', '${escapeStr(b.google_maps_url || '')}', '${escapeStr(b.gov_verify_url)}')">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
             <circle cx="12" cy="10" r="3"></circle>
           </svg>
-          Locate
+          <span>Locate</span>
         </button>
-      ` : `<span style="color:#6E7681; font-size:0.68rem; display:block; text-align:center;">No GPS</span>`;
+      ` : `<span class="biz-no-gps">No GPS</span>`;
 
       return `
         <tr>
           <td class="biz-name-cell">
             <div class="biz-name-main">${b.name}</div>
-            ${b.enseigne && b.enseigne !== b.name ? `<div class="biz-name-sub">Trade sign: ${b.enseigne}</div>` : ''}
+            ${b.enseigne && b.enseigne !== b.name ? `<div class="biz-name-sub"><span class="trade-sign-tag">Enseigne</span><span class="trade-sign-val">${b.enseigne}</span></div>` : ''}
           </td>
           <td>
-            <span class="biz-siret-val">${b.siret}</span>
-            <a href="${b.gov_verify_url}" target="_blank" class="biz-verify-link" title="Verify on official registry">
-              Verify ↗
-            </a>
+            <div class="biz-siret-wrap">
+              <span class="biz-siret-val">${b.siret}</span>
+              <a href="${b.gov_verify_url}" target="_blank" class="biz-verify-chip" title="Verify on official French registry">
+                <span>Verify</span>
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+            </div>
           </td>
           <td>
-            <div class="biz-location-city">${b.city || 'N/A'}</div>
-            <div class="biz-location-zip">${b.postal_code || ''}</div>
+            <div class="biz-location-wrap">
+              <div class="biz-location-city">${b.city || 'N/A'}</div>
+              <div class="biz-location-zip">${b.postal_code || ''}</div>
+            </div>
           </td>
           <td>
-            <div style="display:flex; flex-direction:column; gap:3px;">
-              <div style="display:flex; align-items:flex-start; gap:4px;">
+            <div class="biz-industry-wrap">
+              <div class="biz-industry-row">
                 <span class="badge-naf">${b.naf_code}</span>
                 <span class="biz-industry-title">${b.naf_label}</span>
               </div>
               ${b.naf_code_2025 ? `
-                <div style="display:flex; align-items:center; gap:4px; margin-top:2px;">
+                <div class="biz-industry-row sub-naf">
                   <span class="badge-naf-2025" title="NAF 2025">${b.naf_code_2025}</span>
                   <span class="biz-industry-sub">${b.naf_2025_label || ''}</span>
                 </div>
               ` : ''}
-              ${b.naf_label_fr ? `<div class="biz-industry-official">Official: ${b.naf_label_fr}</div>` : ''}
+              ${b.naf_label_fr ? `<div class="biz-industry-official">${b.naf_label_fr}</div>` : ''}
             </div>
           </td>
           <td style="text-align: center;">${actionBtn}</td>
@@ -1344,7 +1484,7 @@ async function fetchAndRenderBusinesses(append = false) {
     }
 
   } catch (err) {
-    console.error('Error fetching businesses:', err);
+    SireneLogger.error('MODAL', `Error fetching businesses: ${err.message}`, err);
     if (!append) {
       tbody.innerHTML = `<tr><td colspan="5" class="loading-state">Error loading businesses: ${escapeStr(err.message)}</td></tr>`;
     }
@@ -1363,6 +1503,7 @@ function loadMoreBusinesses() {
    Pin Individual Business on Genuine Google Map
    ========================================================================== */
 function pinBusinessOnMap(siret, lat, lng, name, address, nafCode, nafLabel, nafLabelFr, googleUrl, govUrl) {
+  SireneLogger.info('MAP', `Pinning business ${siret} on map: "${name}"`, { lat, lng });
   document.getElementById('bizModal').style.display = 'none';
 
   if (currentBizMarker) {
@@ -1601,10 +1742,12 @@ async function loadNearbyParkings(lat, lon, businessName, radius) {
   renderParkingDrawerPanel(businessName, activeParkingRadius, null, true);
 
   try {
-    const res = await fetch(`/api/parking/nearby?lat=${lat}&lon=${lon}&radius=${activeParkingRadius}`);
+    SireneLogger.info('RADAR', `Scanning nearby truck parkings around [${lat}, ${lon}] within ${activeParkingRadius}m for: "${businessName}"`);
+    const res = await apiFetch(`/api/parking/nearby?lat=${lat}&lon=${lon}&radius=${activeParkingRadius}`);
     const data = await res.json();
     const parkings = data.parkings || [];
     activeParkingData = parkings;
+    SireneLogger.info('RADAR', `Found ${parkings.length} parking spots (${data.truck_friendly_count || 0} truck-friendly) within ${activeParkingRadius}m`);
 
     // Render custom pins on map
     parkings.forEach((p, idx) => {
@@ -1643,7 +1786,7 @@ async function loadNearbyParkings(lat, lon, businessName, radius) {
     renderParkingDrawerPanel(businessName, activeParkingRadius, data, false);
 
   } catch (err) {
-    console.error('Failed to load nearby parkings:', err);
+    SireneLogger.error('RADAR', `Failed to load nearby parkings: ${err.message}`, err);
     renderParkingDrawerPanel(businessName, activeParkingRadius, { count: 0, truck_friendly_count: 0, parkings: [] }, false);
   }
 }
@@ -1870,21 +2013,24 @@ async function checkViewportHeatmap() {
     const maxLng = bounds.getEast().toFixed(3);
 
     try {
-      const res = await fetch(`/api/crowd/heatmap?min_lat=${minLat}&max_lat=${maxLat}&min_lon=${minLng}&max_lon=${maxLng}`);
+      SireneLogger.debug('MAP', `Updating viewport crowd heatmap for bounds [${minLat}, ${minLng}] -> [${maxLat}, ${maxLng}]`);
+      const res = await apiFetch(`/api/crowd/heatmap?min_lat=${minLat}&max_lat=${maxLat}&min_lon=${minLng}&max_lon=${maxLng}`);
       if (!res.ok) return;
       const pts = await res.json();
       if (pts && pts.length > 0 && crowdHeatLayer) {
         crowdHeatLayer.setLatLngs(pts);
         isViewportHeatmapLoaded = true;
+        SireneLogger.debug('MAP', `Applied ${pts.length} high-resolution viewport heatmap points`);
       }
     } catch (e) {
-      console.error('Failed to load viewport heatmap:', e);
+      SireneLogger.error('MAP', `Failed to load viewport heatmap: ${e.message}`, e);
     }
   } else {
     // Revert back to calibrated national density if zoomed out
     if (isViewportHeatmapLoaded && cachedHeatmapData && crowdHeatLayer) {
       crowdHeatLayer.setLatLngs(cachedHeatmapData);
       isViewportHeatmapLoaded = false;
+      SireneLogger.debug('MAP', 'Reverted heatmap to national cached density');
     }
   }
 }
@@ -1892,6 +2038,7 @@ async function checkViewportHeatmap() {
 async function toggleCrowdHeatmap() {
   const btn = document.getElementById('btnToggleCrowd');
   isCrowdActive = !isCrowdActive;
+  SireneLogger.info('MAP', `Crowd Heatmap layer toggled: ${isCrowdActive ? 'ON' : 'OFF'}`);
 
   if (btn) btn.classList.toggle('active', isCrowdActive);
 
@@ -1916,10 +2063,11 @@ async function toggleCrowdHeatmap() {
 
   if (!cachedHeatmapData) {
     try {
-      const res = await fetch('/api/crowd/heatmap');
+      const res = await apiFetch('/api/crowd/heatmap');
       cachedHeatmapData = await res.json();
+      SireneLogger.info('MAP', `Loaded national heatmap points: ${cachedHeatmapData.length}`);
     } catch (e) {
-      console.error('Failed to load heatmap coordinates:', e);
+      SireneLogger.error('MAP', `Failed to load heatmap coordinates: ${e.message}`, e);
       return;
     }
   }
@@ -1975,23 +2123,27 @@ async function loadViewportBusinesses() {
   const maxLng = bounds.getEast();
 
   try {
-    const res = await fetch(`/api/businesses/map?min_lat=${minLat}&max_lat=${maxLat}&min_lng=${minLng}&max_lng=${maxLng}&limit=60`);
+    SireneLogger.debug('MAP', `Loading viewport establishments at zoom ${map.getZoom()}`);
+    const res = await apiFetch(`/api/businesses/map?min_lat=${minLat}&max_lat=${maxLat}&min_lng=${minLng}&max_lng=${maxLng}&limit=60`);
     if (!res.ok) return;
     const data = await res.json();
+    SireneLogger.debug('MAP', `Rendered ${data.items ? data.items.length : 0} establishments in current viewport`);
     renderBusinessMarkers(data.items);
   } catch (e) {
-    console.error('Failed to load viewport businesses:', e);
+    SireneLogger.error('MAP', `Failed to load viewport businesses: ${e.message}`, e);
   }
 }
 
 async function loadCityEstablishments(cityName, deptCode) {
   try {
-    const res = await fetch(`/api/businesses/map?city=${encodeURIComponent(cityName)}&dept=${encodeURIComponent(deptCode)}&limit=60`);
+    SireneLogger.info('MAP', `Loading establishments for city: ${cityName} (Dept ${deptCode})`);
+    const res = await apiFetch(`/api/businesses/map?city=${encodeURIComponent(cityName)}&dept=${encodeURIComponent(deptCode)}&limit=60`);
     if (!res.ok) return;
     const data = await res.json();
+    SireneLogger.info('MAP', `Rendered ${data.items ? data.items.length : 0} establishments for ${cityName}`);
     renderBusinessMarkers(data.items);
   } catch (e) {
-    console.error('Failed to load city establishments:', e);
+    SireneLogger.error('MAP', `Failed to load city establishments for ${cityName}: ${e.message}`, e);
   }
 }
 
@@ -2176,8 +2328,7 @@ function resetAll() {
     state.communeMarker = null;
   }
 
-  document.getElementById('mapViewTitle').textContent = 'National Overview';
-  document.getElementById('mapViewSubtitle').textContent = 'Click any department or city to inspect';
+  setMapHeaderMeta('National Overview', 'Click any department or city to inspect');
 
   map.setView([46.603354, 1.888334], 6);
   renderDepartmentsList();
@@ -2211,9 +2362,11 @@ async function performEnterpriseLookup(query) {
 
   try {
     const version = state.nafVersion || '2008';
-    const res = await fetch(`/api/businesses?q=${encodeURIComponent(query)}&limit=6&version=${version}`);
+    SireneLogger.info('SEARCH', `Enterprise search query: "${query}" (version: ${version})`);
+    const res = await apiFetch(`/api/businesses?q=${encodeURIComponent(query)}&limit=6&version=${version}`);
     if (!res.ok) return;
     const data = await res.json();
+    SireneLogger.info('SEARCH', `Found ${data.total || 0} establishments matching "${query}"`);
 
     if (!data.items || data.items.length === 0) {
       if (/^\d{5,}$/.test(query)) {
@@ -2251,7 +2404,7 @@ async function performEnterpriseLookup(query) {
     `;
     dropdown.style.display = 'block';
   } catch (err) {
-    console.error('Enterprise lookup error:', err);
+    SireneLogger.error('SEARCH', `Enterprise lookup error: ${err.message}`, err);
   }
 }
 

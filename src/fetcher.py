@@ -25,8 +25,10 @@ from src.config import (
     STOCK_PARQUET_PATH,
     GEOLOC_PARQUET_PATH,
 )
+from src.logger import get_logger, log_duration
 
 console = Console()
+logger = get_logger("fetcher")
 
 
 def discover_parquet_resource(dataset_slug: str, title_keyword: str) -> Dict[str, any]:
@@ -35,12 +37,14 @@ def discover_parquet_resource(dataset_slug: str, title_keyword: str) -> Dict[str
     """
     api_url = f"{DATA_GOUV_API_BASE}/datasets/{dataset_slug}/"
     headers = {"User-Agent": "SIRENE-Pipeline/1.0"}
+    logger.info(f"Querying data.gouv.fr API for dataset: '{dataset_slug}' (keyword: '{title_keyword}')")
     
     response = requests.get(api_url, headers=headers, timeout=30)
     response.raise_for_status()
     data = response.json()
     
     resources = data.get("resources", [])
+    logger.debug(f"API returned {len(resources)} total resources for '{dataset_slug}'")
     
     # Filter candidates by format 'parquet' and exact dataset target
     candidates = []
@@ -61,10 +65,13 @@ def discover_parquet_resource(dataset_slug: str, title_keyword: str) -> Dict[str
                 candidates.append(res)
                 
     if not candidates:
+        logger.error(f"No parquet resource found for dataset '{dataset_slug}' with keyword '{title_keyword}'")
         raise ValueError(
             f"No parquet resource found for dataset '{dataset_slug}' with keyword '{title_keyword}'"
         )
         
+    logger.info(f"Discovered {len(candidates)} matching Parquet candidate(s) for '{title_keyword}'")
+
     # Sort by created_at / last_modified descending to take the freshest
     candidates.sort(
         key=lambda r: r.get("last_modified") or r.get("created_at") or "",
@@ -72,7 +79,7 @@ def discover_parquet_resource(dataset_slug: str, title_keyword: str) -> Dict[str
     )
     
     latest = candidates[0]
-    return {
+    result = {
         "id": latest.get("id"),
         "title": latest.get("title"),
         "url": latest.get("url"),
@@ -81,6 +88,9 @@ def discover_parquet_resource(dataset_slug: str, title_keyword: str) -> Dict[str
         "checksum": latest.get("checksum", {}).get("value") if latest.get("checksum") else None,
         "checksum_type": latest.get("checksum", {}).get("type") if latest.get("checksum") else None,
     }
+    size_mb = (result["filesize"] or 0) / (1024 * 1024)
+    logger.info(f"Selected freshest resource: '{result['title']}' | {size_mb:.2f} MB | Modified: {result['last_modified']} | URL: {result['url']}")
+    return result
 
 
 def download_file(
@@ -103,12 +113,15 @@ def download_file(
     max_retries = 5
     retry_count = 0
     
+    logger.info(f"Initiating download: target={target_path.name} | expected_size={expected_size} bytes")
+
     while retry_count < max_retries:
         try:
             # If final target already exists and size matches, check if complete
             if target_path.exists():
                 actual_size = target_path.stat().st_size
                 if expected_size and actual_size == expected_size:
+                    logger.info(f"File verified locally, skipping download: {target_path} ({actual_size / (1024*1024):.1f} MB)")
                     console.print(f"[bold green][OK][/] File already exists and matches expected size: {target_path.name} ({actual_size / (1024*1024):.1f} MB)")
                     return target_path
 
@@ -118,6 +131,7 @@ def download_file(
             if temp_path.exists():
                 downloaded_bytes = temp_path.stat().st_size
                 headers["Range"] = f"bytes={downloaded_bytes}-"
+                logger.info(f"Resuming partial download from byte {downloaded_bytes} ({downloaded_bytes / (1024*1024):.1f} MB)")
                 console.print(f"[yellow]Resuming download from byte {downloaded_bytes} ({downloaded_bytes / (1024*1024):.1f} MB)...[/]")
 
             response = requests.get(url, headers=headers, stream=True, timeout=60)
@@ -127,6 +141,7 @@ def download_file(
                     if target_path.exists():
                         target_path.unlink()
                     temp_path.rename(target_path)
+                    logger.info(f"Partial file was already complete, renamed to {target_path}")
                     return target_path
             response.raise_for_status()
             
@@ -136,6 +151,7 @@ def download_file(
                 downloaded_bytes = 0
                 
             total_size = expected_size or int(response.headers.get("content-length", 0)) + downloaded_bytes
+            logger.debug(f"HTTP {response.status_code} | mode={mode} | target_total={total_size} bytes")
             
             with open(temp_path, mode) as f:
                 with tqdm(
@@ -154,20 +170,25 @@ def download_file(
                             
             # Verify file size if expected_size is known
             if temp_path.exists():
-                if expected_size and temp_path.stat().st_size != expected_size:
-                    raise IOError(f"File size mismatch: got {temp_path.stat().st_size} bytes, expected {expected_size}")
+                final_size = temp_path.stat().st_size
+                if expected_size and final_size != expected_size:
+                    logger.error(f"Size verification failed: got {final_size} bytes, expected {expected_size}")
+                    raise IOError(f"File size mismatch: got {final_size} bytes, expected {expected_size}")
                 if target_path.exists():
                     target_path.unlink()
                 temp_path.rename(target_path)
+                logger.info(f"Download validated and finalized: {target_path} ({final_size / (1024*1024):.2f} MB)")
                 
             console.print(f"[bold green][OK] Download complete:[/] {target_path}")
             return target_path
             
         except (requests.exceptions.RequestException, IOError) as e:
             retry_count += 1
+            logger.warning(f"Download interrupted ({type(e).__name__}: {e}). Retry {retry_count}/{max_retries} scheduled in 3s...", exc_info=True)
             console.print(f"[bold red]Download interrupted ({e}).[/] Retrying {retry_count}/{max_retries} in 3s...")
             time.sleep(3)
             
+    logger.critical(f"Failed to download {url} after {max_retries} attempts.")
     raise RuntimeError(f"Failed to download {url} after {max_retries} attempts.")
 
 
@@ -198,6 +219,7 @@ def fetch_all(force: bool = False) -> Tuple[Path, Path]:
     """
     Fetch both StockEtablissement and Géolocalisation datasets.
     """
+    logger.info("fetch_all: Starting batch discovery and download workflow")
     stock_info, geoloc_info = check_discovery()
     
     console.print("[bold cyan]Starting download of StockEtablissement Parquet...[/]")
@@ -216,6 +238,7 @@ def fetch_all(force: bool = False) -> Tuple[Path, Path]:
         expected_sha1=geoloc_info["checksum"]
     )
     
+    logger.info(f"fetch_all completed: stock={stock_path} ({stock_path.stat().st_size} bytes), geoloc={geoloc_path} ({geoloc_path.stat().st_size} bytes)")
     return stock_path, geoloc_path
 
 

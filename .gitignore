@@ -8,15 +8,20 @@ venv/
 .pytest_cache/
 
 # Data and large downloads
-data/
+data/raw/
+data/processed/
 *.parquet
 *.zip
 *.tar.gz
 *.csv
+!data/france_departements.geojson
+!data/naf/
 
-# Output & Scratch
+# Output & Scratch & Logs
 output/
 scratch/
+logs/
+*.log
 
 # IDE / OS
 .vscode/

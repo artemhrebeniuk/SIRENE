@@ -8,6 +8,9 @@ import os
 import json
 import math
 import duckdb
+from src.logger import get_logger
+
+logger = get_logger("crowd")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PARQUET_PATH = os.path.join(BASE_DIR, "data", "processed", "active_establishments_geo.parquet")
@@ -22,8 +25,10 @@ def compute_national_heatmap_points():
     proportionally without over-saturating the entire country into red.
     """
     if not os.path.exists(PARQUET_PATH):
+        logger.warning(f"Heatmap computation aborted: Parquet not found at {PARQUET_PATH}")
         return []
 
+    logger.info("Computing national commercial density heatmap clusters from Parquet...")
     con = duckdb.connect()
     con.execute("SET threads = 4;")
     rows = con.execute(f"""
@@ -99,9 +104,10 @@ def get_crowd_heatmap_points(min_lat=None, min_lon=None, max_lat=None, max_lon=N
                     norm = (math.log(cnt) - log_min) / (log_max - log_min) if log_max > log_min else 0.5
                     w = round(0.20 + 0.80 * norm, 2)
                     res.append([round(lat, 4), round(lon, 4), w])
+                logger.debug(f"Viewport heatmap queried: {len(res)} clusters generated for bbox [{min_lat}, {min_lon}, {max_lat}, {max_lon}]")
                 return res
         except Exception as e:
-            print("Error querying viewport heatmap:", e)
+            logger.error(f"Error querying viewport heatmap: {e}", exc_info=True)
 
     # National view
     if _CACHED_NATIONAL_POINTS is not None:
@@ -112,38 +118,19 @@ def get_crowd_heatmap_points(min_lat=None, min_lon=None, max_lat=None, max_lon=N
         try:
             with open(HEATMAP_CACHE_PATH, "r", encoding="utf-8") as f:
                 _CACHED_NATIONAL_POINTS = json.load(f)
+                logger.info(f"Loaded national heatmap cache: {len(_CACHED_NATIONAL_POINTS)} points from {HEATMAP_CACHE_PATH}")
                 return _CACHED_NATIONAL_POINTS
         except Exception as e:
-            print("Error loading heatmap cache:", e)
+            logger.error(f"Error loading heatmap cache from {HEATMAP_CACHE_PATH}: {e}", exc_info=True)
 
     # Compute and persist
     pts = compute_national_heatmap_points()
     try:
         with open(HEATMAP_CACHE_PATH, "w", encoding="utf-8") as f:
             json.dump(pts, f)
+        logger.info(f"Saved national heatmap cache: {len(pts)} points to {HEATMAP_CACHE_PATH}")
     except Exception as e:
-        print("Failed to save heatmap cache:", e)
+        logger.error(f"Failed to save heatmap cache: {e}", exc_info=True)
 
     _CACHED_NATIONAL_POINTS = pts
     return pts
-
-
-def get_crowd_hotspots():
-    """
-    Returns verified commercial and footfall metropolitan hubs in France
-    with authentic establishment counts.
-    """
-    return [
-        {"name": "Paris — Triangle d'Or & Haussmann", "lat": 48.8720, "lng": 2.3320, "score": 99, "type": "High Commercial Activity"},
-        {"name": "Paris — Châtelet & Les Halles", "lat": 48.8619, "lng": 2.3470, "score": 98, "type": "Pedestrian Hub"},
-        {"name": "La Défense — Financial District", "lat": 48.8926, "lng": 2.2361, "score": 97, "type": "Corporate Density"},
-        {"name": "Lyon — Presqu'île & Bellecour", "lat": 45.7578, "lng": 4.8320, "score": 96, "type": "Commercial Corridor"},
-        {"name": "Lyon — Part-Dieu Business Center", "lat": 45.7606, "lng": 4.8594, "score": 95, "type": "Transit & Retail"},
-        {"name": "Marseille — Vieux-Port & Canebière", "lat": 43.2951, "lng": 5.3744, "score": 95, "type": "Metropolitan Hub"},
-        {"name": "Bordeaux — Rue Sainte-Catherine", "lat": 44.8378, "lng": -0.5746, "score": 94, "type": "Shopping Axis"},
-        {"name": "Toulouse — Capitole & Alsace-Lorraine", "lat": 43.6047, "lng": 1.4442, "score": 94, "type": "Urban Center"},
-        {"name": "Nice — Place Masséna & Médecin", "lat": 43.6970, "lng": 7.2704, "score": 93, "type": "Riviera Commerce"},
-        {"name": "Lille — Grand Place & Euralille", "lat": 50.6366, "lng": 3.0635, "score": 93, "type": "Northern Commercial Hub"},
-        {"name": "Nantes — Commerce & Crébillon", "lat": 47.2140, "lng": -1.5580, "score": 92, "type": "Atlantic Urban Center"},
-        {"name": "Strasbourg — Place Kléber", "lat": 48.5833, "lng": 7.7455, "score": 92, "type": "Euro-District Hub"}
-    ]

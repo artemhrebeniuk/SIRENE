@@ -29,8 +29,10 @@ from src.config import (
     SUMMARY_TOP_COMMUNES_JSON,
     WEB_TOP_COMMUNES_JSON,
 )
+from src.logger import get_logger, log_duration
 
 console = Console()
+logger = get_logger("analytics")
 
 
 def compute_aggregations(
@@ -44,19 +46,23 @@ def compute_aggregations(
     source_file = str(parquet_path or COMBINED_PARQUET_PATH).replace("\\", "/")
     
     if not Path(source_file).exists():
+        logger.error(f"Processed dataset not found at '{source_file}'")
         raise FileNotFoundError(f"Processed dataset not found at '{source_file}'. Run pipeline first.")
         
+    logger.info(f"Computing Milestone 6 aggregations from '{source_file}': top_n={top_n}, naf_filter={naf_filter}")
     console.print(f"[bold cyan]Computing Milestone 6 Aggregations from [yellow]{source_file}[/]...[/]")
     start_time = time.time()
     
     con = duckdb.connect()
     con.execute("SET threads = 16;")
+    logger.debug("DuckDB threads configured to 16 for analytics.")
     
     # Optional NAF filter clause
     where_naf = ""
     if naf_filter:
         quoted = ", ".join(f"'{code}'" for code in naf_filter)
         where_naf = f"WHERE code_naf IN ({quoted})"
+        logger.info(f"Applied filter: {len(naf_filter)} NAF codes")
         console.print(f"  • Filter applied: {len(naf_filter)} specific NAF codes")
         
     # 1. Full Matrix: Departement x NAF (2008)

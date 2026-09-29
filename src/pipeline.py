@@ -21,8 +21,10 @@ from src.config import (
     GEOLOC_PARQUET_PATH,
     COMBINED_PARQUET_PATH,
 )
+from src.logger import get_logger, log_duration
 
 console = Console()
+logger = get_logger("pipeline")
 
 
 def build_pipeline_sql(
@@ -37,6 +39,7 @@ def build_pipeline_sql(
     """
     sample_clause = f"USING SAMPLE {sample_rate * 100}%" if sample_rate else ""
     limit_clause = f"LIMIT {limit}" if limit else ""
+    logger.debug(f"build_pipeline_sql: limit={limit}, sample_rate={sample_rate}, target_output={target_output}")
     
     query = f"""
     WITH active_stock AS (
@@ -128,6 +131,9 @@ def run_pipeline(
     
     Path(out_file).parent.mkdir(parents=True, exist_ok=True)
     
+    logger.info(f"Starting DuckDB ETL Pipeline: threads={threads}, memory_limit={memory_limit}, limit={limit}")
+    logger.info(f"Inputs: stock='{stock_file}', geoloc='{geoloc_file}' -> Output: '{out_file}'")
+
     console.print(f"[bold cyan]Starting DuckDB Processing Pipeline...[/]")
     console.print(f"  • Stock Source: [yellow]{stock_file}[/]")
     console.print(f"  • Geoloc Source: [yellow]{geoloc_file}[/]")
@@ -136,42 +142,58 @@ def run_pipeline(
     
     start_time = time.time()
     
-    con = duckdb.connect()
-    con.execute(f"SET threads = {threads};")
-    con.execute(f"SET memory_limit = '{memory_limit}';")
-    con.execute("INSTALL spatial; LOAD spatial;")
-    
-    sql = build_pipeline_sql(
-        stock_source=stock_file,
-        geoloc_source=geoloc_file,
-        target_output=out_file,
-        limit=limit
-    )
-    
-    con.execute(sql)
-    elapsed = time.time() - start_time
-    
-    # Get statistics from generated output
-    stats = con.execute(f"""
-        SELECT 
-            COUNT(*) AS total_active,
-            COUNT(CASE WHEN has_coordinates THEN 1 END) AS with_coords,
-            COUNT(DISTINCT code_departement) AS total_dept,
-            COUNT(DISTINCT code_naf) AS total_naf
-        FROM read_parquet('{out_file}')
-    """).fetchone()
-    
-    total_active, with_coords, total_dept, total_naf = stats
-    coord_pct = (with_coords / total_active * 100) if total_active > 0 else 0
-    
-    console.print(f"[bold green][OK] Pipeline completed in {elapsed:.2f} seconds![/]")
-    console.print(f"  • Active Establishments: [bold]{total_active:,}[/]")
-    console.print(f"  • Successfully Geocoded: [bold]{with_coords:,} ({coord_pct:.1f}%)[/]")
-    console.print(f"  • Distinct Departments: [bold]{total_dept}[/]")
-    console.print(f"  • Distinct NAF Codes: [bold]{total_naf}[/]")
-    console.print(f"  • Output Size: [bold]{Path(out_file).stat().st_size / (1024*1024):.2f} MB[/]\n")
-    
-    return Path(out_file)
+    try:
+        con = duckdb.connect()
+        logger.debug(f"DuckDB connection established. Configuring SET threads = {threads}; SET memory_limit = '{memory_limit}';")
+        con.execute(f"SET threads = {threads};")
+        con.execute(f"SET memory_limit = '{memory_limit}';")
+        con.execute("INSTALL spatial; LOAD spatial;")
+        logger.debug("DuckDB spatial extension loaded.")
+        
+        sql = build_pipeline_sql(
+            stock_source=stock_file,
+            geoloc_source=geoloc_file,
+            target_output=out_file,
+            limit=limit
+        )
+        
+        with log_duration(logger, f"DuckDB ETL execution -> {out_file}"):
+            con.execute(sql)
+            
+        elapsed = time.time() - start_time
+        
+        # Get statistics from generated output
+        logger.debug("Querying statistics from generated Parquet layer...")
+        stats = con.execute(f"""
+            SELECT 
+                COUNT(*) AS total_active,
+                COUNT(CASE WHEN has_coordinates THEN 1 END) AS with_coords,
+                COUNT(DISTINCT code_departement) AS total_dept,
+                COUNT(DISTINCT code_naf) AS total_naf
+            FROM read_parquet('{out_file}')
+        """).fetchone()
+        
+        total_active, with_coords, total_dept, total_naf = stats
+        coord_pct = (with_coords / total_active * 100) if total_active > 0 else 0
+        out_size_mb = Path(out_file).stat().st_size / (1024 * 1024)
+        
+        logger.info(
+            f"ETL Pipeline successfully finished in {elapsed:.2f}s | "
+            f"Active: {total_active:,} | Geocoded: {with_coords:,} ({coord_pct:.1f}%) | "
+            f"Departments: {total_dept} | NAF Codes: {total_naf} | Size: {out_size_mb:.2f} MB"
+        )
+
+        console.print(f"[bold green][OK] Pipeline completed in {elapsed:.2f} seconds![/]")
+        console.print(f"  • Active Establishments: [bold]{total_active:,}[/]")
+        console.print(f"  • Successfully Geocoded: [bold]{with_coords:,} ({coord_pct:.1f}%)[/]")
+        console.print(f"  • Distinct Departments: [bold]{total_dept}[/]")
+        console.print(f"  • Distinct NAF Codes: [bold]{total_naf}[/]")
+        console.print(f"  • Output Size: [bold]{out_size_mb:.2f} MB[/]\n")
+        
+        return Path(out_file)
+    except Exception as e:
+        logger.critical(f"Pipeline execution aborted due to unhandled error: {type(e).__name__}: {e}", exc_info=True)
+        raise
 
 
 if __name__ == "__main__":

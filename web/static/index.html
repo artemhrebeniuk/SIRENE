@@ -14,12 +14,11 @@
   <link rel="stylesheet" href="/static/vendor/leaflet.css">
   
   <!-- Custom Material 3 Stylesheet -->
-  <link rel="stylesheet" href="/static/style.css?v=m3.12">
+  <link rel="stylesheet" href="/static/style.css?v=m3.15">
 </head>
 <body>
   <div class="app-layout">
     
-    <!-- Top Clean Header Bar (Design Maestro Floating Capsule Navbar) -->
     <!-- Top Clean Header Bar (Material 3 App Bar) -->
     <header class="app-header">
       <div class="header-brand">
@@ -83,10 +82,6 @@
       <section class="map-container">
         <!-- Map Overlay Header -->
         <div class="map-header-overlay">
-          <div class="map-header-meta">
-            <h2 id="mapViewTitle" class="map-view-title">National Overview</h2>
-            <p id="mapViewSubtitle" class="map-view-sub">Click any department or city to inspect</p>
-          </div>
 
           <div class="map-controls-cluster">
             <!-- Operational Layers Group: Regions, Traffic, Crowd, Parking -->
@@ -114,7 +109,7 @@
                 </svg>
                 Heatmap
               </button>
-              <button class="btn-layer-pill active" id="btnToggleParking" title="Auto Truck Parking Radar for Inspected Business">
+              <button class="btn-layer-pill" id="btnToggleParking" title="Auto Truck Parking Radar for Inspected Business">
                 <span class="layer-dot dot-parking"></span>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="3" y="3" width="18" height="18" rx="4"></rect>
@@ -143,12 +138,6 @@
                   <path d="M9 21a6 6 0 0 0-6-6"></path>
                 </svg>
                 Satellite
-              </button>
-              <button class="btn-basemap" data-basemap="esri-dark" title="Dark Analytics Canvas">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
-                Dark
               </button>
             </div>
 
@@ -278,14 +267,14 @@
               </div>
 
               <!-- 4. Truck & Logistics Parking Radar -->
-              <div class="legend-section no-divider" id="legendParkingBlock">
+              <div class="legend-section no-divider is-disabled" id="legendParkingBlock">
                 <div class="section-header-row">
                   <div class="section-title-wrap">
                     <span class="layer-dot-glow dot-cyan"></span>
                     <span class="section-title">Truck Parking Radar</span>
                   </div>
-                  <button class="legend-toggle-pill" id="legendToggleParking" onclick="toggleParkingRadar()" title="Toggle Truck Parking Radar">
-                    <span class="toggle-state-text">ON</span>
+                  <button class="legend-toggle-pill off" id="legendToggleParking" onclick="toggleParkingRadar()" title="Toggle Truck Parking Radar">
+                    <span class="toggle-state-text">OFF</span>
                   </button>
                 </div>
                 <div class="parking-grid">
@@ -450,11 +439,11 @@
           </div>
         </div>
       </aside>
+    </div> <!-- .workspace-grid -->
+  </div> <!-- .app-layout -->
 
-    </div>
-
-    <!-- Live Business Directory Modal (Resizable & Streamlined) -->
-    <div class="biz-modal-backdrop" id="bizModal" style="display: none;">
+  <!-- Live Business Directory Modal (Material 3 Fullscreen Dialog) -->
+  <div class="biz-modal-backdrop" id="bizModal" style="display: none;">
       <div class="biz-modal-card" id="bizModalCard">
         <!-- Modal Header (Design Maestro Launcher Window Bar) -->
         <div class="biz-modal-header">
@@ -469,7 +458,12 @@
                 <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
               </svg>
             </button>
-            <button class="btn-close-modal" id="btnCloseBizModal" title="Close modal">&times;</button>
+            <button class="btn-close-modal" id="btnCloseBizModal" title="Close dialog">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
           </div>
         </div>
 
@@ -524,10 +518,10 @@
           <table class="biz-table">
             <thead>
               <tr>
-                <th style="width: 28%;">Company</th>
+                <th style="width: 26%;">Company</th>
                 <th style="width: 18%;">SIRET</th>
-                <th style="width: 16%;">Location</th>
-                <th style="width: 28%;">Industry (NAF)</th>
+                <th style="width: 15%;">Location</th>
+                <th style="width: 31%;">Industry (NAF)</th>
                 <th style="width: 10%; text-align: center;">Map</th>
               </tr>
             </thead>
@@ -546,13 +540,11 @@
       </div>
     </div>
 
-  </div>
-
   <!-- Local Leaflet Map JS & Heatmap Engine -->
   <script src="/static/vendor/leaflet.js"></script>
   <script src="/static/vendor/leaflet-heat.js"></script>
   
   <!-- Client Application Engine -->
-  <script src="/static/app.js?v=m3.12"></script>
+  <script src="/static/app.js?v=m3.15"></script>
 </body>
 </html>

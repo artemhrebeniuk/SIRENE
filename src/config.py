@@ -3,6 +3,10 @@ Configuration module for SIRENE data processing pipeline.
 """
 from pathlib import Path
 
+from src.logger import get_logger
+
+logger = get_logger("config")
+
 # Project directories
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
@@ -12,7 +16,9 @@ OUTPUT_DIR = BASE_DIR / "output"
 
 # Ensure runtime directories exist
 for directory in [DATA_DIR, RAW_DATA_DIR, PROCESSED_DATA_DIR, OUTPUT_DIR]:
-    directory.mkdir(parents=True, exist_ok=True)
+    if not directory.exists():
+        directory.mkdir(parents=True, exist_ok=True)
+        logger.debug(f"Created runtime directory: {directory}")
 
 # data.gouv.fr API Configuration
 DATA_GOUV_API_BASE = "https://www.data.gouv.fr/api/1"
