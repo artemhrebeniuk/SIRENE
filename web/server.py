@@ -160,6 +160,7 @@ def get_geojson():
 
 
 @app.route("/api/kpis")
+@app.route("/api/stats")
 def get_kpis():
     data_file, is_sample = get_active_dataset_path()
     con = get_db()
