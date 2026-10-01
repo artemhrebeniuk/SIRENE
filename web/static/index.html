@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="/static/vendor/leaflet.css">
   
   <!-- Custom Material 3 Stylesheet -->
-  <link rel="stylesheet" href="/static/style.css?v=m3.15">
+  <link rel="stylesheet" href="/static/style.css?v=m3.16">
 </head>
 <body>
   <div class="app-layout">
@@ -116,6 +116,14 @@
                   <path d="M9 17V7h4a3 3 0 0 1 0 6H9"></path>
                 </svg>
                 Parking Radar
+              </button>
+              <button class="btn-layer-pill" id="btnToggleBizPins" title="Display businesses as interactive pins on map">
+                <span class="layer-dot dot-biz"></span>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                Businesses
               </button>
             </div>
 
@@ -248,26 +256,26 @@
                 </div>
                 <div class="traffic-grid">
                   <div class="traffic-tile">
-                    <span class="traffic-line-bar" style="background: #22C55E; box-shadow: 0 0 6px rgba(34, 197, 94, 0.6);"></span>
+                    <span class="traffic-line-bar bar-fast"></span>
                     <span class="traffic-tile-text">Fast</span>
                   </div>
                   <div class="traffic-tile">
-                    <span class="traffic-line-bar" style="background: #EAB308; box-shadow: 0 0 6px rgba(234, 179, 8, 0.6);"></span>
+                    <span class="traffic-line-bar bar-moderate"></span>
                     <span class="traffic-tile-text">Moderate</span>
                   </div>
                   <div class="traffic-tile">
-                    <span class="traffic-line-bar" style="background: #EF4444; box-shadow: 0 0 6px rgba(239, 68, 68, 0.6);"></span>
+                    <span class="traffic-line-bar bar-heavy"></span>
                     <span class="traffic-tile-text">Heavy</span>
                   </div>
                   <div class="traffic-tile">
-                    <span class="traffic-line-bar" style="background: #991B1B; box-shadow: 0 0 6px rgba(153, 27, 27, 0.6);"></span>
+                    <span class="traffic-line-bar bar-stop"></span>
                     <span class="traffic-tile-text">Stop &amp; Go</span>
                   </div>
                 </div>
               </div>
 
               <!-- 4. Truck & Logistics Parking Radar -->
-              <div class="legend-section no-divider is-disabled" id="legendParkingBlock">
+              <div class="legend-section is-disabled" id="legendParkingBlock">
                 <div class="section-header-row">
                   <div class="section-title-wrap">
                     <span class="layer-dot-glow dot-cyan"></span>
@@ -291,6 +299,33 @@
                       <span class="parking-primary">Underground Garage</span>
                     </div>
                     <span class="parking-secondary-badge">&lt;2.0m Limit</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 5. Business Establishments & Signboards Radar -->
+              <div class="legend-section no-divider is-disabled" id="legendBizBlock">
+                <div class="section-header-row">
+                  <div class="section-title-wrap">
+                    <span class="layer-dot-glow dot-purple"></span>
+                    <span class="section-title">Business Pins</span>
+                  </div>
+                  <button class="legend-toggle-pill off" id="legendToggleBiz" onclick="toggleBusinessPins()" title="Toggle Business Markers on Map">
+                    <span class="toggle-state-text">OFF</span>
+                  </button>
+                </div>
+                <div class="biz-legend-items">
+                  <div class="biz-legend-item">
+                    <span class="biz-legend-badge badge-storefront">Storefront</span>
+                    <span class="biz-legend-desc">Facade / Street Sign</span>
+                  </div>
+                  <div class="biz-legend-item">
+                    <span class="biz-legend-badge badge-branch">Branch</span>
+                    <span class="biz-legend-desc">Operating Outlet</span>
+                  </div>
+                  <div class="biz-legend-item">
+                    <span class="biz-legend-badge badge-siege">Siège</span>
+                    <span class="biz-legend-desc">Headquarters</span>
                   </div>
                 </div>
               </div>
@@ -382,14 +417,15 @@
               </svg>
               Browse Businesses
             </button>
-            <a class="btn-drawer-export" id="btnExportDrawerCsv" href="#" target="_blank" title="Export this selection to CSV">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
+            <button class="btn-drawer-dossier" id="btnDrawerDossier" style="display: none;" title="Generate executive PDF location dossier">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
               </svg>
-              Export CSV
-            </a>
+              Dossier (PDF)
+            </button>
           </div>
 
           <div class="drawer-sub-breakdown" id="inspectorDetails"></div>
@@ -503,14 +539,65 @@
               <input type="text" id="bizSearchInput" class="biz-search-field" placeholder="Search company name or SIRET...">
               <span class="search-shortcut modal-shortcut">/</span>
             </div>
-            <a id="btnExportBizCsv" class="btn-export-biz" href="#" target="_blank" title="Export filtered establishments to CSV">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
+          </div>
+        </div>
+
+        <!-- Lead Finder & Advertising Intelligence Filters Bar -->
+        <div class="lead-filter-bar">
+          <div class="lead-preset-chips" id="leadPresetChips">
+            <button class="lead-preset-chip active" data-preset="" onclick="setAdPreset('')">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg>
+              <span>All Niches</span>
+            </button>
+            <button class="lead-preset-chip" data-preset="horeca" onclick="setAdPreset('horeca')">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+              <span>HoReCa</span>
+            </button>
+            <button class="lead-preset-chip" data-preset="auto" onclick="setAdPreset('auto')">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="9" rx="2"></rect><path d="M7 11l2.5-6h5L17 11"></path><circle cx="7.5" cy="16.5" r="1.5"></circle><circle cx="16.5" cy="16.5" r="1.5"></circle></svg>
+              <span>Auto &amp; Moto</span>
+            </button>
+            <button class="lead-preset-chip" data-preset="health" onclick="setAdPreset('health')">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"></path><rect x="3" y="3" width="18" height="18" rx="4" stroke-width="1.8"></rect></svg>
+              <span>Health &amp; Dental</span>
+            </button>
+            <button class="lead-preset-chip" data-preset="realestate" onclick="setAdPreset('realestate')">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"></path><path d="M5 21V7l7-4 7 4v14"></path><path d="M9 10h2v3H9zM13 10h2v3h-2zM9 16h2v3H9zM13 16h2v3h-2z"></path></svg>
+              <span>Real Estate</span>
+            </button>
+            <button class="lead-preset-chip" data-preset="retail" onclick="setAdPreset('retail')">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+              <span>Retail &amp; Fashion</span>
+            </button>
+          </div>
+
+          <div class="lead-quick-toggles">
+            <button class="lead-toggle-chip" id="chipToggleEnseigne" onclick="toggleLeadEnseigne()" title="Filter businesses with a registered commercial brand signboard on facade">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              <span>Storefront Sign</span>
+            </button>
+            <div class="lead-select-pill-wrapper">
+              <select id="selectBranchType" class="lead-toggle-select" onchange="onBranchTypeChange(this.value)">
+                <option value="all">All Establishments</option>
+                <option value="secondary">Branches &amp; Outlets</option>
+                <option value="siege">Headquarters (Sièges)</option>
+              </select>
+              <svg class="select-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
-              Export CSV
-            </a>
+            </div>
+            <div class="lead-select-pill-wrapper">
+              <select id="selectWorkforce" class="lead-toggle-select" onchange="onWorkforceChange(this.value)" title="Filter by workforce and team size">
+                <option value="all">All Staff Sizes</option>
+                <option value="with_staff">With Staff (1+ Employees)</option>
+                <option value="10_plus">10+ Employees (SMB / PME)</option>
+                <option value="50_plus">50+ Employees (Large Target)</option>
+                <option value="micro">Solo / Micro</option>
+              </select>
+              <svg class="select-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
           </div>
         </div>
 
@@ -518,16 +605,17 @@
           <table class="biz-table">
             <thead>
               <tr>
-                <th style="width: 26%;">Company</th>
-                <th style="width: 18%;">SIRET</th>
-                <th style="width: 15%;">Location</th>
-                <th style="width: 31%;">Industry (NAF)</th>
-                <th style="width: 10%; text-align: center;">Map</th>
+                <th style="width: 20%; min-width: 190px;">Company &amp; Brand</th>
+                <th style="width: 12%; min-width: 115px;">SIRET &amp; Role</th>
+                <th style="width: 22%; min-width: 210px;">Physical Location &amp; Implantation</th>
+                <th style="width: 15%; min-width: 140px;">Industry (NAF)</th>
+                <th style="width: 13%; min-width: 135px;">Staff &amp; Ad Score</th>
+                <th style="width: 18%; min-width: 260px; text-align: center;">Actions</th>
               </tr>
             </thead>
             <tbody id="bizTableBody">
               <tr>
-                <td colspan="5" class="loading-state">Loading businesses...</td>
+                <td colspan="6" class="loading-state">Loading businesses...</td>
               </tr>
             </tbody>
           </table>
@@ -545,6 +633,6 @@
   <script src="/static/vendor/leaflet-heat.js"></script>
   
   <!-- Client Application Engine -->
-  <script src="/static/app.js?v=m3.15"></script>
+  <script src="/static/app.js?v=m3.16"></script>
 </body>
 </html>

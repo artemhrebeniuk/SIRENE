@@ -3,57 +3,76 @@
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![DuckDB](https://img.shields.io/badge/Engine-DuckDB-FFF000.svg)](https://duckdb.org/)
 [![Flask](https://img.shields.io/badge/API-Flask-000000.svg)](https://flask.palletsprojects.com/)
-[![Leaflet](https://img.shields.io/badge/Maps-Leaflet-199900.svg)](https://leafletjs.com/)
-[![Google Maps](https://img.shields.io/badge/Basemap-Google%20Roadmap%20%26%20Satellite-4285F4.svg)](https://maps.google.com/)
+[![Design](https://img.shields.io/badge/Design-Google%20Material%203-6750A4.svg)](material-design-design.md)
+[![Maps](https://img.shields.io/badge/Maps-Leaflet%20%26%20Google%20Retina%20%402x-4285F4.svg)](https://maps.google.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-An analytical geospatial platform and interactive observatory for the **INSEE SIRENE** French National Enterprise Registry, combining high-speed streaming data processing with an enterprise GIS dashboard featuring live business mapping, calibrated density heatmaps, traffic overlays, and parking intelligence.
+An enterprise-grade analytical geospatial platform and interactive B2B intelligence observatory for the **INSEE SIRENE** French National Enterprise Registry. Combines high-speed out-of-core data processing powered by **DuckDB** with a modern **Google Material 3 (Material You)** interface, real-time spatial mapping, live official financial and executive governance intelligence, multi-establishment branch resolution, workforce size segmentation, calibrated footfall heatmaps, traffic overlays, logistics radar, and automated **Executive Location Dossiers (A4 PDF)**.
 
-Covers **Mainland France** across **96 departments**, **35,000+ communes**, **15.96M+ active establishments**, with **84.52% precise WGS84 GPS geocoding** and all **738 official NAF 2008 Rev 2 economic activity sectors**.
+Covers **Mainland France** across **96 departments**, **35,000+ communes**, **15.96M+ active establishments**, with **84.52% precise WGS84 GPS geocoding** (BAN parcel accuracy) and dual-classification support for **NAF 2008 Rev 2** (738 sectors) and upcoming **NAF 2025 Rev 2.1** (747 sectors).
 
 ---
 
 ## Key Highlights & Capabilities
 
-### Core Analytics Engine
-- **DuckDB Out-of-Core Processing:** Sub-second streaming SQL analytics over 35+ million raw records without memory bottlenecks or database overhead.
-- **14M+ Geocoded Establishments:** Real-time bounding-box queries against the full parquet dataset in ~0.04s via DuckDB.
+### 1. Real-Time Financial & Executive Governance Intelligence (DGFiP / INPI)
+- **Live Official State Integration:** Direct low-latency bridge to `recherche-entreprises.api.gouv.fr` (DINUM / DGFiP / INPI) with in-memory caching (< 190ms response).
+- **Verified Financial Disclosures:** Displays genuine filed annual turnover (*Chiffre d'Affaires* / CA), net profit or loss (*Résultat Net*), and the exact fiscal year filed.
+- **Truth in Data:** Explicitly distinguishes verified government balance sheet figures from modeled statistical revenue brackets.
+- **Board & Executive Officers:** Lists company CEOs, managing directors (*Dirigeants*, *Président*, *Gérant*), and their legal roles directly in the inspector drawer and dossier.
 
-### Interactive GIS Dashboard
-- **Retina @2x Basemaps:** Crystal-clear 512×512px tiles across three modes:
-  - **Google Maps Roadmap** — street names, shops, and places in French
-  - **Google Satellite** — hybrid imagery with labels
-  - **Esri Dark Gray** — clean dark analytics canvas (no watermarks)
-- **Live Business Map Pins:** At zoom ≥ 14, real establishments appear as interactive markers with exact INSEE geocoded coordinates. Each pin shows:
-  - Business name, SIRET code, NAF activity sector
-  - Official verification link to [data.gouv.fr](https://annuaire-entreprises.data.gouv.fr)
-  - One-click Google Maps navigation
-- **Calibrated Density Heatmap:** Continuous thermal gradient (cyan → green → yellow → orange → red) built from authentic business density:
-  - National view: 769 calibrated clusters (≥2,800 establishments per 10km cell)
-  - Zoom-adaptive: switches to high-resolution 100m grid at zoom ≥ 10
-  - Log-normalized with `max: 2.4` so only Paris core reaches crimson red
-- **Live Traffic Layer:** Google Maps real-time traffic conditions overlay.
-- **Parking Radar:** Nearby parking facilities within configurable radius (150m / 300m / 500m) around any selected business.
-- **Regional Choropleth:** Department-level density visualization with zoom-adaptive opacity.
-- **Fullscreen Mode:** Immersive edge-to-edge map view.
+### 2. Workforce Intelligence & URSSAF Declaration Filtering
+- **True Workforce Resolution:** Decodes official INSEE workforce tranches (`00`, `01`, `02`, `11`, `12`, `21`, `22`, `31` to `53`) alongside declared employer status (`caractereEmployeurEtablissement = 'O'`).
+- **Eliminated False Zero-Staff Labels:** Solves the common registry pitfall where unfiled or newly registered entities (`NN`) were mistakenly labeled as "0 employees". Distinguishes true solo operators from pending URSSAF declarations.
+- **Live SQL Segmentation:** On-the-fly DuckDB joins over 41.7M records enable instant filtering by team size:
+  - **All Staff Sizes**
+  - **With Staff (1+ Employees):** Filter for operational employers.
+  - **10+ Employees (SMB / PME):** Qualified commercial targets.
+  - **50+ Employees (Large Target):** Mid-market and enterprise entities.
+  - **Solo / Micro:** Independent professionals and self-employed.
 
-### 3-Pillar Analytics Sidebar
-- **Departments Tab:** Full list of 96 departments ranked by business volume, density choropleth, and geocoding percentage.
-- **Communes (Cities) Tab:** Top French cities (Paris, Lyon, Marseille, Toulouse, Nice, Bordeaux, etc.) with company counts, centroid coordinates, and instant fly-to navigation.
-- **Industries (NAF) Tab:** Complete hierarchy of 738 official French economic sectors (e.g., Tech, Hospitality, Real Estate, Consulting, Healthcare, Retail).
+### 3. Physical Storefront vs Headquarters Resolution
+- **Signboard & Facade Verification:** Accurately identifies commercial trade signs (*enseigne*) and customer-facing storefronts vs legal administrative seats (*siège social* / domiciliation centers).
+- **Multi-Branch Network Discovery:** When inspecting a legal registration address or corporate seat, one-click branch resolution (`/api/business/<siret>/locations`) identifies all physical operating outlets and retail shops of the same enterprise (SIREN) nationwide.
+- **Instant Map Jump:** Allows users to immediately fly the map to the real, customer-facing shop front rather than an administrative mailbox.
+- **Google Street View 360° Integration:** Direct links from table rows, map popups, and the inspector drawer to visually inspect building facades, window displays, and pedestrian access.
 
-### Deep Business Explorer
-- Search businesses by name, commercial trade sign (*enseigne*), or 14-digit **SIRET**.
-- Filter simultaneously by **Department**, **Commune (City)**, and **Niche (NAF)**.
-- Direct links to **Official French Legal Verification** (`annuaire-entreprises.data.gouv.fr/etablissement/<siret>`).
-- One-click **Pin on Map** with exact GPS coordinates from the registry.
-- Infinite scroll and batch pagination (+50 establishments per fetch).
-- One-click **CSV Export** of filtered business cohorts.
+### 4. Interactive B2B Lead Scoring & Advertising Presets
+- **Curated Advertising Niche Presets:** One-click filtering for high-demand B2B commercial categories:
+  - 🍽️ **HoReCa:** Restaurants, Bistros, Bars, Boutique Hotels
+  - 🚗 **Automotive:** Garages, Detailing, Bodywork, Dealerships
+  - ⚕️ **Health & Wellness:** Dental Clinics, Medical Centers, Optical, Spas
+  - 🏢 **Real Estate & Renovation:** Agencies, Interior Designers, General Contractors
+  - 🛍️ **Retail & Boutiques:** Fashion, Luxury, Artisan Bakeries
+- **Dynamic Lead Qualification Score (0–100):** Evaluates commercial presence, workforce size, multi-branch network, and operational vitality. Automatically flags permanently closed (*fermé*) businesses to prevent wasted ad spend.
 
-### Collapsible Map Legend
-- Unified legend panel with toggle controls for each layer (Regions, Heatmap, Traffic, Parking).
-- Real-time ON/OFF state indicators.
-- Heatmap radius selector (Tight / Balanced / Broad).
+### 5. Google Material 3 Design System (Material You)
+Built strictly following the canonical [Material 3 Design Specification](material-design-design.md):
+- **Tonal Color Architecture:** Built on official M3 baseline palettes (`#6750A4` Primary, `#625B71` Secondary, `#7D5260` Tertiary, `#B3261E` Error, `#141218`/`#FEF7FF` Surfaces).
+- **Dynamic Light & Dark Themes:** Automatic detection and manual toggle with synchronized token switching and contrast compliance.
+- **Official Typography:** Clean typography strictly leveraging Google Fonts **Roboto** (`display`, `headline`, `title`, `body`) and **Roboto Mono** for numeric metrics, SIRET identifiers, and technical coordinates.
+- **De-Noised Directory Table:** Clean monospace click-to-copy SIRET chips, concise presence indicators, and streamlined action buttons.
+
+### 6. Executive Location Dossier (One-Click A4 PDF)
+Transform any French establishment into an investor-grade, single-page A4 Cadastral & Intelligence Dossier:
+- **Instant Generation:** Accessible directly via `/dossier/<siret>` or from any business popup with the **Dossier** button.
+- **Verified Financials & Governance Section:** Displays verified annual turnover (CA), net profit, and registered corporate officers.
+- **Strict 1-Page A4 Layout:** Calibrated margins and CSS print rules (`@page { size: A4 portrait; margin: 0; }`) guarantee zero page overflows.
+- **Direct PDF Download:** Client-side vector export using bundled `html2pdf.js` with automated high-DPI canvas capture, or server-side headless Chromium streaming via `/api/dossier/<siret>/pdf`.
+- **Authentic French Republic Seal:** Vector SVG cadastre seal (*RÉPUBLIQUE FRANÇAISE • CADASTRE & SIRENE ARCHIVE*) and BAN cadastral parcel certification.
+- **Live Local Competitor Radar:** Dynamic DuckDB spatial query extracting the top nearest direct competitors within the same NAF sector, complete with Euclidean distance in meters, SIRET, and address.
+- **Logistics & Parking Proximity:** OpenStreetMap-powered radar scanning nearby heavy-duty truck parking and commercial garages.
+
+### 7. Interactive GIS Web Observatory
+- **Retina @2x Basemaps:** Ultra-crisp 512×512px tiles across three modes:
+  - **Google Maps Roadmap:** Street names, POIs, and addresses in French.
+  - **Google Satellite:** High-resolution hybrid aerial imagery with annotated labels.
+  - **Esri Dark Gray:** Sleek dark analytics canvas for density analysis.
+- **Live Establishment Markers:** At zoom ≥ 14, real registered establishments appear with interactive custom pins distinguishing storefronts, branches, and headquarters.
+- **Multi-Scale Real-Coordinate Density Heatmap:** Continuous thermal spectrum from soft lavender baseline (`#6750A4`) through violet, warm amber, up to flame crimson (`#B3261E`) for peak commercial cores. Zero artificial circular blur or grid-snapping distortion.
+- **Real-Time Traffic Layer:** Live road traffic conditions overlay from Google Maps.
+- **Freight & Logistics Radar:** Nearby truck and vehicle parking facilities within 150m, 300m, or 500m radius with clickable focus navigation.
+- **Departmental Choropleth:** Regional density boundaries with zoom-adaptive stroke weight and hover inspection.
 
 ---
 
@@ -71,7 +90,7 @@ Covers **Mainland France** across **96 departments**, **35,000+ communes**, **15
                                │           DuckDB Streaming ETL               │
                                │  - Filter active units (etat = 'A')          │
                                │  - Multi-CRS normalisation -> WGS84 (4326)   │
-                               │  - Left join establishments on siret         │
+                               │  - Left join establishments on SIRET         │
                                └──────────────────────┬───────────────────────┘
                                                       │
                                                       ▼
@@ -81,24 +100,26 @@ Covers **Mainland France** across **96 departments**, **35,000+ communes**, **15
                                │   14,023,282 geocoded establishments         │
                                └──────────────────────┬───────────────────────┘
                                                       │
-                          ┌───────────────────────────┴───────────────────────────┐
-                          ▼                                                       ▼
-           ┌───────────────────────────────┐                       ┌───────────────────────────────┐
-           │      DuckDB Analytics CLI     │                       │     Flask REST API Server     │
-           │  - NAF x Dept matrix reports  │                       │  - Business map endpoint      │
-           │  - Top industries ranking     │                       │  - Crowd heatmap engine       │
-           │  - CSV / JSON summaries       │                       │  - Parking proximity search   │
-           └───────────────────────────────┘                       │  - GeoJSON boundary feeds     │
+                           ┌──────────────────────────┴───────────────────────────┐
+                           ▼                                                      ▼
+            ┌───────────────────────────────┐                      ┌───────────────────────────────┐
+            │      DuckDB Analytics CLI     │                      │     Flask REST API Server     │
+            │  - NAF x Dept matrix reports  │                      │  - Spatial business queries   │
+            │  - Top industries ranking     │                      │  - Density heatmap engine     │
+            │  - CSV / JSON summaries       │                      │  - Live financial enrichment  │
+            └───────────────────────────────┘                      │  - Location Dossier generator │
+                                                                   │  - Branch & store resolution  │
+                                                                   │  - OSM Logistics & Parking    │
                                                                    └──────────────┬────────────────┘
-                                                                                  │ (REST JSON)
+                                                                                  │ (REST / JSON / PDF)
                                                                                   ▼
                                                                    ┌───────────────────────────────┐
-                                                                   │     SIRENE Web Observatory    │
-                                                                   │  - Retina @2x basemaps        │
-                                                                   │  - Live business pins         │
-                                                                   │  - Calibrated density heatmap │
-                                                                   │  - Traffic & parking layers   │
-                                                                   │  - Dept/City/Industry sidebar │
+                                                                   │    SIRENE Web Observatory     │
+                                                                   │  - Google Material 3 Design   │
+                                                                   │  - Retina @2x map engine      │
+                                                                   │  - Executive A4 Dossier Page  │
+                                                                   │  - Lead scoring & presets     │
+                                                                   │  - Dual NAF 2008 / 2025 Mode  │
                                                                    └───────────────────────────────┘
 ```
 
@@ -116,18 +137,21 @@ cd SIRENE
 python -m pip install -r requirements.txt
 ```
 
-### 2. Launch the Dashboard
+### 2. Launch the Platform
 
 If processed data is already generated or cached:
 
 ```bash
-python run.py serve
+python run.py serve --port 8000
 ```
 
-*Or double click `start_dashboard.bat` on Windows.*
+*Or run `./start_dashboard.sh` on macOS/Linux, or `start_dashboard.bat` on Windows.*
 
 Open your browser at:
 👉 **`http://localhost:8000`**
+
+To preview or generate an establishment's Executive Location Dossier directly:
+👉 **`http://localhost:8000/dossier/42298822000030`**
 
 ---
 
@@ -150,109 +174,70 @@ The pipeline CLI automates the entire lifecycle from API discovery to interactiv
 
 ## REST API Reference
 
-The backend provides low-latency REST endpoints querying the processed dataset:
+The backend provides low-latency REST endpoints querying the processed dataset and state registries:
 
-### `GET /api/stats`
-Returns high-level national totals:
-```json
-{
-  "total_establishments": 15965766,
-  "geocoded_establishments": 13494701,
-  "geocoded_pct": 84.52,
-  "total_departments": 96,
-  "total_naf_industries": 735
-}
-```
-
-### `GET /api/departments`
-Returns aggregated statistics for all 96 mainland departments:
-```json
-[
-  {
-    "dept": "75",
-    "name": "Paris",
-    "total": 1337535,
-    "geocoded": 1058204,
-    "geocoded_pct": 79.12,
-    "density_rank": 1
-  }
-]
-```
-
-### `GET /api/communes`
-Returns top 300+ French cities sorted by active business density with geographic center coordinates:
-```json
-[
-  {
-    "code_commune": "75056",
-    "name": "PARIS",
-    "dept": "75",
-    "count": 1322294,
-    "lat": 48.8588,
-    "lon": 2.3470
-  }
-]
-```
-
-### `GET /api/businesses/map`
-Returns geocoded establishments for map rendering within a bounding box or city.
+### `GET /api/businesses`
+Searches and returns establishments with full lead scoring, workforce classification, and physical location verification.
 
 **Query Parameters:**
-- `min_lat`, `max_lat`, `min_lng`, `max_lng` *(float)*: Viewport bounding box coordinates.
-- `city` *(string, optional)*: City name (e.g. `PARIS`).
 - `dept` *(string, optional)*: Department code (e.g. `75`).
-- `limit` *(int, default 60)*: Number of records to return.
+- `city` *(string, optional)*: City name (e.g. `PARIS`).
+- `naf` *(string, optional)*: Specific NAF code (e.g. `56.10A`).
+- `preset` *(string, optional)*: Advertising niche preset (`horeca`, `auto`, `health`, `realestate`, `retail`).
+- `has_enseigne` *(boolean, optional)*: Filter only establishments with a registered trade sign.
+- `branch_type` *(string, optional)*: `all`, `secondary` (branches), or `siege` (headquarters).
+- `workforce` *(string, optional)*: `all`, `with_staff` (1+ employees), `10_plus`, `50_plus`, `micro`.
+- `q` *(string, optional)*: Full-text search on name, sign, or SIRET.
+- `limit` *(int, default 50)*, `offset` *(int, default 0)*.
 
-**Response:**
+### `GET /api/business/<siret>/enrich`
+Fetches verified live financial statements and executive governance from the French National Registry:
 ```json
 {
-  "count": 5,
-  "items": [
+  "siren": "422988220",
+  "siret": "42298822000030",
+  "enriched": true,
+  "nom_complet": "COFFRA GROUP (SOFFAL-SOFRADEC)",
+  "forme_juridique": "5710",
+  "total_etablissements": 3,
+  "latest_fiscal_year": "2024",
+  "turnover": 25049654,
+  "net_profit": 1157484,
+  "dirigeants": [
     {
-      "siret": "10877145200019",
-      "name": "BALAE",
-      "naf_code": "96.04Z",
-      "naf_label": "Physical Wellbeing & Spa Services",
-      "city": "PARIS",
-      "lat": 48.863,
-      "lng": 2.348,
-      "gov_verify_url": "https://annuaire-entreprises.data.gouv.fr/etablissement/10877145200019",
-      "google_maps_url": "https://www.google.com/maps/search/?api=1&query=48.863,2.348"
+      "name": "DANIEL ALLIMANT",
+      "role": "Membre du directoire",
+      "birth_year": "1958"
     }
   ]
 }
 ```
 
-### `GET /api/crowd/heatmap`
-Returns calibrated density heatmap coordinates `[[lat, lon, weight], ...]`.
+### `GET /api/business/<siret>/locations`
+Discovers all operational storefronts and secondary branches of the parent enterprise (SIREN) nationwide, including signboards, postal codes, and GPS coordinates.
 
-**Query Parameters (optional):**
-- `min_lat`, `max_lat`, `min_lon`, `max_lon` *(float)*: Viewport bounding box for high-resolution local query.
-- Without parameters: returns 769 pre-computed national density clusters.
+### `GET /api/businesses/map`
+Returns geocoded establishments for map rendering within a viewport bounding box or city, enriched with storefront classification and 360° view links.
+
+### `GET /api/dossier/<siret>`
+Returns comprehensive intelligence data for an establishment:
+- Enterprise profile (SIRET, name, NAF code, legal label, full street address).
+- Verified annual turnover, net profit, and corporate officers.
+- Nearest direct competitors in the same NAF activity with distance in meters.
+- Departmental density rank and territorial concentration stats.
+- Nearby infrastructure (rail stations, motorways, truck parking, general parking).
+
+### `GET /api/dossier/<siret>/pdf`
+Generates and downloads the executive single-page A4 PDF dossier directly from the browser/backend.
+
+### `GET /dossier/<siret>`
+Renders the standalone Material 3 Executive Location Dossier HTML page with interactive map snapshot, official cadastre seal, verified financial panel, competitor table, logistics radar, and direct PDF download button.
+
+### `GET /api/crowd/heatmap`
+Returns authentic continuous heatmap coordinates `[[lat, lon, weight], ...]`. Supports both full national overview and real-time viewport bounding box streaming at sub-second latency.
 
 ### `GET /api/parking/nearby`
-Returns parking facilities near a given location.
-
-**Query Parameters:**
-- `lat`, `lon` *(float)*: Center coordinates.
-- `radius` *(int, default 300)*: Search radius in meters.
-
-### `GET /api/businesses`
-Searches and returns individual establishments with full details.
-
-**Query Parameters:**
-- `dept` *(string)*: Department code (e.g. `69` or `75`).
-- `commune` *(string, optional)*: City name or commune code (e.g. `LYON`).
-- `naf` *(string, optional)*: Specific NAF code (e.g. `56.10A`, `62.01Z`).
-- `q` *(string, optional)*: Search query matching company name, trade sign, or SIRET.
-- `limit` *(int, default 50)*: Number of records to return.
-- `offset` *(int, default 0)*: Pagination offset.
-
-### `GET /api/naf`
-Returns the complete INSEE NAF 2008 Rev 2 taxonomy with official English and French legal designations.
-
-### `GET /api/geojson`
-Returns GeoJSON boundary multipolygons for French departments for interactive map rendering.
+Returns parking facilities near a given location. Supports radius of 150m, 300m, or 500m.
 
 ---
 
@@ -269,7 +254,8 @@ SIRENE/
 │   └── analytics.py          # Summary generator (NAF x Department cross-tabulation)
 ├── web/
 │   ├── __init__.py           # Package marker
-│   ├── server.py             # Flask REST API with DuckDB-backed endpoints
+│   ├── server.py             # Flask REST API with DuckDB-backed spatial & financial endpoints
+│   ├── lead_scoring.py       # Workforce engine, turnover brackets, and B2B ad scoring
 │   ├── crowd_data.py         # Heatmap engine: national clusters & viewport aggregation
 │   ├── naf_data.py           # Dual INSEE NAF 2008 / 2025 taxonomy loader
 │   ├── naf_complete.json     # Complete 738 NAF 2008 codes metadata (EN + FR)
@@ -277,16 +263,18 @@ SIRENE/
 │   ├── top_communes.json     # Precomputed French cities index with GPS centroids
 │   ├── crowd_heatmap_points.json # Pre-cached national density clusters
 │   └── static/
-│       ├── index.html        # HTML5 observatory layout (Material 3 tokens & Inter)
+│       ├── index.html        # Main observatory UI (Material 3 tokens & Roboto)
 │       ├── style.css         # Material 3 Canonical Theme (Dynamic Light / Dark)
-│       ├── app.js            # Leaflet GIS engine: SireneLogger, basemaps, pins, modal
-│       └── vendor/           # Leaflet.js, leaflet-heat.js (vendored offline)
+│       ├── app.js            # GIS Engine: SireneLogger, basemaps, pins, dossier modals
+│       ├── dossier.html      # Dynamic Jinja2 template for Executive Location Dossier
+│       └── vendor/           # html2pdf.js, Leaflet.js, leaflet-heat.js (offline vendored)
 ├── data/
 │   ├── france_departements.geojson # National departmental boundaries
 │   ├── naf/                  # Official INSEE Excel taxonomy structures
 │   ├── raw/                  # Downloaded INSEE parquet files
 │   └── processed/            # active_establishments_geo.parquet (13.5M+ geocoded)
 ├── logs/                     # Rotating system log directory (sirene.log)
+├── material-design-design.md # Official Material 3 Design Specification & Token Guide
 ├── requirements.txt          # Production dependencies
 ├── run.py                    # Unified CLI management entrypoint
 ├── start_dashboard.sh        # macOS / Linux one-click launcher
@@ -299,14 +287,17 @@ SIRENE/
 ## Technology Stack
 
 | Layer | Technology | Purpose |
-|-------|-----------|---------|
-| Data Engine | **DuckDB** | Out-of-core SQL over 14M+ row Parquet files |
-| Backend | **Flask** | REST API serving business, heatmap, parking, and GeoJSON data |
-| Frontend | **Leaflet.js** | Interactive map with layers, markers, popups |
-| Heatmap | **leaflet-heat** | Canvas-based thermal density visualization |
-| Basemaps | **Google Maps @2x** / **Esri Dark** | Retina-quality tile layers |
-| Data Source | **INSEE SIRENE** | Official French enterprise registry (15.96M establishments) |
-| Geocoding | **INSEE Geolocation** | WGS84 coordinates for 84.52% of establishments |
+| :--- | :--- | :--- |
+| **Design System** | **Google Material 3 (M3)** | Canonical Material You color roles, typography, elevation & shape scale |
+| **Data Engine** | **DuckDB** | Out-of-core SQL analytics over 14M+ row geocoded Parquet files |
+| **Backend** | **Flask** | REST API serving spatial queries, dossiers, heatmaps, and logistics |
+| **State Registry API**| **DINUM / DGFiP / INPI** | Live official balance sheet turnover, net profits, and executive officers |
+| **Mapping Engine** | **Leaflet.js** | Interactive map layers, custom markers, popups, and polygons |
+| **Heatmap Engine** | **leaflet-heat** | High-performance canvas thermal density visualization |
+| **Basemaps** | **Google Maps @2x** / **Esri** | Ultra-crisp Retina tile layers (Roadmap, Satellite, Dark Gray) |
+| **PDF Generation** | **html2pdf.js / Chromium** | Vector-accurate single-page A4 Cadastral Dossier rendering |
+| **Data Source** | **INSEE SIRENE** | Official French enterprise registry (15.96M establishments) |
+| **Geocoding** | **INSEE Geolocation** | WGS84 coordinates for 84.52% of establishments |
 
 ---
 
@@ -314,8 +305,9 @@ SIRENE/
 
 - **Establishment Register:** INSEE SIRENE `StockEtablissement` via [data.gouv.fr](https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/).
 - **Geographic Coordinates:** INSEE Geolocation Layer via [data.gouv.fr](https://www.data.gouv.fr/fr/datasets/geolocalisation-des-etablissements-du-repertoire-sirene/).
-- **Nomenclature of Activities:** INSEE NAF 2008 Rev 2 (`naf2008_liste_n5.xls`).
-- **Official Enterprise Verification:** [Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr/) (Direction interministérielle du numérique / DINUM).
+- **State Financial & Corporate Records:** [Annuaire des Entreprises API](https://recherche-entreprises.api.gouv.fr/) (Direction interministérielle du numérique / DINUM).
+- **Nomenclature of Activities:** INSEE NAF 2008 Rev 2 & NAF 2025 Rev 2.1 via [insee.fr](https://www.insee.fr).
+- **Official Enterprise Verification:** [Annuaire des Entreprises](https://annuaire-entreprises.data.gouv.fr/) (DINUM).
 
 ---
 

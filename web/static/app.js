@@ -16,13 +16,13 @@ const SireneLogger = (() => {
 
   const COLORS = {
     INIT: 'color: #d0bcff; font-weight: bold;',
-    NET: 'color: #38bdf8; font-weight: bold;',
-    MAP: 'color: #4ade80; font-weight: bold;',
-    FILTER: 'color: #fbbf24; font-weight: bold;',
-    MODAL: 'color: #c084fc; font-weight: bold;',
-    THEME: 'color: #2dd4bf; font-weight: bold;',
-    RADAR: 'color: #f472b6; font-weight: bold;',
-    ERROR: 'color: #f87171; font-weight: bold;'
+    NET: 'color: #ccc2dc; font-weight: bold;',
+    MAP: 'color: #81c784; font-weight: bold;',
+    FILTER: 'color: #ffb74d; font-weight: bold;',
+    MODAL: 'color: #eaddff; font-weight: bold;',
+    THEME: 'color: #d0bcff; font-weight: bold;',
+    RADAR: 'color: #efb8c8; font-weight: bold;',
+    ERROR: 'color: #f2b8b5; font-weight: bold;'
   };
 
   function record(level, tag, message, data) {
@@ -44,7 +44,7 @@ const SireneLogger = (() => {
     if (lvl < currentLevel) return;
 
     const entry = record(levelStr, tag, message, extra.length > 0 ? extra : undefined);
-    const colorStyle = COLORS[tag] || 'color: #94a3b8; font-weight: bold;';
+    const colorStyle = COLORS[tag] || 'color: #cac4d0; font-weight: bold;';
     const tagFmt = `%c[${entry.timeFormatted}] [SIRENE:${tag}]%c ${message}`;
     const tagCss = colorStyle;
     const bodyCss = 'color: inherit; font-weight: normal;';
@@ -138,6 +138,10 @@ const modalState = {
   deptName: 'Paris',
   city: '',
   naf: '',
+  preset: '',
+  has_enseigne: false,
+  branch_type: 'all',
+  workforce: 'all',
   query: '',
   offset: 0,
   limit: 50,
@@ -153,6 +157,7 @@ let isRegionsActive = true;
 let isTrafficActive = false;
 let isCrowdActive = false;
 let isParkingRadarActive = false;
+let isBusinessPinsActive = false;
 let activeParkingRadius = 300;
 let activeParkingTarget = null;
 
@@ -345,14 +350,14 @@ function handleMapMoveZoom() {
     }, 300);
   }
 
-  if (zoom >= 14) {
+  if (isBusinessPinsActive && zoom >= 11) {
     clearTimeout(viewportBizDebounce);
     viewportBizDebounce = setTimeout(() => {
       loadViewportBusinesses();
     }, 350);
-  } else {
-    // If not inspecting a specific commune/city, clear the viewport markers to keep map clean
-    if (!state.selectedCommune && businessMarkersLayerGroup) {
+  } else if (!isBusinessPinsActive) {
+    // If not inspecting a specific commune/city or pin, clear markers
+    if (!state.selectedCommune && !currentBizMarker && businessMarkersLayerGroup) {
       businessMarkersLayerGroup.clearLayers();
     }
   }
@@ -373,27 +378,27 @@ function computeDeptQuantiles() {
   };
 }
 
-// Dynamic Color Gradient for Business Density (Logical Sequential Economic Ramp)
-// Avoids discordant "rainbow" patchwork. Moves coherently from calm Cool Blue to Radiant Fuchsia.
+// Dynamic Color Gradient for Business Density (Material 3 Tonal Progression)
+// Follows official Material 3 primary/tonal scale: #eaddff -> #d0bcff -> #9a82db -> #6750a4 -> #381e72
 function getChoroplethColor(value, maxVal) {
-  if (!value || value <= 0) return '#1E293B';
+  if (!value || value <= 0) return '#1d1b20';
 
   if (state.activeMode === 'sector' && state.selectedSector) {
     const ratio = maxVal > 0 ? value / maxVal : 0;
-    if (ratio > 0.60) return '#F43F5E'; // Tier 1: Peak Commercial Hub
-    if (ratio > 0.35) return '#A855F7'; // Tier 2: High Concentration
-    if (ratio > 0.18) return '#7C3AED'; // Tier 3: Moderate Concentration
-    if (ratio > 0.06) return '#4F46E5'; // Tier 4: Moderate-Low Concentration
-    return '#3B82F6';                   // Tier 5: Low Concentration
+    if (ratio > 0.60) return '#381e72'; // Tier 1: Peak Commercial Hub (M3 Deep Tone 20)
+    if (ratio > 0.35) return '#6750a4'; // Tier 2: High Concentration (M3 Primary Tone 40)
+    if (ratio > 0.18) return '#9a82db'; // Tier 3: Moderate Concentration (M3 Primary Tone 60)
+    if (ratio > 0.06) return '#d0bcff'; // Tier 4: Moderate-Low Concentration (M3 Tone 80)
+    return '#eaddff';                   // Tier 5: Low Concentration (M3 Tone 90)
   }
 
   // National 5-tier Quintile Scale (Equal Distribution across 96 departments)
-  // Progressive sequential ramp: Cool Blue -> Royal Indigo -> Deep Violet -> Rich Purple -> Radiant Fuchsia
-  if (value >= deptQuantiles.p80) return '#F43F5E'; // Tier 1: Peak Metropolises (Paris, Lyon, Marseille)
-  if (value >= deptQuantiles.p60) return '#A855F7'; // Tier 2: High Regional Hubs (Bordeaux, Toulouse, Nantes)
-  if (value >= deptQuantiles.p40) return '#7C3AED'; // Tier 3: Moderate Commercial Hubs
-  if (value >= deptQuantiles.p20) return '#4F46E5'; // Tier 4: Moderate-Low Density
-  return '#3B82F6';                                 // Tier 5: Sparse / Rural Baseline (<55k)
+  // Material 3 Tonal Palette: Soft Lavender (90) -> Light Purple (80) -> Purple (60) -> Primary (40) -> Deep Purple (20)
+  if (value >= deptQuantiles.p80) return '#381e72'; // Tier 1: Peak Metropolises (Paris, Lyon, Marseille)
+  if (value >= deptQuantiles.p60) return '#6750a4'; // Tier 2: High Regional Hubs (Bordeaux, Toulouse, Nantes)
+  if (value >= deptQuantiles.p40) return '#9a82db'; // Tier 3: Moderate Commercial Hubs
+  if (value >= deptQuantiles.p20) return '#d0bcff'; // Tier 4: Moderate-Low Density
+  return '#eaddff';                                 // Tier 5: Sparse / Rural Baseline (<55k)
 }
 
 function getFeatureStyle(feature) {
@@ -439,8 +444,8 @@ function getFeatureStyle(feature) {
   // Border: keep delicate hairline border at high zoom, or highlight if selected
   const borderWeight = isSelected ? (currentZoom >= 10 ? 2 : 2.5) : (currentZoom >= 10 ? 0.7 : 1.1);
   const borderColor = isSelected 
-    ? '#38BDF8' 
-    : (isGoogle ? (currentZoom >= 10 ? 'rgba(56, 189, 248, 0.22)' : '#1E293B') : '#475569');
+    ? '#d0bcff' 
+    : (isGoogle ? (currentZoom >= 10 ? 'rgba(208, 188, 255, 0.25)' : '#141218') : '#444746');
 
   return {
     fillColor: getChoroplethColor(val, maxVal),
@@ -577,10 +582,10 @@ function updateChoropleth() {
           const l = e.target;
           const currentZoom = map ? map.getZoom() : 6;
           if (currentZoom >= 10) {
-            l.setStyle({ weight: 2, color: '#38BDF8', fillOpacity: 0 });
+            l.setStyle({ weight: 2, color: '#d0bcff', fillOpacity: 0 });
             return;
           }
-          l.setStyle({ weight: 2.5, color: '#38BDF8', fillOpacity: 0.65 });
+          l.setStyle({ weight: 2.5, color: '#d0bcff', fillOpacity: 0.65 });
           l.bringToFront();
 
           let details = '';
@@ -671,6 +676,11 @@ function bindUI() {
   const btnParking = document.getElementById('btnToggleParking');
   if (btnParking) {
     btnParking.addEventListener('click', toggleParkingRadar);
+  }
+
+  const btnBizPins = document.getElementById('btnToggleBizPins');
+  if (btnBizPins) {
+    btnBizPins.addEventListener('click', () => toggleBusinessPins());
   }
 
   // Draggable Sidebar Splitter Resizer
@@ -1102,6 +1112,8 @@ function setMapHeaderMeta(title, subtitle) {
     if (drawerExportBtn) {
       drawerExportBtn.href = `/api/businesses/export?dept=${encodeURIComponent(deptCode)}`;
     }
+    const btnDossier = document.getElementById('btnDrawerDossier');
+    if (btnDossier) btnDossier.style.display = 'none';
 
     // Render Top Industries in Inspector
     const industriesList = data.top_sectors.slice(0, 3).map(s => `
@@ -1162,6 +1174,8 @@ async function selectCommune(cityName, deptCode, lat, lng) {
     if (drawerExportBtn) {
       drawerExportBtn.href = `/api/businesses/export?dept=${encodeURIComponent(deptCode)}&city=${encodeURIComponent(cityName)}`;
     }
+    const btnDossier = document.getElementById('btnDrawerDossier');
+    if (btnDossier) btnDossier.style.display = 'none';
 
     const industriesList = data.top_sectors.map(s => `
       <div class="breakdown-row" onclick="openBusinessModal('${data.dept}', '${data.city}', '${data.city}', '${s.code_naf}')">
@@ -1184,11 +1198,11 @@ async function selectCommune(cityName, deptCode, lat, lng) {
       }
       state.communeMarker = L.circleMarker([lat, lng], {
         radius: 12,
-        fillColor: '#38BDF8',
-        color: '#FFFFFF',
+        fillColor: '#d0bcff',
+        color: '#381e72',
         weight: 2.5,
         opacity: 1,
-        fillOpacity: 0.8
+        fillOpacity: 0.85
       }).addTo(map);
 
       map.flyTo([lat, lng], 14, { duration: 1.2 });
@@ -1349,14 +1363,68 @@ function setModalCity(cityName) {
 function updateExportLink() {
   const exportBtn = document.getElementById('btnExportBizCsv');
   if (!exportBtn) return;
-  const params = new URLSearchParams({
+  const p = {
     dept: modalState.dept,
     city: modalState.city,
     naf: modalState.naf,
     q: modalState.query
-  });
+  };
+  if (modalState.preset) p.preset = modalState.preset;
+  if (modalState.has_enseigne) p.has_enseigne = 'true';
+  if (modalState.branch_type && modalState.branch_type !== 'all') p.branch_type = modalState.branch_type;
+  if (modalState.workforce && modalState.workforce !== 'all') p.workforce = modalState.workforce;
+  const params = new URLSearchParams(p);
   exportBtn.href = `/api/businesses/export?${params.toString()}`;
 }
+
+function setAdPreset(preset) {
+  modalState.preset = preset;
+  // Clear manual NAF select when preset is chosen
+  if (preset) {
+    const nafSelect = document.getElementById('bizNafSelect');
+    if (nafSelect) nafSelect.value = '';
+    modalState.naf = '';
+  }
+  document.querySelectorAll('#leadPresetChips .lead-preset-chip').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.preset === preset);
+  });
+  modalState.offset = 0;
+  fetchAndRenderBusinesses(false);
+}
+
+function toggleLeadEnseigne() {
+  modalState.has_enseigne = !modalState.has_enseigne;
+  const chip = document.getElementById('chipToggleEnseigne');
+  if (chip) chip.classList.toggle('active', modalState.has_enseigne);
+  modalState.offset = 0;
+  fetchAndRenderBusinesses(false);
+}
+
+function onBranchTypeChange(val) {
+  modalState.branch_type = val;
+  modalState.offset = 0;
+  fetchAndRenderBusinesses(false);
+}
+
+function onWorkforceChange(val) {
+  modalState.workforce = val;
+  modalState.offset = 0;
+  SireneLogger.info('MODAL', `Workforce filter set to ${val}`);
+  fetchAndRenderBusinesses(false);
+}
+
+window.setAdPreset = setAdPreset;
+window.toggleLeadEnseigne = toggleLeadEnseigne;
+window.onBranchTypeChange = onBranchTypeChange;
+window.onWorkforceChange = onWorkforceChange;
+
+window.copySiretToClipboard = function(siret, evt) {
+  if (evt) evt.stopPropagation();
+  if (!siret) return;
+  navigator.clipboard.writeText(siret).then(() => {
+    SireneLogger.info('SYSTEM', `Copied SIRET ${siret} to clipboard`);
+  }).catch(() => {});
+};
 
 async function fetchAndRenderBusinesses(append = false) {
   if (modalState.isLoading) return;
@@ -1371,7 +1439,7 @@ async function fetchAndRenderBusinesses(append = false) {
     modalState.offset = 0;
     modalState.loadedCount = 0;
     modalState.limit = modalState.limit || 50;
-    tbody.innerHTML = `<tr><td colspan="5" class="loading-state">Querying French National Registry...</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="6" class="loading-state">Querying French National Registry & Lead Intelligence...</td></tr>`;
   } else {
     loadMoreBtn.textContent = 'Loading more establishments...';
   }
@@ -1384,14 +1452,25 @@ async function fetchAndRenderBusinesses(append = false) {
     if (modalState.city) {
       url += `&city=${encodeURIComponent(modalState.city)}`;
     }
-    if (modalState.naf) {
+    if (modalState.preset) {
+      url += `&preset=${encodeURIComponent(modalState.preset)}`;
+    } else if (modalState.naf) {
       url += `&naf=${encodeURIComponent(modalState.naf)}`;
+    }
+    if (modalState.has_enseigne) {
+      url += `&has_enseigne=true`;
+    }
+    if (modalState.branch_type && modalState.branch_type !== 'all') {
+      url += `&branch_type=${encodeURIComponent(modalState.branch_type)}`;
+    }
+    if (modalState.workforce && modalState.workforce !== 'all') {
+      url += `&workforce=${encodeURIComponent(modalState.workforce)}`;
     }
     if (modalState.query) {
       url += `&q=${encodeURIComponent(modalState.query)}`;
     }
 
-    SireneLogger.info('MODAL', `Fetching businesses page [offset=${offsetVal}, limit=${limitVal}]`, { dept: modalState.dept, city: modalState.city, naf: modalState.naf, query: modalState.query });
+    SireneLogger.info('MODAL', `Fetching businesses page [offset=${offsetVal}, limit=${limitVal}]`, { dept: modalState.dept, city: modalState.city, naf: modalState.naf, preset: modalState.preset, workforce: modalState.workforce, query: modalState.query });
     const res = await apiFetch(url);
     if (!res.ok) {
       throw new Error(`Server returned ${res.status}`);
@@ -1416,60 +1495,131 @@ async function fetchAndRenderBusinesses(append = false) {
     }
 
     if (data.items.length === 0 && !append) {
-      tbody.innerHTML = `<tr><td colspan="5" class="loading-state">No matching businesses found in this niche / city.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="6" class="loading-state">No matching businesses found in this niche / criteria.</td></tr>`;
       modalState.isLoading = false;
       return;
     }
 
     const rowsHtml = data.items.map(b => {
-      const actionBtn = b.has_gps ? `
-        <button class="btn-locate" onclick="pinBusinessOnMap('${b.siret}', ${b.lat}, ${b.lng}, '${escapeStr(b.name)}', '${escapeStr(b.postal_code || '')} ${escapeStr(b.city || '')}', '${b.naf_code}', '${escapeStr(b.naf_label)}', '${escapeStr(b.naf_label_fr || '')}', '${escapeStr(b.google_maps_url || '')}', '${escapeStr(b.gov_verify_url)}')">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-            <circle cx="12" cy="10" r="3"></circle>
+      const isClosed = b.is_closed;
+      const statusBadge = isClosed 
+        ? `<span class="badge-status-closed">Closed</span>`
+        : '';
+
+      const branchBadge = b.is_siege 
+        ? `<span class="badge-branch-tag badge-role-siege" title="Registered corporate headquarters">Siège</span>`
+        : `<span class="badge-branch-tag badge-role-branch" title="Operating physical branch / outlet">Branch</span>`;
+
+      const presenceType = b.presence_type || (b.has_enseigne ? 'storefront' : (b.is_siege ? 'siege' : 'branch'));
+      const presenceLabel = b.presence_label || (b.has_enseigne ? 'Physical Storefront' : (b.is_siege ? 'Headquarters' : 'Operating Branch'));
+      const presenceDesc = b.presence_desc || '';
+
+      const adScore = b.ad_score || { score: 50, badge: 'Standard Target', grade: 'Standard' };
+      let adClass = 'ad-score-standard';
+      let scoreIcon = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+      
+      if (isClosed) {
+        adClass = 'ad-score-closed';
+        scoreIcon = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`;
+      } else if (adScore.grade === 'Hot') {
+        adClass = 'ad-score-hot';
+        scoreIcon = `<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 23c6.075 0 11-4.925 11-11 0-4.14-2.3-7.75-5.71-9.62a.75.75 0 0 0-1.12.78c.45 2.52-.3 5.09-2.02 6.81-1.39 1.39-3.26 2.03-5.15 1.76a.75.75 0 0 0-.82.97C8.75 14.28 9.5 16.03 9.5 17.5c0 1.93-1.57 3.5-3.5 3.5-.67 0-1.3-.19-1.84-.52A.75.75 0 0 0 3 21.13C4.98 22.28 7.37 23 10 23h2z"></path></svg>`;
+      } else if (adScore.grade === 'Warm') {
+        adClass = 'ad-score-warm';
+        scoreIcon = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`;
+      }
+
+      const streetViewLink = b.has_gps ? `
+        <a href="${b.street_view_url || `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${b.lat},${b.lng}`}" target="_blank" rel="noopener" class="btn-table-action btn-streetview" title="Inspect storefront in Google Street View 360°">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+            <path d="M2 12h20"></path>
           </svg>
-          <span>Locate</span>
-        </button>
-      ` : `<span class="biz-no-gps">No GPS</span>`;
+          <span>360°</span>
+        </a>
+      ` : '';
+
+      const fullAddressStr = `${b.street_address ? b.street_address + ', ' : ''}${b.postal_code || ''} ${b.city || ''}`.trim();
+
+      const actionBtn = `
+        <div class="biz-actions-cell">
+          ${b.has_gps ? `
+            <button class="btn-table-action btn-locate" onclick="pinBusinessOnMap('${b.siret}', ${b.lat}, ${b.lng}, '${escapeStr(b.name)}', '${escapeStr(fullAddressStr)}', '${b.naf_code}', '${escapeStr(b.naf_label)}', '${escapeStr(b.enseigne || '')}', '${escapeStr(b.google_maps_url || '')}', '${escapeStr(b.gov_verify_url)}', '${escapeStr(b.street_view_url || '')}', '${escapeStr(b.status || '')}')" title="Locate on Leaflet map">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>Locate</span>
+            </button>
+            ${streetViewLink}
+          ` : `<span class="biz-no-gps">No GPS</span>`}
+          <button class="btn-table-action btn-dossier" onclick="openDossier('${b.siret}')" title="Generate Location Dossier (PDF)">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+            <span>Dossier</span>
+          </button>
+        </div>
+      `;
+
+      const streetLine = b.street_address ? `<div class="biz-street-address">${escapeStr(b.street_address)}</div>` : '';
+      const compLine = b.complement_address ? `<div class="biz-complement-address">${escapeStr(b.complement_address)}</div>` : '';
 
       return `
-        <tr>
+        <tr class="${isClosed ? 'biz-row-closed' : ''}">
           <td class="biz-name-cell">
-            <div class="biz-name-main">${b.name}</div>
-            ${b.enseigne && b.enseigne !== b.name ? `<div class="biz-name-sub"><span class="trade-sign-tag">Enseigne</span><span class="trade-sign-val">${b.enseigne}</span></div>` : ''}
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:2px; flex-wrap:wrap;">
+              <span class="biz-name-main">${escapeStr(b.name)}</span>
+              ${statusBadge}
+            </div>
+            ${b.enseigne && b.enseigne !== b.name ? `
+              <div class="biz-name-sub">
+                <span class="trade-sign-tag">Sign</span>
+                <span class="trade-sign-val">${escapeStr(b.enseigne)}</span>
+              </div>
+            ` : ''}
           </td>
           <td>
             <div class="biz-siret-wrap">
-              <span class="biz-siret-val">${b.siret}</span>
-              <a href="${b.gov_verify_url}" target="_blank" class="biz-verify-chip" title="Verify on official French registry">
-                <span>Verify</span>
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-              </a>
+              <span class="biz-siret-chip font-mono" onclick="copySiretToClipboard('${b.siret}', event)" title="Click to copy SIRET">
+                ${b.siret}
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </span>
+              ${branchBadge}
             </div>
           </td>
           <td>
             <div class="biz-location-wrap">
-              <div class="biz-location-city">${b.city || 'N/A'}</div>
-              <div class="biz-location-zip">${b.postal_code || ''}</div>
+              ${streetLine}
+              ${compLine}
+              <div class="biz-location-city">${escapeStr(b.postal_code || '')} ${escapeStr(b.city || 'N/A')}</div>
+              <div class="biz-location-tags">
+                <span class="badge-presence badge-presence-${presenceType}" title="${escapeStr(presenceDesc)}">${escapeStr(presenceLabel)}</span>
+              </div>
             </div>
           </td>
           <td>
             <div class="biz-industry-wrap">
               <div class="biz-industry-row">
                 <span class="badge-naf">${b.naf_code}</span>
-                <span class="biz-industry-title">${b.naf_label}</span>
+                <span class="biz-industry-title">${escapeStr(b.naf_label)}</span>
               </div>
-              ${b.naf_code_2025 ? `
-                <div class="biz-industry-row sub-naf">
-                  <span class="badge-naf-2025" title="NAF 2025">${b.naf_code_2025}</span>
-                  <span class="biz-industry-sub">${b.naf_2025_label || ''}</span>
+            </div>
+          </td>
+          <td>
+            <div class="biz-staff-info">
+              <span class="biz-staff-label">${escapeStr(b.workforce_label || 'Solo Operator')}</span>
+              <span class="biz-revenue-label">Est: ${escapeStr(b.est_revenue || '< 150k €')}</span>
+              <div style="margin-top:4px;">
+                <div class="ad-score-pill ${adClass}" title="${adScore.reasons ? adScore.reasons.join(' • ') : ''}">
+                  ${scoreIcon}
+                  <span>${escapeStr(adScore.badge || 'Lead')} (${adScore.score})</span>
                 </div>
-              ` : ''}
-              ${b.naf_label_fr ? `<div class="biz-industry-official">${b.naf_label_fr}</div>` : ''}
+              </div>
             </div>
           </td>
           <td style="text-align: center;">${actionBtn}</td>
@@ -1486,7 +1636,7 @@ async function fetchAndRenderBusinesses(append = false) {
   } catch (err) {
     SireneLogger.error('MODAL', `Error fetching businesses: ${err.message}`, err);
     if (!append) {
-      tbody.innerHTML = `<tr><td colspan="5" class="loading-state">Error loading businesses: ${escapeStr(err.message)}</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="6" class="loading-state">Error loading businesses: ${escapeStr(err.message)}</td></tr>`;
     }
   } finally {
     modalState.isLoading = false;
@@ -1500,9 +1650,18 @@ function loadMoreBusinesses() {
 }
 
 /* ==========================================================================
+   Executive Location Dossier Opener
+   ========================================================================== */
+window.openDossier = function(siret) {
+  if (!siret) return;
+  SireneLogger.info('DOSSIER', `Opening Location Dossier for SIRET ${siret}`);
+  window.open(`/dossier/${siret}`, '_blank');
+};
+
+/* ==========================================================================
    Pin Individual Business on Genuine Google Map
    ========================================================================== */
-function pinBusinessOnMap(siret, lat, lng, name, address, nafCode, nafLabel, nafLabelFr, googleUrl, govUrl) {
+function pinBusinessOnMap(siret, lat, lng, name, address, nafCode, nafLabel, enseigne, googleUrl, govUrl, streetViewUrl, status) {
   SireneLogger.info('MAP', `Pinning business ${siret} on map: "${name}"`, { lat, lng });
   document.getElementById('bizModal').style.display = 'none';
 
@@ -1510,9 +1669,18 @@ function pinBusinessOnMap(siret, lat, lng, name, address, nafCode, nafLabel, naf
     map.removeLayer(currentBizMarker);
   }
 
+  const isClosed = Boolean(status && (status.toLowerCase().includes('closed') || status === 'F'));
+  const statusPill = isClosed
+    ? `<span class="badge-status-closed"><span class="live-dot" style="background:#B3261E;"></span>Closed / Fermé</span>`
+    : `<span class="popup-status-pill"><span class="live-dot"></span>Active Target</span>`;
+
+  const svUrl = streetViewUrl || `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}`;
+  const gMapsUrl = googleUrl || `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+  const gGovUrl = govUrl || `https://annuaire-entreprises.data.gouv.fr/etablissement/${siret}`;
+
   const icon = L.divIcon({
     className: 'custom-biz-pin',
-    html: '<div class="pin-pulse"></div><div class="pin-dot"></div>',
+    html: `<div class="pin-pulse" style="${isClosed ? 'background:rgba(179,38,30,0.4);' : ''}"></div><div class="pin-dot" style="${isClosed ? 'background:#B3261E;' : ''}"></div>`,
     iconSize: [24, 24],
     iconAnchor: [12, 12]
   });
@@ -1520,40 +1688,84 @@ function pinBusinessOnMap(siret, lat, lng, name, address, nafCode, nafLabel, naf
   currentBizMarker = L.marker([lat, lng], { icon: icon }).addTo(map);
 
   currentBizMarker.bindPopup(`
-    <div class="biz-popup">
-      <div class="biz-popup-tag">Establishment Target</div>
-      <div class="biz-popup-title">${name}</div>
-      <div class="biz-popup-sub">SIRET: <code>${siret}</code></div>
-      <div class="biz-popup-sub">Location: <b>${address}</b></div>
-      <div class="biz-popup-badge">${nafCode} • ${nafLabel}</div>
-      ${nafLabelFr ? `<div style="font-size:0.67rem; color:#94A3B8; margin-top:3px;">Official (FR): ${nafLabelFr}</div>` : ''}
-      
-      <div style="display:flex; flex-direction:column; gap:5px; margin-top:8px;">
-        <a href="${googleUrl}" target="_blank" class="btn-google-ext" style="display:flex; align-items:center; justify-content:center; padding:5px 8px;">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-            <polyline points="15 3 21 3 21 9"></polyline>
-            <line x1="10" y1="14" x2="21" y2="3"></line>
+    <div class="biz-popup-v2">
+      <div class="popup-top-bar">
+        ${statusPill}
+        <span class="popup-naf-pill" title="NAF 2008">${nafCode}</span>
+      </div>
+      <div class="popup-title">${escapeStr(name)}</div>
+      ${enseigne && enseigne !== name ? `<div style="font-size:0.75rem; color:var(--md-sys-color-primary); font-weight:600; margin-bottom:4px; display:inline-flex; align-items:center; gap:4px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Sign: ${escapeStr(enseigne)}</div>` : ''}
+      <div class="popup-sector">${escapeStr(nafLabel)}</div>
+      <div class="popup-meta-card">
+        <div class="popup-meta-row">
+          <svg class="popup-meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
           </svg>
-          Open in Google Maps
-        </a>
-        <a href="${govUrl}" target="_blank" class="btn-gov-verify" style="display:flex; align-items:center; justify-content:center;">
-          Official Verification ↗
-        </a>
+          <span class="popup-meta-label">SIRET</span>
+          <span class="popup-siret-val font-mono">${siret}</span>
+        </div>
+        <div class="popup-meta-row">
+          <svg class="popup-meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <span class="popup-meta-label">Address</span>
+          <span class="popup-address-val">${escapeStr(address)}</span>
+        </div>
+      </div>
+      <div class="popup-actions-v2">
+        <button onclick="openDossier('${siret}')" class="btn-popup-dossier-hero">
+          <div class="btn-dossier-inner">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+            <span>Location Dossier (PDF)</span>
+          </div>
+          <span class="btn-dossier-arrow">↗</span>
+        </button>
+        <div class="popup-split-row">
+          <a href="${svUrl}" target="_blank" class="btn-popup-streetview" title="Inspect storefront facade in Google Street View 360°">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            <span>Street View 360°</span>
+          </a>
+          <a href="${gMapsUrl}" target="_blank" class="btn-popup-sub-action">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+            <span>Maps</span>
+          </a>
+          <a href="${gGovUrl}" target="_blank" class="btn-popup-sub-action">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <span>Registry</span>
+          </a>
+        </div>
       </div>
     </div>
   `, {
     offset: [0, -8],
-    maxWidth: 300
+    maxWidth: 320
   }).openPopup();
 
   map.flyTo([lat, lng], 17, { duration: 1.2 });
 
   // Store active parking target
-  activeParkingTarget = { siret, lat, lng, name, address, nafCode, nafLabel, googleUrl, govUrl };
+  activeParkingTarget = { siret, lat, lng, name, address, nafCode, nafLabel, googleUrl: gMapsUrl, govUrl: gGovUrl, streetViewUrl: svUrl };
 
   // Update Drawer to show Business Profile & Truck Parking Radar
-  showBusinessInInspector(siret, lat, lng, name, address, nafCode, nafLabel, googleUrl, govUrl);
+  showBusinessInInspector(siret, lat, lng, name, address, nafCode, nafLabel, gMapsUrl, gGovUrl, svUrl, isClosed);
 
   // If Parking Radar is enabled, scan nearby spots
   if (isParkingRadarActive) {
@@ -1564,7 +1776,7 @@ function pinBusinessOnMap(siret, lat, lng, name, address, nafCode, nafLabel, naf
 /* ==========================================================================
    Business Inspector Drawer & Truck Logistics Integration
    ========================================================================== */
-function showBusinessInInspector(siret, lat, lng, name, address, nafCode, nafLabel, googleUrl, govUrl) {
+function showBusinessInInspector(siret, lat, lng, name, address, nafCode, nafLabel, googleUrl, govUrl, streetViewUrl, isClosed) {
   const drawer = document.getElementById('inspectorDrawer');
   if (!drawer) return;
 
@@ -1583,10 +1795,18 @@ function showBusinessInInspector(siret, lat, lng, name, address, nafCode, nafLab
   }
 
   const countEl = document.getElementById('inspectorCount');
-  if (countEl) countEl.textContent = 'Active';
+  if (countEl) {
+    if (isClosed) {
+      countEl.textContent = 'Permanently Closed';
+      countEl.style.color = '#B3261E';
+    } else {
+      countEl.textContent = 'Active Target';
+      countEl.style.color = '#1B5E20';
+    }
+  }
 
   const geocodedEl = document.getElementById('inspectorGeocoded');
-  if (geocodedEl) geocodedEl.textContent = 'Verified';
+  if (geocodedEl) geocodedEl.textContent = 'Verified WGS84';
 
   const btnOpenModal = document.getElementById('btnOpenBizModal');
   if (btnOpenModal) {
@@ -1604,8 +1824,145 @@ function showBusinessInInspector(siret, lat, lng, name, address, nafCode, nafLab
     };
   }
 
+  const btnDossier = document.getElementById('btnDrawerDossier');
+  if (btnDossier) {
+    btnDossier.style.display = 'inline-flex';
+    btnDossier.onclick = () => openDossier(siret);
+  }
+
+  let btnStreetView = document.getElementById('btnDrawerStreetView');
+  if (!btnStreetView) {
+    btnStreetView = document.createElement('a');
+    btnStreetView.id = 'btnDrawerStreetView';
+    btnStreetView.target = '_blank';
+    btnStreetView.className = 'btn-drawer-export';
+    btnStreetView.style.cssText = 'color: #F57C00; background: rgba(245, 124, 0, 0.12); border-color: rgba(245, 124, 0, 0.35); text-decoration: none;';
+    btnStreetView.innerHTML = `
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+      Street View
+    `;
+    const actions = document.querySelector('.drawer-actions');
+    if (actions) actions.insertBefore(btnStreetView, actions.firstChild);
+  }
+  if (btnStreetView) {
+    btnStreetView.href = streetViewUrl || `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}`;
+  }
+
+  const details = document.getElementById('inspectorDetails');
+  if (details) {
+    details.innerHTML = `
+      <div id="inspectorFinancialBlock"></div>
+      <div id="inspectorBranchesBlock"></div>
+      <div id="inspectorParkingBlock"></div>
+    `;
+  }
+
+  loadBusinessFinancialEnrichment(siret);
+  loadBusinessBranches(siret);
+
   // Initial placeholder while parking radar queries Overpass
   renderParkingDrawerPanel(name, activeParkingRadius, null, true);
+}
+
+async function loadBusinessFinancialEnrichment(siret) {
+  const block = document.getElementById('inspectorFinancialBlock');
+  if (!block) return;
+  try {
+    const res = await apiFetch(`/api/business/${siret}/enrich`);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (!data || !data.enriched) return;
+
+    let caStr = 'Awaiting filing';
+    if (data.turnover) {
+      caStr = `${Math.round(data.turnover).toLocaleString('fr-FR')} €`;
+      if (data.latest_fiscal_year) caStr += ` <span style="font-size:0.68rem; color:var(--md-sys-color-outline); font-weight:400;">(${data.latest_fiscal_year})</span>`;
+    }
+
+    let profitStr = 'Confidential';
+    let profitColor = 'var(--md-sys-color-on-surface-variant)';
+    if (data.net_profit !== null && data.net_profit !== undefined && data.net_profit !== 0) {
+      profitStr = `${Math.round(data.net_profit).toLocaleString('fr-FR')} €`;
+      profitColor = data.net_profit > 0 ? '#1B5E20' : '#B3261E';
+    }
+
+    let dirHtml = '';
+    if (data.dirigeants && data.dirigeants.length > 0) {
+      dirHtml = data.dirigeants.map(d => `
+        <div style="font-size:0.72rem; color:var(--md-sys-color-on-surface); margin-top:2px;">
+          <b style="font-weight:600;">${escapeStr(d.name)}</b> <span style="font-size:0.68rem; color:var(--md-sys-color-outline);">(${escapeStr(d.role)})</span>
+        </div>
+      `).join('');
+    }
+
+    block.innerHTML = `
+      <div class="drawer-enrich-card">
+        <div class="drawer-enrich-header">
+          <div style="display:flex; align-items:center; gap:5px; font-size:0.75rem; font-weight:600; color:var(--md-sys-color-primary);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Verified Financials &amp; Governance</span>
+          </div>
+          <span class="badge-role-siege" style="font-size:0.62rem; padding:2px 6px;">DGFiP / INPI</span>
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-top:6px;">
+          <div class="drawer-stat-mini">
+            <span style="font-size:0.66rem; color:var(--md-sys-color-on-surface-variant); text-transform:uppercase;">Turnover (CA)</span>
+            <span style="font-size:0.88rem; font-weight:700; color:var(--md-sys-color-on-surface);">${caStr}</span>
+          </div>
+          <div class="drawer-stat-mini">
+            <span style="font-size:0.66rem; color:var(--md-sys-color-on-surface-variant); text-transform:uppercase;">Net Result</span>
+            <span style="font-size:0.88rem; font-weight:700; color:${profitColor};">${profitStr}</span>
+          </div>
+        </div>
+        ${dirHtml ? `<div style="margin-top:8px; border-top:1px solid var(--md-sys-color-outline-variant); padding-top:6px;"><span style="font-size:0.66rem; color:var(--md-sys-color-on-surface-variant); text-transform:uppercase; font-weight:600;">Corporate Officers:</span>${dirHtml}</div>` : ''}
+      </div>
+    `;
+  } catch (e) {
+    SireneLogger.debug('ENRICH', `Enrichment card skipped: ${e.message}`);
+  }
+}
+
+async function loadBusinessBranches(siret) {
+  const block = document.getElementById('inspectorBranchesBlock');
+  if (!block) return;
+  try {
+    const res = await apiFetch(`/api/business/${siret}/locations`);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (!data || !data.locations || data.locations.length <= 1) return;
+
+    const locItems = data.locations.filter(l => !l.is_current).slice(0, 3);
+    if (locItems.length === 0) return;
+
+    block.innerHTML = `
+      <div class="drawer-branches-card">
+        <div class="drawer-enrich-header">
+          <div style="display:flex; align-items:center; gap:5px; font-size:0.75rem; font-weight:600; color:var(--md-sys-color-secondary);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+            <span>Other Operating Locations (${data.count})</span>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px;">
+          ${locItems.map(l => `
+            <div class="branch-jump-item" onclick="map.flyTo([${l.lat}, ${l.lng}], 18); showBusinessInInspector('${l.siret}', ${l.lat}, ${l.lng}, '${escapeStr(l.name)}', '${escapeStr(l.postal_code || '')} ${escapeStr(l.city || '')}', '', '', '', '', '', false);" title="Jump to this physical branch on map">
+              <div style="font-size:0.74rem; font-weight:600; color:var(--md-sys-color-on-surface);">
+                ${l.enseigne ? `<span class="trade-sign-tag" style="margin-right:4px;">Store</span>${escapeStr(l.enseigne)}` : escapeStr(l.name)}
+              </div>
+              <div style="font-size:0.68rem; color:var(--md-sys-color-on-surface-variant); display:flex; justify-content:space-between; align-items:center; margin-top:2px;">
+                <span>${escapeStr(l.postal_code || '')} ${escapeStr(l.city || '')}</span>
+                <span style="color:var(--md-sys-color-primary); font-weight:600;">Jump →</span>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  } catch (e) {
+    SireneLogger.debug('BRANCHES', `Branches card skipped: ${e.message}`);
+  }
 }
 
 /* ==========================================================================
@@ -1729,9 +2086,9 @@ async function loadNearbyParkings(lat, lon, businessName, radius) {
 
   parkingRadiusCircle = L.circle([lat, lon], {
     radius: activeParkingRadius,
-    color: '#38BDF8',
-    fillColor: '#38BDF8',
-    fillOpacity: 0.07,
+    color: '#ccc2dc',
+    fillColor: '#ccc2dc',
+    fillOpacity: 0.1,
     weight: 1.5,
     dashArray: '5, 5'
   }).addTo(map);
@@ -1812,7 +2169,7 @@ function focusOnParking(spotIdx) {
 }
 
 function renderParkingDrawerPanel(businessName, radius, data, isLoading) {
-  const container = document.getElementById('inspectorDetails');
+  const container = document.getElementById('inspectorParkingBlock') || document.getElementById('inspectorDetails');
   if (!container) return;
 
   if (isLoading) {
@@ -1865,9 +2222,9 @@ function renderParkingDrawerPanel(businessName, radius, data, isLoading) {
       </div>
     `;
   }).join('') : `
-    <div style="font-size:0.73rem; color:#94A3B8; text-align:center; padding:12px;">
+    <div style="font-size:0.73rem; color:var(--md-sys-color-on-surface-variant); text-align:center; padding:12px;">
       No registered parking spots found within ${radius}m.<br>
-      <span style="font-size:0.67rem; color:#64748B;">Try selecting 500m radius.</span>
+      <span style="font-size:0.67rem; color:var(--md-sys-color-outline);">Try selecting 500m radius.</span>
     </div>
   `;
 
@@ -1907,14 +2264,15 @@ function renderParkingDrawerPanel(businessName, radius, data, isLoading) {
 }
 
 /* ==========================================================================
-   STEP 3: Continuous Smooth Thermal Footfall Heatmap (matching Screenshot 3)
+   STEP 3: Continuous Smooth Thermal Footfall Heatmap (Real Coordinates)
    ========================================================================== */
 const HEATMAP_GRADIENT = {
-  0.25: '#00d2ff',  // Soft Cyan (secondary activity)
-  0.45: '#00f59b',  // Bright Lime Green (active trade zone)
-  0.65: '#ffe600',  // Warm Solar Yellow (regional metropolis)
-  0.82: '#ff7700',  // Deep Orange (major commercial hub)
-  1.00: '#ff0033'   // Fiery Crimson Red (peak national density: Paris core)
+  0.15: 'rgba(103, 80, 164, 0.40)', // M3 Primary soft translucent baseline
+  0.35: 'rgba(154, 130, 219, 0.75)', // M3 Primary Tone 60
+  0.55: 'rgba(103, 80, 164, 0.95)', // M3 Primary Tone 40
+  0.72: '#ffb74d',                  // M3 Warm Amber (high commercial density)
+  0.88: '#f57c00',                  // M3 Vivid Orange (heavy density)
+  1.00: '#b3261e'                   // M3 Error / Flame Crimson (megacity core)
 };
 
 let crowdHeatLayer = null;
@@ -1928,65 +2286,69 @@ let heatmapRadiusMultiplier = 1.0; // 0.7 (Tight), 1.0 (Balanced), 1.4 (Broad)
 
 function getZoomAdaptiveHeatmapParams() {
   const currentZoom = map ? map.getZoom() : 6;
-  let baseR = 12;
-  let baseBlur = 10;
-  let maxZ = 8;
-  let minOp = 0.22;
-  let maxVal = 2.0;
+  let baseR = 14;
+  let baseBlur = 14;
+  let minOp = 0.05;
+  let maxVal = 1.6;
 
   if (currentZoom <= 6) {
-    baseR = 11;
-    baseBlur = 9;
-    maxZ = 8;
-    minOp = 0.25;
-    maxVal = 2.4; // Calibrated for Greater Paris 4-cell overlap so only Paris center reaches crimson
+    // National overview of France: clear glowing city nodes, no countryside fog
+    baseR = 12;
+    baseBlur = 13;
+    maxVal = 1.5;
   } else if (currentZoom === 7) {
-    baseR = 13;
-    baseBlur = 10;
-    maxZ = 9;
-    minOp = 0.24;
-    maxVal = 2.0;
+    baseR = 14;
+    baseBlur = 14;
+    maxVal = 1.4;
   } else if (currentZoom === 8) {
     baseR = 15;
-    baseBlur = 12;
-    maxZ = 10;
-    minOp = 0.22;
-    maxVal = 1.8;
-  } else if (currentZoom === 9) {
-    baseR = 18;
-    baseBlur = 14;
-    maxZ = 11;
-    minOp = 0.20;
-    maxVal = 1.5;
-  } else if (currentZoom === 10) {
-    baseR = 20;
-    baseBlur = 16;
-    maxZ = 12;
-    minOp = 0.18;
+    baseBlur = 15;
     maxVal = 1.3;
+  } else if (currentZoom === 9) {
+    baseR = 16;
+    baseBlur = 16;
+    maxVal = 1.25;
+  } else if (currentZoom === 10) {
+    baseR = 18;
+    baseBlur = 16;
+    maxVal = 1.2;
   } else if (currentZoom === 11) {
-    baseR = 22;
-    baseBlur = 18;
-    maxZ = 13;
-    minOp = 0.16;
-    maxVal = 1.1;
+    baseR = 18;
+    baseBlur = 16;
+    maxVal = 1.25;
   } else if (currentZoom === 12) {
-    baseR = 25;
-    baseBlur = 20;
-    maxZ = 14;
-    minOp = 0.15;
-    maxVal = 1.0;
-  } else if (currentZoom >= 13) {
-    baseR = 28;
-    baseBlur = 22;
-    maxZ = 16;
-    minOp = 0.14;
-    maxVal = 1.0;
+    baseR = 19;
+    baseBlur = 15;
+    maxVal = 1.35;
+  } else if (currentZoom === 13) {
+    baseR = 17;
+    baseBlur = 14;
+    maxVal = 1.5;
+  } else if (currentZoom === 14) {
+    baseR = 13;
+    baseBlur = 10;
+    maxVal = 2.4;
+  } else if (currentZoom === 15) {
+    // High zoom: crisp commercial ribbons along shopping streets
+    baseR = 11;
+    baseBlur = 8;
+    maxVal = 2.8;
+  } else if (currentZoom >= 16) {
+    // Street / parcel level: tight halos right on building facades and storefronts
+    baseR = 9;
+    baseBlur = 7;
+    maxVal = 3.2;
   }
 
-  const finalR = Math.round(baseR * heatmapRadiusMultiplier);
-  const finalBlur = Math.round(baseBlur * heatmapRadiusMultiplier);
-  return { radius: finalR, blur: finalBlur, maxZoom: maxZ, minOpacity: minOp, max: maxVal };
+  const finalR = Math.max(6, Math.round(baseR * heatmapRadiusMultiplier));
+  const finalBlur = Math.max(5, Math.round(baseBlur * heatmapRadiusMultiplier));
+  return { 
+    radius: finalR, 
+    blur: finalBlur, 
+    maxZoom: currentZoom, 
+    minOpacity: minOp, 
+    max: maxVal 
+  };
 }
 
 function updateHeatmapOnZoom() {
@@ -2005,32 +2367,38 @@ async function checkViewportHeatmap() {
   if (!crowdHeatLayer || !isCrowdActive || !map || !map.hasLayer(crowdHeatLayer)) return;
   const zoom = map.getZoom();
 
-  if (zoom >= 10) {
+  if (zoom >= 8) {
     const bounds = map.getBounds();
-    const minLat = bounds.getSouth().toFixed(3);
-    const maxLat = bounds.getNorth().toFixed(3);
-    const minLng = bounds.getWest().toFixed(3);
-    const maxLng = bounds.getEast().toFixed(3);
+    // Add 12% padding to bounds so panning is completely seamless without cutoffs
+    const latSpan = bounds.getNorth() - bounds.getSouth();
+    const lngSpan = bounds.getEast() - bounds.getWest();
+    const padLat = latSpan * 0.12;
+    const padLng = lngSpan * 0.12;
+
+    const minLat = (bounds.getSouth() - padLat).toFixed(4);
+    const maxLat = (bounds.getNorth() + padLat).toFixed(4);
+    const minLng = (bounds.getWest() - padLng).toFixed(4);
+    const maxLng = (bounds.getEast() + padLng).toFixed(4);
 
     try {
-      SireneLogger.debug('MAP', `Updating viewport crowd heatmap for bounds [${minLat}, ${minLng}] -> [${maxLat}, ${maxLng}]`);
+      SireneLogger.debug('MAP', `Updating viewport crowd heatmap for bounds [${minLat}, ${minLng}] -> [${maxLat}, ${maxLng}] (zoom ${zoom})`);
       const res = await apiFetch(`/api/crowd/heatmap?min_lat=${minLat}&max_lat=${maxLat}&min_lon=${minLng}&max_lon=${maxLng}`);
       if (!res.ok) return;
       const pts = await res.json();
       if (pts && pts.length > 0 && crowdHeatLayer) {
         crowdHeatLayer.setLatLngs(pts);
         isViewportHeatmapLoaded = true;
-        SireneLogger.debug('MAP', `Applied ${pts.length} high-resolution viewport heatmap points`);
+        SireneLogger.debug('MAP', `Applied ${pts.length} multi-resolution viewport heatmap points`);
       }
     } catch (e) {
       SireneLogger.error('MAP', `Failed to load viewport heatmap: ${e.message}`, e);
     }
   } else {
-    // Revert back to calibrated national density if zoomed out
+    // Revert back to calibrated national density if zoomed out (< 8)
     if (isViewportHeatmapLoaded && cachedHeatmapData && crowdHeatLayer) {
       crowdHeatLayer.setLatLngs(cachedHeatmapData);
       isViewportHeatmapLoaded = false;
-      SireneLogger.debug('MAP', 'Reverted heatmap to national cached density');
+      SireneLogger.debug('MAP', 'Reverted heatmap to national calibrated density');
     }
   }
 }
@@ -2093,7 +2461,7 @@ function renderHeatmapLayer(points) {
   }).addTo(map);
 
   // If already at high zoom, load viewport high-res points
-  if (map.getZoom() >= 10) {
+  if (map.getZoom() >= 8) {
     checkViewportHeatmap();
   }
 }
@@ -2114,8 +2482,49 @@ function setHeatmapRadius(r) {
 /* ==========================================================================
    Actual Geocoded Establishments on Map (Real INSEE SIRENE Coordinates)
    ========================================================================== */
+async function toggleBusinessPins(forceState) {
+  if (typeof forceState === 'boolean') {
+    isBusinessPinsActive = forceState;
+  } else {
+    isBusinessPinsActive = !isBusinessPinsActive;
+  }
+  SireneLogger.info('MAP', `Business Pins layer toggled: ${isBusinessPinsActive ? 'ON' : 'OFF'}`);
+
+  const btn = document.getElementById('btnToggleBizPins');
+  if (btn) btn.classList.toggle('active', isBusinessPinsActive);
+
+  const miniToggle = document.getElementById('legendToggleBiz');
+  if (miniToggle) {
+    miniToggle.classList.toggle('off', !isBusinessPinsActive);
+    const span = miniToggle.querySelector('.toggle-state-text');
+    if (span) span.textContent = isBusinessPinsActive ? 'ON' : 'OFF';
+  }
+
+  const block = document.getElementById('legendBizBlock');
+  if (block) {
+    block.classList.toggle('is-disabled', !isBusinessPinsActive);
+  }
+
+  if (!isBusinessPinsActive) {
+    if (businessMarkersLayerGroup) {
+      businessMarkersLayerGroup.clearLayers();
+    }
+    return;
+  }
+
+  // If zoomed out, automatically zoom to active department, commune, or city center
+  if (map && map.getZoom() < 12) {
+    const center = map.getCenter();
+    map.setView(center, 13);
+  } else {
+    await loadViewportBusinesses();
+  }
+}
+
 async function loadViewportBusinesses() {
-  if (!map || map.getZoom() < 14) return;
+  if (!map || !isBusinessPinsActive) return;
+  if (map.getZoom() < 11) return;
+
   const bounds = map.getBounds();
   const minLat = bounds.getSouth();
   const maxLat = bounds.getNorth();
@@ -2124,7 +2533,21 @@ async function loadViewportBusinesses() {
 
   try {
     SireneLogger.debug('MAP', `Loading viewport establishments at zoom ${map.getZoom()}`);
-    const res = await apiFetch(`/api/businesses/map?min_lat=${minLat}&max_lat=${maxLat}&min_lng=${minLng}&max_lng=${maxLng}&limit=60`);
+    let url = `/api/businesses/map?min_lat=${minLat}&max_lat=${maxLat}&min_lng=${minLng}&max_lng=${maxLng}&limit=120`;
+    if (modalState && modalState.preset) {
+      url += `&preset=${encodeURIComponent(modalState.preset)}`;
+    }
+    if (modalState && modalState.hasEnseigne) {
+      url += `&has_enseigne=true`;
+    }
+    if (modalState && modalState.branchType && modalState.branchType !== 'all') {
+      url += `&branch_type=${encodeURIComponent(modalState.branchType)}`;
+    }
+    if (state.selectedDept && !state.selectedCommune) {
+      url += `&dept=${encodeURIComponent(state.selectedDept)}`;
+    }
+
+    const res = await apiFetch(url);
     if (!res.ok) return;
     const data = await res.json();
     SireneLogger.debug('MAP', `Rendered ${data.items ? data.items.length : 0} establishments in current viewport`);
@@ -2137,7 +2560,7 @@ async function loadViewportBusinesses() {
 async function loadCityEstablishments(cityName, deptCode) {
   try {
     SireneLogger.info('MAP', `Loading establishments for city: ${cityName} (Dept ${deptCode})`);
-    const res = await apiFetch(`/api/businesses/map?city=${encodeURIComponent(cityName)}&dept=${encodeURIComponent(deptCode)}&limit=60`);
+    const res = await apiFetch(`/api/businesses/map?city=${encodeURIComponent(cityName)}&dept=${encodeURIComponent(deptCode)}&limit=100`);
     if (!res.ok) return;
     const data = await res.json();
     SireneLogger.info('MAP', `Rendered ${data.items ? data.items.length : 0} establishments for ${cityName}`);
@@ -2156,55 +2579,116 @@ function renderBusinessMarkers(items) {
   items.forEach(b => {
     if (!b.lat || !b.lng) return;
 
+    const presenceType = b.presence_type || (b.has_enseigne ? 'storefront' : (b.is_siege ? 'siege' : 'branch'));
+    const isClosed = b.is_closed;
+    const pinTypeClass = isClosed ? 'pin-type-closed' : `pin-type-${presenceType}`;
+
+    let innerSvg = '';
+    if (presenceType === 'storefront') {
+      innerSvg = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>`;
+    } else if (presenceType === 'siege') {
+      innerSvg = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5"><path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path></svg>`;
+    } else {
+      innerSvg = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5"><circle cx="12" cy="12" r="3.5"></circle></svg>`;
+    }
+
     const icon = L.divIcon({
       className: 'biz-node-icon',
       html: `
-        <div class="biz-node-pin">
-          <div class="biz-node-dot"></div>
+        <div class="biz-marker-pin ${pinTypeClass}" title="${escapeStr(b.name)}">
+          <div class="biz-marker-pin-inner">
+            ${innerSvg}
+          </div>
         </div>
       `,
-      iconSize: [16, 16],
-      iconAnchor: [8, 8]
+      iconSize: [22, 22],
+      iconAnchor: [11, 22],
+      popupAnchor: [0, -20]
     });
 
     const marker = L.marker([b.lat, b.lng], { icon: icon });
 
+    const presenceLabel = b.presence_label || (b.has_enseigne ? 'Physical Storefront' : (b.is_siege ? 'Headquarters' : 'Operating Branch'));
+    const fullAddr = `${b.street_address ? b.street_address + ', ' : ''}${b.postal_code || ''} ${b.city || ''}`.trim();
+    const svUrl = b.street_view_url || `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${b.lat},${b.lng}`;
+
     marker.bindTooltip(`
       <div class="biz-mini-tooltip">
         <b>${escapeStr(b.name)}</b>
-        <div style="font-size:0.67rem; color:#94A3B8; margin-top:1px;">${b.naf_code} • ${escapeStr(b.naf_label)}</div>
+        <div style="font-size:0.67rem; color:var(--md-sys-color-primary); margin-top:1px;">${escapeStr(presenceLabel)}</div>
+        <div style="font-size:0.65rem; color:var(--md-sys-color-on-surface-variant);">${b.naf_code} • ${escapeStr(b.naf_label)}</div>
       </div>
-    `, { direction: 'top', offset: [0, -6] });
+    `, { direction: 'top', offset: [0, -22] });
 
     marker.bindPopup(`
-      <div class="biz-popup">
-        <div class="biz-popup-tag">Verified Establishment</div>
-        <div class="biz-popup-title">${escapeStr(b.name)}</div>
-        ${b.enseigne && b.enseigne !== b.name ? `<div class="biz-popup-sub">Trade sign: <b>${escapeStr(b.enseigne)}</b></div>` : ''}
-        <div class="biz-popup-sub">SIRET: <code>${b.siret}</code></div>
-        <div class="biz-popup-sub">Location: <b>${escapeStr(b.postal_code || '')} ${escapeStr(b.city || '')}</b></div>
-        <div class="biz-popup-badge">${b.naf_code} • ${escapeStr(b.naf_label)}</div>
-        ${b.naf_code_2025 ? `<div style="margin-top:4px;"><span class="badge-naf-2025">${b.naf_code_2025}</span> <span style="font-size:0.68rem; color:var(--md-sys-color-on-surface-variant);">NAF 2025: ${escapeStr(b.naf_2025_label || '')}</span></div>` : ''}
-        ${b.naf_label_fr ? `<div style="font-size:0.67rem; color:var(--md-sys-color-on-surface-variant); margin-top:3px;">Official (FR): ${escapeStr(b.naf_label_fr)}</div>` : ''}
-        
-        <div style="display:flex; flex-direction:column; gap:5px; margin-top:8px;">
-          <a href="${b.google_maps_url}" target="_blank" class="btn-google-ext" style="display:flex; align-items:center; justify-content:center; padding:5px 8px;">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" y1="14" x2="21" y2="3"></line>
+      <div class="biz-popup-v2">
+        <div class="popup-top-bar">
+          <span class="popup-status-pill">
+            <span class="live-dot"></span>${isClosed ? 'Closed' : 'Verified'}
+          </span>
+          <span class="badge-presence badge-presence-${presenceType}" style="font-size:0.65rem; padding:2px 7px;">${escapeStr(presenceLabel)}</span>
+          <span class="popup-naf-pill" title="NAF 2008">${b.naf_code}</span>
+        </div>
+        <div class="popup-title">${escapeStr(b.name)}</div>
+        ${b.enseigne && b.enseigne !== b.name ? `<div style="font-size:0.72rem; color:var(--md-sys-color-primary); margin-bottom:3px; font-weight:600;">Sign: ${escapeStr(b.enseigne)}</div>` : ''}
+        <div class="popup-sector">${escapeStr(b.naf_label)}</div>
+        <div class="popup-meta-card">
+          <div class="popup-meta-row">
+            <svg class="popup-meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
             </svg>
-            Open in Google Maps
-          </a>
-          <a href="${b.gov_verify_url}" target="_blank" class="btn-gov-verify" style="display:flex; align-items:center; justify-content:center;">
-            Official Registry ↗
-          </a>
+            <span class="popup-meta-label">SIRET</span>
+            <span class="popup-siret-val font-mono">${b.siret}</span>
+          </div>
+          <div class="popup-meta-row">
+            <svg class="popup-meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span class="popup-meta-label">Address</span>
+            <span class="popup-address-val">${escapeStr(fullAddr)}</span>
+          </div>
+        </div>
+        <div class="popup-actions-v2">
+          <button onclick="openDossier('${b.siret}')" class="btn-popup-dossier-hero">
+            <div class="btn-dossier-inner">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+              <span>Location Dossier (PDF)</span>
+            </div>
+            <span class="btn-dossier-arrow">↗</span>
+          </button>
+          <div class="popup-split-row">
+            <a href="${svUrl}" target="_blank" rel="noopener" class="btn-popup-sub-action" title="Inspect storefront in Google Street View 360°">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                <path d="M2 12h20"></path>
+              </svg>
+              <span>360° View</span>
+            </a>
+            <a href="${b.google_maps_url}" target="_blank" rel="noopener" class="btn-popup-sub-action">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+              <span>Google Maps</span>
+            </a>
+          </div>
         </div>
       </div>
-    `, { offset: [0, -6], maxWidth: 300 });
+    `, { offset: [0, -18], maxWidth: 320 });
 
     marker.on('click', () => {
-      showBusinessInInspector(b.siret, b.lat, b.lng, b.name, `${b.postal_code || ''} ${b.city || ''}`, b.naf_code, b.naf_label, b.google_maps_url, b.gov_verify_url);
+      showBusinessInInspector(b.siret, b.lat, b.lng, b.name, fullAddr, b.naf_code, b.naf_label, b.google_maps_url, b.gov_verify_url);
       if (isParkingRadarActive) {
         loadNearbyParkings(b.lat, b.lng, b.name, activeParkingRadius);
       }
@@ -2371,7 +2855,7 @@ async function performEnterpriseLookup(query) {
     if (!data.items || data.items.length === 0) {
       if (/^\d{5,}$/.test(query)) {
         dropdown.innerHTML = `
-          <div style="padding:10px; font-size:0.75rem; color:#94A3B8; text-align:center;">
+          <div style="padding:10px; font-size:0.75rem; color:var(--md-sys-color-on-surface-variant); text-align:center;">
             No registered establishment found for "<b>${escapeStr(query)}</b>"
           </div>`;
         dropdown.style.display = 'block';
@@ -2382,7 +2866,7 @@ async function performEnterpriseLookup(query) {
     }
 
     dropdown.innerHTML = `
-      <div style="padding: 4px 8px 6px; font-size:0.67rem; text-transform:uppercase; color:#94A3B8; font-weight:700; letter-spacing:0.04em;">
+      <div style="padding: 4px 8px 6px; font-size:0.67rem; text-transform:uppercase; color:var(--md-sys-color-on-surface-variant); font-weight:700; letter-spacing:0.04em;">
         Enterprises matching "${escapeStr(query)}" (${data.total.toLocaleString()} total):
       </div>
       ${data.items.map(b => `
@@ -2397,7 +2881,7 @@ async function performEnterpriseLookup(query) {
             <span>${b.postal_code || ''} ${b.city || ''} (${b.department})</span>
           </div>
           <div class="lookup-action">
-            ${b.has_gps ? '📍 Locate on Map' : '📋 Inspect Enterprise'} →
+            ${b.has_gps ? 'Locate on Map' : 'Inspect Enterprise'} →
           </div>
         </div>
       `).join('')}
@@ -2419,7 +2903,7 @@ window.focusBusinessOnMap = function(siret, lat, lng, name, nafCode, nafLabel, p
       className: 'biz-node-icon pulse-active',
       html: `
         <div class="biz-node-pin" style="transform:scale(1.4);">
-          <div class="biz-node-dot" style="background:#10B981; box-shadow:0 0 16px #10B981;"></div>
+          <div class="biz-node-dot" style="background:var(--accent-emerald, #388e3c); box-shadow:0 0 16px var(--accent-emerald-glow, rgba(56, 142, 60, 0.4));"></div>
         </div>
       `,
       iconSize: [24, 24],
@@ -2429,39 +2913,67 @@ window.focusBusinessOnMap = function(siret, lat, lng, name, nafCode, nafLabel, p
     const marker = L.marker([lat, lng], { icon: icon }).addTo(businessMarkersLayerGroup);
     
     marker.bindPopup(`
-      <div class="biz-popup">
-        <div class="biz-popup-tag">Direct Verified SIRENE Match</div>
-        <div class="biz-popup-title">${escapeStr(name)}</div>
-        <div class="biz-popup-meta">
-          <div class="biz-popup-row">
-            <span class="biz-popup-label">SIRET</span>
-            <span class="biz-popup-val font-mono" style="color:var(--md-sys-color-primary);">${siret}</span>
-          </div>
-          <div class="biz-popup-row">
-            <span class="biz-popup-label">Address</span>
-            <span class="biz-popup-val">${postalCode} ${city}</span>
-          </div>
-          <div class="biz-popup-row">
-            <span class="biz-popup-label">NAF 2008</span>
-            <span class="biz-popup-val"><b>${nafCode}</b> ${escapeStr(nafLabel)}</span>
-          </div>
-          ${naf2025Code ? `
-          <div class="biz-popup-row">
-            <span class="biz-popup-label" style="color:var(--md-sys-color-tertiary);">NAF 2025</span>
-            <span class="biz-popup-val"><b>${naf2025Code}</b> ${escapeStr(naf2025Label)}</span>
-          </div>
-          ` : ''}
+      <div class="biz-popup-v2">
+        <div class="popup-top-bar">
+          <span class="popup-status-pill">
+            <span class="live-dot"></span>Direct Match
+          </span>
+          <span class="popup-naf-pill" title="NAF 2008">${nafCode}</span>
         </div>
-        <div class="biz-popup-actions" style="margin-top:8px; display:flex; gap:6px;">
-          <a href="https://annuaire-entreprises.data.gouv.fr/etablissement/${siret}" target="_blank" class="btn-gov-verify" style="flex:1;">
-            Gouv.fr Record ↗
-          </a>
-          <a href="https://www.google.com/maps/search/?api=1&query=${lat},${lng}" target="_blank" class="btn-google-ext" style="flex:1;">
-            Google Maps ↗
-          </a>
+        <div class="popup-title">${escapeStr(name)}</div>
+        <div class="popup-sector">${escapeStr(nafLabel)}</div>
+        <div class="popup-meta-card">
+          <div class="popup-meta-row">
+            <svg class="popup-meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+            <span class="popup-meta-label">SIRET</span>
+            <span class="popup-siret-val font-mono">${siret}</span>
+          </div>
+          <div class="popup-meta-row">
+            <svg class="popup-meta-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span class="popup-meta-label">Address</span>
+            <span class="popup-address-val">${postalCode} ${city}</span>
+          </div>
+        </div>
+        <div class="popup-actions-v2">
+          <button onclick="openDossier('${siret}')" class="btn-popup-dossier-hero">
+            <div class="btn-dossier-inner">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+              <span>Location Dossier (PDF)</span>
+            </div>
+            <span class="btn-dossier-arrow">↗</span>
+          </button>
+          <div class="popup-split-row">
+            <a href="https://www.google.com/maps/search/?api=1&query=${lat},${lng}" target="_blank" class="btn-popup-sub-action">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+              <span>Google Maps</span>
+            </a>
+            <a href="https://annuaire-entreprises.data.gouv.fr/etablissement/${siret}" target="_blank" class="btn-popup-sub-action">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              <span>Registry</span>
+            </a>
+          </div>
         </div>
       </div>
-    `).openPopup();
+    `, { offset: [0, -8], maxWidth: 320 });
   } else {
     // If no coordinates, open directory modal filtered by SIRET
     openBusinessModal('', '', '', '');

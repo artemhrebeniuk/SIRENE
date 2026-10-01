@@ -40,7 +40,7 @@
   "01.14Y": {
     "code": "01.14Y",
     "label_fr": "Culture de la canne à sucre",
-    "label_en": "Culture de la canne à sucre",
+    "label_en": "Growing of sugar cane",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -52,7 +52,7 @@
   "01.15Y": {
     "code": "01.15Y",
     "label_fr": "Culture du tabac",
-    "label_en": "Culture du tabac",
+    "label_en": "Growing of tobacco",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -64,7 +64,7 @@
   "01.16Y": {
     "code": "01.16Y",
     "label_fr": "Culture de plantes à fibres",
-    "label_en": "Culture de plantes à fibres",
+    "label_en": "Growing of fibre crops",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -76,7 +76,7 @@
   "01.19Y": {
     "code": "01.19Y",
     "label_fr": "Autres cultures non permanentes",
-    "label_en": "Autres cultures non permanentes",
+    "label_en": "Growing of other non-perennial crops",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -100,7 +100,7 @@
   "01.22Y": {
     "code": "01.22Y",
     "label_fr": "Culture de fruits tropicaux et subtropicaux",
-    "label_en": "Culture de fruits tropicaux et subtropicaux",
+    "label_en": "Growing of tropical and subtropical fruits",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -136,7 +136,7 @@
   "01.25Y": {
     "code": "01.25Y",
     "label_fr": "Culture d’autres fruits d’arbres ou d’arbustes et de fruits à coque",
-    "label_en": "Culture d'autres fruits d'arbres ou d'arbustes et de fruits à coque",
+    "label_en": "Growing of other tree and bush fruits and nuts",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -148,7 +148,7 @@
   "01.26Y": {
     "code": "01.26Y",
     "label_fr": "Culture de fruits oléagineux",
-    "label_en": "Culture de fruits oléagineux",
+    "label_en": "Growing of oleaginous fruits",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -160,7 +160,7 @@
   "01.27Y": {
     "code": "01.27Y",
     "label_fr": "Culture de plantes à boissons",
-    "label_en": "Culture de plantes à boissons",
+    "label_en": "Growing of beverage crops",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -172,7 +172,7 @@
   "01.28Y": {
     "code": "01.28Y",
     "label_fr": "Culture de plantes à épices, aromatiques, médicinales et pharmaceutiques",
-    "label_en": "Culture de plantes à épices, aromatiques, médicinales et pharmaceutiques",
+    "label_en": "Growing of spices, aromatic, drug and pharmaceutical crops",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -184,7 +184,7 @@
   "01.29Y": {
     "code": "01.29Y",
     "label_fr": "Autres cultures permanentes",
-    "label_en": "Autres cultures permanentes",
+    "label_en": "Growing of other perennial crops",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -196,7 +196,7 @@
   "01.30Y": {
     "code": "01.30Y",
     "label_fr": "Reproduction de plantes",
-    "label_en": "Reproduction de plantes",
+    "label_en": "Plant propagation",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -233,7 +233,7 @@
   "01.43Y": {
     "code": "01.43Y",
     "label_fr": "Élevage de chevaux et d’autres équidés",
-    "label_en": "Élevage de chevaux et d'autres équidés",
+    "label_en": "Raising of horses and other equines",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -245,7 +245,7 @@
   "01.44Y": {
     "code": "01.44Y",
     "label_fr": "Élevage de chameaux et d’autres camélidés",
-    "label_en": "Élevage de chameaux et d'autres camélidés",
+    "label_en": "Raising of camels and camelids",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -257,7 +257,7 @@
   "01.45Y": {
     "code": "01.45Y",
     "label_fr": "Élevage d’ovins et de caprins",
-    "label_en": "Élevage d'ovins et de caprins",
+    "label_en": "Raising of sheep and goats",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -269,7 +269,7 @@
   "01.46Y": {
     "code": "01.46Y",
     "label_fr": "Élevage de porcins",
-    "label_en": "Élevage de porcins",
+    "label_en": "Raising of swine/pigs",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -281,7 +281,7 @@
   "01.47Y": {
     "code": "01.47Y",
     "label_fr": "Élevage de volailles",
-    "label_en": "Élevage de volailles",
+    "label_en": "Raising of poultry",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -295,7 +295,7 @@
   "01.48G": {
     "code": "01.48G",
     "label_fr": "Apiculture",
-    "label_en": "Élevage d'autres animaux",
+    "label_en": "Raising of other animals",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -307,7 +307,7 @@
   "01.48H": {
     "code": "01.48H",
     "label_fr": "Élevage d'autres animaux destinés à la consommation",
-    "label_en": "Élevage d'autres animaux",
+    "label_en": "Raising of other animals",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -319,7 +319,7 @@
   "01.48J": {
     "code": "01.48J",
     "label_fr": "Élevage d'animaux de compagnie et d'autres animaux n.c.a.",
-    "label_en": "Élevage d'autres animaux",
+    "label_en": "Raising of other animals",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -332,7 +332,7 @@
   "01.50Y": {
     "code": "01.50Y",
     "label_fr": "Culture et élevage associés",
-    "label_en": "Culture et élevage associés",
+    "label_en": "Mixed farming",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -344,7 +344,7 @@
   "01.61Y": {
     "code": "01.61Y",
     "label_fr": "Activités de soutien aux cultures",
-    "label_en": "Activités de soutien aux cultures",
+    "label_en": "Support activities for crop production",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -356,7 +356,7 @@
   "01.62Y": {
     "code": "01.62Y",
     "label_fr": "Activités de soutien à la production animale",
-    "label_en": "Activités de soutien à la production animale",
+    "label_en": "Support activities for animal production",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -381,7 +381,7 @@
   "01.70Y": {
     "code": "01.70Y",
     "label_fr": "Chasse, piégeage et activités de service connexes",
-    "label_en": "Chasse, piégeage et services annexes",
+    "label_en": "Hunting, trapping and related service activities",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "01",
@@ -393,7 +393,7 @@
   "02.10Y": {
     "code": "02.10Y",
     "label_fr": "Sylviculture et autres activités forestières",
-    "label_en": "Sylviculture et autres activités forestières",
+    "label_en": "Silviculture and other forestry activities",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "02",
@@ -417,7 +417,7 @@
   "02.30Y": {
     "code": "02.30Y",
     "label_fr": "Récolte de produits forestiers non ligneux poussant à l’état sauvage",
-    "label_en": "Récolte de produits forestiers non ligneux poussant à l'état sauvage",
+    "label_en": "Gathering of wild growing non-wood products",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "02",
@@ -429,7 +429,7 @@
   "02.40Y": {
     "code": "02.40Y",
     "label_fr": "Activités de soutien à l’exploitation forestière",
-    "label_en": "Services de soutien à l'exploitation forestière",
+    "label_en": "Support services to forestry",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "02",
@@ -453,7 +453,7 @@
   "03.12Y": {
     "code": "03.12Y",
     "label_fr": "Pêche en eau douce",
-    "label_en": "Pêche en eau douce",
+    "label_en": "Freshwater fishing",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "03",
@@ -465,7 +465,7 @@
   "03.21Y": {
     "code": "03.21Y",
     "label_fr": "Aquaculture en mer",
-    "label_en": "Aquaculture en mer",
+    "label_en": "Marine aquaculture",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "03",
@@ -477,7 +477,7 @@
   "03.22Y": {
     "code": "03.22Y",
     "label_fr": "Aquaculture en eau douce",
-    "label_en": "Aquaculture en eau douce",
+    "label_en": "Freshwater aquaculture",
     "section": "A",
     "section_label": "AGRICULTURE, SYLVICULTURE ET PÊCHE",
     "division": "03",
@@ -505,7 +505,7 @@
   "05.10Y": {
     "code": "05.10Y",
     "label_fr": "Extraction de houille",
-    "label_en": "Extraction de houille",
+    "label_en": "Mining of hard coal",
     "section": "B",
     "section_label": "INDUSTRIES EXTRACTIVES",
     "division": "05",
@@ -517,7 +517,7 @@
   "05.20Y": {
     "code": "05.20Y",
     "label_fr": "Extraction de lignite",
-    "label_en": "Extraction de lignite",
+    "label_en": "Mining of lignite",
     "section": "B",
     "section_label": "INDUSTRIES EXTRACTIVES",
     "division": "05",
@@ -529,7 +529,7 @@
   "06.10Y": {
     "code": "06.10Y",
     "label_fr": "Extraction de pétrole brut",
-    "label_en": "Extraction de pétrole brut",
+    "label_en": "Extraction of crude petroleum",
     "section": "B",
     "section_label": "INDUSTRIES EXTRACTIVES",
     "division": "06",
@@ -541,7 +541,7 @@
   "06.20Y": {
     "code": "06.20Y",
     "label_fr": "Extraction de gaz naturel",
-    "label_en": "Extraction de gaz naturel",
+    "label_en": "Extraction of natural gas",
     "section": "B",
     "section_label": "INDUSTRIES EXTRACTIVES",
     "division": "06",
@@ -553,7 +553,7 @@
   "07.10Y": {
     "code": "07.10Y",
     "label_fr": "Extraction de minerais de fer",
-    "label_en": "Extraction de minerais de fer",
+    "label_en": "Mining of iron ores",
     "section": "B",
     "section_label": "INDUSTRIES EXTRACTIVES",
     "division": "07",
@@ -565,7 +565,7 @@
   "07.21Y": {
     "code": "07.21Y",
     "label_fr": "Extraction de minerais d’uranium et de thorium",
-    "label_en": "Extraction de minerais d'uranium et de thorium",
+    "label_en": "Mining of uranium and thorium ores",
     "section": "B",
     "section_label": "INDUSTRIES EXTRACTIVES",
     "division": "07",
@@ -577,7 +577,7 @@
   "07.29Y": {
     "code": "07.29Y",
     "label_fr": "Extraction d’autres minerais de métaux non ferreux",
-    "label_en": "Extraction d'autres minerais de métaux non ferreux",
+    "label_en": "Mining of other non-ferrous metal ores",
     "section": "B",
     "section_label": "INDUSTRIES EXTRACTIVES",
     "division": "07",
@@ -589,7 +589,7 @@
   "08.11Y": {
     "code": "08.11Y",
     "label_fr": "Extraction de pierres ornementales, de calcaire industriel, de gypse, d’ardoise et d’autres pierres",
-    "label_en": "Extraction de pierres ornementales et de construction, de calcaire industriel, de gypse, de craie et d'ardoise",
+    "label_en": "Quarrying of ornamental and building stone, limestone, gypsum, chalk and slate",
     "section": "B",
     "section_label": "INDUSTRIES EXTRACTIVES",
     "division": "08",
@@ -601,7 +601,7 @@
   "08.12Y": {
     "code": "08.12Y",
     "label_fr": "Exploitation de gravières et sablières, extraction d’argiles et de kaolin",
-    "label_en": "Exploitation de gravières et sablières, extraction d'argiles et de kaolin",
+    "label_en": "Operation of gravel and sand pits; mining of clays and kaolin",
     "section": "B",
     "section_label": "INDUSTRIES EXTRACTIVES",
     "division": "08",
@@ -613,7 +613,7 @@
   "08.91Y": {
     "code": "08.91Y",
     "label_fr": "Extraction de minéraux chimiques et d’engrais minéraux",
-    "label_en": "Extraction des minéraux chimiques et d'engrais minéraux",
+    "label_en": "Mining of chemical and fertiliser minerals",
     "section": "B",
     "section_label": "INDUSTRIES EXTRACTIVES",
     "division": "08",
@@ -625,7 +625,7 @@
   "08.92Y": {
     "code": "08.92Y",
     "label_fr": "Extraction de tourbe",
-    "label_en": "Extraction de tourbe",
+    "label_en": "Extraction of peat",
     "section": "B",
     "section_label": "INDUSTRIES EXTRACTIVES",
     "division": "08",
@@ -637,7 +637,7 @@
   "08.93Y": {
     "code": "08.93Y",
     "label_fr": "Production de sel",
-    "label_en": "Production de sel",
+    "label_en": "Extraction of salt",
     "section": "B",
     "section_label": "INDUSTRIES EXTRACTIVES",
     "division": "08",
@@ -649,7 +649,7 @@
   "08.99Y": {
     "code": "08.99Y",
     "label_fr": "Autres activités extractives n.c.a.",
-    "label_en": "Autres activités extractives n.c.a.",
+    "label_en": "Other mining and quarrying n.e.c.",
     "section": "B",
     "section_label": "INDUSTRIES EXTRACTIVES",
     "division": "08",
@@ -661,7 +661,7 @@
   "09.10Y": {
     "code": "09.10Y",
     "label_fr": "Activités de soutien à l’extraction d’hydrocarbures",
-    "label_en": "Activités de soutien à l'extraction d'hydrocarbures",
+    "label_en": "Support activities for petroleum and natural gas extraction",
     "section": "B",
     "section_label": "INDUSTRIES EXTRACTIVES",
     "division": "09",
@@ -673,7 +673,7 @@
   "09.90Y": {
     "code": "09.90Y",
     "label_fr": "Activités de soutien aux autres industries extractives",
-    "label_en": "Activités de soutien aux autres industries extractives",
+    "label_en": "Support activities for other mining and quarrying",
     "section": "B",
     "section_label": "INDUSTRIES EXTRACTIVES",
     "division": "09",
@@ -685,7 +685,7 @@
   "10.11Y": {
     "code": "10.11Y",
     "label_fr": "Transformation et conservation de la viande, à l’exception de la viande de volaille",
-    "label_en": "Transformation et conservation de la viande de boucherie",
+    "label_en": "Processing and preserving of meat",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -697,7 +697,7 @@
   "10.12Y": {
     "code": "10.12Y",
     "label_fr": "Transformation et conservation de la viande de volaille",
-    "label_en": "Transformation et conservation de la viande de volaille",
+    "label_en": "Processing and preserving of poultry meat",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -709,7 +709,7 @@
   "10.13G": {
     "code": "10.13G",
     "label_fr": "Préparation industrielle de produits à base de viande",
-    "label_en": "Préparation industrielle de produits à base de viande",
+    "label_en": "Production of meat and poultry meat products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -734,7 +734,7 @@
   "10.20Y": {
     "code": "10.20Y",
     "label_fr": "Transformation et conservation de poisson, de crustacés et de mollusques",
-    "label_en": "Transformation et conservation de poisson, de crustacés et de mollusques",
+    "label_en": "Processing and preserving of fish, crustaceans and molluscs",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -746,7 +746,7 @@
   "10.31Y": {
     "code": "10.31Y",
     "label_fr": "Transformation et conservation de pommes de terre",
-    "label_en": "Transformation et conservation de pommes de terre",
+    "label_en": "Processing and preserving of potatoes",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -758,7 +758,7 @@
   "10.32Y": {
     "code": "10.32Y",
     "label_fr": "Préparation de jus de fruits et légumes",
-    "label_en": "Préparation de jus de fruits et légumes",
+    "label_en": "Manufacture of fruit and vegetable juice",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -770,7 +770,7 @@
   "10.39G": {
     "code": "10.39G",
     "label_fr": "Autre transformation et conservation de légumes",
-    "label_en": "Autre transformation et conservation de légumes",
+    "label_en": "Other processing and preserving of fruit and vegetables",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -782,7 +782,7 @@
   "10.39H": {
     "code": "10.39H",
     "label_fr": "Autre transformation et conservation de fruits",
-    "label_en": "Transformation et conservation de fruits",
+    "label_en": "Other processing and preserving of fruit and vegetables",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -794,7 +794,7 @@
   "10.41Y": {
     "code": "10.41Y",
     "label_fr": "Fabrication d’huiles et graisses",
-    "label_en": "Fabrication d'huiles et graisses brutes",
+    "label_en": "Manufacture of oils and fats",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -807,7 +807,7 @@
   "10.42Y": {
     "code": "10.42Y",
     "label_fr": "Fabrication de margarine et graisses comestibles similaires",
-    "label_en": "Fabrication de margarine et graisses comestibles similaires",
+    "label_en": "Manufacture of margarine and similar edible fats",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -819,7 +819,7 @@
   "10.51G": {
     "code": "10.51G",
     "label_fr": "Fabrication de lait liquide, crèmes de lait et laits fermentés",
-    "label_en": "Fabrication de lait liquide et de produits frais",
+    "label_en": "Operation of dairies and cheese making",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -832,7 +832,7 @@
   "10.51H": {
     "code": "10.51H",
     "label_fr": "Fabrication de fromage",
-    "label_en": "Fabrication de fromage",
+    "label_en": "Operation of dairies and cheese making",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -845,7 +845,7 @@
   "10.51J": {
     "code": "10.51J",
     "label_fr": "Fabrication de beurre et d'autres produits laitiers",
-    "label_en": "Fabrication de beurre",
+    "label_en": "Operation of dairies and cheese making",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -858,7 +858,7 @@
   "10.52Y": {
     "code": "10.52Y",
     "label_fr": "Fabrication de crèmes glacées et autres glaces alimentaires",
-    "label_en": "Fabrication de glaces et sorbets",
+    "label_en": "Manufacture of ice cream",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -870,7 +870,7 @@
   "10.61G": {
     "code": "10.61G",
     "label_fr": "Meunerie",
-    "label_en": "Meunerie",
+    "label_en": "Manufacture of grain mill products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -883,7 +883,7 @@
   "10.61H": {
     "code": "10.61H",
     "label_fr": "Autres activités du travail des grains",
-    "label_en": "Autres activités du travail des grains",
+    "label_en": "Manufacture of grain mill products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -950,7 +950,7 @@
   "10.72Y": {
     "code": "10.72Y",
     "label_fr": "Fabrication de biscuits, biscottes et pâtisseries de conservation",
-    "label_en": "Fabrication de biscuits, biscottes et pâtisseries de conservation",
+    "label_en": "Manufacture of rusks and biscuits; manufacture of preserved pastry goods and cakes",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -963,7 +963,7 @@
   "10.73Y": {
     "code": "10.73Y",
     "label_fr": "Fabrication de pâtes alimentaires",
-    "label_en": "Fabrication de pâtes alimentaires",
+    "label_en": "Manufacture of macaroni, noodles, couscous and similar farinaceous products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -976,7 +976,7 @@
   "10.81Y": {
     "code": "10.81Y",
     "label_fr": "Fabrication de sucre",
-    "label_en": "Fabrication de sucre",
+    "label_en": "Manufacture of sugar",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -988,7 +988,7 @@
   "10.82Y": {
     "code": "10.82Y",
     "label_fr": "Fabrication de cacao, de chocolat et de produits de confiserie",
-    "label_en": "Fabrication de cacao, chocolat et de produits de confiserie",
+    "label_en": "Manufacture of cocoa, chocolate and sugar confectionery",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -1000,7 +1000,7 @@
   "10.83Y": {
     "code": "10.83Y",
     "label_fr": "Transformation du thé et du café",
-    "label_en": "Transformation du thé et du café",
+    "label_en": "Processing of tea and coffee",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -1012,7 +1012,7 @@
   "10.84Y": {
     "code": "10.84Y",
     "label_fr": "Fabrication de condiments et assaisonnements",
-    "label_en": "Fabrication de condiments et assaisonnements",
+    "label_en": "Manufacture of condiments and seasonings",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -1024,7 +1024,7 @@
   "10.85Y": {
     "code": "10.85Y",
     "label_fr": "Fabrication de plats préparés",
-    "label_en": "Fabrication de plats préparés",
+    "label_en": "Manufacture of prepared meals and dishes",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -1036,7 +1036,7 @@
   "10.86Y": {
     "code": "10.86Y",
     "label_fr": "Fabrication d’aliments homogénéisés et diététiques",
-    "label_en": "Fabrication d'aliments homogénéisés et diététiques",
+    "label_en": "Manufacture of homogenised food preparations and dietetic food",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -1062,7 +1062,7 @@
   "10.91Y": {
     "code": "10.91Y",
     "label_fr": "Fabrication d’aliments pour animaux de ferme",
-    "label_en": "Fabrication d'aliments pour animaux de ferme",
+    "label_en": "Manufacture of prepared feeds for farm animals",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -1074,7 +1074,7 @@
   "10.92Y": {
     "code": "10.92Y",
     "label_fr": "Fabrication d’aliments pour animaux de compagnie",
-    "label_en": "Fabrication d'aliments pour animaux de compagnie",
+    "label_en": "Manufacture of prepared pet foods",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "10",
@@ -1086,7 +1086,7 @@
   "11.01Y": {
     "code": "11.01Y",
     "label_fr": "Production de boissons alcoolisées distillées",
-    "label_en": "Production de boissons alcooliques distillées",
+    "label_en": "Distilling, rectifying and blending of spirits",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "11",
@@ -1098,7 +1098,7 @@
   "11.02G": {
     "code": "11.02G",
     "label_fr": "Fabrication de vins effervescents",
-    "label_en": "Fabrication de vins effervescents",
+    "label_en": "Manufacture of wine from grape",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "11",
@@ -1122,7 +1122,7 @@
   "11.03Y": {
     "code": "11.03Y",
     "label_fr": "Fabrication de cidre et autres boissons fermentées à base de fruits",
-    "label_en": "Fabrication de cidre et de vins de fruits",
+    "label_en": "Manufacture of cider and other fruit wines",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "11",
@@ -1134,7 +1134,7 @@
   "11.04Y": {
     "code": "11.04Y",
     "label_fr": "Production d’autres boissons fermentées non distillées",
-    "label_en": "Production d'autres boissons fermentées non distillées",
+    "label_en": "Manufacture of other non-distilled fermented beverages",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "11",
@@ -1146,7 +1146,7 @@
   "11.05Y": {
     "code": "11.05Y",
     "label_fr": "Fabrication de bière",
-    "label_en": "Fabrication de bière",
+    "label_en": "Manufacture of beer",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "11",
@@ -1158,7 +1158,7 @@
   "11.06Y": {
     "code": "11.06Y",
     "label_fr": "Fabrication de malt",
-    "label_en": "Fabrication de malt",
+    "label_en": "Manufacture of malt",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "11",
@@ -1170,7 +1170,7 @@
   "11.07G": {
     "code": "11.07G",
     "label_fr": "Industrie des eaux de table",
-    "label_en": "Industrie des eaux de table",
+    "label_en": "Manufacture of soft drinks; production of mineral waters and other bottled waters",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "11",
@@ -1195,7 +1195,7 @@
   "12.00Y": {
     "code": "12.00Y",
     "label_fr": "Fabrication de produits à base de tabac",
-    "label_en": "Fabrication de produits à base de tabac",
+    "label_en": "Manufacture of tobacco products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "12",
@@ -1207,7 +1207,7 @@
   "13.10Y": {
     "code": "13.10Y",
     "label_fr": "Préparation de fibres textiles et filature",
-    "label_en": "Préparation de fibres textiles et filature",
+    "label_en": "Preparation and spinning of textile fibres",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "13",
@@ -1219,7 +1219,7 @@
   "13.20Y": {
     "code": "13.20Y",
     "label_fr": "Tissage",
-    "label_en": "Tissage",
+    "label_en": "Weaving of textiles",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "13",
@@ -1231,7 +1231,7 @@
   "13.30Y": {
     "code": "13.30Y",
     "label_fr": "Ennoblissement textile",
-    "label_en": "Ennoblissement textile",
+    "label_en": "Finishing of textiles",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "13",
@@ -1244,7 +1244,7 @@
   "13.91Y": {
     "code": "13.91Y",
     "label_fr": "Fabrication d’étoffes à mailles",
-    "label_en": "Fabrication d'étoffes à mailles",
+    "label_en": "Manufacture of knitted and crocheted fabrics",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "13",
@@ -1256,7 +1256,7 @@
   "13.92Y": {
     "code": "13.92Y",
     "label_fr": "Fabrication de textiles ménagers et d’articles d’ameublement confectionnés",
-    "label_en": "Fabrication d'articles textiles, sauf habillement",
+    "label_en": "Manufacture of made-up textile articles, except apparel",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "13",
@@ -1268,7 +1268,7 @@
   "13.93Y": {
     "code": "13.93Y",
     "label_fr": "Fabrication de tapis et moquettes",
-    "label_en": "Fabrication de tapis et moquettes",
+    "label_en": "Manufacture of carpets and rugs",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "13",
@@ -1280,7 +1280,7 @@
   "13.94Y": {
     "code": "13.94Y",
     "label_fr": "Fabrication de ficelles, cordes et filets",
-    "label_en": "Fabrication de ficelles, cordes et filets",
+    "label_en": "Manufacture of cordage, rope, twine and netting",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "13",
@@ -1292,7 +1292,7 @@
   "13.95Y": {
     "code": "13.95Y",
     "label_fr": "Fabrication de textiles non-tissés et articles non-tissés",
-    "label_en": "Fabrication de non-tissés, sauf habillement",
+    "label_en": "Manufacture of non-wovens and articles made from non-wovens, except apparel",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "13",
@@ -1318,7 +1318,7 @@
   "13.99Y": {
     "code": "13.99Y",
     "label_fr": "Fabrication d’autres textiles n.c.a.",
-    "label_en": "Fabrication d'autres textiles n.c.a.",
+    "label_en": "Manufacture of other textiles n.e.c.",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "13",
@@ -1330,7 +1330,7 @@
   "14.10Y": {
     "code": "14.10Y",
     "label_fr": "Fabrication d’articles à mailles",
-    "label_en": "Fabrication de vêtements de dessus",
+    "label_en": "Manufacture of other outerwear",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "14",
@@ -1346,7 +1346,7 @@
   "14.21Y": {
     "code": "14.21Y",
     "label_fr": "Fabrication de vêtements de dessus",
-    "label_en": "Fabrication de vêtements de dessus",
+    "label_en": "Manufacture of outerwear",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "14",
@@ -1360,7 +1360,7 @@
   "14.22Y": {
     "code": "14.22Y",
     "label_fr": "Fabrication de vêtements de dessous",
-    "label_en": "Fabrication de vêtements de dessous",
+    "label_en": "Manufacture of underwear",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "14",
@@ -1373,7 +1373,7 @@
   "14.23Y": {
     "code": "14.23Y",
     "label_fr": "Fabrication de vêtements de travail",
-    "label_en": "Fabrication de vêtements de travail",
+    "label_en": "Manufacture of workwear",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "14",
@@ -1385,7 +1385,7 @@
   "14.24Y": {
     "code": "14.24Y",
     "label_fr": "Fabrication de vêtements en cuir et en fourrure",
-    "label_en": "Fabrication de vêtements en cuir",
+    "label_en": "Manufacture of leather clothes",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "14",
@@ -1398,7 +1398,7 @@
   "14.29Y": {
     "code": "14.29Y",
     "label_fr": "Fabrication d’autres articles d’habillement et accessoires n.c.a.",
-    "label_en": "Fabrication d'autres vêtements et accessoires",
+    "label_en": "Manufacture of other wearing apparel and accessories",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "14",
@@ -1410,7 +1410,7 @@
   "15.11Y": {
     "code": "15.11Y",
     "label_fr": "Tannage, apprêt et teinture des cuirs et des fourrures",
-    "label_en": "Apprêt et tannage des cuirs ; préparation et teinture des fourrures",
+    "label_en": "Tanning and dressing of leather; dressing and dyeing of fur",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "15",
@@ -1422,7 +1422,7 @@
   "15.12Y": {
     "code": "15.12Y",
     "label_fr": "Fabrication de bagages, de maroquinerie, sellerie et bourrellerie, en toutes matières",
-    "label_en": "Fabrication d'articles de voyage, de maroquinerie et de sellerie",
+    "label_en": "Manufacture of luggage, handbags and the like, saddlery and harness",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "15",
@@ -1434,7 +1434,7 @@
   "15.20Y": {
     "code": "15.20Y",
     "label_fr": "Fabrication de chaussures",
-    "label_en": "Fabrication de chaussures",
+    "label_en": "Manufacture of footwear",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "15",
@@ -1450,7 +1450,7 @@
   "16.11Y": {
     "code": "16.11Y",
     "label_fr": "Sciage et rabotage du bois",
-    "label_en": "Sciage et rabotage du bois, hors imprégnation",
+    "label_en": "Sawmilling and planing of wood",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "16",
@@ -1474,7 +1474,7 @@
   "16.21Y": {
     "code": "16.21Y",
     "label_fr": "Fabrication de placage et de panneaux de bois",
-    "label_en": "Fabrication de placage et de panneaux de bois",
+    "label_en": "Manufacture of veneer sheets and wood-based panels",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "16",
@@ -1486,7 +1486,7 @@
   "16.22Y": {
     "code": "16.22Y",
     "label_fr": "Fabrication de parquets assemblés",
-    "label_en": "Fabrication de parquets assemblés",
+    "label_en": "Manufacture of assembled parquet floors",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "16",
@@ -1498,7 +1498,7 @@
   "16.23Y": {
     "code": "16.23Y",
     "label_fr": "Fabrication de charpentes et d’autres menuiseries",
-    "label_en": "Fabrication de charpentes et d'autres menuiseries",
+    "label_en": "Manufacture of other builders' carpentry and joinery",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "16",
@@ -1510,7 +1510,7 @@
   "16.24Y": {
     "code": "16.24Y",
     "label_fr": "Fabrication d’emballages en bois",
-    "label_en": "Fabrication d'emballages en bois",
+    "label_en": "Manufacture of wooden containers",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "16",
@@ -1522,7 +1522,7 @@
   "16.25Y": {
     "code": "16.25Y",
     "label_fr": "Fabrication de portes et fenêtres en bois",
-    "label_en": "Fabrication de charpentes et d'autres menuiseries",
+    "label_en": "Manufacture of other builders' carpentry and joinery",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "16",
@@ -1534,7 +1534,7 @@
   "16.26Y": {
     "code": "16.26Y",
     "label_fr": "Fabrication de combustibles solides à partir de biomasse végétale",
-    "label_en": "Fabrication d'objets divers en bois ; fabrication d'objets en liège, vannerie et sparterie",
+    "label_en": "Manufacture of other products of wood; manufacture of articles of cork, straw and plaiting materials",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "16",
@@ -1546,7 +1546,7 @@
   "16.27Y": {
     "code": "16.27Y",
     "label_fr": "Finition de produits en bois",
-    "label_en": "Fabrication de placage et de panneaux de bois",
+    "label_en": "Manufacture of veneer sheets and wood-based panels",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "16",
@@ -1562,7 +1562,7 @@
   "16.28Y": {
     "code": "16.28Y",
     "label_fr": "Fabrication d’objets divers en bois, d’objets en liège, vannerie et sparterie",
-    "label_en": "Fabrication d'objets divers en bois ; fabrication d'objets en liège, vannerie et sparterie",
+    "label_en": "Manufacture of other products of wood; manufacture of articles of cork, straw and plaiting materials",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "16",
@@ -1574,7 +1574,7 @@
   "17.11Y": {
     "code": "17.11Y",
     "label_fr": "Fabrication de pâte à papier",
-    "label_en": "Fabrication de pâte à papier",
+    "label_en": "Manufacture of pulp",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "17",
@@ -1586,7 +1586,7 @@
   "17.12Y": {
     "code": "17.12Y",
     "label_fr": "Fabrication de papier et de carton",
-    "label_en": "Fabrication de papier et de carton",
+    "label_en": "Manufacture of paper and paperboard",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "17",
@@ -1598,7 +1598,7 @@
   "17.21Y": {
     "code": "17.21Y",
     "label_fr": "Fabrication de papier et carton ondulés et d’emballages en papier ou en carton",
-    "label_en": "Fabrication de carton ondulé",
+    "label_en": "Manufacture of corrugated paper and paperboard and of containers of paper and paperboard",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "17",
@@ -1612,7 +1612,7 @@
   "17.22Y": {
     "code": "17.22Y",
     "label_fr": "Fabrication d’articles en papier à usage sanitaire ou domestique",
-    "label_en": "Fabrication d'articles en papier à usage sanitaire ou domestique",
+    "label_en": "Manufacture of household and sanitary goods and of toilet requisites",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "17",
@@ -1624,7 +1624,7 @@
   "17.23Y": {
     "code": "17.23Y",
     "label_fr": "Fabrication d’articles de papeterie",
-    "label_en": "Fabrication d'articles de papeterie",
+    "label_en": "Manufacture of paper stationery",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "17",
@@ -1636,7 +1636,7 @@
   "17.24Y": {
     "code": "17.24Y",
     "label_fr": "Fabrication de papiers peints",
-    "label_en": "Fabrication de papiers peints",
+    "label_en": "Manufacture of wallpaper",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "17",
@@ -1648,7 +1648,7 @@
   "17.25Y": {
     "code": "17.25Y",
     "label_fr": "Fabrication d’autres articles en papier ou en carton",
-    "label_en": "Fabrication d'autres articles en papier ou en carton",
+    "label_en": "Manufacture of other articles of paper and paperboard",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "17",
@@ -1660,7 +1660,7 @@
   "18.11Y": {
     "code": "18.11Y",
     "label_fr": "Imprimerie de journaux",
-    "label_en": "Imprimerie de journaux",
+    "label_en": "Printing of newspapers",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "18",
@@ -1686,7 +1686,7 @@
   "18.13Y": {
     "code": "18.13Y",
     "label_fr": "Activités de pré-presse",
-    "label_en": "Activités de pré-presse",
+    "label_en": "Pre-press and pre-media services",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "18",
@@ -1698,7 +1698,7 @@
   "18.14Y": {
     "code": "18.14Y",
     "label_fr": "Reliure et activités connexes",
-    "label_en": "Reliure et activités connexes",
+    "label_en": "Binding and related services",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "18",
@@ -1722,7 +1722,7 @@
   "19.10Y": {
     "code": "19.10Y",
     "label_fr": "Cokéfaction",
-    "label_en": "Cokéfaction",
+    "label_en": "Manufacture of coke oven products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "19",
@@ -1746,7 +1746,7 @@
   "20.11Y": {
     "code": "20.11Y",
     "label_fr": "Fabrication de gaz industriels",
-    "label_en": "Fabrication de gaz industriels",
+    "label_en": "Manufacture of industrial gases",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "20",
@@ -1758,7 +1758,7 @@
   "20.12Y": {
     "code": "20.12Y",
     "label_fr": "Fabrication de colorants et de pigments",
-    "label_en": "Fabrication de colorants et de pigments",
+    "label_en": "Manufacture of dyes and pigments",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "20",
@@ -1770,7 +1770,7 @@
   "20.13Y": {
     "code": "20.13Y",
     "label_fr": "Fabrication d’autres produits chimiques inorganiques de base",
-    "label_en": "Enrichissement et retraitement de matières nucléaires",
+    "label_en": "Manufacture of other inorganic basic chemicals",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "20",
@@ -1783,7 +1783,7 @@
   "20.14Y": {
     "code": "20.14Y",
     "label_fr": "Fabrication d’autres produits chimiques organiques de base",
-    "label_en": "Fabrication de gaz industriels",
+    "label_en": "Manufacture of industrial gases",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "20",
@@ -1796,7 +1796,7 @@
   "20.15Y": {
     "code": "20.15Y",
     "label_fr": "Fabrication de produits azotés et d’engrais",
-    "label_en": "Fabrication de produits azotés et d'engrais",
+    "label_en": "Manufacture of fertilisers and nitrogen compounds",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "20",
@@ -1808,7 +1808,7 @@
   "20.16Y": {
     "code": "20.16Y",
     "label_fr": "Fabrication de matières plastiques de base",
-    "label_en": "Fabrication de matières plastiques de base",
+    "label_en": "Manufacture of plastics in primary forms",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "20",
@@ -1821,7 +1821,7 @@
   "20.17Y": {
     "code": "20.17Y",
     "label_fr": "Fabrication de caoutchouc synthétique",
-    "label_en": "Fabrication de caoutchouc synthétique",
+    "label_en": "Manufacture of synthetic rubber in primary forms",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "20",
@@ -1833,7 +1833,7 @@
   "20.20Y": {
     "code": "20.20Y",
     "label_fr": "Fabrication de pesticides, de désinfectants et d’autres produits agrochimiques",
-    "label_en": "Fabrication de pesticides et d'autres produits agrochimiques",
+    "label_en": "Manufacture of pesticides and other agrochemical products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "20",
@@ -1845,7 +1845,7 @@
   "20.30Y": {
     "code": "20.30Y",
     "label_fr": "Fabrication de peintures, vernis, encres et mastics",
-    "label_en": "Fabrication de peintures, vernis, encres et mastics",
+    "label_en": "Manufacture of paints, varnishes and similar coatings, printing ink and mastics",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "20",
@@ -1857,7 +1857,7 @@
   "20.41Y": {
     "code": "20.41Y",
     "label_fr": "Fabrication de savons, détergents et produits d’entretien",
-    "label_en": "Fabrication de savons, détergents et produits d'entretien",
+    "label_en": "Manufacture of soap and detergents, cleaning and polishing preparations",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "20",
@@ -1869,7 +1869,7 @@
   "20.42Y": {
     "code": "20.42Y",
     "label_fr": "Fabrication de parfums et de produits pour la toilette",
-    "label_en": "Fabrication de parfums et de produits pour la toilette",
+    "label_en": "Manufacture of perfumes and toilet preparations",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "20",
@@ -1881,7 +1881,7 @@
   "20.51Y": {
     "code": "20.51Y",
     "label_fr": "Fabrication de biocarburants liquides",
-    "label_en": "Fabrication d'autres produits chimiques organiques de base",
+    "label_en": "Manufacture of other organic basic chemicals",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "20",
@@ -1894,7 +1894,7 @@
   "20.59Y": {
     "code": "20.59Y",
     "label_fr": "Fabrication d’autres produits chimiques n.c.a.",
-    "label_en": "Fabrication de produits explosifs",
+    "label_en": "Manufacture of explosives",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "20",
@@ -1909,7 +1909,7 @@
   "20.60Y": {
     "code": "20.60Y",
     "label_fr": "Fabrication de fibres artificielles ou synthétiques",
-    "label_en": "Fabrication de fibres artificielles ou synthétiques",
+    "label_en": "Manufacture of man-made fibres",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "20",
@@ -1921,7 +1921,7 @@
   "21.10Y": {
     "code": "21.10Y",
     "label_fr": "Fabrication de produits pharmaceutiques de base",
-    "label_en": "Fabrication de produits pharmaceutiques de base",
+    "label_en": "Manufacture of basic pharmaceutical products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "21",
@@ -1933,7 +1933,7 @@
   "21.20Y": {
     "code": "21.20Y",
     "label_fr": "Fabrication de préparations pharmaceutiques",
-    "label_en": "Fabrication de préparations pharmaceutiques",
+    "label_en": "Manufacture of pharmaceutical preparations",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "21",
@@ -1945,7 +1945,7 @@
   "22.11Y": {
     "code": "22.11Y",
     "label_fr": "Fabrication et rechapage de pneus en caoutchouc et fabrication de chambres à air",
-    "label_en": "Fabrication et rechapage de pneumatiques",
+    "label_en": "Manufacture of rubber tyres and tubes; retreading and rebuilding of rubber tyres",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "22",
@@ -1957,7 +1957,7 @@
   "22.12Y": {
     "code": "22.12Y",
     "label_fr": "Fabrication d’autres articles en caoutchouc",
-    "label_en": "Fabrication d'autres articles en caoutchouc",
+    "label_en": "Manufacture of other rubber products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "22",
@@ -1969,7 +1969,7 @@
   "22.21Y": {
     "code": "22.21Y",
     "label_fr": "Fabrication de plaques, feuilles, tubes et profilés en matières plastiques",
-    "label_en": "Fabrication de plaques, feuilles, tubes et profilés en matières plastiques",
+    "label_en": "Manufacture of plastic plates, sheets, tubes and profiles",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "22",
@@ -1982,7 +1982,7 @@
   "22.22Y": {
     "code": "22.22Y",
     "label_fr": "Fabrication d’emballages en matières plastiques",
-    "label_en": "Fabrication d'emballages en matières plastiques",
+    "label_en": "Manufacture of plastic packing goods",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "22",
@@ -1994,7 +1994,7 @@
   "22.23Y": {
     "code": "22.23Y",
     "label_fr": "Fabrication de portes et fenêtres en matières plastiques",
-    "label_en": "Fabrication d'éléments en matières plastiques pour la construction",
+    "label_en": "Manufacture of builders’ ware of plastic",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "22",
@@ -2006,7 +2006,7 @@
   "22.24Y": {
     "code": "22.24Y",
     "label_fr": "Fabrication d’éléments en matières plastiques pour la construction",
-    "label_en": "Fabrication d'éléments en matières plastiques pour la construction",
+    "label_en": "Manufacture of builders’ ware of plastic",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "22",
@@ -2018,7 +2018,7 @@
   "22.25Y": {
     "code": "22.25Y",
     "label_fr": "Façonnage et finition de produits en matières plastiques",
-    "label_en": "Fabrication de plaques, feuilles, tubes et profilés en matières plastiques",
+    "label_en": "Manufacture of plastic plates, sheets, tubes and profiles",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "22",
@@ -2034,7 +2034,7 @@
   "22.26Y": {
     "code": "22.26Y",
     "label_fr": "Fabrication d’autres articles en matières plastiques",
-    "label_en": "Fabrication de produits de consommation courante en matières plastiques",
+    "label_en": "Manufacture of other plastic products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "22",
@@ -2046,7 +2046,7 @@
   "23.11Y": {
     "code": "23.11Y",
     "label_fr": "Fabrication de verre plat",
-    "label_en": "Fabrication de verre plat",
+    "label_en": "Manufacture of flat glass",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2058,7 +2058,7 @@
   "23.12Y": {
     "code": "23.12Y",
     "label_fr": "Façonnage et transformation du verre plat",
-    "label_en": "Façonnage et transformation du verre plat",
+    "label_en": "Shaping and processing of flat glass",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2070,7 +2070,7 @@
   "23.13Y": {
     "code": "23.13Y",
     "label_fr": "Fabrication de verre creux",
-    "label_en": "Fabrication de verre creux",
+    "label_en": "Manufacture of hollow glass",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2082,7 +2082,7 @@
   "23.14Y": {
     "code": "23.14Y",
     "label_fr": "Fabrication de fibres de verre",
-    "label_en": "Fabrication de fibres de verre",
+    "label_en": "Manufacture of glass fibres",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2094,7 +2094,7 @@
   "23.15Y": {
     "code": "23.15Y",
     "label_fr": "Fabrication et façonnage d’autres articles en verre, y compris verre technique",
-    "label_en": "Fabrication et façonnage d'autres articles en verre, y compris verre technique",
+    "label_en": "Manufacture and processing of other glass, including technical glassware",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2106,7 +2106,7 @@
   "23.20Y": {
     "code": "23.20Y",
     "label_fr": "Fabrication de produits réfractaires",
-    "label_en": "Fabrication de produits réfractaires",
+    "label_en": "Manufacture of refractory products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2118,7 +2118,7 @@
   "23.31Y": {
     "code": "23.31Y",
     "label_fr": "Fabrication de carreaux en céramique",
-    "label_en": "Fabrication de carreaux en céramique",
+    "label_en": "Manufacture of ceramic tiles and flags",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2130,7 +2130,7 @@
   "23.32Y": {
     "code": "23.32Y",
     "label_fr": "Fabrication de briques, tuiles et produits de construction, en terre cuite",
-    "label_en": "Fabrication de briques, tuiles et produits de construction, en terre cuite",
+    "label_en": "Manufacture of bricks, tiles and construction products, in baked clay",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2142,7 +2142,7 @@
   "23.41Y": {
     "code": "23.41Y",
     "label_fr": "Fabrication d’articles céramiques à usage domestique ou ornemental",
-    "label_en": "Fabrication d'articles céramiques à usage domestique ou ornemental",
+    "label_en": "Manufacture of ceramic household and ornamental articles",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2154,7 +2154,7 @@
   "23.42Y": {
     "code": "23.42Y",
     "label_fr": "Fabrication d’appareils sanitaires en céramique",
-    "label_en": "Fabrication d'appareils sanitaires en céramique",
+    "label_en": "Manufacture of ceramic sanitary fixtures",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2166,7 +2166,7 @@
   "23.43Y": {
     "code": "23.43Y",
     "label_fr": "Fabrication d’isolateurs et pièces isolantes en céramique",
-    "label_en": "Fabrication d'isolateurs et pièces isolantes en céramique",
+    "label_en": "Manufacture of ceramic insulators and insulating fittings",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2178,7 +2178,7 @@
   "23.44Y": {
     "code": "23.44Y",
     "label_fr": "Fabrication d’autres produits céramiques à usage technique",
-    "label_en": "Fabrication d'autres produits céramiques à usage technique",
+    "label_en": "Manufacture of other technical ceramic products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2190,7 +2190,7 @@
   "23.45Y": {
     "code": "23.45Y",
     "label_fr": "Fabrication d’autres produits céramiques",
-    "label_en": "Fabrication d'autres produits céramiques",
+    "label_en": "Manufacture of other ceramic products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2202,7 +2202,7 @@
   "23.51Y": {
     "code": "23.51Y",
     "label_fr": "Fabrication de ciment",
-    "label_en": "Fabrication de ciment",
+    "label_en": "Manufacture of cement",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2214,7 +2214,7 @@
   "23.52Y": {
     "code": "23.52Y",
     "label_fr": "Fabrication de chaux et plâtre",
-    "label_en": "Fabrication de chaux et plâtre",
+    "label_en": "Manufacture of lime and plaster",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2226,7 +2226,7 @@
   "23.61Y": {
     "code": "23.61Y",
     "label_fr": "Fabrication d’éléments en béton pour la construction",
-    "label_en": "Fabrication d'éléments en béton pour la construction",
+    "label_en": "Manufacture of concrete products for construction purposes",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2238,7 +2238,7 @@
   "23.62Y": {
     "code": "23.62Y",
     "label_fr": "Fabrication d’éléments en plâtre pour la construction",
-    "label_en": "Fabrication d'éléments en plâtre pour la construction",
+    "label_en": "Manufacture of plaster products for construction purposes",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2262,7 +2262,7 @@
   "23.64Y": {
     "code": "23.64Y",
     "label_fr": "Fabrication de mortiers et de bétons secs",
-    "label_en": "Fabrication de mortiers et bétons secs",
+    "label_en": "Manufacture of mortars",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2274,7 +2274,7 @@
   "23.65Y": {
     "code": "23.65Y",
     "label_fr": "Fabrication d’ouvrages en fibre-ciment",
-    "label_en": "Fabrication d'ouvrages en fibre-ciment",
+    "label_en": "Manufacture of fibre cement",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2286,7 +2286,7 @@
   "23.66Y": {
     "code": "23.66Y",
     "label_fr": "Fabrication d’autres ouvrages en béton, en ciment ou en plâtre",
-    "label_en": "Fabrication d'éléments en matières plastiques pour la construction",
+    "label_en": "Manufacture of builders’ ware of plastic",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2299,7 +2299,7 @@
   "23.70Y": {
     "code": "23.70Y",
     "label_fr": "Taille, façonnage et finissage de pierres",
-    "label_en": "Taille, façonnage et finissage de pierres",
+    "label_en": "Cutting, shaping and finishing of stone",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2311,7 +2311,7 @@
   "23.91Y": {
     "code": "23.91Y",
     "label_fr": "Fabrication de produits abrasifs",
-    "label_en": "Fabrication de produits abrasifs",
+    "label_en": "Production of abrasive products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "23",
@@ -2336,7 +2336,7 @@
   "24.10Y": {
     "code": "24.10Y",
     "label_fr": "Sidérurgie",
-    "label_en": "Sidérurgie",
+    "label_en": "Manufacture of basic iron and steel and of ferro-alloys",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "24",
@@ -2348,7 +2348,7 @@
   "24.20Y": {
     "code": "24.20Y",
     "label_fr": "Fabrication de tubes, tuyaux, profilés creux et accessoires correspondants en acier",
-    "label_en": "Fabrication de tubes, tuyaux, profilés creux et accessoires correspondants en acier",
+    "label_en": "Manufacture of tubes, pipes, hollow profiles and related fittings, of steel",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "24",
@@ -2360,7 +2360,7 @@
   "24.31Y": {
     "code": "24.31Y",
     "label_fr": "Étirage à froid de barres",
-    "label_en": "Étirage à froid de barres",
+    "label_en": "Cold drawing of bars",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "24",
@@ -2372,7 +2372,7 @@
   "24.32Y": {
     "code": "24.32Y",
     "label_fr": "Laminage à froid de feuillards",
-    "label_en": "Laminage à froid de feuillards",
+    "label_en": "Cold rolling of narrow strip",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "24",
@@ -2384,7 +2384,7 @@
   "24.33Y": {
     "code": "24.33Y",
     "label_fr": "Profilage à froid par formage ou pliage",
-    "label_en": "Profilage à froid par formage ou pliage",
+    "label_en": "Cold forming or folding",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "24",
@@ -2396,7 +2396,7 @@
   "24.34Y": {
     "code": "24.34Y",
     "label_fr": "Tréfilage à froid",
-    "label_en": "Tréfilage à froid",
+    "label_en": "Cold drawing of wire",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "24",
@@ -2408,7 +2408,7 @@
   "24.41Y": {
     "code": "24.41Y",
     "label_fr": "Production de métaux précieux",
-    "label_en": "Production de métaux précieux",
+    "label_en": "Precious metals production",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "24",
@@ -2420,7 +2420,7 @@
   "24.42Y": {
     "code": "24.42Y",
     "label_fr": "Métallurgie de l’aluminium",
-    "label_en": "Métallurgie de l'aluminium",
+    "label_en": "Aluminium production",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "24",
@@ -2432,7 +2432,7 @@
   "24.43Y": {
     "code": "24.43Y",
     "label_fr": "Métallurgie du plomb, du zinc ou de l’étain",
-    "label_en": "Métallurgie du plomb, du zinc ou de l'étain",
+    "label_en": "Lead, zinc and tin production",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "24",
@@ -2444,7 +2444,7 @@
   "24.44Y": {
     "code": "24.44Y",
     "label_fr": "Métallurgie du cuivre",
-    "label_en": "Métallurgie du cuivre",
+    "label_en": "Copper production",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "24",
@@ -2456,7 +2456,7 @@
   "24.45Y": {
     "code": "24.45Y",
     "label_fr": "Métallurgie des autres métaux non ferreux",
-    "label_en": "Métallurgie des autres métaux non ferreux",
+    "label_en": "Other non-ferrous metal production",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "24",
@@ -2468,7 +2468,7 @@
   "24.46Y": {
     "code": "24.46Y",
     "label_fr": "Élaboration et transformation de matières nucléaires",
-    "label_en": "Élaboration et transformation de matières nucléaires",
+    "label_en": "Processing of nuclear fuel",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "24",
@@ -2480,7 +2480,7 @@
   "24.51Y": {
     "code": "24.51Y",
     "label_fr": "Fonderie de fonte",
-    "label_en": "Fonderie de fonte",
+    "label_en": "Casting of iron",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "24",
@@ -2504,7 +2504,7 @@
   "24.53Y": {
     "code": "24.53Y",
     "label_fr": "Fonderie de métaux légers",
-    "label_en": "Fonderie de métaux légers",
+    "label_en": "Casting of light metals",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "24",
@@ -2541,7 +2541,7 @@
   "25.12Y": {
     "code": "25.12Y",
     "label_fr": "Fabrication de portes et fenêtres en métal",
-    "label_en": "Fabrication de portes et fenêtres en métal",
+    "label_en": "Manufacture of doors and windows of metal",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "25",
@@ -2553,7 +2553,7 @@
   "25.21Y": {
     "code": "25.21Y",
     "label_fr": "Fabrication de radiateurs et de chaudières pour le chauffage central",
-    "label_en": "Fabrication de radiateurs et de chaudières pour le chauffage central",
+    "label_en": "Manufacture of central heating radiators and boilers",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "25",
@@ -2566,7 +2566,7 @@
   "25.22Y": {
     "code": "25.22Y",
     "label_fr": "Fabrication d’autres réservoirs, citernes et conteneurs métalliques",
-    "label_en": "Fabrication d'autres réservoirs, citernes et conteneurs métalliques",
+    "label_en": "Manufacture of other tanks, reservoirs and containers of metal",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "25",
@@ -2578,7 +2578,7 @@
   "25.30Y": {
     "code": "25.30Y",
     "label_fr": "Fabrication d’armes et de munitions",
-    "label_en": "Fabrication d'armes et de munitions",
+    "label_en": "Manufacture of weapons and ammunition",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "25",
@@ -2603,7 +2603,7 @@
   "25.51Y": {
     "code": "25.51Y",
     "label_fr": "Revêtement des métaux",
-    "label_en": "Traitement et revêtement des métaux",
+    "label_en": "Treatment and coating of metals",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "25",
@@ -2615,7 +2615,7 @@
   "25.52Y": {
     "code": "25.52Y",
     "label_fr": "Traitement thermique des métaux",
-    "label_en": "Traitement et revêtement des métaux",
+    "label_en": "Treatment and coating of metals",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "25",
@@ -2627,7 +2627,7 @@
   "25.53Y": {
     "code": "25.53Y",
     "label_fr": "Usinage des métaux",
-    "label_en": "Traitement et revêtement des métaux",
+    "label_en": "Treatment and coating of metals",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "25",
@@ -2641,7 +2641,7 @@
   "25.61Y": {
     "code": "25.61Y",
     "label_fr": "Fabrication de coutellerie",
-    "label_en": "Fabrication de coutellerie",
+    "label_en": "Treatment and coating of metals",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "25",
@@ -2653,7 +2653,7 @@
   "25.62Y": {
     "code": "25.62Y",
     "label_fr": "Fabrication de serrures et de ferrures",
-    "label_en": "Fabrication de serrures et de ferrures",
+    "label_en": "Machining",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "25",
@@ -2665,7 +2665,7 @@
   "25.63Y": {
     "code": "25.63Y",
     "label_fr": "Fabrication d’outillage",
-    "label_en": "Fabrication de moules et modèles",
+    "label_en": "Manufacture of tools",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "25",
@@ -2678,7 +2678,7 @@
   "25.91Y": {
     "code": "25.91Y",
     "label_fr": "Fabrication de fûts et emballages métalliques similaires",
-    "label_en": "Fabrication de fûts et emballages métalliques similaires",
+    "label_en": "Manufacture of steel drums and similar containers",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "25",
@@ -2690,7 +2690,7 @@
   "25.92Y": {
     "code": "25.92Y",
     "label_fr": "Fabrication d’emballages métalliques légers",
-    "label_en": "Fabrication d'emballages métalliques légers",
+    "label_en": "Manufacture of light metal packaging",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "25",
@@ -2702,7 +2702,7 @@
   "25.93Y": {
     "code": "25.93Y",
     "label_fr": "Fabrication d’articles en fils métalliques, de chaînes et de ressorts",
-    "label_en": "Fabrication d'articles en fils métalliques, de chaînes et de ressorts",
+    "label_en": "Manufacture of wire products, chain and springs",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "25",
@@ -2714,7 +2714,7 @@
   "25.94Y": {
     "code": "25.94Y",
     "label_fr": "Fabrication de vis et de boulons",
-    "label_en": "Fabrication de vis et de boulons",
+    "label_en": "Manufacture of fasteners and screw machine products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "25",
@@ -2726,7 +2726,7 @@
   "25.99Y": {
     "code": "25.99Y",
     "label_fr": "Fabrication d’autres produits métalliques n.c.a.",
-    "label_en": "Fabrication d'articles métalliques ménagers",
+    "label_en": "Manufacture of other fabricated metal products n.e.c.",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "25",
@@ -2739,7 +2739,7 @@
   "26.11Y": {
     "code": "26.11Y",
     "label_fr": "Fabrication de composants électroniques",
-    "label_en": "Fabrication de composants électroniques",
+    "label_en": "Manufacture of electronic components",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "26",
@@ -2751,7 +2751,7 @@
   "26.12Y": {
     "code": "26.12Y",
     "label_fr": "Fabrication de cartes électroniques assemblées",
-    "label_en": "Fabrication de cartes électroniques assemblées",
+    "label_en": "Manufacture of loaded electronic boards",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "26",
@@ -2763,7 +2763,7 @@
   "26.20Y": {
     "code": "26.20Y",
     "label_fr": "Fabrication d’ordinateurs et d’équipements périphériques",
-    "label_en": "Fabrication d'ordinateurs et d'équipements périphériques",
+    "label_en": "Manufacture of computers and peripheral equipment",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "26",
@@ -2776,7 +2776,7 @@
   "26.30Y": {
     "code": "26.30Y",
     "label_fr": "Fabrication d’équipements de communication",
-    "label_en": "Fabrication d'équipements de communication",
+    "label_en": "Manufacture of communication equipment",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "26",
@@ -2788,7 +2788,7 @@
   "26.40Y": {
     "code": "26.40Y",
     "label_fr": "Fabrication de produits électroniques grand public",
-    "label_en": "Fabrication d'ordinateurs et d'équipements périphériques",
+    "label_en": "Manufacture of computers and peripheral equipment",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "26",
@@ -2801,7 +2801,7 @@
   "26.51Y": {
     "code": "26.51Y",
     "label_fr": "Fabrication d’instruments et d’appareils de mesure, d’essai et de navigation",
-    "label_en": "Fabrication d'équipements de communication",
+    "label_en": "Manufacture of communication equipment",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "26",
@@ -2815,7 +2815,7 @@
   "26.52Y": {
     "code": "26.52Y",
     "label_fr": "Horlogerie",
-    "label_en": "Horlogerie",
+    "label_en": "Manufacture of watches and clocks",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "26",
@@ -2827,7 +2827,7 @@
   "26.60Y": {
     "code": "26.60Y",
     "label_fr": "Fabrication d’équipements d’irradiation médicale, d’équipements électromédicaux et électrothérapeutiques",
-    "label_en": "Fabrication d'équipements d'irradiation médicale, d'équipements électromédicaux et électrothérapeutiques",
+    "label_en": "Manufacture of irradiation, electromedical and electrotherapeutic equipment",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "26",
@@ -2840,7 +2840,7 @@
   "26.70Y": {
     "code": "26.70Y",
     "label_fr": "Fabrication de matériels optique et photographique et de supports magnétiques et optiques",
-    "label_en": "Fabrication de matériels optique et photographique",
+    "label_en": "Manufacture of optical instruments and photographic equipment",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "26",
@@ -2853,7 +2853,7 @@
   "27.11Y": {
     "code": "27.11Y",
     "label_fr": "Fabrication de moteurs, génératrices et transformateurs électriques",
-    "label_en": "Fabrication de moteurs, génératrices et transformateurs électriques",
+    "label_en": "Manufacture of electric motors, generators and transformers",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "27",
@@ -2867,7 +2867,7 @@
   "27.12Y": {
     "code": "27.12Y",
     "label_fr": "Fabrication de matériel de distribution et de commande électrique",
-    "label_en": "Fabrication de matériel de distribution et de commande électrique",
+    "label_en": "Manufacture of electricity distribution and control apparatus",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "27",
@@ -2879,7 +2879,7 @@
   "27.20Y": {
     "code": "27.20Y",
     "label_fr": "Fabrication de piles et d’accumulateurs électriques",
-    "label_en": "Fabrication de piles et d'accumulateurs électriques",
+    "label_en": "Manufacture of batteries and accumulators",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "27",
@@ -2891,7 +2891,7 @@
   "27.31Y": {
     "code": "27.31Y",
     "label_fr": "Fabrication de câbles de fibres optiques",
-    "label_en": "Fabrication de câbles de fibres optiques",
+    "label_en": "Manufacture of fibre optic cables",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "27",
@@ -2903,7 +2903,7 @@
   "27.32Y": {
     "code": "27.32Y",
     "label_fr": "Fabrication d’autres fils et câbles électroniques ou électriques",
-    "label_en": "Fabrication d'autres fils et câbles électroniques ou électriques",
+    "label_en": "Manufacture of other electronic and electric wires and cables",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "27",
@@ -2915,7 +2915,7 @@
   "27.33Y": {
     "code": "27.33Y",
     "label_fr": "Fabrication de matériel d’installation électrique",
-    "label_en": "Fabrication de matériel d'installation électrique",
+    "label_en": "Manufacture of wiring devices",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "27",
@@ -2927,7 +2927,7 @@
   "27.40Y": {
     "code": "27.40Y",
     "label_fr": "Fabrication d’appareils d’éclairage",
-    "label_en": "Fabrication d'appareils d'éclairage électrique",
+    "label_en": "Manufacture of electric lighting equipment",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "27",
@@ -2939,7 +2939,7 @@
   "27.51Y": {
     "code": "27.51Y",
     "label_fr": "Fabrication d’appareils électroménagers",
-    "label_en": "Fabrication d'appareils électroménagers",
+    "label_en": "Manufacture of electric domestic appliances",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "27",
@@ -2951,7 +2951,7 @@
   "27.52Y": {
     "code": "27.52Y",
     "label_fr": "Fabrication d’appareils ménagers non électriques",
-    "label_en": "Fabrication d'appareils ménagers non électriques",
+    "label_en": "Manufacture of non-electric domestic appliances",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "27",
@@ -2963,7 +2963,7 @@
   "27.90Y": {
     "code": "27.90Y",
     "label_fr": "Fabrication d’autres matériels électriques",
-    "label_en": "Fabrication d'autres matériels électriques",
+    "label_en": "Manufacture of other electrical equipment",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "27",
@@ -2976,7 +2976,7 @@
   "28.11Y": {
     "code": "28.11Y",
     "label_fr": "Fabrication de moteurs et turbines, à l’exception des moteurs d’avions et de véhicules",
-    "label_en": "Fabrication de moteurs et turbines, à l'exception des moteurs d'avions et de véhicules",
+    "label_en": "Manufacture of engines and turbines, except aircraft, vehicle and cycle engines",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -2988,7 +2988,7 @@
   "28.12Y": {
     "code": "28.12Y",
     "label_fr": "Fabrication d’équipements de transmission de puissance hydrauliques et pneumatiques",
-    "label_en": "Fabrication d'équipements hydrauliques et pneumatiques",
+    "label_en": "Manufacture of fluid power equipment",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3000,7 +3000,7 @@
   "28.13G": {
     "code": "28.13G",
     "label_fr": "Fabrication d'autres pompes",
-    "label_en": "Fabrication d'autres pompes et compresseurs",
+    "label_en": "Manufacture of other pumps and compressors",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3012,7 +3012,7 @@
   "28.13H": {
     "code": "28.13H",
     "label_fr": "Fabrication d'autres compresseurs",
-    "label_en": "Fabrication d'autres pompes et compresseurs",
+    "label_en": "Manufacture of other pumps and compressors",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3024,7 +3024,7 @@
   "28.14Y": {
     "code": "28.14Y",
     "label_fr": "Fabrication d’autres articles de robinetterie",
-    "label_en": "Fabrication d'autres articles de robinetterie",
+    "label_en": "Manufacture of other taps and valves",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3036,7 +3036,7 @@
   "28.15Y": {
     "code": "28.15Y",
     "label_fr": "Fabrication de roulements et de transmissions mécaniques",
-    "label_en": "Fabrication d'engrenages et d'organes mécaniques de transmission",
+    "label_en": "Manufacture of bearings, gears, gearing and driving elements",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3048,7 +3048,7 @@
   "28.21Y": {
     "code": "28.21Y",
     "label_fr": "Fabrication de fours et brûleurs et d’équipements fixes de chauffage domestique",
-    "label_en": "Fabrication de radiateurs et de chaudières pour le chauffage central",
+    "label_en": "Manufacture of central heating radiators and boilers",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3061,7 +3061,7 @@
   "28.22Y": {
     "code": "28.22Y",
     "label_fr": "Fabrication de matériel de levage et de manutention",
-    "label_en": "Fabrication de matériel de levage et de manutention",
+    "label_en": "Manufacture of lifting and handling equipment",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3073,7 +3073,7 @@
   "28.23Y": {
     "code": "28.23Y",
     "label_fr": "Fabrication de machines et d’équipements de bureau (à l’exception des ordinateurs et équipements périphériques)",
-    "label_en": "Fabrication de machines et d'équipements de bureau (à l'exception des ordinateurs et équipements périphériques)",
+    "label_en": "Manufacture of office machinery and equipment (except computers and peripheral equipment)",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3085,7 +3085,7 @@
   "28.24Y": {
     "code": "28.24Y",
     "label_fr": "Fabrication d’outillage portatif à moteur incorporé",
-    "label_en": "Fabrication d'outillage portatif à moteur incorporé",
+    "label_en": "Manufacture of power-driven hand tools",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3097,7 +3097,7 @@
   "28.25Y": {
     "code": "28.25Y",
     "label_fr": "Fabrication d’équipements aérauliques et frigorifiques industriels",
-    "label_en": "Fabrication de fours et brûleurs",
+    "label_en": "Manufacture of ovens, furnaces and furnace burners",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3110,7 +3110,7 @@
   "28.29Y": {
     "code": "28.29Y",
     "label_fr": "Fabrication de machines diverses d’usage général",
-    "label_en": "Fabrication d'équipements d'emballage, de conditionnement et de pesage",
+    "label_en": "Manufacture of other general-purpose machinery n.e.c.",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3123,7 +3123,7 @@
   "28.30Y": {
     "code": "28.30Y",
     "label_fr": "Fabrication de machines agricoles et forestières",
-    "label_en": "Fabrication de machines agricoles et forestières",
+    "label_en": "Manufacture of agricultural and forestry machinery",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3136,7 +3136,7 @@
   "28.41Y": {
     "code": "28.41Y",
     "label_fr": "Fabrication de machines-outils pour le formage et le travail des métaux",
-    "label_en": "Fabrication de machines-outils pour le travail des métaux",
+    "label_en": "Manufacture of metal forming machinery",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3149,7 +3149,7 @@
   "28.42Y": {
     "code": "28.42Y",
     "label_fr": "Fabrication d’autres machines-outils",
-    "label_en": "Fabrication d'autres machines-outils",
+    "label_en": "Manufacture of other machine tools",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3161,7 +3161,7 @@
   "28.91Y": {
     "code": "28.91Y",
     "label_fr": "Fabrication de machines pour la métallurgie",
-    "label_en": "Fabrication de machines pour la métallurgie",
+    "label_en": "Manufacture of machinery for metallurgy",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3173,7 +3173,7 @@
   "28.92Y": {
     "code": "28.92Y",
     "label_fr": "Fabrication de machines pour l’extraction ou la construction",
-    "label_en": "Fabrication de machines pour l'extraction ou la construction",
+    "label_en": "Manufacture of machinery for mining, quarrying and construction",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3185,7 +3185,7 @@
   "28.93Y": {
     "code": "28.93Y",
     "label_fr": "Fabrication de machines pour l’industrie agro-alimentaire",
-    "label_en": "Fabrication d'autres machines d'usage général",
+    "label_en": "Manufacture of other general-purpose machinery n.e.c.",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3198,7 +3198,7 @@
   "28.94Y": {
     "code": "28.94Y",
     "label_fr": "Fabrication de machines pour les industries textiles et du cuir",
-    "label_en": "Fabrication de machines pour les industries textiles",
+    "label_en": "Manufacture of machinery for textile, apparel and leather production",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3210,7 +3210,7 @@
   "28.95Y": {
     "code": "28.95Y",
     "label_fr": "Fabrication de machines pour les industries du papier et du carton",
-    "label_en": "Fabrication de machines pour les industries du papier et du carton",
+    "label_en": "Manufacture of machinery for paper and paperboard production",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3222,7 +3222,7 @@
   "28.96Y": {
     "code": "28.96Y",
     "label_fr": "Fabrication de machines pour le travail du caoutchouc ou des plastiques",
-    "label_en": "Fabrication de machines pour le travail du caoutchouc ou des plastiques",
+    "label_en": "Manufacture of plastics and rubber machinery",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3234,7 +3234,7 @@
   "28.97Y": {
     "code": "28.97Y",
     "label_fr": "Fabrication de machines de fabrication additive",
-    "label_en": "Fabrication de machines-outils pour le travail des métaux",
+    "label_en": "Manufacture of metal forming machinery",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3249,7 +3249,7 @@
   "28.99Y": {
     "code": "28.99Y",
     "label_fr": "Fabrication d’autres machines d’usage spécifique n.c.a.",
-    "label_en": "Fabrication de machines d'imprimerie",
+    "label_en": "Manufacture of other special-purpose machinery n.e.c.",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "28",
@@ -3262,7 +3262,7 @@
   "29.10Y": {
     "code": "29.10Y",
     "label_fr": "Construction de véhicules automobiles",
-    "label_en": "Fabrication de moteurs, génératrices et transformateurs électriques",
+    "label_en": "Manufacture of electric motors, generators and transformers",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "29",
@@ -3275,7 +3275,7 @@
   "29.20Y": {
     "code": "29.20Y",
     "label_fr": "Fabrication de carrosseries de véhicules automobiles ; fabrication de remorques et de semi-remorques",
-    "label_en": "Fabrication de carrosseries et remorques",
+    "label_en": "Manufacture of bodies (coachwork) for motor vehicles; manufacture of trailers and semi-trailers",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "29",
@@ -3287,7 +3287,7 @@
   "29.31Y": {
     "code": "29.31Y",
     "label_fr": "Fabrication d’équipements électriques et électroniques automobiles",
-    "label_en": "Fabrication d'autres matériels électriques",
+    "label_en": "Manufacture of other electrical equipment",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "29",
@@ -3300,7 +3300,7 @@
   "29.32Y": {
     "code": "29.32Y",
     "label_fr": "Fabrication d’autres équipements automobiles",
-    "label_en": "Façonnage et transformation du verre plat",
+    "label_en": "Shaping and processing of flat glass",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "29",
@@ -3315,7 +3315,7 @@
   "30.11Y": {
     "code": "30.11Y",
     "label_fr": "Construction de navires et de structures flottantes civiles",
-    "label_en": "Construction de navires et de structures flottantes",
+    "label_en": "Building of ships and floating structures",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "30",
@@ -3327,7 +3327,7 @@
   "30.12Y": {
     "code": "30.12Y",
     "label_fr": "Construction de bateaux de plaisance",
-    "label_en": "Construction de bateaux de plaisance",
+    "label_en": "Building of pleasure and sporting boats",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "30",
@@ -3339,7 +3339,7 @@
   "30.13Y": {
     "code": "30.13Y",
     "label_fr": "Construction de bateaux et navires militaires",
-    "label_en": "Construction de navires et de structures flottantes",
+    "label_en": "Building of ships and floating structures",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "30",
@@ -3351,7 +3351,7 @@
   "30.20Y": {
     "code": "30.20Y",
     "label_fr": "Construction de locomotives et d’autre matériel ferroviaire roulant",
-    "label_en": "Construction de locomotives et d'autre matériel ferroviaire roulant",
+    "label_en": "Manufacture of railway locomotives and rolling stock",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "30",
@@ -3387,7 +3387,7 @@
   "30.40Y": {
     "code": "30.40Y",
     "label_fr": "Construction de véhicules militaires de combat",
-    "label_en": "Construction de véhicules militaires de combat",
+    "label_en": "Manufacture of military fighting vehicles",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "30",
@@ -3399,7 +3399,7 @@
   "30.91Y": {
     "code": "30.91Y",
     "label_fr": "Fabrication de motocycles",
-    "label_en": "Fabrication de moteurs et turbines, à l'exception des moteurs d'avions et de véhicules",
+    "label_en": "Manufacture of engines and turbines, except aircraft, vehicle and cycle engines",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "30",
@@ -3412,7 +3412,7 @@
   "30.92Y": {
     "code": "30.92Y",
     "label_fr": "Fabrication de bicyclettes et de véhicules pour invalides",
-    "label_en": "Fabrication de motocycles",
+    "label_en": "Manufacture of motorcycles",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "30",
@@ -3425,7 +3425,7 @@
   "30.99Y": {
     "code": "30.99Y",
     "label_fr": "Fabrication d’autres équipements de transport n.c.a.",
-    "label_en": "Fabrication d'autres équipements de transport n.c.a.",
+    "label_en": "Manufacture of other transport equipment n.e.c.",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "30",
@@ -3437,7 +3437,7 @@
   "31.00G": {
     "code": "31.00G",
     "label_fr": "Fabrication de meubles à destination de professionnels",
-    "label_en": "Fabrication de meubles de bureau et de magasin",
+    "label_en": "Manufacture of office and shop furniture",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "31",
@@ -3452,7 +3452,7 @@
   "31.00H": {
     "code": "31.00H",
     "label_fr": "Fabrication de meubles de cuisine et salle de bain",
-    "label_en": "Fabrication d'appareils sanitaires en céramique",
+    "label_en": "Manufacture of ceramic sanitary fixtures",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "31",
@@ -3466,7 +3466,7 @@
   "31.00J": {
     "code": "31.00J",
     "label_fr": "Fabrication d'autres meubles domestiques, de sommiers et de matelas",
-    "label_en": "Fabrication de meubles de bureau et de magasin",
+    "label_en": "Manufacture of office and shop furniture",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "31",
@@ -3482,7 +3482,7 @@
   "32.11Y": {
     "code": "32.11Y",
     "label_fr": "Frappe de monnaie",
-    "label_en": "Frappe de monnaie",
+    "label_en": "Striking of coins",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "32",
@@ -3494,7 +3494,7 @@
   "32.12Y": {
     "code": "32.12Y",
     "label_fr": "Fabrication d’articles de joaillerie et bijouterie",
-    "label_en": "Fabrication d'articles de joaillerie et bijouterie",
+    "label_en": "Manufacture of jewellery and related articles",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "32",
@@ -3506,7 +3506,7 @@
   "32.13Y": {
     "code": "32.13Y",
     "label_fr": "Fabrication d’articles de bijouterie fantaisie et articles similaires",
-    "label_en": "Fabrication d'articles de bijouterie fantaisie et articles similaires",
+    "label_en": "Manufacture of imitation jewellery and related articles",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "32",
@@ -3518,7 +3518,7 @@
   "32.20Y": {
     "code": "32.20Y",
     "label_fr": "Fabrication d’instruments de musique",
-    "label_en": "Fabrication d'instruments de musique",
+    "label_en": "Manufacture of musical instruments",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "32",
@@ -3530,7 +3530,7 @@
   "32.30Y": {
     "code": "32.30Y",
     "label_fr": "Fabrication d’articles de sport",
-    "label_en": "Fabrication d'articles de sport",
+    "label_en": "Manufacture of sports goods",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "32",
@@ -3542,7 +3542,7 @@
   "32.40Y": {
     "code": "32.40Y",
     "label_fr": "Fabrication de jeux et jouets",
-    "label_en": "Fabrication de jeux et jouets",
+    "label_en": "Manufacture of games and toys",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "32",
@@ -3554,7 +3554,7 @@
   "32.50Y": {
     "code": "32.50Y",
     "label_fr": "Fabrication d’instruments et de fournitures à usage médical et dentaire",
-    "label_en": "Fabrication de matériel médico-chirurgical et dentaire",
+    "label_en": "Manufacture of medical and dental instruments and supplies",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "32",
@@ -3568,7 +3568,7 @@
   "32.91Y": {
     "code": "32.91Y",
     "label_fr": "Fabrication d’articles de brosserie",
-    "label_en": "Fabrication d'articles de brosserie",
+    "label_en": "Manufacture of brooms and brushes",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "32",
@@ -3580,7 +3580,7 @@
   "32.99Y": {
     "code": "32.99Y",
     "label_fr": "Autres activités manufacturières n.c.a.",
-    "label_en": "Fabrication d'autres matériels électriques",
+    "label_en": "Manufacture of other electrical equipment",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "32",
@@ -3594,7 +3594,7 @@
   "33.11Y": {
     "code": "33.11Y",
     "label_fr": "Réparation et entretien d’ouvrages en métaux",
-    "label_en": "Réparation d'ouvrages en métaux",
+    "label_en": "Repair of fabricated metal products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "33",
@@ -3618,7 +3618,7 @@
   "33.13Y": {
     "code": "33.13Y",
     "label_fr": "Réparation et entretien de matériels électroniques et optiques",
-    "label_en": "Réparation de matériels électroniques et optiques",
+    "label_en": "Repair of electronic and optical equipment",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "33",
@@ -3630,7 +3630,7 @@
   "33.14Y": {
     "code": "33.14Y",
     "label_fr": "Réparation et entretien d’équipements électriques",
-    "label_en": "Réparation d'équipements électriques",
+    "label_en": "Repair of electrical equipment",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "33",
@@ -3655,7 +3655,7 @@
   "33.16Y": {
     "code": "33.16Y",
     "label_fr": "Réparation et entretien d’aéronefs et d’engins spatiaux civils",
-    "label_en": "Réparation et maintenance d'aéronefs et d'engins spatiaux",
+    "label_en": "Repair and maintenance of aircraft and spacecraft",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "33",
@@ -3667,7 +3667,7 @@
   "33.17Y": {
     "code": "33.17Y",
     "label_fr": "Réparation et entretien d’autres équipements de transport civils",
-    "label_en": "Réparation d'ouvrages en métaux",
+    "label_en": "Repair of fabricated metal products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "33",
@@ -3693,7 +3693,7 @@
   "33.18H": {
     "code": "33.18H",
     "label_fr": "Réparation et entretien de véhicules de combat, de navires et de bateaux militaires",
-    "label_en": "Réparation d'ouvrages en métaux",
+    "label_en": "Repair of fabricated metal products",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "33",
@@ -3707,7 +3707,7 @@
   "33.19Y": {
     "code": "33.19Y",
     "label_fr": "Réparation et entretien d’autres équipements",
-    "label_en": "Réparation d'autres équipements",
+    "label_en": "Repair of other equipment",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "33",
@@ -3719,7 +3719,7 @@
   "33.20Y": {
     "code": "33.20Y",
     "label_fr": "Installation de machines et d’équipements industriels",
-    "label_en": "Installation de structures métalliques, chaudronnées et de tuyauterie",
+    "label_en": "Installation of industrial machinery and equipment",
     "section": "C",
     "section_label": "INDUSTRIE MANUFACTURIÈRE",
     "division": "33",
@@ -3734,7 +3734,7 @@
   "35.11Y": {
     "code": "35.11Y",
     "label_fr": "Production d’électricité à partir de sources non renouvelables",
-    "label_en": "Production d'électricité",
+    "label_en": "Production of electricity",
     "section": "D",
     "section_label": "PRODUCTION ET DISTRIBUTION D’ÉLECTRICITÉ, DE GAZ, DE VAPEUR ET D’AIR CONDITIONNÉ",
     "division": "35",
@@ -3746,7 +3746,7 @@
   "35.12Y": {
     "code": "35.12Y",
     "label_fr": "Production d’électricité à partir de sources renouvelables",
-    "label_en": "Production d'électricité",
+    "label_en": "Production of electricity",
     "section": "D",
     "section_label": "PRODUCTION ET DISTRIBUTION D’ÉLECTRICITÉ, DE GAZ, DE VAPEUR ET D’AIR CONDITIONNÉ",
     "division": "35",
@@ -3782,7 +3782,7 @@
   "35.15G": {
     "code": "35.15G",
     "label_fr": "Exploitation d'installations de recharge pour véhicules électriques",
-    "label_en": "Commerce d'électricité",
+    "label_en": "Trade of electricity",
     "section": "D",
     "section_label": "PRODUCTION ET DISTRIBUTION D’ÉLECTRICITÉ, DE GAZ, DE VAPEUR ET D’AIR CONDITIONNÉ",
     "division": "35",
@@ -3794,7 +3794,7 @@
   "35.15H": {
     "code": "35.15H",
     "label_fr": "Autre commerce d’électricité",
-    "label_en": "Commerce d'électricité",
+    "label_en": "Trade of electricity",
     "section": "D",
     "section_label": "PRODUCTION ET DISTRIBUTION D’ÉLECTRICITÉ, DE GAZ, DE VAPEUR ET D’AIR CONDITIONNÉ",
     "division": "35",
@@ -3806,7 +3806,7 @@
   "35.16Y": {
     "code": "35.16Y",
     "label_fr": "Stockage de l’électricité",
-    "label_en": "Production d'électricité",
+    "label_en": "Production of electricity",
     "section": "D",
     "section_label": "PRODUCTION ET DISTRIBUTION D’ÉLECTRICITÉ, DE GAZ, DE VAPEUR ET D’AIR CONDITIONNÉ",
     "division": "35",
@@ -3818,7 +3818,7 @@
   "35.21Y": {
     "code": "35.21Y",
     "label_fr": "Production de gaz",
-    "label_en": "Production de combustibles gazeux",
+    "label_en": "Manufacture of gas",
     "section": "D",
     "section_label": "PRODUCTION ET DISTRIBUTION D’ÉLECTRICITÉ, DE GAZ, DE VAPEUR ET D’AIR CONDITIONNÉ",
     "division": "35",
@@ -3830,7 +3830,7 @@
   "35.22Y": {
     "code": "35.22Y",
     "label_fr": "Distribution de combustibles gazeux par conduites",
-    "label_en": "Distribution de combustibles gazeux par conduites",
+    "label_en": "Distribution of gaseous fuels through mains",
     "section": "D",
     "section_label": "PRODUCTION ET DISTRIBUTION D’ÉLECTRICITÉ, DE GAZ, DE VAPEUR ET D’AIR CONDITIONNÉ",
     "division": "35",
@@ -3842,7 +3842,7 @@
   "35.23Y": {
     "code": "35.23Y",
     "label_fr": "Commerce de combustibles gazeux par conduites",
-    "label_en": "Commerce de combustibles gazeux par conduites",
+    "label_en": "Trade of gas through mains",
     "section": "D",
     "section_label": "PRODUCTION ET DISTRIBUTION D’ÉLECTRICITÉ, DE GAZ, DE VAPEUR ET D’AIR CONDITIONNÉ",
     "division": "35",
@@ -3867,7 +3867,7 @@
   "35.30Y": {
     "code": "35.30Y",
     "label_fr": "Production et distribution de vapeur et d’air conditionné",
-    "label_en": "Production et distribution de vapeur et d'air conditionné",
+    "label_en": "Steam and air conditioning supply",
     "section": "D",
     "section_label": "PRODUCTION ET DISTRIBUTION D’ÉLECTRICITÉ, DE GAZ, DE VAPEUR ET D’AIR CONDITIONNÉ",
     "division": "35",
@@ -3879,7 +3879,7 @@
   "35.40Y": {
     "code": "35.40Y",
     "label_fr": "Activités des courtiers et agents pour l’électricité et le gaz naturel",
-    "label_en": "Commerce d'électricité",
+    "label_en": "Trade of electricity",
     "section": "D",
     "section_label": "PRODUCTION ET DISTRIBUTION D’ÉLECTRICITÉ, DE GAZ, DE VAPEUR ET D’AIR CONDITIONNÉ",
     "division": "35",
@@ -3892,7 +3892,7 @@
   "36.00Y": {
     "code": "36.00Y",
     "label_fr": "Captage, traitement et distribution d’eau",
-    "label_en": "Captage, traitement et distribution d'eau",
+    "label_en": "Water collection, treatment and supply",
     "section": "E",
     "section_label": "PRODUCTION ET DISTRIBUTION D’EAU ; ASSAINISSEMENT, GESTION DES DÉCHETS ET DÉPOLLUTION",
     "division": "36",
@@ -3904,7 +3904,7 @@
   "37.00Y": {
     "code": "37.00Y",
     "label_fr": "Collecte et traitement des eaux usées",
-    "label_en": "Collecte et traitement des eaux usées",
+    "label_en": "Sewerage",
     "section": "E",
     "section_label": "PRODUCTION ET DISTRIBUTION D’EAU ; ASSAINISSEMENT, GESTION DES DÉCHETS ET DÉPOLLUTION",
     "division": "37",
@@ -3916,7 +3916,7 @@
   "38.11Y": {
     "code": "38.11Y",
     "label_fr": "Collecte des déchets non dangereux",
-    "label_en": "Collecte des déchets non dangereux",
+    "label_en": "Collection of non-hazardous waste",
     "section": "E",
     "section_label": "PRODUCTION ET DISTRIBUTION D’EAU ; ASSAINISSEMENT, GESTION DES DÉCHETS ET DÉPOLLUTION",
     "division": "38",
@@ -3928,7 +3928,7 @@
   "38.12Y": {
     "code": "38.12Y",
     "label_fr": "Collecte des déchets dangereux",
-    "label_en": "Collecte des déchets dangereux",
+    "label_en": "Collection of hazardous waste",
     "section": "E",
     "section_label": "PRODUCTION ET DISTRIBUTION D’EAU ; ASSAINISSEMENT, GESTION DES DÉCHETS ET DÉPOLLUTION",
     "division": "38",
@@ -3940,7 +3940,7 @@
   "38.21Y": {
     "code": "38.21Y",
     "label_fr": "Récupération de matériaux",
-    "label_en": "Traitement et élimination des déchets non dangereux",
+    "label_en": "Treatment and disposal of non-hazardous waste",
     "section": "E",
     "section_label": "PRODUCTION ET DISTRIBUTION D’EAU ; ASSAINISSEMENT, GESTION DES DÉCHETS ET DÉPOLLUTION",
     "division": "38",
@@ -3954,7 +3954,7 @@
   "38.22Y": {
     "code": "38.22Y",
     "label_fr": "Valorisation énergétique",
-    "label_en": "Traitement et élimination des déchets non dangereux",
+    "label_en": "Treatment and disposal of non-hazardous waste",
     "section": "E",
     "section_label": "PRODUCTION ET DISTRIBUTION D’EAU ; ASSAINISSEMENT, GESTION DES DÉCHETS ET DÉPOLLUTION",
     "division": "38",
@@ -3967,7 +3967,7 @@
   "38.23Y": {
     "code": "38.23Y",
     "label_fr": "Autre valorisation des déchets",
-    "label_en": "Traitement et élimination des déchets non dangereux",
+    "label_en": "Treatment and disposal of non-hazardous waste",
     "section": "E",
     "section_label": "PRODUCTION ET DISTRIBUTION D’EAU ; ASSAINISSEMENT, GESTION DES DÉCHETS ET DÉPOLLUTION",
     "division": "38",
@@ -3980,7 +3980,7 @@
   "38.31Y": {
     "code": "38.31Y",
     "label_fr": "Incinération sans récupération d’énergie",
-    "label_en": "Traitement et élimination des déchets non dangereux",
+    "label_en": "Treatment and disposal of non-hazardous waste",
     "section": "E",
     "section_label": "PRODUCTION ET DISTRIBUTION D’EAU ; ASSAINISSEMENT, GESTION DES DÉCHETS ET DÉPOLLUTION",
     "division": "38",
@@ -3993,7 +3993,7 @@
   "38.32Y": {
     "code": "38.32Y",
     "label_fr": "Mise en décharge ou stockage permanent",
-    "label_en": "Traitement et élimination des déchets non dangereux",
+    "label_en": "Treatment and disposal of non-hazardous waste",
     "section": "E",
     "section_label": "PRODUCTION ET DISTRIBUTION D’EAU ; ASSAINISSEMENT, GESTION DES DÉCHETS ET DÉPOLLUTION",
     "division": "38",
@@ -4006,7 +4006,7 @@
   "38.33Y": {
     "code": "38.33Y",
     "label_fr": "Autre élimination des déchets",
-    "label_en": "Traitement et élimination des déchets non dangereux",
+    "label_en": "Treatment and disposal of non-hazardous waste",
     "section": "E",
     "section_label": "PRODUCTION ET DISTRIBUTION D’EAU ; ASSAINISSEMENT, GESTION DES DÉCHETS ET DÉPOLLUTION",
     "division": "38",
@@ -4019,7 +4019,7 @@
   "39.00Y": {
     "code": "39.00Y",
     "label_fr": "Activités de dépollution et autres activités de service de gestion des déchets",
-    "label_en": "Dépollution et autres services de gestion des déchets",
+    "label_en": "Remediation activities and other waste management services",
     "section": "E",
     "section_label": "PRODUCTION ET DISTRIBUTION D’EAU ; ASSAINISSEMENT, GESTION DES DÉCHETS ET DÉPOLLUTION",
     "division": "39",
@@ -4055,7 +4055,7 @@
   "42.11Y": {
     "code": "42.11Y",
     "label_fr": "Construction de routes et autoroutes",
-    "label_en": "Construction de routes et autoroutes",
+    "label_en": "Construction of roads and motorways",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "42",
@@ -4067,7 +4067,7 @@
   "42.12Y": {
     "code": "42.12Y",
     "label_fr": "Construction de voies ferrées de surface et souterraines",
-    "label_en": "Construction de voies ferrées de surface et souterraines",
+    "label_en": "Construction of railways and underground railways",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "42",
@@ -4091,7 +4091,7 @@
   "42.13H": {
     "code": "42.13H",
     "label_fr": "Construction de tunnels",
-    "label_en": "Construction et entretien de tunnels",
+    "label_en": "Construction of bridges and tunnels",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "42",
@@ -4103,7 +4103,7 @@
   "42.21Y": {
     "code": "42.21Y",
     "label_fr": "Construction de réseaux pour fluides",
-    "label_en": "Construction de réseaux pour fluides",
+    "label_en": "Construction of utility projects for fluids",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "42",
@@ -4115,7 +4115,7 @@
   "42.22Y": {
     "code": "42.22Y",
     "label_fr": "Construction de réseaux électriques et de télécommunications",
-    "label_en": "Construction de réseaux électriques et de télécommunications",
+    "label_en": "Construction of utility projects for electricity and telecommunications",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "42",
@@ -4127,7 +4127,7 @@
   "42.91Y": {
     "code": "42.91Y",
     "label_fr": "Construction d’ouvrages maritimes et fluviaux",
-    "label_en": "Construction d'ouvrages maritimes et fluviaux",
+    "label_en": "Construction of water projects",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "42",
@@ -4139,7 +4139,7 @@
   "42.99Y": {
     "code": "42.99Y",
     "label_fr": "Construction d’autres ouvrages de génie civil n.c.a.",
-    "label_en": "Construction d'autres ouvrages de génie civil n.c.a.",
+    "label_en": "Construction of other civil engineering projects n.e.c.",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "42",
@@ -4176,7 +4176,7 @@
   "43.12H": {
     "code": "43.12H",
     "label_fr": "Travaux de terrassement spécialisés ou de grande masse",
-    "label_en": "Travaux de terrassement spécialisés ou de grande masse",
+    "label_en": "Site preparation",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "43",
@@ -4188,7 +4188,7 @@
   "43.13Y": {
     "code": "43.13Y",
     "label_fr": "Forages et sondages",
-    "label_en": "Forages et sondages",
+    "label_en": "Test drilling and boring",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "43",
@@ -4212,7 +4212,7 @@
   "43.21H": {
     "code": "43.21H",
     "label_fr": "Travaux d'installation électrique sur la voie",
-    "label_en": "Travaux d'installation électrique sur la voie publique",
+    "label_en": "Electrical installation",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "43",
@@ -4249,7 +4249,7 @@
   "43.23Y": {
     "code": "43.23Y",
     "label_fr": "Mise en place de l’isolation",
-    "label_en": "Travaux d'isolation",
+    "label_en": "Other construction installation",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "43",
@@ -4263,7 +4263,7 @@
   "43.24Y": {
     "code": "43.24Y",
     "label_fr": "Autres travaux d’installation",
-    "label_en": "Autres travaux d'installation n.c.a.",
+    "label_en": "Other construction installation",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "43",
@@ -4303,7 +4303,7 @@
   "43.32H": {
     "code": "43.32H",
     "label_fr": "Travaux de menuiserie métallique",
-    "label_en": "Travaux de menuiserie métallique et serrurerie",
+    "label_en": "Joinery installation",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "43",
@@ -4356,7 +4356,7 @@
   "43.35Y": {
     "code": "43.35Y",
     "label_fr": "Autres travaux de finition",
-    "label_en": "Autres travaux de finition",
+    "label_en": "Other building completion and finishing",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "43",
@@ -4393,7 +4393,7 @@
   "43.41J": {
     "code": "43.41J",
     "label_fr": "Travaux d'étanchéification pour la toiture",
-    "label_en": "Travaux d'étanchéification",
+    "label_en": "Other specialised construction activities n.e.c.",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "43",
@@ -4405,7 +4405,7 @@
   "43.42G": {
     "code": "43.42G",
     "label_fr": "Travaux de montage d’éléments de construction préfabriqués pour bâtiments, en acier",
-    "label_en": "Travaux de montage de structures métalliques",
+    "label_en": "Other specialised construction activities n.e.c.",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "43",
@@ -4417,7 +4417,7 @@
   "43.42H": {
     "code": "43.42H",
     "label_fr": "Travaux de montage d’éléments de construction préfabriqués pour bâtiments, en bois",
-    "label_en": "Autres travaux spécialisés de construction",
+    "label_en": "Other specialised construction activities n.e.c.",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "43",
@@ -4429,7 +4429,7 @@
   "43.42J": {
     "code": "43.42J",
     "label_fr": "Autres travaux de construction spécialisés dans la construction de bâtiments n.c.a.",
-    "label_en": "Travaux d'étanchéification",
+    "label_en": "Other specialised construction activities n.e.c.",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "43",
@@ -4442,7 +4442,7 @@
   "43.50Y": {
     "code": "43.50Y",
     "label_fr": "Travaux de construction spécialisés en génie civil",
-    "label_en": "Construction de routes et autoroutes",
+    "label_en": "Construction of roads and motorways",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "43",
@@ -4456,7 +4456,7 @@
   "43.60Y": {
     "code": "43.60Y",
     "label_fr": "Activités de service d’intermédiation pour des travaux de construction spécialisés",
-    "label_en": "Autres activités de soutien aux entreprises n.c.a.",
+    "label_en": "Other business support service activities n.e.c.",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "43",
@@ -4480,7 +4480,7 @@
   "43.99G": {
     "code": "43.99G",
     "label_fr": "Location avec opérateur d’équipement de construction",
-    "label_en": "Location avec opérateur de matériel de construction",
+    "label_en": "Other specialised construction activities n.e.c.",
     "section": "F",
     "section_label": "CONSTRUCTION",
     "division": "43",
@@ -4508,7 +4508,7 @@
   "46.11Y": {
     "code": "46.11Y",
     "label_fr": "Activités d’intermédiaire du commerce de gros en matières premières agricoles, animaux vivants, matières premières textiles et produits semi-finis",
-    "label_en": "Intermédiaires du commerce en matières premières agricoles, animaux vivants, matières premières textiles et produits semi-finis",
+    "label_en": "Agents involved in the sale of agricultural raw materials, live animals, textile raw materials and semi-finished goods",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4521,7 +4521,7 @@
   "46.12Y": {
     "code": "46.12Y",
     "label_fr": "Activités d’intermédiaire du commerce de gros en combustibles, minerais, métaux et produits chimiques",
-    "label_en": "Centrales d'achat de carburant",
+    "label_en": "Agents involved in the sale of fuels, ores, metals and industrial chemicals",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4535,7 +4535,7 @@
   "46.13Y": {
     "code": "46.13Y",
     "label_fr": "Activités d’intermédiaire du commerce de gros en bois et matériaux de construction",
-    "label_en": "Intermédiaires du commerce en bois et matériaux de construction",
+    "label_en": "Agents involved in the sale of timber and building materials",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4548,7 +4548,7 @@
   "46.14Y": {
     "code": "46.14Y",
     "label_fr": "Activités d’intermédiaire du commerce de gros en machines, équipements industriels, navires et avions",
-    "label_en": "Intermédiaires du commerce en machines, équipements industriels, navires et avions",
+    "label_en": "Agents involved in the sale of machinery, industrial equipment, ships and aircraft",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4561,7 +4561,7 @@
   "46.15Y": {
     "code": "46.15Y",
     "label_fr": "Activités d’intermédiaire du commerce de gros en meubles, biens domestiques et quincaillerie",
-    "label_en": "Intermédiaires du commerce en meubles, articles de ménage et quincaillerie",
+    "label_en": "Agents involved in the sale of furniture, household goods, hardware and ironmongery",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4574,7 +4574,7 @@
   "46.16Y": {
     "code": "46.16Y",
     "label_fr": "Activités d’intermédiaire du commerce de gros en textiles, habillement, fourrures, chaussures et articles en cuir",
-    "label_en": "Intermédiaires du commerce en textiles, habillement, fourrures, chaussures et articles en cuir",
+    "label_en": "Agents involved in the sale of textiles, clothing, fur, footwear and leather goods",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4600,7 +4600,7 @@
   "46.17H": {
     "code": "46.17H",
     "label_fr": "Autres activités d'intermédiaire du commerce de gros en denrées, boissons et tabac",
-    "label_en": "Autres intermédiaires du commerce en denrées, boissons et tabac",
+    "label_en": "Agents involved in the sale of food, beverages and tobacco",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4643,7 +4643,7 @@
   "46.19H": {
     "code": "46.19H",
     "label_fr": "Autres activités d'intermédiaire non spécialisé du commerce de gros",
-    "label_en": "Autres intermédiaires du commerce en produits divers",
+    "label_en": "Agents involved in the sale of a variety of goods",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4656,7 +4656,7 @@
   "46.21Y": {
     "code": "46.21Y",
     "label_fr": "Commerce de gros de céréales, de tabac non manufacturé, de semences et d’aliments pour animaux",
-    "label_en": "Commerce de gros (commerce interentreprises) de céréales, de tabac non manufacturé, de semences et d'aliments pour le bétail",
+    "label_en": "Wholesale of grain, unmanufactured tobacco, seeds and animal feeds",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4668,7 +4668,7 @@
   "46.22Y": {
     "code": "46.22Y",
     "label_fr": "Commerce de gros de fleurs et de plantes",
-    "label_en": "Commerce de gros (commerce interentreprises) de fleurs et plantes",
+    "label_en": "Wholesale of flowers and plants",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4680,7 +4680,7 @@
   "46.23Y": {
     "code": "46.23Y",
     "label_fr": "Commerce de gros d’animaux vivants",
-    "label_en": "Commerce de gros (commerce interentreprises) d'animaux vivants",
+    "label_en": "Wholesale of live animals",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4692,7 +4692,7 @@
   "46.24Y": {
     "code": "46.24Y",
     "label_fr": "Commerce de gros de cuirs et de peaux",
-    "label_en": "Commerce de gros (commerce interentreprises) de cuirs et peaux",
+    "label_en": "Wholesale of hides, skins and leather",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4704,7 +4704,7 @@
   "46.31Y": {
     "code": "46.31Y",
     "label_fr": "Commerce de gros de fruits et légumes",
-    "label_en": "Commerce de gros (commerce interentreprises) de fruits et légumes",
+    "label_en": "Wholesale of fruit and vegetables",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4716,7 +4716,7 @@
   "46.32G": {
     "code": "46.32G",
     "label_fr": "Commerce de gros de viandes et de produits à base de viande",
-    "label_en": "Commerce de gros (commerce interentreprises) de viandes de boucherie",
+    "label_en": "Wholesale of meat and meat products",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4730,7 +4730,7 @@
   "46.32H": {
     "code": "46.32H",
     "label_fr": "Commerce de gros de poissons, crustacés et mollusques et de produits à base de poisson",
-    "label_en": "Commerce de gros (commerce interentreprises) de poissons, crustacés et mollusques",
+    "label_en": "Wholesale of other food, including fish, crustaceans and molluscs",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4742,7 +4742,7 @@
   "46.33Y": {
     "code": "46.33Y",
     "label_fr": "Commerce de gros de produits laitiers, œufs, huiles et matières grasses comestibles",
-    "label_en": "Commerce de gros (commerce interentreprises) de produits laitiers, œufs, huiles et matières grasses comestibles",
+    "label_en": "Wholesale of dairy products, eggs and edible oils and fats",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4755,7 +4755,7 @@
   "46.34Y": {
     "code": "46.34Y",
     "label_fr": "Commerce de gros de boissons",
-    "label_en": "Commerce de gros (commerce interentreprises) de boissons",
+    "label_en": "Wholesale of beverages",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4767,7 +4767,7 @@
   "46.35Y": {
     "code": "46.35Y",
     "label_fr": "Commerce de gros de produits à base de tabac",
-    "label_en": "Commerce de gros (commerce interentreprises) de produits à base de tabac",
+    "label_en": "Wholesale of tobacco products",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4779,7 +4779,7 @@
   "46.36Y": {
     "code": "46.36Y",
     "label_fr": "Commerce de gros de sucre, chocolat et confiserie",
-    "label_en": "Commerce de gros (commerce interentreprises) de sucre, chocolat et confiserie",
+    "label_en": "Wholesale of sugar and chocolate and sugar confectionery",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4791,7 +4791,7 @@
   "46.37Y": {
     "code": "46.37Y",
     "label_fr": "Commerce de gros de café, thé, cacao et épices",
-    "label_en": "Commerce de gros (commerce interentreprises) de café, thé, cacao et épices",
+    "label_en": "Wholesale of coffee, tea, cocoa and spices",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4803,7 +4803,7 @@
   "46.38Y": {
     "code": "46.38Y",
     "label_fr": "Commerce de gros d’autres denrées alimentaires",
-    "label_en": "Commerce de gros (commerce interentreprises) alimentaire spécialisé divers",
+    "label_en": "Wholesale of other food, including fish, crustaceans and molluscs",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4815,7 +4815,7 @@
   "46.39Y": {
     "code": "46.39Y",
     "label_fr": "Commerce de gros non spécialisé de denrées, boissons et tabac",
-    "label_en": "Commerce de gros (commerce interentreprises) de produits surgelés",
+    "label_en": "Non-specialised wholesale of food, beverages and tobacco",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4828,7 +4828,7 @@
   "46.41Y": {
     "code": "46.41Y",
     "label_fr": "Commerce de gros de textiles",
-    "label_en": "Commerce de gros (commerce interentreprises) de textiles",
+    "label_en": "Wholesale of textiles",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4840,7 +4840,7 @@
   "46.42Y": {
     "code": "46.42Y",
     "label_fr": "Commerce de gros d’habillement et de chaussures",
-    "label_en": "Commerce de gros (commerce interentreprises) d'habillement et de chaussures",
+    "label_en": "Wholesale of clothing and footwear",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4852,7 +4852,7 @@
   "46.43G": {
     "code": "46.43G",
     "label_fr": "Commerce de gros d’appareils de génie climatique",
-    "label_en": "Commerce de gros (commerce interentreprises) d'appareils électroménagers",
+    "label_en": "Wholesale of electrical household appliances",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4864,7 +4864,7 @@
   "46.43H": {
     "code": "46.43H",
     "label_fr": "Commerce de gros d’autres appareils électroménagers",
-    "label_en": "Commerce de gros (commerce interentreprises) d'appareils électroménagers",
+    "label_en": "Wholesale of electrical household appliances",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4876,7 +4876,7 @@
   "46.44Y": {
     "code": "46.44Y",
     "label_fr": "Commerce de gros de vaisselle, verrerie et produits d’entretien",
-    "label_en": "Commerce de gros (commerce interentreprises) de vaisselle, verrerie et produits d'entretien",
+    "label_en": "Wholesale of china and glassware and cleaning materials",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4888,7 +4888,7 @@
   "46.45Y": {
     "code": "46.45Y",
     "label_fr": "Commerce de gros de parfumerie et de produits de beauté",
-    "label_en": "Commerce de gros (commerce interentreprises) de parfumerie et de produits de beauté",
+    "label_en": "Wholesale of perfume and cosmetics",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4900,7 +4900,7 @@
   "46.46Y": {
     "code": "46.46Y",
     "label_fr": "Commerce de gros de produits pharmaceutiques et médicaux",
-    "label_en": "Commerce de gros (commerce interentreprises) de produits pharmaceutiques",
+    "label_en": "Wholesale of pharmaceutical goods",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4912,7 +4912,7 @@
   "46.47Y": {
     "code": "46.47Y",
     "label_fr": "Commerce de gros de meubles à usage domestique, de bureau et de magasin, de tapis et d’appareils d’éclairage",
-    "label_en": "Commerce de gros (commerce interentreprises) de meubles, de tapis et d'appareils d'éclairage",
+    "label_en": "Wholesale of furniture, carpets and lighting equipment",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4925,7 +4925,7 @@
   "46.48Y": {
     "code": "46.48Y",
     "label_fr": "Commerce de gros d’articles d’horlogerie et de bijouterie",
-    "label_en": "Commerce de gros (commerce interentreprises) d'articles d'horlogerie et de bijouterie",
+    "label_en": "Wholesale of watches and jewellery",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4937,7 +4937,7 @@
   "46.49Y": {
     "code": "46.49Y",
     "label_fr": "Commerce de gros d’autres biens domestiques",
-    "label_en": "Commerce de gros (commerce interentreprises) d'appareils électroménagers",
+    "label_en": "Wholesale of electrical household appliances",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4950,7 +4950,7 @@
   "46.50Y": {
     "code": "46.50Y",
     "label_fr": "Commerce de gros d’équipements de l’information et de la communication",
-    "label_en": "Commerce de gros (commerce interentreprises) d'ordinateurs, d'équipements informatiques périphériques et de logiciels",
+    "label_en": "Wholesale of computers, computer peripheral equipment and software",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4964,7 +4964,7 @@
   "46.61Y": {
     "code": "46.61Y",
     "label_fr": "Commerce de gros de matériel agricole",
-    "label_en": "Commerce de gros (commerce interentreprises) de matériel agricole",
+    "label_en": "Wholesale of agricultural machinery, equipment and supplies",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4976,7 +4976,7 @@
   "46.62Y": {
     "code": "46.62Y",
     "label_fr": "Commerce de gros de machines-outils",
-    "label_en": "Commerce de gros (commerce interentreprises) de machines-outils",
+    "label_en": "Wholesale of machine tools",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -4988,7 +4988,7 @@
   "46.63Y": {
     "code": "46.63Y",
     "label_fr": "Commerce de gros de machines pour l’extraction, la construction et le génie civil",
-    "label_en": "Commerce de gros (commerce interentreprises) de machines pour l'extraction, la construction et le génie civil",
+    "label_en": "Wholesale of mining, construction and civil engineering machinery",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -5000,7 +5000,7 @@
   "46.64G": {
     "code": "46.64G",
     "label_fr": "Commerce de gros d’autre matériel électrique",
-    "label_en": "Commerce de gros (commerce interentreprises) d'appareils électroménagers",
+    "label_en": "Wholesale of electrical household appliances",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -5013,7 +5013,7 @@
   "46.64H": {
     "code": "46.64H",
     "label_fr": "Commerce de gros de matériels de manutention et de levage",
-    "label_en": "Commerce de gros (commerce interentreprises) de fournitures et équipements industriels divers",
+    "label_en": "Wholesale of other machinery and equipment",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -5025,7 +5025,7 @@
   "46.64J": {
     "code": "46.64J",
     "label_fr": "Commerce de gros d’autres machines et équipements pour l’industrie et le transport",
-    "label_en": "Commerce de gros (commerce interentreprises) de machines pour l'industrie textile et l'habillement",
+    "label_en": "Wholesale of machinery for the textile industry and of sewing and knitting machines",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -5038,7 +5038,7 @@
   "46.64K": {
     "code": "46.64K",
     "label_fr": "Commerce de gros d’autres machines et équipements pour le commerce et les services",
-    "label_en": "Commerce de gros (commerce interentreprises) de fournitures et équipements divers pour le commerce et les services",
+    "label_en": "Wholesale of other machinery and equipment",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -5062,7 +5062,7 @@
   "46.71H": {
     "code": "46.71H",
     "label_fr": "Commerce de gros d’autres véhicules automobiles",
-    "label_en": "Commerce d'autres véhicules automobiles",
+    "label_en": "Sale of other motor vehicles",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -5086,7 +5086,7 @@
   "46.73Y": {
     "code": "46.73Y",
     "label_fr": "Commerce de gros de motocycles et de pièces et accessoires pour motocycles",
-    "label_en": "Commerce et réparation de motocycles",
+    "label_en": "Sale, maintenance and repair of motorcycles and related parts and accessories",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -5098,7 +5098,7 @@
   "46.81Y": {
     "code": "46.81Y",
     "label_fr": "Commerce de gros de combustibles solides, liquides et gazeux et de produits annexes",
-    "label_en": "Commerce de gros (commerce interentreprises) de combustibles et de produits annexes",
+    "label_en": "Wholesale of solid, liquid and gaseous fuels and related products",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -5110,7 +5110,7 @@
   "46.82Y": {
     "code": "46.82Y",
     "label_fr": "Commerce de gros de minerais et de métaux",
-    "label_en": "Commerce de gros (commerce interentreprises) de minerais et métaux",
+    "label_en": "Wholesale of metals and metal ores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -5134,7 +5134,7 @@
   "46.83H": {
     "code": "46.83H",
     "label_fr": "Commerce de gros d’appareils sanitaires",
-    "label_en": "Commerce de gros (commerce interentreprises) d'appareils sanitaires et de produits de décoration",
+    "label_en": "Wholesale of wood, construction materials and sanitary equipment",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -5146,7 +5146,7 @@
   "46.83J": {
     "code": "46.83J",
     "label_fr": "Commerce de gros de matériaux de décoration",
-    "label_en": "Commerce de gros (commerce interentreprises) d'appareils sanitaires et de produits de décoration",
+    "label_en": "Wholesale of wood, construction materials and sanitary equipment",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -5158,7 +5158,7 @@
   "46.84G": {
     "code": "46.84G",
     "label_fr": "Commerce de gros de quincaillerie et de matériel de bricolage",
-    "label_en": "Commerce de gros (commerce interentreprises) de quincaillerie",
+    "label_en": "Wholesale of hardware, plumbing and heating equipment and supplies",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -5171,7 +5171,7 @@
   "46.84H": {
     "code": "46.84H",
     "label_fr": "Commerce de gros de fournitures pour plomberie et chauffage",
-    "label_en": "Commerce de gros (commerce interentreprises) de fournitures pour la plomberie et le chauffage",
+    "label_en": "Wholesale of hardware, plumbing and heating equipment and supplies",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -5183,7 +5183,7 @@
   "46.85Y": {
     "code": "46.85Y",
     "label_fr": "Commerce de gros de produits chimiques",
-    "label_en": "Commerce de gros (commerce interentreprises) de produits chimiques",
+    "label_en": "Wholesale of chemical products",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -5195,7 +5195,7 @@
   "46.86Y": {
     "code": "46.86Y",
     "label_fr": "Commerce de gros d’autres produits intermédiaires",
-    "label_en": "Commerce de gros (commerce interentreprises) d'autres produits intermédiaires",
+    "label_en": "Wholesale of other intermediate products",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -5207,7 +5207,7 @@
   "46.87Y": {
     "code": "46.87Y",
     "label_fr": "Commerce de gros de déchets et débris",
-    "label_en": "Commerce de gros (commerce interentreprises) de déchets et débris",
+    "label_en": "Wholesale of waste and scrap",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -5219,7 +5219,7 @@
   "46.89Y": {
     "code": "46.89Y",
     "label_fr": "Autre commerce de gros spécialisé n.c.a.",
-    "label_en": "Autre commerce de gros spécialisé n.c.a.",
+    "label_en": "Other specialized wholesale n.e.c.",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "46",
@@ -5293,7 +5293,7 @@
   "47.11L": {
     "code": "47.11L",
     "label_fr": "Commerce de détail non spécialisé à prédominance alimentaire hors magasin",
-    "label_en": "Commerce de détail alimentaire sur éventaires et marchés",
+    "label_en": "Retail sale via stalls and markets of food, beverages and tobacco products",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5320,7 +5320,7 @@
   "47.12H": {
     "code": "47.12H",
     "label_fr": "Autre commerce de détail non spécialisé en magasin de moins de 2500 m² ou hors magasin",
-    "label_en": "Autres commerces de détail en magasin non spécialisé",
+    "label_en": "Other retail sale in non-specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5336,7 +5336,7 @@
   "47.21Y": {
     "code": "47.21Y",
     "label_fr": "Commerce de détail de fruits et légumes",
-    "label_en": "Commerce de détail de fruits et légumes en magasin spécialisé",
+    "label_en": "Retail sale of fruit and vegetables in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5368,7 +5368,7 @@
   "47.23Y": {
     "code": "47.23Y",
     "label_fr": "Commerce de détail de poisson, de crustacés et de mollusques",
-    "label_en": "Commerce de détail de poissons, crustacés et mollusques en magasin spécialisé",
+    "label_en": "Retail sale of fish, crustaceans and molluscs in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5401,7 +5401,7 @@
   "47.25Y": {
     "code": "47.25Y",
     "label_fr": "Commerce de détail de boissons",
-    "label_en": "Commerce de détail de boissons en magasin spécialisé",
+    "label_en": "Retail sale of beverages in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5417,7 +5417,7 @@
   "47.26Y": {
     "code": "47.26Y",
     "label_fr": "Commerce de détail de produits à base de tabac",
-    "label_en": "Commerce de détail de produits à base de tabac en magasin spécialisé",
+    "label_en": "Retail sale of tobacco products in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5433,7 +5433,7 @@
   "47.27G": {
     "code": "47.27G",
     "label_fr": "Commerce de détail de produits laitiers et d'œufs",
-    "label_en": "Autres commerces de détail alimentaires en magasin spécialisé",
+    "label_en": "Other retail sale of food in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5449,7 +5449,7 @@
   "47.27H": {
     "code": "47.27H",
     "label_fr": "Commerce de détail spécialisé d’autres produits d’épicerie et d’autres produits alimentaires n.c.a.",
-    "label_en": "Autres commerces de détail alimentaires en magasin spécialisé",
+    "label_en": "Other retail sale of food in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5465,7 +5465,7 @@
   "47.30Y": {
     "code": "47.30Y",
     "label_fr": "Commerce de détail de carburants",
-    "label_en": "Commerce de détail de carburants en magasin spécialisé",
+    "label_en": "Retail sale of automotive fuel in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5477,7 +5477,7 @@
   "47.40Y": {
     "code": "47.40Y",
     "label_fr": "Commerce de détail d’équipements de l’information et de la communication",
-    "label_en": "Commerce de détail d'ordinateurs, d'unités périphériques et de logiciels en magasin spécialisé",
+    "label_en": "Retail sale of computers, peripheral units and software in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5495,7 +5495,7 @@
   "47.51Y": {
     "code": "47.51Y",
     "label_fr": "Commerce de détail de textiles",
-    "label_en": "Commerce de détail de textiles en magasin spécialisé",
+    "label_en": "Retail sale of textiles in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5511,7 +5511,7 @@
   "47.52G": {
     "code": "47.52G",
     "label_fr": "Commerce de détail de quincaillerie, de matériaux de construction et de bricolage, de peinture et de verre en magasin de moins de 400 m²",
-    "label_en": "Commerce de détail de quincaillerie, peintures et verres en petites surfaces (moins de 400 m²)",
+    "label_en": "Retail sale of hardware, paints and glass in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5524,7 +5524,7 @@
   "47.52H": {
     "code": "47.52H",
     "label_fr": "Commerce de détail de quincaillerie, de matériaux de construction et de bricolage, de peinture et de verre en magasin de plus de 400 m² ou hors magasin",
-    "label_en": "Commerce de détail de quincaillerie, peintures et verres en grandes surfaces (400 m² et plus)",
+    "label_en": "Retail sale of hardware, paints and glass in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5541,7 +5541,7 @@
   "47.53Y": {
     "code": "47.53Y",
     "label_fr": "Commerce de détail de tapis, moquettes et revêtements de murs et de sols",
-    "label_en": "Commerce de détail de tapis, moquettes et revêtements de murs et de sols en magasin spécialisé",
+    "label_en": "Retail sale of carpets, rugs, wall and floor coverings in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5557,7 +5557,7 @@
   "47.54Y": {
     "code": "47.54Y",
     "label_fr": "Commerce de détail d’appareils électroménagers",
-    "label_en": "Commerce de détail d'appareils électroménagers en magasin spécialisé",
+    "label_en": "Retail sale of electrical household appliances in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5573,7 +5573,7 @@
   "47.55G": {
     "code": "47.55G",
     "label_fr": "Commerce de détail de meubles",
-    "label_en": "Commerce de détail de meubles",
+    "label_en": "Retail sale of furniture",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5589,7 +5589,7 @@
   "47.55H": {
     "code": "47.55H",
     "label_fr": "Commerce de détail d'appareils d’éclairage, de vaisselle et d’autres équipements du foyer",
-    "label_en": "Commerce de détail d'autres équipements du foyer",
+    "label_en": "Retail sale of furniture, lighting equipment and other household articles in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5606,7 +5606,7 @@
   "47.61Y": {
     "code": "47.61Y",
     "label_fr": "Commerce de détail de livres",
-    "label_en": "Commerce de détail de livres en magasin spécialisé",
+    "label_en": "Retail sale of books in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5622,7 +5622,7 @@
   "47.62Y": {
     "code": "47.62Y",
     "label_fr": "Commerce de détail de journaux et autres publications périodiques et de papeterie",
-    "label_en": "Commerce de détail de journaux et papeterie en magasin spécialisé",
+    "label_en": "Retail sale of newspapers and stationery in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5638,7 +5638,7 @@
   "47.63Y": {
     "code": "47.63Y",
     "label_fr": "Commerce de détail d’articles de sport",
-    "label_en": "Commerce de détail d'articles de sport en magasin spécialisé",
+    "label_en": "Retail sale of sporting equipment in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5655,7 +5655,7 @@
   "47.64Y": {
     "code": "47.64Y",
     "label_fr": "Commerce de détail de jeux et jouets",
-    "label_en": "Commerce de détail de jeux et jouets en magasin spécialisé",
+    "label_en": "Retail sale of games and toys in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5671,7 +5671,7 @@
   "47.69Y": {
     "code": "47.69Y",
     "label_fr": "Commerce de détail de biens culturels et de loisirs n.c.a.",
-    "label_en": "Commerce de détail d'autres équipements du foyer",
+    "label_en": "Retail sale of furniture, lighting equipment and other household articles in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5705,7 +5705,7 @@
   "47.72G": {
     "code": "47.72G",
     "label_fr": "Commerce de détail de chaussures",
-    "label_en": "Commerce de détail de la chaussure",
+    "label_en": "Retail sale of footwear and leather goods in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5721,7 +5721,7 @@
   "47.72H": {
     "code": "47.72H",
     "label_fr": "Commerce de détail de maroquinerie et d'articles de voyage",
-    "label_en": "Commerce de détail de maroquinerie et d'articles de voyage",
+    "label_en": "Retail sale of footwear and leather goods in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5750,7 +5750,7 @@
   "47.74G": {
     "code": "47.74G",
     "label_fr": "Commerce de détail d'optique",
-    "label_en": "Commerces de détail d'optique",
+    "label_en": "Other retail sale of new goods in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5766,7 +5766,7 @@
   "47.74H": {
     "code": "47.74H",
     "label_fr": "Commerce de détail d’autres articles médicaux et orthopédiques",
-    "label_en": "Commerce de détail d'articles médicaux et orthopédiques en magasin spécialisé",
+    "label_en": "Retail sale of medical and orthopaedic goods in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5782,7 +5782,7 @@
   "47.75Y": {
     "code": "47.75Y",
     "label_fr": "Commerce de détail de parfumerie et de produits de beauté",
-    "label_en": "Commerce de détail de parfumerie et de produits de beauté en magasin spécialisé",
+    "label_en": "Retail sale of cosmetic and toilet articles in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5798,7 +5798,7 @@
   "47.76Y": {
     "code": "47.76Y",
     "label_fr": "Commerce de détail de fleurs, plantes, engrais, animaux de compagnie et aliments pour ces animaux",
-    "label_en": "Commerce de détail de fleurs, plantes, graines, engrais, animaux de compagnie et aliments pour ces animaux en magasin spécialisé",
+    "label_en": "Retail sale of flowers, plants, seeds, fertilisers, pet animals and pet food in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5814,7 +5814,7 @@
   "47.77Y": {
     "code": "47.77Y",
     "label_fr": "Commerce de détail d’articles d’horlogerie et de bijouterie",
-    "label_en": "Commerce de détail d'articles d'horlogerie et de bijouterie en magasin spécialisé",
+    "label_en": "Retail sale of watches and jewellery in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5830,7 +5830,7 @@
   "47.78G": {
     "code": "47.78G",
     "label_fr": "Commerce de détail de charbons et combustibles",
-    "label_en": "Commerces de détail de charbons et combustibles",
+    "label_en": "Other retail sale of new goods in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5846,7 +5846,7 @@
   "47.78H": {
     "code": "47.78H",
     "label_fr": "Commerce de détail spécialisé d’autres biens neufs n.c.a.",
-    "label_en": "Autres commerces de détail spécialisés divers",
+    "label_en": "Other retail sale of new goods in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5862,7 +5862,7 @@
   "47.79G": {
     "code": "47.79G",
     "label_fr": "Commerce de détail d’antiquités et livres anciens",
-    "label_en": "Commerce de détail de biens d'occasion en magasin",
+    "label_en": "Retail sale of second-hand goods in stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5878,7 +5878,7 @@
   "47.79H": {
     "code": "47.79H",
     "label_fr": "Commerce de détail d’autres biens d’occasion",
-    "label_en": "Commerce de détail de biens d'occasion en magasin",
+    "label_en": "Retail sale of second-hand goods in stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5908,7 +5908,7 @@
   "47.82Y": {
     "code": "47.82Y",
     "label_fr": "Commerce de détail de pièces et accessoires de véhicules automobiles",
-    "label_en": "Commerce de détail d'équipements automobiles",
+    "label_en": "Retail trade of motor vehicle parts and accessories",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5920,7 +5920,7 @@
   "47.83Y": {
     "code": "47.83Y",
     "label_fr": "Commerce de détail de motocycles et de pièces et accessoires de motocycles",
-    "label_en": "Commerce et réparation de motocycles",
+    "label_en": "Sale, maintenance and repair of motorcycles and related parts and accessories",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5975,7 +5975,7 @@
   "47.92H": {
     "code": "47.92H",
     "label_fr": "Activités de service d’intermédiation pour le commerce de détail de journaux et de produits à base de tabac",
-    "label_en": "Commerce de détail de produits à base de tabac en magasin spécialisé",
+    "label_en": "Retail sale of tobacco products in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -5992,7 +5992,7 @@
   "47.92J": {
     "code": "47.92J",
     "label_fr": "Activités de service d'intermédiation pour le commerce de détail spécialisé d’autres biens",
-    "label_en": "Commerce de détail de fruits et légumes en magasin spécialisé",
+    "label_en": "Retail sale of fruit and vegetables in specialised stores",
     "section": "G",
     "section_label": "COMMERCE",
     "division": "47",
@@ -6078,7 +6078,7 @@
   "49.31G": {
     "code": "49.31G",
     "label_fr": "Transport régulier urbain et suburbain de voyageurs par route",
-    "label_en": "Transports urbains et suburbains de voyageurs",
+    "label_en": "Urban and suburban passenger land transport",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "49",
@@ -6102,7 +6102,7 @@
   "49.32Y": {
     "code": "49.32Y",
     "label_fr": "Transport non régulier de voyageurs par route",
-    "label_en": "Autres transports routiers de voyageurs",
+    "label_en": "Other passenger land transport n.e.c.",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "49",
@@ -6138,7 +6138,7 @@
   "49.34Y": {
     "code": "49.34Y",
     "label_fr": "Transport de voyageurs par téléphériques et remontées mécaniques",
-    "label_en": "Transports urbains et suburbains de voyageurs",
+    "label_en": "Urban and suburban passenger land transport",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "49",
@@ -6151,7 +6151,7 @@
   "49.39Y": {
     "code": "49.39Y",
     "label_fr": "Autre transport terrestre de voyageurs n.c.a.",
-    "label_en": "Autres transports routiers de voyageurs",
+    "label_en": "Other passenger land transport n.e.c.",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "49",
@@ -6189,7 +6189,7 @@
   "49.41J": {
     "code": "49.41J",
     "label_fr": "Location de camions avec chauffeur",
-    "label_en": "Location de camions avec chauffeur",
+    "label_en": "Freight transport by road",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "49",
@@ -6201,7 +6201,7 @@
   "49.42Y": {
     "code": "49.42Y",
     "label_fr": "Services de déménagement",
-    "label_en": "Services de déménagement",
+    "label_en": "Removal services",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "49",
@@ -6225,7 +6225,7 @@
   "50.10Y": {
     "code": "50.10Y",
     "label_fr": "Transports maritimes et côtiers de passagers",
-    "label_en": "Transports maritimes et côtiers de passagers",
+    "label_en": "Sea and coastal passenger water transport",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "50",
@@ -6237,7 +6237,7 @@
   "50.20Y": {
     "code": "50.20Y",
     "label_fr": "Transports maritimes et côtiers de fret",
-    "label_en": "Transports maritimes et côtiers de fret",
+    "label_en": "Sea and coastal freight water transport",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "50",
@@ -6249,7 +6249,7 @@
   "50.30Y": {
     "code": "50.30Y",
     "label_fr": "Transports fluviaux de passagers",
-    "label_en": "Transports fluviaux de passagers",
+    "label_en": "Inland passenger water transport",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "50",
@@ -6261,7 +6261,7 @@
   "50.40Y": {
     "code": "50.40Y",
     "label_fr": "Transports fluviaux de fret",
-    "label_en": "Transports fluviaux de fret",
+    "label_en": "Inland freight water transport",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "50",
@@ -6273,7 +6273,7 @@
   "51.10Y": {
     "code": "51.10Y",
     "label_fr": "Transports aériens de passagers",
-    "label_en": "Transports aériens de passagers",
+    "label_en": "Passenger air transport",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "51",
@@ -6285,7 +6285,7 @@
   "51.21Y": {
     "code": "51.21Y",
     "label_fr": "Transports aériens de fret",
-    "label_en": "Transports aériens de fret",
+    "label_en": "Freight air transport",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "51",
@@ -6297,7 +6297,7 @@
   "51.22Y": {
     "code": "51.22Y",
     "label_fr": "Transports spatiaux",
-    "label_en": "Transports spatiaux",
+    "label_en": "Space transport",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "51",
@@ -6309,7 +6309,7 @@
   "52.10G": {
     "code": "52.10G",
     "label_fr": "Entreposage et stockage frigorifique",
-    "label_en": "Entreposage et stockage frigorifique",
+    "label_en": "Warehousing and storage",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "52",
@@ -6321,7 +6321,7 @@
   "52.10H": {
     "code": "52.10H",
     "label_fr": "Entreposage et stockage non frigorifique",
-    "label_en": "Entreposage et stockage non frigorifique",
+    "label_en": "Warehousing and storage",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "52",
@@ -6345,7 +6345,7 @@
   "52.22Y": {
     "code": "52.22Y",
     "label_fr": "Services auxiliaires des transports par eau",
-    "label_en": "Services auxiliaires des transports par eau",
+    "label_en": "Service activities incidental to water transportation",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "52",
@@ -6357,7 +6357,7 @@
   "52.23Y": {
     "code": "52.23Y",
     "label_fr": "Services auxiliaires des transports aériens",
-    "label_en": "Services auxiliaires des transports aériens",
+    "label_en": "Service activities incidental to air transportation",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "52",
@@ -6369,7 +6369,7 @@
   "52.24G": {
     "code": "52.24G",
     "label_fr": "Manutention portuaire",
-    "label_en": "Manutention portuaire",
+    "label_en": "Cargo handling",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "52",
@@ -6407,7 +6407,7 @@
   "52.26Y": {
     "code": "52.26Y",
     "label_fr": "Autres activités de soutien pour les transports",
-    "label_en": "Services auxiliaires des transports par eau",
+    "label_en": "Service activities incidental to water transportation",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "52",
@@ -6448,7 +6448,7 @@
   "53.10Y": {
     "code": "53.10Y",
     "label_fr": "Activités de poste dans le cadre d’une obligation de service universel",
-    "label_en": "Activités de poste dans le cadre d'une obligation de service universel",
+    "label_en": "Postal activities under universal service obligation",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "53",
@@ -6488,7 +6488,7 @@
   "53.30Y": {
     "code": "53.30Y",
     "label_fr": "Activités de service d’intermédiation pour des activités de poste et de courrier",
-    "label_en": "Autres activités de soutien aux entreprises n.c.a.",
+    "label_en": "Other business support service activities n.e.c.",
     "section": "H",
     "section_label": "TRANSPORTS ET ENTREPOSAGE",
     "division": "53",
@@ -6524,7 +6524,7 @@
   "55.30Y": {
     "code": "55.30Y",
     "label_fr": "Terrains de camping et parcs pour caravanes ou véhicules de loisirs",
-    "label_en": "Terrains de camping et parcs pour caravanes ou véhicules de loisirs",
+    "label_en": "Camping grounds, recreational vehicle parks and trailer parks",
     "section": "I",
     "section_label": "HÉBERGEMENT ET RESTAURATION",
     "division": "55",
@@ -6536,7 +6536,7 @@
   "55.40Y": {
     "code": "55.40Y",
     "label_fr": "Activités de service d’intermédiation pour l’hébergement",
-    "label_en": "Activités des agences de voyage",
+    "label_en": "Travel agency activities",
     "section": "I",
     "section_label": "HÉBERGEMENT ET RESTAURATION",
     "division": "55",
@@ -6549,7 +6549,7 @@
   "55.90Y": {
     "code": "55.90Y",
     "label_fr": "Autres hébergements",
-    "label_en": "Autres hébergements",
+    "label_en": "Other accommodation",
     "section": "I",
     "section_label": "HÉBERGEMENT ET RESTAURATION",
     "division": "55",
@@ -6647,7 +6647,7 @@
   "56.40Y": {
     "code": "56.40Y",
     "label_fr": "Activités de service d’intermédiation pour des activités de service de restauration",
-    "label_en": "Autres services de réservation et activités connexes",
+    "label_en": "Other reservation service and related activities",
     "section": "I",
     "section_label": "HÉBERGEMENT ET RESTAURATION",
     "division": "56",
@@ -6671,7 +6671,7 @@
   "58.12Y": {
     "code": "58.12Y",
     "label_fr": "Édition de journaux",
-    "label_en": "Édition de journaux",
+    "label_en": "Publishing of directories and mailing lists",
     "section": "J",
     "section_label": "ÉDITION, DIFFUSION ET ACTIVITÉS DE PRODUCTION ET DE DISTRIBUTION DE CONTENU",
     "division": "58",
@@ -6683,7 +6683,7 @@
   "58.13Y": {
     "code": "58.13Y",
     "label_fr": "Édition de revues et de périodiques",
-    "label_en": "Édition de revues et périodiques",
+    "label_en": "Publishing of journals and periodicals",
     "section": "J",
     "section_label": "ÉDITION, DIFFUSION ET ACTIVITÉS DE PRODUCTION ET DE DISTRIBUTION DE CONTENU",
     "division": "58",
@@ -6695,7 +6695,7 @@
   "58.19Y": {
     "code": "58.19Y",
     "label_fr": "Autres activités d’édition, à l’exception de l’édition de logiciels",
-    "label_en": "Édition de répertoires et de fichiers d'adresses",
+    "label_en": "Publishing of directories and mailing lists",
     "section": "J",
     "section_label": "ÉDITION, DIFFUSION ET ACTIVITÉS DE PRODUCTION ET DE DISTRIBUTION DE CONTENU",
     "division": "58",
@@ -6720,7 +6720,7 @@
   "58.29Y": {
     "code": "58.29Y",
     "label_fr": "Édition d’autres logiciels",
-    "label_en": "Édition de logiciels système et de réseau",
+    "label_en": "Other software publishing",
     "section": "J",
     "section_label": "ÉDITION, DIFFUSION ET ACTIVITÉS DE PRODUCTION ET DE DISTRIBUTION DE CONTENU",
     "division": "58",
@@ -6784,7 +6784,7 @@
   "59.12Y": {
     "code": "59.12Y",
     "label_fr": "Post-production de films cinématographiques, de vidéos et de programmes de télévision",
-    "label_en": "Film & Video Post-Production Services",
+    "label_en": "Motion picture, video and television post-production activities",
     "section": "J",
     "section_label": "ÉDITION, DIFFUSION ET ACTIVITÉS DE PRODUCTION ET DE DISTRIBUTION DE CONTENU",
     "division": "59",
@@ -6809,7 +6809,7 @@
   "59.14Y": {
     "code": "59.14Y",
     "label_fr": "Projection de films cinématographiques",
-    "label_en": "Projection de films cinématographiques",
+    "label_en": "Motion picture projection activities",
     "section": "J",
     "section_label": "ÉDITION, DIFFUSION ET ACTIVITÉS DE PRODUCTION ET DE DISTRIBUTION DE CONTENU",
     "division": "59",
@@ -6833,7 +6833,7 @@
   "60.10Y": {
     "code": "60.10Y",
     "label_fr": "Radiodiffusion et activités de distribution de contenu audio",
-    "label_en": "Édition et diffusion de programmes radio",
+    "label_en": "Radio broadcasting",
     "section": "J",
     "section_label": "ÉDITION, DIFFUSION ET ACTIVITÉS DE PRODUCTION ET DE DISTRIBUTION DE CONTENU",
     "division": "60",
@@ -6872,7 +6872,7 @@
   "60.31Y": {
     "code": "60.31Y",
     "label_fr": "Activités d’agence de presse",
-    "label_en": "Activités des agences de presse",
+    "label_en": "News agency activities",
     "section": "J",
     "section_label": "ÉDITION, DIFFUSION ET ACTIVITÉS DE PRODUCTION ET DE DISTRIBUTION DE CONTENU",
     "division": "60",
@@ -6911,7 +6911,7 @@
   "61.20Y": {
     "code": "61.20Y",
     "label_fr": "Activités de revente de télécommunications et activités de service d’intermédiation pour les télécommunications",
-    "label_en": "Autres activités de télécommunication",
+    "label_en": "Other telecommunications activities",
     "section": "K",
     "section_label": "TÉLÉCOMMUNICATIONS, PROGRAMMATION INFORMATIQUE, CONSEIL, INFRASTRUCTURE INFORMATIQUE ET AUTRES ACTIVITÉS DE SERVICE INFORMATIQUE",
     "division": "61",
@@ -7011,7 +7011,7 @@
   "63.92Y": {
     "code": "63.92Y",
     "label_fr": "Autres activités de service d’information",
-    "label_en": "Autres services d'information n.c.a.",
+    "label_en": "Other information service activities n.e.c.",
     "section": "K",
     "section_label": "TÉLÉCOMMUNICATIONS, PROGRAMMATION INFORMATIQUE, CONSEIL, INFRASTRUCTURE INFORMATIQUE ET AUTRES ACTIVITÉS DE SERVICE INFORMATIQUE",
     "division": "63",
@@ -7023,7 +7023,7 @@
   "64.11Y": {
     "code": "64.11Y",
     "label_fr": "Activités de banque centrale",
-    "label_en": "Activités de banque centrale",
+    "label_en": "Central banking",
     "section": "L",
     "section_label": "ACTIVITÉS FINANCIÈRES ET D’ASSURANCE",
     "division": "64",
@@ -7059,7 +7059,7 @@
   "64.22Y": {
     "code": "64.22Y",
     "label_fr": "Activités de conduit de financement",
-    "label_en": "Fonds de placement et entités financières similaires",
+    "label_en": "Trusts, funds and similar financial entities",
     "section": "L",
     "section_label": "ACTIVITÉS FINANCIÈRES ET D’ASSURANCE",
     "division": "64",
@@ -7072,7 +7072,7 @@
   "64.31Y": {
     "code": "64.31Y",
     "label_fr": "Activités de fonds d’investissement sur le marché monétaire ou non monétaire",
-    "label_en": "Fonds de placement et entités financières similaires",
+    "label_en": "Trusts, funds and similar financial entities",
     "section": "L",
     "section_label": "ACTIVITÉS FINANCIÈRES ET D’ASSURANCE",
     "division": "64",
@@ -7084,7 +7084,7 @@
   "64.32Y": {
     "code": "64.32Y",
     "label_fr": "Activités de fiducie, comptes de patrimoine et d’agence",
-    "label_en": "Fonds de placement et entités financières similaires",
+    "label_en": "Trusts, funds and similar financial entities",
     "section": "L",
     "section_label": "ACTIVITÉS FINANCIÈRES ET D’ASSURANCE",
     "division": "64",
@@ -7096,7 +7096,7 @@
   "64.91Y": {
     "code": "64.91Y",
     "label_fr": "Crédit-bail",
-    "label_en": "Crédit-bail",
+    "label_en": "Financial leasing",
     "section": "L",
     "section_label": "ACTIVITÉS FINANCIÈRES ET D’ASSURANCE",
     "division": "64",
@@ -7108,7 +7108,7 @@
   "64.92Y": {
     "code": "64.92Y",
     "label_fr": "Autre distribution de crédit",
-    "label_en": "Autre distribution de crédit",
+    "label_en": "Other credit granting",
     "section": "L",
     "section_label": "ACTIVITÉS FINANCIÈRES ET D’ASSURANCE",
     "division": "64",
@@ -7121,7 +7121,7 @@
   "64.99Y": {
     "code": "64.99Y",
     "label_fr": "Autres activités des services financiers, hors assurance et fonds de pension, n.c.a.",
-    "label_en": "Autres activités des services financiers, hors assurance et caisses de retraite, n.c.a.",
+    "label_en": "Other financial service activities, except insurance and pension funding n.e.c.",
     "section": "L",
     "section_label": "ACTIVITÉS FINANCIÈRES ET D’ASSURANCE",
     "division": "64",
@@ -7134,7 +7134,7 @@
   "65.11Y": {
     "code": "65.11Y",
     "label_fr": "Assurance vie",
-    "label_en": "Assurance vie",
+    "label_en": "Life insurance",
     "section": "L",
     "section_label": "ACTIVITÉS FINANCIÈRES ET D’ASSURANCE",
     "division": "65",
@@ -7158,7 +7158,7 @@
   "65.20Y": {
     "code": "65.20Y",
     "label_fr": "Réassurance",
-    "label_en": "Réassurance",
+    "label_en": "Reinsurance",
     "section": "L",
     "section_label": "ACTIVITÉS FINANCIÈRES ET D’ASSURANCE",
     "division": "65",
@@ -7182,7 +7182,7 @@
   "66.11Y": {
     "code": "66.11Y",
     "label_fr": "Administration de marchés financiers",
-    "label_en": "Administration de marchés financiers",
+    "label_en": "Administration of financial markets",
     "section": "L",
     "section_label": "ACTIVITÉS FINANCIÈRES ET D’ASSURANCE",
     "division": "66",
@@ -7194,7 +7194,7 @@
   "66.12Y": {
     "code": "66.12Y",
     "label_fr": "Courtage de valeurs mobilières et de matières premières",
-    "label_en": "Courtage de valeurs mobilières et de marchandises",
+    "label_en": "Security and commodity contracts brokerage",
     "section": "L",
     "section_label": "ACTIVITÉS FINANCIÈRES ET D’ASSURANCE",
     "division": "66",
@@ -7231,7 +7231,7 @@
   "66.21Y": {
     "code": "66.21Y",
     "label_fr": "Évaluation des risques et dommages",
-    "label_en": "Évaluation des risques et dommages",
+    "label_en": "Risk and damage evaluation",
     "section": "L",
     "section_label": "ACTIVITÉS FINANCIÈRES ET D’ASSURANCE",
     "division": "66",
@@ -7255,7 +7255,7 @@
   "66.29Y": {
     "code": "66.29Y",
     "label_fr": "Activités auxiliaires d’assurance et de fonds de pension n.c.a.",
-    "label_en": "Autres activités auxiliaires d'assurance et de caisses de retraite",
+    "label_en": "Other activities auxiliary to insurance and pension funding",
     "section": "L",
     "section_label": "ACTIVITÉS FINANCIÈRES ET D’ASSURANCE",
     "division": "66",
@@ -7457,7 +7457,7 @@
   "71.20H": {
     "code": "71.20H",
     "label_fr": "Analyses, essais et inspections techniques",
-    "label_en": "Analyses, essais et inspections techniques",
+    "label_en": "Technical testing and analysis",
     "section": "N",
     "section_label": "ACTIVITÉS SPÉCIALISÉES, SCIENTIFIQUES ET TECHNIQUES",
     "division": "71",
@@ -7481,7 +7481,7 @@
   "72.10H": {
     "code": "72.10H",
     "label_fr": "Recherche et développement en autres sciences physiques et naturelles",
-    "label_en": "Recherche-développement en autres sciences physiques et naturelles",
+    "label_en": "Other research and experimental development on natural sciences and engineering",
     "section": "N",
     "section_label": "ACTIVITÉS SPÉCIALISÉES, SCIENTIFIQUES ET TECHNIQUES",
     "division": "72",
@@ -7493,7 +7493,7 @@
   "72.20Y": {
     "code": "72.20Y",
     "label_fr": "Recherche et développement en sciences humaines et sociales",
-    "label_en": "Recherche-développement en sciences humaines et sociales",
+    "label_en": "Research and experimental development on social sciences and humanities",
     "section": "N",
     "section_label": "ACTIVITÉS SPÉCIALISÉES, SCIENTIFIQUES ET TECHNIQUES",
     "division": "72",
@@ -7517,7 +7517,7 @@
   "73.12Y": {
     "code": "73.12Y",
     "label_fr": "Régie publicitaire de médias",
-    "label_en": "Régie publicitaire de médias",
+    "label_en": "Media representation",
     "section": "N",
     "section_label": "ACTIVITÉS SPÉCIALISÉES, SCIENTIFIQUES ET TECHNIQUES",
     "division": "73",
@@ -7529,7 +7529,7 @@
   "73.20Y": {
     "code": "73.20Y",
     "label_fr": "Études de marché et sondages",
-    "label_en": "Études de marché et sondages",
+    "label_en": "Market research and public opinion polling",
     "section": "N",
     "section_label": "ACTIVITÉS SPÉCIALISÉES, SCIENTIFIQUES ET TECHNIQUES",
     "division": "73",
@@ -7637,7 +7637,7 @@
   "74.99Y": {
     "code": "74.99Y",
     "label_fr": "Toutes les autres activités spécialisées, scientifiques et techniques n.c.a.",
-    "label_en": "Activité des économistes de la construction",
+    "label_en": "Other professional, scientific and technical activities n.e.c.",
     "section": "N",
     "section_label": "ACTIVITÉS SPÉCIALISÉES, SCIENTIFIQUES ET TECHNIQUES",
     "division": "74",
@@ -7650,7 +7650,7 @@
   "75.00Y": {
     "code": "75.00Y",
     "label_fr": "Activités vétérinaires",
-    "label_en": "Activités vétérinaires",
+    "label_en": "Veterinary activities",
     "section": "N",
     "section_label": "ACTIVITÉS SPÉCIALISÉES, SCIENTIFIQUES ET TECHNIQUES",
     "division": "75",
@@ -7677,7 +7677,7 @@
   "77.12Y": {
     "code": "77.12Y",
     "label_fr": "Location et location-bail de camions",
-    "label_en": "Location et location-bail de camions",
+    "label_en": "Rental and leasing of trucks",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "77",
@@ -7690,7 +7690,7 @@
   "77.21Y": {
     "code": "77.21Y",
     "label_fr": "Location et location-bail d’articles de loisirs et de sport",
-    "label_en": "Location et location-bail d'articles de loisirs et de sport",
+    "label_en": "Rental and leasing of recreational and sports goods",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "77",
@@ -7702,7 +7702,7 @@
   "77.22Y": {
     "code": "77.22Y",
     "label_fr": "Location et location-bail d’autres biens personnels et domestiques",
-    "label_en": "Location de vidéocassettes et disques vidéo",
+    "label_en": "Rental of video tapes and disks",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "77",
@@ -7715,7 +7715,7 @@
   "77.31Y": {
     "code": "77.31Y",
     "label_fr": "Location et location-bail de matériel agricole",
-    "label_en": "Location et location-bail de machines et équipements agricoles",
+    "label_en": "Rental and leasing of agricultural machinery and equipment",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "77",
@@ -7727,7 +7727,7 @@
   "77.32Y": {
     "code": "77.32Y",
     "label_fr": "Location et location-bail de machines et équipements pour la construction et le génie civil",
-    "label_en": "Location et location-bail de machines et équipements pour la construction",
+    "label_en": "Rental and leasing of construction and civil engineering machinery and equipment",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "77",
@@ -7739,7 +7739,7 @@
   "77.33Y": {
     "code": "77.33Y",
     "label_fr": "Location et location-bail de machines et équipements de bureau et d’ordinateurs",
-    "label_en": "Location et location-bail de machines de bureau et de matériel informatique",
+    "label_en": "Rental and leasing of office machinery and equipment (including computers)",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "77",
@@ -7751,7 +7751,7 @@
   "77.34Y": {
     "code": "77.34Y",
     "label_fr": "Location et location-bail de matériels de transport par eau",
-    "label_en": "Location et location-bail de matériels de transport par eau",
+    "label_en": "Rental and leasing of water transport equipment",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "77",
@@ -7763,7 +7763,7 @@
   "77.35Y": {
     "code": "77.35Y",
     "label_fr": "Location et location-bail de matériels de transport aérien",
-    "label_en": "Location et location-bail de matériels de transport aérien",
+    "label_en": "Rental and leasing of air transport equipment",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "77",
@@ -7775,7 +7775,7 @@
   "77.39Y": {
     "code": "77.39Y",
     "label_fr": "Location et location-bail d’autres machines, équipements et biens n.c.a.",
-    "label_en": "Location et location-bail d'autres machines, équipements et biens matériels n.c.a.",
+    "label_en": "Rental and leasing of other machinery, equipment and tangible goods n.e.c.",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "77",
@@ -7787,7 +7787,7 @@
   "77.40G": {
     "code": "77.40G",
     "label_fr": "Services de franchise ou de licence de marques",
-    "label_en": "Location-bail de propriété intellectuelle et de produits similaires, à l'exception des œuvres soumises à copyright",
+    "label_en": "Leasing of intellectual property and similar products, except copyrighted works",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "77",
@@ -7799,7 +7799,7 @@
   "77.40H": {
     "code": "77.40H",
     "label_fr": "Autre location-bail de propriété intellectuelle et de produits similaires, à l'exception des œuvres soumises à copyright",
-    "label_en": "Location-bail de propriété intellectuelle et de produits similaires, à l'exception des œuvres soumises à copyright",
+    "label_en": "Leasing of intellectual property and similar products, except copyrighted works",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "77",
@@ -7811,7 +7811,7 @@
   "77.51Y": {
     "code": "77.51Y",
     "label_fr": "Activités de service d’intermédiation pour la location et la location-bail de voitures, camping-cars et caravanes",
-    "label_en": "Activités des agences de voyage",
+    "label_en": "Travel agency activities",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "77",
@@ -7825,7 +7825,7 @@
   "77.52Y": {
     "code": "77.52Y",
     "label_fr": "Activités de service d’intermédiation pour la location et la location-bail d’autres biens corporels et d’immobilisations incorporelles non financières",
-    "label_en": "Autres activités de soutien aux entreprises n.c.a.",
+    "label_en": "Other business support service activities n.e.c.",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "77",
@@ -7861,7 +7861,7 @@
   "78.20H": {
     "code": "78.20H",
     "label_fr": "Autre mise à disposition de ressources humaines",
-    "label_en": "Autre mise à disposition de ressources humaines",
+    "label_en": "Temporary employment agency activities",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "78",
@@ -7873,7 +7873,7 @@
   "79.11Y": {
     "code": "79.11Y",
     "label_fr": "Activités d’agence de voyage",
-    "label_en": "Activités des agences de voyage",
+    "label_en": "Travel agency activities",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "79",
@@ -7885,7 +7885,7 @@
   "79.12Y": {
     "code": "79.12Y",
     "label_fr": "Activités de voyagiste",
-    "label_en": "Activités des voyagistes",
+    "label_en": "Tour operator activities",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "79",
@@ -7897,7 +7897,7 @@
   "79.90Y": {
     "code": "79.90Y",
     "label_fr": "Autres activités de service de réservation et activités connexes",
-    "label_en": "Autres services de réservation et activités connexes",
+    "label_en": "Other reservation service and related activities",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "79",
@@ -7909,7 +7909,7 @@
   "80.01Y": {
     "code": "80.01Y",
     "label_fr": "Activités d’investigation et de sécurité privée",
-    "label_en": "Activités de sécurité privée",
+    "label_en": "Private security activities",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "80",
@@ -7960,7 +7960,7 @@
   "81.22Y": {
     "code": "81.22Y",
     "label_fr": "Autres activités de nettoyage des bâtiments et nettoyage industriel",
-    "label_en": "Autres travaux de finition",
+    "label_en": "Other building completion and finishing",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "81",
@@ -7974,7 +7974,7 @@
   "81.23G": {
     "code": "81.23G",
     "label_fr": "Désinfection, désinsectisation, dératisation",
-    "label_en": "Désinfection, désinsectisation, dératisation",
+    "label_en": "Disinfection and pest control services",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "81",
@@ -7986,7 +7986,7 @@
   "81.23H": {
     "code": "81.23H",
     "label_fr": "Autres activités de nettoyage n.c.a.",
-    "label_en": "Autres activités de nettoyage n.c.a.",
+    "label_en": "Other cleaning activities n.e.c.",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "81",
@@ -8023,7 +8023,7 @@
   "82.20Y": {
     "code": "82.20Y",
     "label_fr": "Activités de centre d’appels",
-    "label_en": "Activités de centres d'appels",
+    "label_en": "Activities of call centres",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "82",
@@ -8035,7 +8035,7 @@
   "82.30Y": {
     "code": "82.30Y",
     "label_fr": "Organisation de salons professionnels et congrès",
-    "label_en": "Organisation de foires, salons professionnels et congrès",
+    "label_en": "Organisation of conventions and trade shows",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "82",
@@ -8047,7 +8047,7 @@
   "82.40Y": {
     "code": "82.40Y",
     "label_fr": "Activités de service d’intermédiation pour des services de soutien aux entreprises n.c.a.",
-    "label_en": "Autres services de réservation et activités connexes",
+    "label_en": "Other reservation service and related activities",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "82",
@@ -8060,7 +8060,7 @@
   "82.91Y": {
     "code": "82.91Y",
     "label_fr": "Activités d’agence de recouvrement et de bureau de crédit",
-    "label_en": "Activités des agences de recouvrement de factures et des sociétés d'information financière sur la clientèle",
+    "label_en": "Activities of collection agencies and credit bureaus",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "82",
@@ -8073,7 +8073,7 @@
   "82.92Y": {
     "code": "82.92Y",
     "label_fr": "Activités de conditionnement",
-    "label_en": "Activités de conditionnement",
+    "label_en": "Packaging activities",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "82",
@@ -8085,7 +8085,7 @@
   "82.99Y": {
     "code": "82.99Y",
     "label_fr": "Autres activités de service de soutien aux entreprises n.c.a.",
-    "label_en": "Autres activités de soutien aux entreprises n.c.a.",
+    "label_en": "Other business support service activities n.e.c.",
     "section": "O",
     "section_label": "ACTIVITÉS DE SERVICE ADMINISTRATIF ET DE SOUTIEN",
     "division": "82",
@@ -8109,7 +8109,7 @@
   "84.12Y": {
     "code": "84.12Y",
     "label_fr": "Réglementation des soins de santé, de l’enseignement, des services culturels et des autres services sociaux",
-    "label_en": "Administration publique (tutelle) de la santé, de la formation, de la culture et des services sociaux, autre que sécurité sociale",
+    "label_en": "Regulation of the activities of providing health care, education, cultural services and other social services, excluding social security",
     "section": "P",
     "section_label": "ADMINISTRATION PUBLIQUE ET DÉFENSE ; SÉCURITÉ SOCIALE OBLIGATOIRE",
     "division": "84",
@@ -8121,7 +8121,7 @@
   "84.13Y": {
     "code": "84.13Y",
     "label_fr": "Réglementation et contribution à l’amélioration de l’efficacité des activités économiques",
-    "label_en": "Administration publique (tutelle) des activités économiques",
+    "label_en": "Regulation of and contribution to more efficient operation of businesses",
     "section": "P",
     "section_label": "ADMINISTRATION PUBLIQUE ET DÉFENSE ; SÉCURITÉ SOCIALE OBLIGATOIRE",
     "division": "84",
@@ -8133,7 +8133,7 @@
   "84.21Y": {
     "code": "84.21Y",
     "label_fr": "Affaires étrangères",
-    "label_en": "Affaires étrangères",
+    "label_en": "Foreign affairs",
     "section": "P",
     "section_label": "ADMINISTRATION PUBLIQUE ET DÉFENSE ; SÉCURITÉ SOCIALE OBLIGATOIRE",
     "division": "84",
@@ -8145,7 +8145,7 @@
   "84.22Y": {
     "code": "84.22Y",
     "label_fr": "Défense",
-    "label_en": "Défense",
+    "label_en": "Defence activities",
     "section": "P",
     "section_label": "ADMINISTRATION PUBLIQUE ET DÉFENSE ; SÉCURITÉ SOCIALE OBLIGATOIRE",
     "division": "84",
@@ -8157,7 +8157,7 @@
   "84.23Y": {
     "code": "84.23Y",
     "label_fr": "Justice",
-    "label_en": "Justice",
+    "label_en": "Justice and judicial activities",
     "section": "P",
     "section_label": "ADMINISTRATION PUBLIQUE ET DÉFENSE ; SÉCURITÉ SOCIALE OBLIGATOIRE",
     "division": "84",
@@ -8169,7 +8169,7 @@
   "84.24Y": {
     "code": "84.24Y",
     "label_fr": "Activités d’ordre public et de sécurité civile",
-    "label_en": "Activités d'ordre public et de sécurité",
+    "label_en": "Public order and safety activities",
     "section": "P",
     "section_label": "ADMINISTRATION PUBLIQUE ET DÉFENSE ; SÉCURITÉ SOCIALE OBLIGATOIRE",
     "division": "84",
@@ -8181,7 +8181,7 @@
   "84.25Y": {
     "code": "84.25Y",
     "label_fr": "Activités de service d’incendie et de secours",
-    "label_en": "Services du feu et de secours",
+    "label_en": "Fire service activities",
     "section": "P",
     "section_label": "ADMINISTRATION PUBLIQUE ET DÉFENSE ; SÉCURITÉ SOCIALE OBLIGATOIRE",
     "division": "84",
@@ -8194,7 +8194,7 @@
   "84.30G": {
     "code": "84.30G",
     "label_fr": "Activités générales de sécurité sociale",
-    "label_en": "Activités générales de sécurité sociale",
+    "label_en": "Compulsory social security activities",
     "section": "P",
     "section_label": "ADMINISTRATION PUBLIQUE ET DÉFENSE ; SÉCURITÉ SOCIALE OBLIGATOIRE",
     "division": "84",
@@ -8206,7 +8206,7 @@
   "84.30H": {
     "code": "84.30H",
     "label_fr": "Gestion des retraites complémentaires",
-    "label_en": "Gestion des retraites complémentaires",
+    "label_en": "Compulsory social security activities",
     "section": "P",
     "section_label": "ADMINISTRATION PUBLIQUE ET DÉFENSE ; SÉCURITÉ SOCIALE OBLIGATOIRE",
     "division": "84",
@@ -8218,7 +8218,7 @@
   "84.30J": {
     "code": "84.30J",
     "label_fr": "Distribution sociale de revenus",
-    "label_en": "Distribution sociale de revenus",
+    "label_en": "Compulsory social security activities",
     "section": "P",
     "section_label": "ADMINISTRATION PUBLIQUE ET DÉFENSE ; SÉCURITÉ SOCIALE OBLIGATOIRE",
     "division": "84",
@@ -8230,7 +8230,7 @@
   "85.10Y": {
     "code": "85.10Y",
     "label_fr": "Enseignement pré-primaire",
-    "label_en": "Enseignement pré-primaire",
+    "label_en": "Pre-primary education",
     "section": "Q",
     "section_label": "ENSEIGNEMENT",
     "division": "85",
@@ -8243,7 +8243,7 @@
   "85.20Y": {
     "code": "85.20Y",
     "label_fr": "Enseignement primaire",
-    "label_en": "Enseignement primaire",
+    "label_en": "Primary education",
     "section": "Q",
     "section_label": "ENSEIGNEMENT",
     "division": "85",
@@ -8255,7 +8255,7 @@
   "85.31Y": {
     "code": "85.31Y",
     "label_fr": "Enseignement secondaire général",
-    "label_en": "Enseignement secondaire général",
+    "label_en": "General secondary education",
     "section": "Q",
     "section_label": "ENSEIGNEMENT",
     "division": "85",
@@ -8279,7 +8279,7 @@
   "85.33Y": {
     "code": "85.33Y",
     "label_fr": "Enseignement post-secondaire non supérieur",
-    "label_en": "Enseignement post-secondaire non supérieur",
+    "label_en": "Post-secondary non-tertiary education",
     "section": "Q",
     "section_label": "ENSEIGNEMENT",
     "division": "85",
@@ -8291,7 +8291,7 @@
   "85.40Y": {
     "code": "85.40Y",
     "label_fr": "Enseignement supérieur",
-    "label_en": "Enseignement supérieur",
+    "label_en": "Higher education",
     "section": "Q",
     "section_label": "ENSEIGNEMENT",
     "division": "85",
@@ -8315,7 +8315,7 @@
   "85.52Y": {
     "code": "85.52Y",
     "label_fr": "Enseignement culturel",
-    "label_en": "Enseignement culturel",
+    "label_en": "Cultural education",
     "section": "Q",
     "section_label": "ENSEIGNEMENT",
     "division": "85",
@@ -8363,7 +8363,7 @@
   "85.61Y": {
     "code": "85.61Y",
     "label_fr": "Activités de service d’intermédiation dans le domaine de l’appui scolaire et du tutorat",
-    "label_en": "Autres activités de soutien aux entreprises n.c.a.",
+    "label_en": "Other business support service activities n.e.c.",
     "section": "Q",
     "section_label": "ENSEIGNEMENT",
     "division": "85",
@@ -8375,7 +8375,7 @@
   "85.69Y": {
     "code": "85.69Y",
     "label_fr": "Activités de soutien à l’enseignement n.c.a.",
-    "label_en": "Activités de soutien à l'enseignement",
+    "label_en": "Educational support activities",
     "section": "Q",
     "section_label": "ENSEIGNEMENT",
     "division": "85",
@@ -8387,7 +8387,7 @@
   "86.10Y": {
     "code": "86.10Y",
     "label_fr": "Activités hospitalières",
-    "label_en": "Activités hospitalières",
+    "label_en": "Hospital activities",
     "section": "R",
     "section_label": "SANTÉ HUMAINE ET ACTIVITÉS D’ACTION SOCIALE",
     "division": "86",
@@ -8522,7 +8522,7 @@
   "86.97Y": {
     "code": "86.97Y",
     "label_fr": "Activités de service d’intermédiation pour les services médicaux, dentaires et autres services pour la santé humaine",
-    "label_en": "Autres activités de soutien aux entreprises n.c.a.",
+    "label_en": "Other business support service activities n.e.c.",
     "section": "R",
     "section_label": "SANTÉ HUMAINE ET ACTIVITÉS D’ACTION SOCIALE",
     "division": "86",
@@ -8534,7 +8534,7 @@
   "86.99Y": {
     "code": "86.99Y",
     "label_fr": "Autres activités pour la santé humaine n.c.a.",
-    "label_en": "Centres de collecte et banques d'organes",
+    "label_en": "Other human health activities",
     "section": "R",
     "section_label": "SANTÉ HUMAINE ET ACTIVITÉS D’ACTION SOCIALE",
     "division": "86",
@@ -8572,7 +8572,7 @@
   "87.10J": {
     "code": "87.10J",
     "label_fr": "Activités d’hébergement médicalisé pour adultes en situation de handicap et autres activités d’hébergement médicalisé",
-    "label_en": "Hébergement médicalisé pour adultes handicapés et autre hébergement médicalisé",
+    "label_en": "Residential nursing care activities",
     "section": "R",
     "section_label": "SANTÉ HUMAINE ET ACTIVITÉS D’ACTION SOCIALE",
     "division": "87",
@@ -8584,7 +8584,7 @@
   "87.20G": {
     "code": "87.20G",
     "label_fr": "Activités d’hébergement social pour personnes souffrant de maladie mentale",
-    "label_en": "Hébergement social pour handicapés mentaux et malades mentaux",
+    "label_en": "Residential care activities for mental retardation, mental health and substance abuse",
     "section": "R",
     "section_label": "SANTÉ HUMAINE ET ACTIVITÉS D’ACTION SOCIALE",
     "division": "87",
@@ -8632,7 +8632,7 @@
   "87.91Y": {
     "code": "87.91Y",
     "label_fr": "Activités de service d’intermédiation pour des activités de soins en établissement résidentiel",
-    "label_en": "Autres activités de soutien aux entreprises n.c.a.",
+    "label_en": "Other business support service activities n.e.c.",
     "section": "R",
     "section_label": "SANTÉ HUMAINE ET ACTIVITÉS D’ACTION SOCIALE",
     "division": "87",
@@ -8644,7 +8644,7 @@
   "87.99G": {
     "code": "87.99G",
     "label_fr": "Activités d’hébergement social pour enfants en difficulté",
-    "label_en": "Hébergement social pour enfants en difficultés",
+    "label_en": "Other residential care activities",
     "section": "R",
     "section_label": "SANTÉ HUMAINE ET ACTIVITÉS D’ACTION SOCIALE",
     "division": "87",
@@ -8656,7 +8656,7 @@
   "87.99H": {
     "code": "87.99H",
     "label_fr": "Activités d’hébergement social pour adultes et familles en difficulté et autres activités d’hébergement social n.c.a.",
-    "label_en": "Hébergement social pour adultes et familles en difficultés et autre hébergement social",
+    "label_en": "Other residential care activities",
     "section": "R",
     "section_label": "SANTÉ HUMAINE ET ACTIVITÉS D’ACTION SOCIALE",
     "division": "87",
@@ -8680,7 +8680,7 @@
   "88.10H": {
     "code": "88.10H",
     "label_fr": "Activités d’accueil ou d’accompagnement sans hébergement d’adultes en situation de handicap ou de personnes âgées",
-    "label_en": "Accueil ou accompagnement sans hébergement d'adultes handicapés ou de personnes âgées",
+    "label_en": "Social work activities without accommodation for the elderly and disabled",
     "section": "R",
     "section_label": "SANTÉ HUMAINE ET ACTIVITÉS D’ACTION SOCIALE",
     "division": "88",
@@ -8740,7 +8740,7 @@
   "88.99G": {
     "code": "88.99G",
     "label_fr": "Autre accueil ou accompagnement sans hébergement d’enfants et d’adolescents",
-    "label_en": "Autre accueil ou accompagnement sans hébergement d'enfants et d'adolescents",
+    "label_en": "Other social work activities without accommodation n.e.c.",
     "section": "R",
     "section_label": "SANTÉ HUMAINE ET ACTIVITÉS D’ACTION SOCIALE",
     "division": "88",
@@ -8849,7 +8849,7 @@
   "90.39H": {
     "code": "90.39H",
     "label_fr": "Activités de soutien technique aux spectacles et aux événements culturels",
-    "label_en": "Activités de soutien au spectacle vivant",
+    "label_en": "Support activities to performing arts",
     "section": "S",
     "section_label": "ARTS, SPORTS ET ACTIVITÉS RÉCRÉATIVES",
     "division": "90",
@@ -8861,7 +8861,7 @@
   "91.11Y": {
     "code": "91.11Y",
     "label_fr": "Activités des bibliothèques",
-    "label_en": "Gestion des bibliothèques et des archives",
+    "label_en": "Library and archives activities",
     "section": "S",
     "section_label": "ARTS, SPORTS ET ACTIVITÉS RÉCRÉATIVES",
     "division": "91",
@@ -8873,7 +8873,7 @@
   "91.12Y": {
     "code": "91.12Y",
     "label_fr": "Activités des centres d’archives",
-    "label_en": "Gestion des bibliothèques et des archives",
+    "label_en": "Library and archives activities",
     "section": "S",
     "section_label": "ARTS, SPORTS ET ACTIVITÉS RÉCRÉATIVES",
     "division": "91",
@@ -8897,7 +8897,7 @@
   "91.22Y": {
     "code": "91.22Y",
     "label_fr": "Activité des monuments et sites historiques",
-    "label_en": "Gestion des sites et monuments historiques et des attractions touristiques similaires",
+    "label_en": "Operation of historical sites and buildings and similar visitor attractions",
     "section": "S",
     "section_label": "ARTS, SPORTS ET ACTIVITÉS RÉCRÉATIVES",
     "division": "91",
@@ -8909,7 +8909,7 @@
   "91.30Y": {
     "code": "91.30Y",
     "label_fr": "Conservation, restauration et autres activités de soutien pour la préservation du patrimoine culturel",
-    "label_en": "Réparation d'autres équipements",
+    "label_en": "Repair of other equipment",
     "section": "S",
     "section_label": "ARTS, SPORTS ET ACTIVITÉS RÉCRÉATIVES",
     "division": "91",
@@ -8922,7 +8922,7 @@
   "91.41Y": {
     "code": "91.41Y",
     "label_fr": "Activités de gestion de jardins botaniques et zoologiques",
-    "label_en": "Gestion des jardins botaniques et zoologiques et des réserves naturelles",
+    "label_en": "Botanical and zoological gardens and nature reserves activities",
     "section": "S",
     "section_label": "ARTS, SPORTS ET ACTIVITÉS RÉCRÉATIVES",
     "division": "91",
@@ -8934,7 +8934,7 @@
   "91.42Y": {
     "code": "91.42Y",
     "label_fr": "Activités de gestion de réserves naturelles",
-    "label_en": "Gestion des jardins botaniques et zoologiques et des réserves naturelles",
+    "label_en": "Botanical and zoological gardens and nature reserves activities",
     "section": "S",
     "section_label": "ARTS, SPORTS ET ACTIVITÉS RÉCRÉATIVES",
     "division": "91",
@@ -8946,7 +8946,7 @@
   "92.00Y": {
     "code": "92.00Y",
     "label_fr": "Activités de jeux d’argent et de paris",
-    "label_en": "Organisation de jeux de hasard et d'argent",
+    "label_en": "Gambling and betting activities",
     "section": "S",
     "section_label": "ARTS, SPORTS ET ACTIVITÉS RÉCRÉATIVES",
     "division": "92",
@@ -8998,7 +8998,7 @@
   "93.19Y": {
     "code": "93.19Y",
     "label_fr": "Autres activités sportives n.c.a.",
-    "label_en": "Autres activités liées au sport",
+    "label_en": "Other sports activities",
     "section": "S",
     "section_label": "ARTS, SPORTS ET ACTIVITÉS RÉCRÉATIVES",
     "division": "93",
@@ -9011,7 +9011,7 @@
   "93.21Y": {
     "code": "93.21Y",
     "label_fr": "Activités des parcs d’attractions et parcs à thème",
-    "label_en": "Activités des parcs d'attractions et parcs à thèmes",
+    "label_en": "Activities of amusement parks and theme parks",
     "section": "S",
     "section_label": "ARTS, SPORTS ET ACTIVITÉS RÉCRÉATIVES",
     "division": "93",
@@ -9023,7 +9023,7 @@
   "93.29Y": {
     "code": "93.29Y",
     "label_fr": "Activités récréatives et de loisirs n.c.a.",
-    "label_en": "Organisation de foires, salons professionnels et congrès",
+    "label_en": "Organisation of conventions and trade shows",
     "section": "S",
     "section_label": "ARTS, SPORTS ET ACTIVITÉS RÉCRÉATIVES",
     "division": "93",
@@ -9039,7 +9039,7 @@
   "94.11Y": {
     "code": "94.11Y",
     "label_fr": "Activités des organisations patronales et des chambres représentatives",
-    "label_en": "Activités des organisations patronales et consulaires",
+    "label_en": "Activities of business and employers membership organisations",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "94",
@@ -9051,7 +9051,7 @@
   "94.12Y": {
     "code": "94.12Y",
     "label_fr": "Activités des organisations professionnelles",
-    "label_en": "Activités des organisations professionnelles",
+    "label_en": "Activities of professional membership organisations",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "94",
@@ -9063,7 +9063,7 @@
   "94.20Y": {
     "code": "94.20Y",
     "label_fr": "Activités des syndicats de salariés",
-    "label_en": "Activités des syndicats de salariés",
+    "label_en": "Activities of trade unions",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "94",
@@ -9075,7 +9075,7 @@
   "94.91Y": {
     "code": "94.91Y",
     "label_fr": "Activités des organisations religieuses",
-    "label_en": "Activités des organisations religieuses",
+    "label_en": "Activities of religious organisations",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "94",
@@ -9087,7 +9087,7 @@
   "94.92Y": {
     "code": "94.92Y",
     "label_fr": "Activités des organisations politiques",
-    "label_en": "Activités des organisations politiques",
+    "label_en": "Activities of political organisations",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "94",
@@ -9099,7 +9099,7 @@
   "94.99Y": {
     "code": "94.99Y",
     "label_fr": "Activités des organisations associatives n.c.a.",
-    "label_en": "Autres organisations fonctionnant par adhésion volontaire",
+    "label_en": "Activities of other membership organisations n.e.c.",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "94",
@@ -9111,7 +9111,7 @@
   "95.10Y": {
     "code": "95.10Y",
     "label_fr": "Réparation et entretien d’ordinateurs et d’équipements de communication",
-    "label_en": "Réparation d'ordinateurs et d'équipements périphériques",
+    "label_en": "Repair of computers and peripheral equipment",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "95",
@@ -9124,7 +9124,7 @@
   "95.21Y": {
     "code": "95.21Y",
     "label_fr": "Réparation et entretien de produits électroniques grand public",
-    "label_en": "Réparation de produits électroniques grand public",
+    "label_en": "Repair of consumer electronics",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "95",
@@ -9136,7 +9136,7 @@
   "95.22Y": {
     "code": "95.22Y",
     "label_fr": "Réparation et entretien d’appareils électroménagers et d’équipements pour la maison et le jardin",
-    "label_en": "Réparation d'appareils électroménagers et d'équipements pour la maison et le jardin",
+    "label_en": "Repair of household appliances and home and garden equipment",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "95",
@@ -9148,7 +9148,7 @@
   "95.23Y": {
     "code": "95.23Y",
     "label_fr": "Réparation et entretien de chaussures et d’articles en cuir",
-    "label_en": "Réparation de chaussures et d'articles en cuir",
+    "label_en": "Repair of footwear and leather goods",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "95",
@@ -9160,7 +9160,7 @@
   "95.24Y": {
     "code": "95.24Y",
     "label_fr": "Réparation et entretien de meubles et d’équipements du foyer",
-    "label_en": "Réparation de meubles et d'équipements du foyer",
+    "label_en": "Repair of furniture and home furnishings",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "95",
@@ -9172,7 +9172,7 @@
   "95.25Y": {
     "code": "95.25Y",
     "label_fr": "Réparation et entretien d’articles d’horlogerie et de bijouterie",
-    "label_en": "Réparation d'articles d'horlogerie et de bijouterie",
+    "label_en": "Repair of watches, clocks and jewellery",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "95",
@@ -9184,7 +9184,7 @@
   "95.29G": {
     "code": "95.29G",
     "label_fr": "Réparation et entretien de cycles et autres engins de la mobilité douce",
-    "label_en": "Réparation d'autres biens personnels et domestiques",
+    "label_en": "Repair of other personal and household goods",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "95",
@@ -9196,7 +9196,7 @@
   "95.29H": {
     "code": "95.29H",
     "label_fr": "Réparation et entretien de tous les autres biens personnels ou domestiques n.c.a.",
-    "label_en": "Réparation d'autres biens personnels et domestiques",
+    "label_en": "Repair of other personal and household goods",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "95",
@@ -9220,7 +9220,7 @@
   "95.31H": {
     "code": "95.31H",
     "label_fr": "Réparation et entretien d'autres véhicules automobiles",
-    "label_en": "Entretien et réparation d'autres véhicules automobiles",
+    "label_en": "Maintenance and repair of motor vehicles",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "95",
@@ -9232,7 +9232,7 @@
   "95.32Y": {
     "code": "95.32Y",
     "label_fr": "Réparation et entretien de motocycles",
-    "label_en": "Commerce et réparation de motocycles",
+    "label_en": "Sale, maintenance and repair of motorcycles and related parts and accessories",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "95",
@@ -9259,7 +9259,7 @@
   "96.10G": {
     "code": "96.10G",
     "label_fr": "Blanchisserie-teinturerie de gros",
-    "label_en": "Blanchisserie-teinturerie de gros",
+    "label_en": "Wholesale laundry and dry cleaning",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "96",
@@ -9271,7 +9271,7 @@
   "96.10H": {
     "code": "96.10H",
     "label_fr": "Blanchisserie-teinturerie de détail",
-    "label_en": "Blanchisserie-teinturerie de détail",
+    "label_en": "Retail laundry and dry cleaning",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "96",
@@ -9343,7 +9343,7 @@
   "96.40Y": {
     "code": "96.40Y",
     "label_fr": "Activités de service d’intermédiation pour des services aux personnes",
-    "label_en": "Autres activités de soutien aux entreprises n.c.a.",
+    "label_en": "Other business support service activities n.e.c.",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "96",
@@ -9380,7 +9380,7 @@
   "96.99H": {
     "code": "96.99H",
     "label_fr": "Toutes les autres activités de service aux personnes n.c.a.",
-    "label_en": "Autres activités récréatives et de loisirs",
+    "label_en": "Other amusement and recreation activities",
     "section": "T",
     "section_label": "AUTRES ACTIVITÉS DE SERVICES",
     "division": "96",
@@ -9393,7 +9393,7 @@
   "97.00Y": {
     "code": "97.00Y",
     "label_fr": "Activités des ménages en tant qu’employeurs de personnel domestique",
-    "label_en": "Activités des ménages en tant qu'employeurs de personnel domestique",
+    "label_en": "Activities of households as employers of domestic personnel",
     "section": "U",
     "section_label": "ACTIVITÉS DES MÉNAGES EN TANT QU’EMPLOYEURS ; ACTIVITÉS INDIFFÉRENCIÉES DES MÉNAGES EN TANT QUE PRODUCTEURS DE BIENS ET SERVICES POUR USAGE PROPRE",
     "division": "97",
@@ -9405,7 +9405,7 @@
   "98.10Y": {
     "code": "98.10Y",
     "label_fr": "Activités indifférenciées des ménages en tant que producteurs de biens pour usage propre",
-    "label_en": "Activités indifférenciées des ménages en tant que producteurs de biens pour usage propre",
+    "label_en": "Undifferentiated goods-producing activities of private households for own use",
     "section": "U",
     "section_label": "ACTIVITÉS DES MÉNAGES EN TANT QU’EMPLOYEURS ; ACTIVITÉS INDIFFÉRENCIÉES DES MÉNAGES EN TANT QUE PRODUCTEURS DE BIENS ET SERVICES POUR USAGE PROPRE",
     "division": "98",
@@ -9417,7 +9417,7 @@
   "98.20Y": {
     "code": "98.20Y",
     "label_fr": "Activités indifférenciées des ménages en tant que producteurs de services pour usage propre",
-    "label_en": "Activités indifférenciées des ménages en tant que producteurs de services pour usage propre",
+    "label_en": "Undifferentiated service-producing activities of private households for own use",
     "section": "U",
     "section_label": "ACTIVITÉS DES MÉNAGES EN TANT QU’EMPLOYEURS ; ACTIVITÉS INDIFFÉRENCIÉES DES MÉNAGES EN TANT QUE PRODUCTEURS DE BIENS ET SERVICES POUR USAGE PROPRE",
     "division": "98",
@@ -9429,7 +9429,7 @@
   "99.00Y": {
     "code": "99.00Y",
     "label_fr": "Activités des organisations et organismes extraterritoriaux",
-    "label_en": "Activités des organisations et organismes extraterritoriaux",
+    "label_en": "Activities of extraterritorial organisations and bodies",
     "section": "V",
     "section_label": "ACTIVITÉS DES ORGANISATIONS ET ORGANISMES EXTRATERRITORIAUX",
     "division": "99",
