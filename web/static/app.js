@@ -1175,8 +1175,8 @@ function setMapHeaderMeta(title, subtitle) {
     if (drawerExportBtn) {
       drawerExportBtn.href = `/api/businesses/export?dept=${encodeURIComponent(deptCode)}`;
     }
-    const btnDossier = document.getElementById('btnDrawerDossier');
-    if (btnDossier) btnDossier.style.display = 'none';
+    const btnVerify = document.getElementById('btnDrawerVerify') || document.getElementById('btnDrawerDossier');
+    if (btnVerify) btnVerify.style.display = 'none';
 
     // Render Top Industries in Inspector
     const industriesList = data.top_sectors.slice(0, 3).map(s => `
@@ -1237,8 +1237,8 @@ async function selectCommune(cityName, deptCode, lat, lng) {
     if (drawerExportBtn) {
       drawerExportBtn.href = `/api/businesses/export?dept=${encodeURIComponent(deptCode)}&city=${encodeURIComponent(cityName)}`;
     }
-    const btnDossier = document.getElementById('btnDrawerDossier');
-    if (btnDossier) btnDossier.style.display = 'none';
+    const btnVerify = document.getElementById('btnDrawerVerify') || document.getElementById('btnDrawerDossier');
+    if (btnVerify) btnVerify.style.display = 'none';
 
     const industriesList = data.top_sectors.map(s => `
       <div class="breakdown-row" onclick="openBusinessModal('${data.dept}', '${data.city}', '${data.city}', '${s.code_naf}')">
@@ -1730,13 +1730,13 @@ function createBusinessPopupHtml({
       </div>
 
       <div class="m3-popup-actions">
-        <button onclick="openDossier('${siret}')" class="m3-popup-btn m3-popup-btn-primary" title="Export executive PDF dossier">
+        <a href="${gGov}" target="_blank" rel="noopener noreferrer" class="m3-popup-btn m3-popup-btn-primary" title="Vérifier sur l'Annuaire officiel des Entreprises (data.gouv.fr)">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <polyline points="9 12 11 14 15 10"></polyline>
           </svg>
-          <span>PDF Dossier</span>
-        </button>
+          <span>Verify</span>
+        </a>
         <a href="${streetView}" target="_blank" rel="noopener noreferrer" class="m3-popup-btn m3-popup-btn-tonal" title="Street View 360°">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
           <span>360° View</span>
@@ -1886,15 +1886,13 @@ async function fetchAndRenderBusinesses(append = false) {
             </button>
             ${streetViewLink}
           ` : `<span class="biz-no-gps">No GPS</span>`}
-          <button class="btn-table-action btn-dossier" onclick="openDossier('${b.siret}')" title="Generate Location Dossier (PDF)">
+          <a class="btn-table-action btn-verify" href="${b.gov_verify_url || ('https://annuaire-entreprises.data.gouv.fr/etablissement/' + b.siret)}" target="_blank" rel="noopener noreferrer" title="Vérifier sur l'Annuaire officiel des Entreprises (data.gouv.fr)">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <polyline points="9 12 11 14 15 10"></polyline>
             </svg>
-            <span>Dossier</span>
-          </button>
+            <span>Verify</span>
+          </a>
         </div>
       `;
 
@@ -1982,13 +1980,15 @@ function loadMoreBusinesses() {
 }
 
 /* ==========================================================================
-   Executive Location Dossier Opener
+   Official French Registry Verification (Annuaire des Entreprises - data.gouv.fr)
    ========================================================================== */
-window.openDossier = function(siret) {
+window.verifyBusiness = function(siret) {
   if (!siret) return;
-  SireneLogger.info('DOSSIER', `Opening Location Dossier for SIRET ${siret}`);
-  window.open(`/dossier/${siret}`, '_blank');
+  const cleanSiret = String(siret).replace(/\s+/g, '');
+  SireneLogger.info('VERIFY', `Opening official French registry verification for SIRET ${cleanSiret}`);
+  window.open(`https://annuaire-entreprises.data.gouv.fr/etablissement/${cleanSiret}`, '_blank', 'noopener,noreferrer');
 };
+window.openDossier = window.verifyBusiness;
 
 /* ==========================================================================
    Pin Individual Business on Genuine Google Map
@@ -2103,10 +2103,15 @@ function showBusinessInInspector(siret, lat, lng, name, address, nafCode, nafLab
     };
   }
 
-  const btnDossier = document.getElementById('btnDrawerDossier');
-  if (btnDossier) {
-    btnDossier.style.display = 'inline-flex';
-    btnDossier.onclick = () => openDossier(siret);
+  const btnVerify = document.getElementById('btnDrawerVerify') || document.getElementById('btnDrawerDossier');
+  if (btnVerify) {
+    btnVerify.style.display = 'inline-flex';
+    const targetGovUrl = govUrl || `https://annuaire-entreprises.data.gouv.fr/etablissement/${siret}`;
+    if (btnVerify.tagName.toLowerCase() === 'a') {
+      btnVerify.href = targetGovUrl;
+    } else {
+      btnVerify.onclick = () => window.verifyBusiness(siret);
+    }
   }
 
   let btnStreetView = document.getElementById('btnDrawerStreetView');
@@ -2569,31 +2574,32 @@ function getZoomAdaptiveHeatmapParams() {
 
   if (currentZoom <= 6) {
     // National overview: glowing city nodes
-    baseR = 12; baseBlur = 12; maxVal = 1.4; minOp = 0.04;
+    baseR = 13; baseBlur = 13; maxVal = 1.5; minOp = 0.04;
   } else if (currentZoom === 7) {
-    baseR = 14; baseBlur = 13; maxVal = 1.3; minOp = 0.04;
+    baseR = 14; baseBlur = 13; maxVal = 1.4; minOp = 0.04;
   } else if (currentZoom === 8) {
-    baseR = 15; baseBlur = 14; maxVal = 1.2; minOp = 0.04;
+    baseR = 15; baseBlur = 14; maxVal = 1.3; minOp = 0.04;
   } else if (currentZoom === 9) {
-    baseR = 14; baseBlur = 13; maxVal = 1.1; minOp = 0.05;
+    baseR = 15; baseBlur = 13; maxVal = 1.2; minOp = 0.05;
   } else if (currentZoom === 10) {
-    baseR = 12; baseBlur = 11; maxVal = 1.0; minOp = 0.05;
+    baseR = 14; baseBlur = 12; maxVal = 1.1; minOp = 0.05;
   } else if (currentZoom === 11) {
-    // City overview: switch to viewport data, tighten blobs
-    baseR = 10; baseBlur = 9; maxVal = 1.0; minOp = 0.06;
+    // City overview: viewport 100m clusters – needs enough radius to blend
+    baseR = 18; baseBlur = 14; maxVal = 1.5; minOp = 0.05;
   } else if (currentZoom === 12) {
-    // District level: crisp density
-    baseR = 8; baseBlur = 7; maxVal = 0.9; minOp = 0.07;
+    // District level: still 100m clusters, blend well
+    baseR = 16; baseBlur = 12; maxVal = 1.4; minOp = 0.06;
   } else if (currentZoom === 13) {
-    baseR = 7; baseBlur = 6; maxVal = 0.85; minOp = 0.08;
+    baseR = 13; baseBlur = 10; maxVal = 1.3; minOp = 0.06;
   } else if (currentZoom === 14) {
-    baseR = 6; baseBlur = 5; maxVal = 0.8; minOp = 0.08;
+    // Individual establishments appear – start tightening
+    baseR = 9; baseBlur = 7; maxVal = 1.0; minOp = 0.07;
   } else if (currentZoom === 15) {
     // High zoom: tight commercial ribbons along streets
-    baseR = 5; baseBlur = 4; maxVal = 0.75; minOp = 0.09;
+    baseR = 7; baseBlur = 5; maxVal = 0.9; minOp = 0.08;
   } else {
-    // Street/parcel level: tight halos on building facades
-    baseR = 4; baseBlur = 3; maxVal = 0.7; minOp = 0.1;
+    // Street/parcel level: individual building halos
+    baseR = 5; baseBlur = 4; maxVal = 0.8; minOp = 0.09;
   }
 
   const finalR    = Math.max(4, Math.round(baseR    * heatmapRadiusMultiplier));
@@ -2606,6 +2612,7 @@ function getZoomAdaptiveHeatmapParams() {
     max:        maxVal
   };
 }
+
 
 
 function updateHeatmapOnZoom() {

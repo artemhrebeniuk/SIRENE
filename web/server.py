@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Tuple, List, Dict, Any
 import time
 import urllib.request
-from flask import Flask, jsonify, request, send_from_directory, Response, g, render_template
+from flask import Flask, jsonify, request, send_from_directory, Response, g, render_template, redirect
 import duckdb
 
 ENRICHMENT_CACHE: Dict[str, Dict[str, Any]] = {}
@@ -1438,59 +1438,9 @@ def get_business_dossier_api(siret: str):
 
 @app.route("/dossier/<siret>")
 def view_business_dossier(siret: str):
-    """Renders high-fidelity print-ready Location Dossier HTML page."""
-    dossier = get_establishment_dossier_data(siret.strip())
-    if not dossier:
-        return jsonify({"error": "Establishment not found", "siret": siret}), 404
-    return render_template("dossier.html", **dossier)
-
-
-@app.route("/api/dossier/<siret>/pdf")
-def download_business_dossier_pdf(siret: str):
-    """
-    Renders and serves high-fidelity vector PDF for an establishment.
-    Uses headless Chromium print-to-pdf pipeline.
-    """
-    import subprocess
-    import os
-    from flask import send_file
-
-    siret_clean = siret.strip()
-    dossier = get_establishment_dossier_data(siret_clean)
-    if not dossier:
-        return jsonify({"error": "Establishment not found", "siret": siret}), 404
-
-    cache_dir = Path("/tmp/sirene_pdf_cache")
-    cache_dir.mkdir(parents=True, exist_ok=True)
-    pdf_path = cache_dir / f"Dossier_{siret_clean}.pdf"
-
-    chrome_binary = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-    port = request.host.split(":")[-1] if ":" in request.host else "8000"
-    target_url = f"http://127.0.0.1:{port}/dossier/{siret_clean}"
-
-    if os.path.exists(chrome_binary):
-        try:
-            cmd = [
-                chrome_binary,
-                "--headless=new",
-                f"--print-to-pdf={pdf_path}",
-                "--print-to-pdf-no-header",
-                target_url
-            ]
-            subprocess.run(cmd, check=True, timeout=15, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        except Exception as e:
-            logger.error(f"Headless Chrome PDF generation failed: {e}")
-
-    if pdf_path.exists():
-        company_name = "".join(c for c in dossier.get("name", "Company") if c.isalnum() or c in ("-", "_")).strip() or "Company"
-        download_filename = f"Dossier_{siret_clean}_{company_name}.pdf"
-        return send_file(
-            str(pdf_path),
-            as_attachment=True,
-            download_name=download_filename,
-            mimetype="application/pdf"
-        )
-    return jsonify({"error": "Failed to generate PDF"}), 500
+    """Redirects to official French registry (Annuaire des Entreprises - data.gouv.fr)."""
+    siret_clean = "".join(c for c in siret.strip() if c.isdigit()) or siret.strip()
+    return redirect(f"https://annuaire-entreprises.data.gouv.fr/etablissement/{siret_clean}", code=302)
 
 
 @app.route("/api/businesses/map")

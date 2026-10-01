@@ -1212,7 +1212,8 @@ body {
 }
 
 
-/* Material 3 Filled Tonal Button (Location Dossier PDF) */
+/* Material 3 Filled Tonal Button (Official French Gov Verification) */
+.btn-drawer-verify,
 .btn-drawer-dossier {
   display: inline-flex;
   align-items: center;
@@ -1232,6 +1233,7 @@ body {
   white-space: nowrap;
 }
 
+.btn-drawer-verify:hover,
 .btn-drawer-dossier:hover {
   filter: brightness(1.08);
   box-shadow: var(--shadow-elevation-2);
@@ -2322,12 +2324,15 @@ body {
   transform: translateY(-1px);
 }
 
+.btn-table-action.btn-verify,
 .btn-table-action.btn-dossier {
   background: var(--md-sys-color-primary-container);
   border: 1px solid var(--md-sys-color-outline-variant);
   color: var(--md-sys-color-on-primary-container);
+  text-decoration: none;
 }
 
+.btn-table-action.btn-verify:hover,
 .btn-table-action.btn-dossier:hover {
   background: var(--md-sys-color-primary);
   border-color: var(--md-sys-color-primary);

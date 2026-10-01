@@ -7,7 +7,7 @@
 [![Maps](https://img.shields.io/badge/Maps-Leaflet%20%26%20Google%20Retina%20%402x-4285F4.svg)](https://maps.google.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-An enterprise-grade analytical geospatial platform and interactive B2B intelligence observatory for the **INSEE SIRENE** French National Enterprise Registry. Combines high-speed out-of-core data processing powered by **DuckDB** with a modern **Google Material 3 (Material You)** interface, real-time spatial mapping, live official financial and executive governance intelligence, multi-establishment branch resolution, workforce size segmentation, calibrated footfall heatmaps, traffic overlays, logistics radar, and automated **Executive Location Dossiers (A4 PDF)**.
+An enterprise-grade analytical geospatial platform and interactive B2B intelligence observatory for the **INSEE SIRENE** French National Enterprise Registry. Combines high-speed out-of-core data processing powered by **DuckDB** with a modern **Google Material 3 (Material You)** interface, real-time spatial mapping, live official financial and executive governance intelligence, multi-establishment branch resolution, workforce size segmentation, calibrated footfall heatmaps, traffic overlays, logistics radar, and direct **Official French Government Registry Verification (data.gouv.fr)**.
 
 Covers **Mainland France** across **96 departments**, **35,000+ communes**, **15.96M+ active establishments**, with **84.52% precise WGS84 GPS geocoding** (BAN parcel accuracy) and dual-classification support for **NAF 2008 Rev 2** (738 sectors) and upcoming **NAF 2025 Rev 2.1** (747 sectors).
 
@@ -20,7 +20,7 @@ Covers **Mainland France** across **96 departments**, **35,000+ communes**, **15
 - **Live Official State Integration:** Direct low-latency bridge to `recherche-entreprises.api.gouv.fr` (DINUM / DGFiP / INPI) with in-memory caching (< 190ms response).
 - **Verified Financial Disclosures:** Displays genuine filed annual turnover (_Chiffre d'Affaires_ / CA), net profit or loss (_Résultat Net_), and the exact fiscal year filed.
 - **Truth in Data:** Explicitly distinguishes verified government balance sheet figures from modeled statistical revenue brackets.
-- **Board & Executive Officers:** Lists company CEOs, managing directors (_Dirigeants_, _Président_, _Gérant_), and their legal roles directly in the inspector drawer and dossier.
+- **Board & Executive Officers:** Lists company CEOs, managing directors (_Dirigeants_, _Président_, _Gérant_), and their legal roles directly in the inspector drawer.
 
 ### 2. Workforce Intelligence & URSSAF Declaration Filtering
 
@@ -59,15 +59,12 @@ Built strictly following the canonical [Material 3 Design Specification](materia
 - **Official Typography:** Clean typography strictly leveraging Google Fonts **Roboto** (`display`, `headline`, `title`, `body`) and **Roboto Mono** for numeric metrics, SIRET identifiers, and technical coordinates.
 - **De-Noised Directory Table:** Clean monospace click-to-copy SIRET chips, concise presence indicators, and streamlined action buttons.
 
-### 6. Executive Location Dossier (One-Click A4 PDF)
+### 6. Official French Registry Verification (Annuaire des Entreprises)
 
-Transform any French establishment into an investor-grade, single-page A4 Cadastral & Intelligence Dossier:
+Verify any French establishment directly against the official French public service directory:
 
-- **Instant Generation:** Accessible directly via `/dossier/<siret>` or from any business popup with the **Dossier** button.
-- **Verified Financials & Governance Section:** Displays verified annual turnover (CA), net profit, and registered corporate officers.
-- **Strict 1-Page A4 Layout:** Calibrated margins and CSS print rules (`@page { size: A4 portrait; margin: 0; }`) guarantee zero page overflows.
-- **Direct PDF Download:** Client-side vector export using bundled `html2pdf.js` with automated high-DPI canvas capture, or server-side headless Chromium streaming via `/api/dossier/<siret>/pdf`.
-- **Authentic French Republic Seal:** Vector SVG cadastre seal (_RÉPUBLIQUE FRANÇAISE • CADASTRE & SIRENE ARCHIVE_) and BAN cadastral parcel certification.
+- **One-Click Official Verification:** Dedicated **Verify** button across business popups, inspector drawer, and modal table linking directly to `https://annuaire-entreprises.data.gouv.fr/etablissement/<siret>`.
+- **Authoritative Data Source:** Instantly cross-reference INSEE SIRENE records, INPI National Register of Enterprises (RNE), URSSAF declarations, and official Bodacc filings.
 - **Live Local Competitor Radar:** Dynamic DuckDB spatial query extracting the top nearest direct competitors within the same NAF sector, complete with Euclidean distance in meters, SIRET, and address.
 - **Logistics & Parking Proximity:** OpenStreetMap-powered radar scanning nearby heavy-duty truck parking and commercial garages.
 
@@ -116,17 +113,17 @@ Transform any French establishment into an investor-grade, single-page A4 Cadast
             │  - NAF x Dept matrix reports  │                      │  - Spatial business queries   │
             │  - Top industries ranking     │                      │  - Density heatmap engine     │
             │  - CSV / JSON summaries       │                      │  - Live financial enrichment  │
-            └───────────────────────────────┘                      │  - Location Dossier generator │
+            └───────────────────────────────┘                      │  - Official Gov Verification  │
                                                                    │  - Branch & store resolution  │
                                                                    │  - OSM Logistics & Parking    │
                                                                    └──────────────┬────────────────┘
-                                                                                  │ (REST / JSON / PDF)
+                                                                                  │ (REST / JSON / GeoJSON)
                                                                                   ▼
                                                                    ┌───────────────────────────────┐
                                                                    │    SIRENE Web Observatory     │
                                                                    │  - Google Material 3 Design   │
                                                                    │  - Retina @2x map engine      │
-                                                                   │  - Executive A4 Dossier Page  │
+                                                                   │  - Official data.gouv.fr link │
                                                                    │  - Lead scoring & presets     │
                                                                    │  - Dual NAF 2008 / 2025 Mode  │
                                                                    └───────────────────────────────┘
@@ -159,8 +156,8 @@ _Or run `./start_dashboard.sh` on macOS/Linux, or `start_dashboard.bat` on Windo
 Open your browser at:
 👉 **`http://localhost:8000`**
 
-To preview or generate an establishment's Executive Location Dossier directly:
-👉 **`http://localhost:8000/dossier/42298822000030`**
+To verify an establishment directly against the official French registry:
+👉 **`http://localhost:8000/dossier/42298822000030`** _(redirects to annuaire-entreprises.data.gouv.fr)_
 
 ---
 
@@ -244,13 +241,9 @@ Returns comprehensive intelligence data for an establishment:
 - Departmental density rank and territorial concentration stats.
 - Nearby infrastructure (rail stations, motorways, truck parking, general parking).
 
-### `GET /api/dossier/<siret>/pdf`
-
-Generates and downloads the executive single-page A4 PDF dossier directly from the browser/backend.
-
 ### `GET /dossier/<siret>`
 
-Renders the standalone Material 3 Executive Location Dossier HTML page with interactive map snapshot, official cadastre seal, verified financial panel, competitor table, logistics radar, and direct PDF download button.
+Redirects (302) directly to the official French Government enterprise page on `https://annuaire-entreprises.data.gouv.fr/etablissement/<siret>`.
 
 ### `GET /api/crowd/heatmap`
 
@@ -286,9 +279,8 @@ SIRENE/
 │   └── static/
 │       ├── index.html        # Main observatory UI (Material 3 tokens & Roboto)
 │       ├── style.css         # Material 3 Canonical Theme (Dynamic Light / Dark)
-│       ├── app.js            # GIS Engine: SireneLogger, basemaps, pins, dossier modals
-│       ├── dossier.html      # Dynamic Jinja2 template for Executive Location Dossier
-│       └── vendor/           # html2pdf.js, Leaflet.js, leaflet-heat.js (offline vendored)
+│       ├── app.js            # GIS Engine: SireneLogger, basemaps, pins, verification
+│       └── vendor/           # Leaflet.js, leaflet-heat.js (offline vendored)
 ├── data/
 │   ├── france_departements.geojson # National departmental boundaries
 │   ├── naf/                  # Official INSEE Excel taxonomy structures
@@ -316,7 +308,7 @@ SIRENE/
 | **Mapping Engine**     | **Leaflet.js**                 | Interactive map layers, custom markers, popups, and polygons              |
 | **Heatmap Engine**     | **leaflet-heat**               | High-performance canvas thermal density visualization                     |
 | **Basemaps**           | **Google Maps @2x** / **Esri** | Ultra-crisp Retina tile layers (Roadmap, Satellite, Dark Gray)            |
-| **PDF Generation**     | **html2pdf.js / Chromium**     | Vector-accurate single-page A4 Cadastral Dossier rendering                |
+| **State Verification** | **Annuaire des Entreprises**  | Direct links to official French Republic public registry (data.gouv.fr)   |
 | **Data Source**        | **INSEE SIRENE**               | Official French enterprise registry (15.96M establishments)               |
 | **Geocoding**          | **INSEE Geolocation**          | WGS84 coordinates for 84.52% of establishments                            |
 

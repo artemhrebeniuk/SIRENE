@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="/static/vendor/leaflet.css">
   
   <!-- Custom Material 3 Stylesheet -->
-  <link rel="stylesheet" href="/static/style.css?v=m3.24">
+  <link rel="stylesheet" href="/static/style.css?v=m3.25">
 </head>
 <body>
   <div class="app-layout">
@@ -417,15 +417,13 @@
               </svg>
               Browse Businesses
             </button>
-            <button class="btn-drawer-dossier" id="btnDrawerDossier" style="display: none;" title="Generate executive PDF location dossier">
+            <a class="btn-drawer-verify" id="btnDrawerVerify" target="_blank" rel="noopener noreferrer" style="display: none;" title="Vérifier sur l'Annuaire officiel des Entreprises (data.gouv.fr)">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" y1="13" x2="8" y2="13"></line>
-                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
               </svg>
-              Dossier (PDF)
-            </button>
+              Verify
+            </a>
           </div>
 
           <div class="drawer-sub-breakdown" id="inspectorDetails"></div>
@@ -608,6 +606,6 @@
   <script src="/static/vendor/leaflet-heat.js"></script>
   
   <!-- Client Application Engine -->
-  <script src="/static/app.js?v=m3.24"></script>
+  <script src="/static/app.js?v=m3.25"></script>
 </body>
 </html>
