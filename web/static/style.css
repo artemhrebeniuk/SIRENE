@@ -893,34 +893,6 @@ body {
   }
 }
 
-/* Floating Fullscreen Map Button (Directly on Map canvas) */
-.map-floating-fullscreen {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-full);
-  background: var(--md-sys-color-surface-container-high);
-  color: var(--md-sys-color-on-surface);
-  border: 1px solid var(--md-sys-color-outline-variant);
-  box-shadow: var(--shadow-elevation-2);
-  cursor: pointer;
-  transition: all var(--motion-duration-short2) var(--motion-easing-standard);
-}
-
-.map-floating-fullscreen:hover {
-  background: var(--md-sys-color-primary-container);
-  color: var(--md-sys-color-on-primary-container);
-  border-color: var(--md-sys-color-primary);
-  transform: scale(1.05);
-  box-shadow: var(--shadow-elevation-3);
-}
-
 /* Map Canvas */
 #map {
   flex: 1;
@@ -1764,38 +1736,67 @@ body {
   pointer-events: none;
 }
 
-.filter-search-box {
+/* Compact Expandable Search Control (Material 3) */
+.filter-search-compact {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
   margin-left: auto;
-  min-width: 220px;
-  max-width: 360px;
-  flex: 1;
   height: 34px;
+}
+
+.btn-search-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
   background: var(--md-sys-color-surface-container-low);
   border: 1px solid var(--md-sys-color-outline-variant);
   border-radius: var(--radius-full);
-  padding: 0 12px;
+  color: var(--md-sys-color-on-surface-variant);
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+  font-weight: 500;
+  cursor: pointer;
   box-shadow: var(--shadow-elevation-1);
   transition: all var(--motion-duration-short2) var(--motion-easing-standard);
+  white-space: nowrap;
 }
 
-.filter-search-box:hover {
-  background: var(--md-sys-color-surface-container-lowest);
-  border-color: var(--md-sys-color-outline);
-}
-
-.filter-search-box:focus-within {
+.btn-search-toggle:hover {
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
   border-color: var(--md-sys-color-primary);
-  background: var(--md-sys-color-surface-container-lowest);
-  box-shadow: 0 0 0 2px rgba(168, 121, 230, 0.25);
 }
 
-.filter-search-box .search-icon {
-  color: var(--md-sys-color-on-surface-variant);
-  flex-shrink: 0;
+.search-input-shell {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  width: 220px;
+  background: var(--md-sys-color-surface-container-lowest);
+  border: 1px solid var(--md-sys-color-primary);
+  border-radius: var(--radius-full);
+  padding: 0 10px 0 12px;
+  box-shadow: 0 0 0 2px rgba(168, 121, 230, 0.25);
+  animation: searchExpand 0.18s cubic-bezier(0.2, 0, 0, 1);
+}
+
+@keyframes searchExpand {
+  from { width: 40px; opacity: 0; }
+  to { width: 220px; opacity: 1; }
+}
+
+.filter-search-compact.is-open .btn-search-toggle,
+.filter-search-compact.has-value .btn-search-toggle {
+  display: none;
+}
+
+.filter-search-compact.is-open .search-input-shell,
+.filter-search-compact.has-value .search-input-shell {
+  display: flex;
 }
 
 .filter-search-input {
@@ -1807,11 +1808,30 @@ body {
   font-family: var(--font-body);
   font-size: 0.78rem;
   padding: 0;
+  min-width: 0;
 }
 
 .filter-search-input::placeholder {
   color: var(--md-sys-color-on-surface-variant);
   opacity: 0.75;
+}
+
+.btn-clear-search-text {
+  background: transparent;
+  border: none;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 0.72rem;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.btn-clear-search-text:hover {
+  color: var(--md-sys-color-error);
 }
 
 /* Active Filter Funnel Feed */
@@ -2328,41 +2348,42 @@ body {
 
 /* Deprecated lead-filter-bar consolidated into biz-filter-pipeline */
 
-/* Ad Potential Score Badges */
-.ad-score-pill {
+/* Staff and Financial Overview Badges (Clean, Factual Material 3) */
+.biz-staff-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.biz-workforce-tag {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 2.5px 8px;
-  border-radius: var(--radius-full);
-  font-size: 0.68rem;
+  font-size: 0.74rem;
   font-weight: 600;
-  font-family: var(--font-body);
-  white-space: nowrap;
+  color: var(--md-sys-color-on-surface);
 }
 
-.ad-score-hot {
-  background: rgba(129, 199, 132, 0.16);
+.biz-workforce-tag svg {
+  color: var(--md-sys-color-primary);
+  flex-shrink: 0;
+}
+
+.biz-turnover-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.70rem;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.biz-turnover-tag .fin-prefix {
+  opacity: 0.8;
+}
+
+.biz-turnover-tag .fin-value {
+  font-weight: 600;
   color: #81C784;
-  border: 1px solid rgba(129, 199, 132, 0.4);
-}
-
-.ad-score-warm {
-  background: rgba(255, 183, 77, 0.16);
-  color: #FFB74D;
-  border: 1px solid rgba(255, 183, 77, 0.4);
-}
-
-.ad-score-standard {
-  background: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
-  border: 1px solid var(--md-sys-color-outline-variant);
-}
-
-.ad-score-closed {
-  background: var(--md-sys-color-error-container);
-  color: var(--md-sys-color-on-error-container);
-  border: 1px solid var(--md-sys-color-error);
 }
 
 /* Establishment Status & Branch Role Badges */

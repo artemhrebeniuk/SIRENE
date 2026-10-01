@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="/static/vendor/leaflet.css">
   
   <!-- Custom Material 3 Stylesheet -->
-  <link rel="stylesheet" href="/static/style.css?v=m3.20">
+  <link rel="stylesheet" href="/static/style.css?v=m3.21">
 </head>
 <body>
   <div class="app-layout">
@@ -161,11 +161,6 @@
 
         <!-- The Leaflet Map Canvas -->
         <div id="map"></div>
-        <button class="map-floating-fullscreen" id="mapFloatingFullscreen" onclick="toggleMapFullscreen()" title="Toggle Fullscreen Map">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
-          </svg>
-        </button>
 
         <!-- Unified Collapsible Map Legend (Design Maestro Style) -->
         <div class="unified-legend-container" id="unifiedLegendContainer">
@@ -493,7 +488,6 @@
             <h3 class="biz-modal-title" id="bizModalTitle">Businesses in Paris (75)</h3>
           </div>
           <div class="biz-modal-controls">
-            <span class="esc-kbd-hint"><kbd>ESC</kbd> to exit</span>
             <button class="btn-modal-action" id="btnMaximizeBizModal" title="Toggle Fullscreen">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
@@ -554,14 +548,19 @@
               <svg class="field-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </div>
 
-            <!-- 5. Search Bar -->
-            <div class="filter-search-box">
-              <svg class="search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-              <input type="text" id="bizSearchInput" class="filter-search-input" placeholder="Search company, sign or SIRET...">
-              <span class="search-shortcut modal-shortcut">/</span>
+            <!-- 5. Compact Expandable Search Button -->
+            <div class="filter-search-compact" id="filterSearchCompact">
+              <button type="button" class="btn-search-toggle" id="btnSearchToggle" title="Search company, sign or SIRET (Press /)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <span class="search-toggle-label">Search</span>
+              </button>
+              <div class="search-input-shell" id="searchInputShell">
+                <input type="text" id="bizSearchInput" class="filter-search-input" placeholder="Search company, sign or SIRET...">
+                <button type="button" class="btn-clear-search-text" id="btnClearSearchText" title="Clear search" style="display: none;">✕</button>
+              </div>
             </div>
           </div>
 
@@ -585,8 +584,8 @@
                 <th style="width: 12%; min-width: 115px;">SIRET &amp; Role</th>
                 <th style="width: 22%; min-width: 210px;">Physical Location &amp; Implantation</th>
                 <th style="width: 15%; min-width: 140px;">Industry (NAF)</th>
-                <th style="width: 13%; min-width: 135px;">Staff &amp; Ad Score</th>
-                <th style="width: 18%; min-width: 275px; text-align: center;">Actions</th>
+                <th style="width: 14%; min-width: 145px;">Staff &amp; Financials</th>
+                <th style="width: 17%; min-width: 260px; text-align: center;">Actions</th>
               </tr>
             </thead>
             <tbody id="bizTableBody">
@@ -609,6 +608,6 @@
   <script src="/static/vendor/leaflet-heat.js"></script>
   
   <!-- Client Application Engine -->
-  <script src="/static/app.js?v=m3.20"></script>
+  <script src="/static/app.js?v=m3.21"></script>
 </body>
 </html>

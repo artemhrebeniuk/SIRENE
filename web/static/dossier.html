@@ -176,6 +176,8 @@
       display: flex;
       flex-direction: column;
       position: relative;
+      box-sizing: border-box;
+      overflow: hidden;
     }
 
     /* Header */
@@ -988,16 +990,14 @@
         <div class="metric-value" style="color: var(--primary);">{{ naf_code }} • {{ naf_label }}</div>
       </div>
       <div class="metric-card">
-        <div class="metric-label">Lead Priority &amp; Fit</div>
+        <div class="metric-label">Establishment Role</div>
         <div class="metric-value">
           {% if is_closed %}
-            <span style="color:#BA1A1A; font-weight:700;">Ineligible (Closed)</span>
-          {% elif ad_score %}
-            <span style="color: {{ '#B3261E' if ad_score.grade == 'HOT' else ('#B26A00' if ad_score.grade == 'WARM' else '#4F378B') }}; font-weight:700;">
-              {{ ad_score.grade }} ({{ ad_score.score }}/100)
-            </span>
+            <span style="color:#BA1A1A; font-weight:700;">Fermé (Closed)</span>
+          {% elif is_siege %}
+            <span style="color: var(--primary); font-weight:700;">Headquarters (Siège)</span>
           {% else %}
-            Standard
+            <span style="color: var(--text-main); font-weight:700;">Operating Branch</span>
           {% endif %}
         </div>
       </div>
@@ -1115,6 +1115,8 @@
         <div class="stat-number">{{ "{:,}".format(density_stats.total_dept) }}</div>
         <div class="stat-sub">{{ department_name }} regional total</div>
       </div>
+    </div>
+
     <!-- Official Financial Records & Corporate Officers (DGFiP / INPI) -->
     <div class="section-card" style="margin-bottom: 24px;">
       <div class="section-header">

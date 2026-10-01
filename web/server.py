@@ -38,6 +38,7 @@ logger = get_logger("server")
 
 app = Flask(__name__, static_folder="static", template_folder="static")
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 
 @app.before_request

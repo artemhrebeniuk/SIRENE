@@ -866,16 +866,49 @@ function bindUI() {
     }
   });
 
-  // Live Search inside Business Directory
+  // Compact Expandable Search in Business Directory
+  const filterSearchCompact = document.getElementById('filterSearchCompact');
+  const btnSearchToggle = document.getElementById('btnSearchToggle');
   const bizSearchInput = document.getElementById('bizSearchInput');
-  bizSearchInput.addEventListener('input', (e) => {
-    clearTimeout(searchDebounceTimer);
-    searchDebounceTimer = setTimeout(() => {
-      modalState.query = e.target.value.trim();
-      modalState.offset = 0;
-      fetchAndRenderBusinesses(false);
-    }, 280);
-  });
+  const btnClearSearchText = document.getElementById('btnClearSearchText');
+
+  if (btnSearchToggle && filterSearchCompact && bizSearchInput) {
+    btnSearchToggle.addEventListener('click', () => {
+      filterSearchCompact.classList.add('is-open');
+      bizSearchInput.focus();
+    });
+
+    bizSearchInput.addEventListener('input', (e) => {
+      const val = e.target.value.trim();
+      filterSearchCompact.classList.toggle('has-value', Boolean(val));
+      if (btnClearSearchText) {
+        btnClearSearchText.style.display = val ? 'inline-flex' : 'none';
+      }
+      clearTimeout(searchDebounceTimer);
+      searchDebounceTimer = setTimeout(() => {
+        modalState.query = val;
+        modalState.offset = 0;
+        fetchAndRenderBusinesses(false);
+      }, 280);
+    });
+
+    if (btnClearSearchText) {
+      btnClearSearchText.addEventListener('click', () => {
+        bizSearchInput.value = '';
+        btnClearSearchText.style.display = 'none';
+        filterSearchCompact.classList.remove('has-value', 'is-open');
+        modalState.query = '';
+        modalState.offset = 0;
+        fetchAndRenderBusinesses(false);
+      });
+    }
+
+    document.addEventListener('click', (e) => {
+      if (filterSearchCompact && !filterSearchCompact.contains(e.target) && !bizSearchInput.value.trim()) {
+        filterSearchCompact.classList.remove('is-open');
+      }
+    });
+  }
 
   // City Dropdown Filter
   const bizCitySelect = document.getElementById('bizCitySelect');
@@ -1575,6 +1608,10 @@ function removeActiveFilter(type) {
     modalState.query = '';
     const inp = document.getElementById('bizSearchInput');
     if (inp) inp.value = '';
+    const sc = document.getElementById('filterSearchCompact');
+    if (sc) sc.classList.remove('has-value', 'is-open');
+    const clr = document.getElementById('btnClearSearchText');
+    if (clr) clr.style.display = 'none';
   }
   modalState.offset = 0;
   fetchAndRenderBusinesses(false);
@@ -1599,6 +1636,10 @@ function resetAllFilters() {
   if (typeSel) typeSel.value = 'all';
   const searchInp = document.getElementById('bizSearchInput');
   if (searchInp) searchInp.value = '';
+  const sc = document.getElementById('filterSearchCompact');
+  if (sc) sc.classList.remove('has-value', 'is-open');
+  const clr = document.getElementById('btnClearSearchText');
+  if (clr) clr.style.display = 'none';
 
   modalState.offset = 0;
   fetchAndRenderBusinesses(false);
@@ -1795,20 +1836,7 @@ async function fetchAndRenderBusinesses(append = false) {
       const presenceLabel = b.presence_label || (b.has_enseigne ? 'Physical Storefront' : (b.is_siege ? 'Headquarters' : 'Operating Branch'));
       const presenceDesc = b.presence_desc || '';
 
-      const adScore = b.ad_score || { score: 50, badge: 'Standard Target', grade: 'Standard' };
-      let adClass = 'ad-score-standard';
-      let scoreIcon = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
-      
-      if (isClosed) {
-        adClass = 'ad-score-closed';
-        scoreIcon = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`;
-      } else if (adScore.grade === 'Hot') {
-        adClass = 'ad-score-hot';
-        scoreIcon = `<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 23c6.075 0 11-4.925 11-11 0-4.14-2.3-7.75-5.71-9.62a.75.75 0 0 0-1.12.78c.45 2.52-.3 5.09-2.02 6.81-1.39 1.39-3.26 2.03-5.15 1.76a.75.75 0 0 0-.82.97C8.75 14.28 9.5 16.03 9.5 17.5c0 1.93-1.57 3.5-3.5 3.5-.67 0-1.3-.19-1.84-.52A.75.75 0 0 0 3 21.13C4.98 22.28 7.37 23 10 23h2z"></path></svg>`;
-      } else if (adScore.grade === 'Warm') {
-        adClass = 'ad-score-warm';
-        scoreIcon = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`;
-      }
+      // Workforce and revenue factual labels
 
       const streetViewLink = b.has_gps ? `
         <a href="${b.street_view_url || `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${b.lat},${b.lng}`}" target="_blank" rel="noopener" class="btn-table-action btn-streetview" title="Inspect storefront in Google Street View 360°">
@@ -1893,13 +1921,13 @@ async function fetchAndRenderBusinesses(append = false) {
           </td>
           <td>
             <div class="biz-staff-info">
-              <span class="biz-staff-label">${escapeStr(b.workforce_label || 'Solo Operator')}</span>
-              <span class="biz-revenue-label">Est: ${escapeStr(b.est_revenue || '< 150k €')}</span>
-              <div style="margin-top:4px;">
-                <div class="ad-score-pill ${adClass}" title="${adScore.reasons ? adScore.reasons.join(' • ') : ''}">
-                  ${scoreIcon}
-                  <span>${escapeStr(adScore.badge || 'Lead')} (${adScore.score})</span>
-                </div>
+              <div class="biz-workforce-tag">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <span>${escapeStr(b.workforce_label || 'Solo Operator')}</span>
+              </div>
+              <div class="biz-turnover-tag">
+                <span class="fin-prefix">Est. Turnover:</span>
+                <span class="fin-value">${escapeStr(b.est_revenue || '< 150k €')}</span>
               </div>
             </div>
           </td>
@@ -2900,7 +2928,6 @@ function toggleUnifiedLegend() {
 function toggleMapFullscreen() {
   const isFs = document.body.classList.contains('map-fullscreen');
   const btn = document.getElementById('btnToggleFullscreen');
-  const floatBtn = document.getElementById('mapFloatingFullscreen');
 
   if (!isFs) {
     document.body.classList.add('map-fullscreen');
@@ -2912,10 +2939,6 @@ function toggleMapFullscreen() {
       if (svg) {
         svg.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>';
       }
-    }
-    if (floatBtn) {
-      floatBtn.title = 'Exit Fullscreen (ESC)';
-      floatBtn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
     }
     if (document.documentElement.requestFullscreen) {
       document.documentElement.requestFullscreen().catch(() => {});
@@ -2930,10 +2953,6 @@ function toggleMapFullscreen() {
       if (svg) {
         svg.innerHTML = '<path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>';
       }
-    }
-    if (floatBtn) {
-      floatBtn.title = 'Toggle Fullscreen Map';
-      floatBtn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>';
     }
     if (document.fullscreenElement && document.exitFullscreen) {
       document.exitFullscreen().catch(() => {});
