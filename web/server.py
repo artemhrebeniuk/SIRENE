@@ -76,8 +76,25 @@ def handle_after_request(response):
         logger.info(msg)
     else:
         logger.debug(msg)
-        
+
+    # ── Vercel CDN caching ────────────────────────────────────────────────────
+    if request.method == "GET" and status == 200:
+        path = request.path
+        # Heavy aggregate endpoints: cache 1 hour on CDN, serve stale up to 24h
+        if path in ("/api/kpis", "/api/stats", "/api/departments", "/api/sectors",
+                    "/api/geojson", "/api/communes"):
+            response.headers["Cache-Control"] = "public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400"
+        # Per-dept queries: cache 30 min
+        elif path.startswith("/api/department/") or path.startswith("/api/businesses/map"):
+            response.headers["Cache-Control"] = "public, max-age=1800, s-maxage=1800, stale-while-revalidate=3600"
+        # Static assets: 7 days
+        elif not path.startswith("/api/"):
+            response.headers["Cache-Control"] = "public, max-age=604800, immutable"
+    # ─────────────────────────────────────────────────────────────────────────
+
     return response
+
+
 
 
 from werkzeug.exceptions import HTTPException
