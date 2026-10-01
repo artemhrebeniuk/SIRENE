@@ -154,6 +154,18 @@ def get_active_dataset_path() -> Tuple[str, bool]:
 def get_db():
     con = duckdb.connect()
     con.execute("SET threads = 4;")
+    # Enable httpfs extension when using remote parquet URL (S3, R2, GCS, HTTP)
+    remote_url = os.environ.get("PARQUET_URL") or os.environ.get("DATASET_URL")
+    if remote_url and (remote_url.startswith("http") or remote_url.startswith("s3")):
+        try:
+            con.execute("INSTALL httpfs;")
+            con.execute("LOAD httpfs;")
+            con.execute("SET enable_progress_bar = false;")
+            # Allow insecure HTTP if needed (non-HTTPS)
+            if remote_url.startswith("http://"):
+                con.execute("SET s3_use_ssl = false;")
+        except Exception as e:
+            logger.warning(f"httpfs setup warning: {e}")
     return con
 
 
