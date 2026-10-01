@@ -325,6 +325,16 @@ function initMap() {
     handleMapMoveZoom();
   });
 
+  // Interactive Radar Relocation: Click anywhere on map to reposition Parking Radar
+  map.on('click', (e) => {
+    if (isParkingRadarActive && e.latlng) {
+      const lat = e.latlng.lat;
+      const lng = e.latlng.lng;
+      activeParkingTarget = { lat, lng, name: `Location [${lat.toFixed(4)}, ${lng.toFixed(4)}]` };
+      loadNearbyParkings(lat, lng, activeParkingTarget.name, activeParkingRadius);
+    }
+  });
+
   // Automatic Container Resize Observer to prevent any unrendered tile gaps or black strips
   const mapElem = document.getElementById('map');
   if (window.ResizeObserver && mapElem) {
@@ -2324,6 +2334,48 @@ function toggleTrafficLayer() {
   }
 }
 
+/* Floating sleek notification toast for GIS & radar events */
+function showToast(msg, duration = 3200) {
+  let toast = document.getElementById('sireneToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'sireneToast';
+    toast.style.cssText = `
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(23, 20, 38, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.15);
+      z-index: 99999;
+      opacity: 0;
+      transition: all 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    `;
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.style.opacity = '1';
+  toast.style.transform = 'translateX(-50%) translateY(0)';
+  
+  clearTimeout(toast._timeout);
+  toast._timeout = setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(-50%) translateY(16px)';
+  }, duration);
+}
+
 /* ==========================================================================
    STEP 2: Truck Parking Radar & Search Radius
    ========================================================================== */
@@ -2351,8 +2403,19 @@ function toggleParkingRadar() {
       parkingRadiusCircle = null;
     }
     if (parkingLayerGroup) parkingLayerGroup.clearLayers();
-  } else if (activeParkingTarget) {
-    loadNearbyParkings(activeParkingTarget.lng ? activeParkingTarget.lat : activeParkingTarget.lat, activeParkingTarget.lng, activeParkingTarget.name, activeParkingRadius);
+    showToast('Parking Radar deactivated');
+  } else {
+    // 1. If an inspected business exists, scan around it
+    if (activeParkingTarget && activeParkingTarget.lat && activeParkingTarget.lng) {
+      loadNearbyParkings(activeParkingTarget.lat, activeParkingTarget.lng, activeParkingTarget.name, activeParkingRadius);
+      showToast(`🅿️ Radar active: scanning near ${activeParkingTarget.name}`);
+    } else {
+      // 2. Otherwise auto-scan around the center of current map view
+      const center = map.getCenter();
+      activeParkingTarget = { lat: center.lat, lng: center.lng, name: 'Map Viewport Center' };
+      loadNearbyParkings(center.lat, center.lng, 'Map Viewport Center', activeParkingRadius);
+      showToast('🅿️ Parking Radar ON: Scanning center. Click map to scan any location.');
+    }
   }
 }
 
@@ -2361,7 +2424,7 @@ let activeParkingData = [];
 async function loadNearbyParkings(lat, lon, businessName, radius) {
   if (!isParkingRadarActive) return;
 
-  activeParkingRadius = radius || activeParkingRadius || 300;
+  activeParkingRadius = radius || activeParkingRadius || 400;
 
   // 1. Draw or update circular radar zone on map
   if (parkingRadiusCircle && map.hasLayer(parkingRadiusCircle)) {
@@ -2370,11 +2433,11 @@ async function loadNearbyParkings(lat, lon, businessName, radius) {
 
   parkingRadiusCircle = L.circle([lat, lon], {
     radius: activeParkingRadius,
-    color: '#ccc2dc',
-    fillColor: '#ccc2dc',
-    fillOpacity: 0.1,
-    weight: 1.5,
-    dashArray: '5, 5'
+    color: '#818cf8',
+    fillColor: '#818cf8',
+    fillOpacity: 0.12,
+    weight: 2,
+    dashArray: '6, 6'
   }).addTo(map);
 
   if (parkingLayerGroup) parkingLayerGroup.clearLayers();
@@ -2388,7 +2451,19 @@ async function loadNearbyParkings(lat, lon, businessName, radius) {
     const data = await res.json();
     const parkings = data.parkings || [];
     activeParkingData = parkings;
-    SireneLogger.info('RADAR', `Found ${parkings.length} parking spots (${data.truck_friendly_count || 0} truck-friendly) within ${activeParkingRadius}m`);
+    const effectiveRadius = data.radius || activeParkingRadius;
+    SireneLogger.info('RADAR', `Found ${parkings.length} parking spots (${data.truck_friendly_count || 0} truck-friendly) within ${effectiveRadius}m`);
+
+    // If radius was expanded by backend, visually update circle
+    if (data.radius && data.radius !== activeParkingRadius && parkingRadiusCircle) {
+      parkingRadiusCircle.setRadius(data.radius);
+    }
+
+    if (parkings.length > 0) {
+      showToast(`🅿️ Found ${parkings.length} parking spots (${data.truck_friendly_count || 0} truck/van friendly)`);
+    } else {
+      showToast(`ℹ️ No registered parking spots found within ${effectiveRadius}m`);
+    }
 
     // Render custom pins on map
     parkings.forEach((p, idx) => {
@@ -2407,16 +2482,16 @@ async function loadNearbyParkings(lat, lon, businessName, radius) {
           <div class="parking-popup-badge ${isTruck ? 'badge-truck' : 'badge-garage'}">
             ${isTruck ? '✓ Truck-Friendly Surface' : '⚠ Underground / Restricted'}
           </div>
-          <div class="parking-popup-name">${p.name}</div>
+          <div class="parking-popup-name">${escapeStr(p.name)}</div>
           <div class="parking-popup-meta">
-            Distance: <b>${p.distance_m}m</b> from business<br>
+            Distance: <b>${p.distance_m}m</b> from radar center<br>
             Type: <b>${p.type || 'Standard'}</b><br>
             ${p.capacity ? `Capacity: <b>${p.capacity} spots</b><br>` : ''}
             ${p.maxheight ? `Max Clearance: <b>${p.maxheight}</b><br>` : ''}
             Fee: <b>${p.fee === 'yes' ? 'Paid Parking' : (p.fee === 'no' ? 'Free Parking' : 'Standard')}</b>
           </div>
         </div>
-      `, { offset: [0, -8], maxWidth: 240 });
+      `, { offset: [0, -8], maxWidth: 250 });
 
       p._markerId = idx;
       marker._spotIdx = idx;
@@ -2424,7 +2499,7 @@ async function loadNearbyParkings(lat, lon, businessName, radius) {
     });
 
     // 3. Render loaded drawer panel
-    renderParkingDrawerPanel(businessName, activeParkingRadius, data, false);
+    renderParkingDrawerPanel(businessName, effectiveRadius, data, false);
 
   } catch (err) {
     SireneLogger.error('RADAR', `Failed to load nearby parkings: ${err.message}`, err);
@@ -2551,12 +2626,12 @@ function renderParkingDrawerPanel(businessName, radius, data, isLoading) {
    STEP 3: Continuous Smooth Thermal Footfall Heatmap (Real Coordinates)
    ========================================================================== */
 const HEATMAP_GRADIENT = {
-  0.15: 'rgba(103, 80, 164, 0.40)', // M3 Primary soft translucent baseline
-  0.35: 'rgba(154, 130, 219, 0.75)', // M3 Primary Tone 60
-  0.55: 'rgba(103, 80, 164, 0.95)', // M3 Primary Tone 40
-  0.72: '#ffb74d',                  // M3 Warm Amber (high commercial density)
-  0.88: '#f57c00',                  // M3 Vivid Orange (heavy density)
-  1.00: '#b3261e'                   // M3 Error / Flame Crimson (megacity core)
+  0.15: 'rgba(67, 56, 202, 0.45)',  // Deep Indigo (ambient density)
+  0.32: 'rgba(14, 165, 233, 0.72)', // Sky / Cyan
+  0.50: 'rgba(16, 185, 129, 0.85)', // Vivid Emerald
+  0.68: '#f59e0b',                   // Luminous Amber (active retail & commerce)
+  0.84: '#ea580c',                   // Hot Orange (high-density footfall)
+  1.00: '#dc2626'                    // Radiant Flame Core (epicenter)
 };
 
 let crowdHeatLayer = null;
@@ -2573,37 +2648,21 @@ function getZoomAdaptiveHeatmapParams() {
   let baseR, baseBlur, minOp, maxVal;
 
   if (currentZoom <= 6) {
-    // National overview: glowing city nodes
-    baseR = 13; baseBlur = 13; maxVal = 1.5; minOp = 0.04;
-  } else if (currentZoom === 7) {
-    baseR = 14; baseBlur = 13; maxVal = 1.4; minOp = 0.04;
-  } else if (currentZoom === 8) {
-    baseR = 15; baseBlur = 14; maxVal = 1.3; minOp = 0.04;
-  } else if (currentZoom === 9) {
-    baseR = 15; baseBlur = 13; maxVal = 1.2; minOp = 0.05;
-  } else if (currentZoom === 10) {
-    baseR = 14; baseBlur = 12; maxVal = 1.1; minOp = 0.05;
-  } else if (currentZoom === 11) {
-    // City overview: viewport 100m clusters – needs enough radius to blend
-    baseR = 18; baseBlur = 14; maxVal = 1.5; minOp = 0.05;
-  } else if (currentZoom === 12) {
-    // District level: still 100m clusters, blend well
-    baseR = 16; baseBlur = 12; maxVal = 1.4; minOp = 0.06;
-  } else if (currentZoom === 13) {
-    baseR = 13; baseBlur = 10; maxVal = 1.3; minOp = 0.06;
-  } else if (currentZoom === 14) {
-    // Individual establishments appear – start tightening
-    baseR = 9; baseBlur = 7; maxVal = 1.0; minOp = 0.07;
-  } else if (currentZoom === 15) {
-    // High zoom: tight commercial ribbons along streets
-    baseR = 7; baseBlur = 5; maxVal = 0.9; minOp = 0.08;
+    baseR = 14; baseBlur = 12; maxVal = 1.0; minOp = 0.18;
+  } else if (currentZoom <= 8) {
+    baseR = 18; baseBlur = 14; maxVal = 1.0; minOp = 0.20;
+  } else if (currentZoom <= 10) {
+    baseR = 24; baseBlur = 18; maxVal = 0.95; minOp = 0.22;
+  } else if (currentZoom <= 12) {
+    baseR = 30; baseBlur = 22; maxVal = 0.90; minOp = 0.24;
+  } else if (currentZoom <= 14) {
+    baseR = 36; baseBlur = 26; maxVal = 0.85; minOp = 0.26;
   } else {
-    // Street/parcel level: individual building halos
-    baseR = 5; baseBlur = 4; maxVal = 0.8; minOp = 0.09;
+    baseR = 44; baseBlur = 30; maxVal = 0.80; minOp = 0.28;
   }
 
-  const finalR    = Math.max(4, Math.round(baseR    * heatmapRadiusMultiplier));
-  const finalBlur = Math.max(3, Math.round(baseBlur * heatmapRadiusMultiplier));
+  const finalR    = Math.max(8, Math.round(baseR    * heatmapRadiusMultiplier));
+  const finalBlur = Math.max(6, Math.round(baseBlur * heatmapRadiusMultiplier));
   return {
     radius:     finalR,
     blur:       finalBlur,
@@ -2631,9 +2690,8 @@ async function checkViewportHeatmap() {
   if (!crowdHeatLayer || !isCrowdActive || !map || !map.hasLayer(crowdHeatLayer)) return;
   const zoom = map.getZoom();
 
-  // At zoom ≥ 11 (city/district level), national aggregates create huge blobs —
-  // replace with real per-establishment viewport coordinates from the API
-  if (zoom >= 11) {
+  // At zoom ≥ 10 (city/metro level), load high-density viewport coordinates
+  if (zoom >= 10) {
     const bounds = map.getBounds();
     // Add 15% padding so panning is seamless without cutoffs at edges
     const latSpan = bounds.getNorth() - bounds.getSouth();

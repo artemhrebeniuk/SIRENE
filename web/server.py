@@ -1031,35 +1031,50 @@ def calculate_distance_m(lat1: float, lon1: float, lat2: float, lon2: float) -> 
 
 def fetch_osm_parking(lat: float, lon: float, radius: int = 400) -> dict:
     """Fetch nearby parking amenities from OpenStreetMap Overpass API mirrors with in-memory caching."""
-    radius = min(max(radius, 50), 1000)
+    radius = min(max(radius, 50), 1200)
     cache_key = f"{round(lat, 4)}_{round(lon, 4)}_{radius}"
     if cache_key in PARKING_CACHE:
         return PARKING_CACHE[cache_key]
 
-    overpass_query = f"""
-    [out:json][timeout:8];
-    (
-      node["amenity"="parking"](around:{radius},{lat},{lon});
-      way["amenity"="parking"](around:{radius},{lat},{lon});
-    );
-    out center 15;
-    """
     mirrors = [
-        "https://overpass.openstreetmap.fr/api/interpreter",
         "https://overpass-api.de/api/interpreter",
-        "https://overpass.kumi.systems/api/interpreter"
+        "https://overpass.kumi.systems/api/interpreter",
+        "https://overpass.openstreetmap.fr/api/interpreter",
+        "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
     ]
-    headers = {"User-Agent": "SIRENE-TruckAd-Platform/1.0"}
-    elements = []
-    
-    for mirror in mirrors:
-        try:
-            resp = requests.post(mirror, data={"data": overpass_query}, headers=headers, timeout=5)
-            if resp.status_code == 200:
-                elements = resp.json().get("elements", [])
-                break
-        except Exception:
-            continue
+    headers = {
+        "User-Agent": "SIRENE-FleetLogistics-Platform/2.0 (commercial-truck-parking)",
+        "Accept": "application/json"
+    }
+
+    def _query_overpass(r):
+        q = f"""
+        [out:json][timeout:7];
+        (
+          node["amenity"="parking"](around:{r},{lat},{lon});
+          way["amenity"="parking"](around:{r},{lat},{lon});
+        );
+        out center 20;
+        """
+        for mirror in mirrors:
+            try:
+                resp = requests.post(mirror, data={"data": q}, headers=headers, timeout=6)
+                if resp.status_code == 200:
+                    elems = resp.json().get("elements", [])
+                    if elems:
+                        return elems
+            except Exception:
+                continue
+        return []
+
+    elements = _query_overpass(radius)
+    # If no parkings within narrow radius (e.g. 300-400m), automatically try up to 800m
+    effective_radius = radius
+    if not elements and radius < 700:
+        expanded_r = min(radius * 2, 800)
+        elements = _query_overpass(expanded_r)
+        if elements:
+            effective_radius = expanded_r
             
     try:
         if elements:
@@ -1107,19 +1122,20 @@ def fetch_osm_parking(lat: float, lon: float, radius: int = 400) -> dict:
             results.sort(key=lambda x: x["distance_m"])
             response_data = {
                 "center": {"lat": lat, "lon": lon},
-                "radius": radius,
+                "radius": effective_radius,
+                "requested_radius": radius,
                 "count": len(results),
                 "truck_friendly_count": sum(1 for r in results if r["is_truck_friendly"]),
                 "parkings": results
             }
             PARKING_CACHE[cache_key] = response_data
-            logger.info(f"OSM Parking: lat={lat}, lon={lon}, radius={radius}m -> {len(results)} spots found")
+            logger.info(f"OSM Parking: lat={lat}, lon={lon}, radius={effective_radius}m -> {len(results)} spots found")
             return response_data
         else:
-            return {"center": {"lat": lat, "lon": lon}, "count": 0, "truck_friendly_count": 0, "parkings": []}
+            return {"center": {"lat": lat, "lon": lon}, "radius": radius, "count": 0, "truck_friendly_count": 0, "parkings": []}
     except Exception as e:
         logger.error(f"OSM Parking error for ({lat}, {lon}): {e}", exc_info=True)
-        return {"center": {"lat": lat, "lon": lon}, "count": 0, "truck_friendly_count": 0, "parkings": [], "error": str(e)}
+        return {"center": {"lat": lat, "lon": lon}, "radius": radius, "count": 0, "truck_friendly_count": 0, "parkings": [], "error": str(e)}
 
 
 @app.route("/api/parking/nearby")
