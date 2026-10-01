@@ -14,6 +14,16 @@ import duckdb
 
 ENRICHMENT_CACHE: Dict[str, Dict[str, Any]] = {}
 
+# ---------------------------------------------------------------------------
+# Module-level caches — survive across warm Vercel invocations
+# ---------------------------------------------------------------------------
+# Cache for resolved CDN URL (GitHub releases redirect → objects.githubusercontent.com)
+_RESOLVED_PARQUET_URL: str | None = None
+
+# Cache for heavy query results: {cache_key: {"data": ..., "ts": float}}
+_QUERY_CACHE: Dict[str, Dict[str, Any]] = {}
+_QUERY_CACHE_TTL = 3600  # seconds — 1 hour
+
 from src.config import (
     BASE_DIR,
     COMBINED_PARQUET_PATH,
@@ -124,18 +134,43 @@ DEPT_NAMES = {
 }
 
 
+def _resolve_url_redirect(url: str) -> str:
+    """
+    Follow HTTP redirects (e.g. GitHub releases 302 → CDN) and return final URL.
+    Caches the result in _RESOLVED_PARQUET_URL so we only do this once per warm instance.
+    """
+    global _RESOLVED_PARQUET_URL
+    if _RESOLVED_PARQUET_URL is not None:
+        return _RESOLVED_PARQUET_URL
+    try:
+        req = urllib.request.Request(url, method="HEAD")
+        req.add_header("User-Agent", "DuckDB-SIRENE/1.0")
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            final_url = resp.url
+        if final_url != url:
+            logger.info(f"Resolved redirect: {url} → {final_url}")
+        _RESOLVED_PARQUET_URL = final_url
+    except Exception as e:
+        logger.warning(f"Redirect resolve failed ({e}), using original URL")
+        _RESOLVED_PARQUET_URL = url
+    return _RESOLVED_PARQUET_URL
+
+
 def get_active_dataset_path() -> Tuple[str, bool]:
     """
     Return path or URL to active establishments dataset.
     Prioritizes:
     1. Remote parquet URL via PARQUET_URL / DATASET_URL env vars (Cloudflare R2, AWS S3, etc.)
+       GitHub release URLs are resolved to their final CDN URL to avoid DuckDB redirect issues.
     2. Local full dataset (COMBINED_PARQUET_PATH)
     3. Bundled lightweight demo sample (sample_establishments_geo.parquet)
     """
     remote_url = os.environ.get("PARQUET_URL") or os.environ.get("DATASET_URL")
     if remote_url:
-        logger.info(f"Resolved active dataset: remote parquet ({remote_url})")
-        return remote_url, False
+        # Resolve GitHub / any redirect to final CDN URL once and cache
+        resolved = _resolve_url_redirect(remote_url)
+        logger.info(f"Active dataset: remote parquet ({resolved})")
+        return resolved, False
 
     full_path = COMBINED_PARQUET_PATH
     if full_path.exists():
@@ -169,6 +204,24 @@ def get_db():
     return con
 
 
+def cache_get(key: str):
+    """Return cached value if still fresh, else None."""
+    entry = _QUERY_CACHE.get(key)
+    if entry and (time.time() - entry["ts"]) < _QUERY_CACHE_TTL:
+        logger.debug(f"Cache HIT: {key}")
+        return entry["data"]
+    return None
+
+
+def cache_set(key: str, data):
+    """Store data in module-level query cache."""
+    _QUERY_CACHE[key] = {"data": data, "ts": time.time()}
+    logger.debug(f"Cache SET: {key}")
+    return data
+
+
+
+
 @app.route("/")
 def index():
     resp = send_from_directory(app.static_folder, "index.html")
@@ -190,6 +243,10 @@ def get_geojson():
 @app.route("/api/kpis")
 @app.route("/api/stats")
 def get_kpis():
+    cached = cache_get("kpis")
+    if cached:
+        return jsonify(cached)
+
     data_file, is_sample = get_active_dataset_path()
     con = get_db()
     
@@ -213,7 +270,7 @@ def get_kpis():
         f"depts={total_dept}, naf={total_naf}, naf25={total_naf_2025} (source: {os.path.basename(data_file)})"
     )
     
-    return jsonify({
+    result = {
         "total_active_establishments": total_active,
         "geocoded_establishments": with_coords,
         "geocoding_rate_pct": pct,
@@ -222,11 +279,17 @@ def get_kpis():
         "distinct_naf_2025_codes": total_naf_2025,
         "is_sample": is_sample,
         "source_file": os.path.basename(data_file)
-    })
+    }
+    cache_set("kpis", result)
+    return jsonify(result)
 
 
 @app.route("/api/departments")
 def get_departments():
+    cached = cache_get("departments")
+    if cached:
+        return jsonify(cached)
+
     data_file, _ = get_active_dataset_path()
     con = get_db()
     
@@ -262,6 +325,7 @@ def get_departments():
             "top_naf_label": get_naf_label_en(r[4])
         })
     logger.debug(f"/api/departments: returned aggregates for {len(results)} departments")
+    cache_set("departments", results)
     return jsonify(results)
 
 
