@@ -582,10 +582,16 @@ function updateChoropleth() {
           const l = e.target;
           const currentZoom = map ? map.getZoom() : 6;
           if (currentZoom >= 10) {
-            l.setStyle({ weight: 2, color: '#d0bcff', fillOpacity: 0 });
+            l.setStyle({ weight: 2, color: '#6750a4', fillOpacity: 0 });
             return;
           }
-          l.setStyle({ weight: 2.5, color: '#d0bcff', fillOpacity: 0.65 });
+          // Darker, rich highlight for city/department hover (M3 Deep Tone #381e72 / #6750a4)
+          l.setStyle({
+            weight: 2.5,
+            color: '#6750a4',
+            fillColor: '#381e72',
+            fillOpacity: 0.75
+          });
           l.bringToFront();
 
           let details = '';
@@ -937,6 +943,23 @@ function bindUI() {
     });
   }
 
+  // Edge-to-edge hitbox activation for all filter pills
+  document.querySelectorAll('.filter-field-pill').forEach(pill => {
+    pill.addEventListener('click', (e) => {
+      const sel = pill.querySelector('select');
+      if (sel && e.target !== sel) {
+        if (typeof sel.showPicker === 'function') {
+          try {
+            sel.showPicker();
+            return;
+          } catch (err) {}
+        }
+        sel.focus();
+        sel.click();
+      }
+    });
+  });
+
   // Load More Button
   const loadMoreBtn = document.getElementById('btnLoadMoreBiz');
   if (loadMoreBtn) {
@@ -1238,11 +1261,11 @@ async function selectCommune(cityName, deptCode, lat, lng) {
       }
       state.communeMarker = L.circleMarker([lat, lng], {
         radius: 12,
-        fillColor: '#d0bcff',
-        color: '#381e72',
+        fillColor: '#6750a4',
+        color: '#1d1b20',
         weight: 2.5,
         opacity: 1,
-        fillOpacity: 0.85
+        fillOpacity: 0.90
       }).addTo(map);
 
       map.flyTo([lat, lng], 14, { duration: 1.2 });

@@ -125,15 +125,30 @@ DEPT_NAMES = {
 
 
 def get_active_dataset_path() -> Tuple[str, bool]:
-    """Return path to genuine full active establishments parquet layer."""
+    """
+    Return path or URL to active establishments dataset.
+    Prioritizes:
+    1. Remote parquet URL via PARQUET_URL / DATASET_URL env vars (Cloudflare R2, AWS S3, etc.)
+    2. Local full dataset (COMBINED_PARQUET_PATH)
+    3. Bundled lightweight demo sample (sample_establishments_geo.parquet)
+    """
+    remote_url = os.environ.get("PARQUET_URL") or os.environ.get("DATASET_URL")
+    if remote_url:
+        logger.info(f"Resolved active dataset: remote parquet ({remote_url})")
+        return remote_url, False
+
     full_path = COMBINED_PARQUET_PATH
-    
     if full_path.exists():
         logger.debug(f"Resolved active dataset: full parquet ({full_path})")
         return str(full_path).replace("\\", "/"), False
-    else:
-        logger.critical(f"No processed dataset found! Expected: {full_path}")
-        raise FileNotFoundError(f"Processed dataset ({full_path}) not found. Run pipeline first.")
+
+    sample_path = BASE_DIR / "data" / "sample_establishments_geo.parquet"
+    if sample_path.exists():
+        logger.info(f"Using bundled sample parquet dataset ({sample_path})")
+        return str(sample_path).replace("\\", "/"), True
+
+    logger.critical(f"No processed dataset found! Expected: {full_path}")
+    raise FileNotFoundError(f"Processed dataset ({full_path}) not found. Run pipeline first or set PARQUET_URL.")
 
 
 def get_db():

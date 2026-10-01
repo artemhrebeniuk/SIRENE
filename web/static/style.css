@@ -1397,7 +1397,7 @@ body {
 }
 
 .entity-row:hover {
-  background: var(--bg-hover);
+  background: rgba(56, 30, 114, 0.40);
 }
 
 .entity-row.selected {
@@ -1664,7 +1664,7 @@ body {
   background: var(--md-sys-color-surface-container-low);
   border: 1px solid var(--md-sys-color-outline-variant);
   border-radius: var(--radius-full);
-  padding: 0 28px 0 12px;
+  padding: 0;
   height: 34px;
   cursor: pointer;
   transition: all var(--motion-duration-short2) var(--motion-easing-standard);
@@ -1682,13 +1682,29 @@ body {
 }
 
 .field-label-prefix {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 0.65rem;
   font-weight: 700;
   color: var(--md-sys-color-primary);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  margin-right: 6px;
-  flex-shrink: 0;
+  pointer-events: none;
+  z-index: 2;
+  user-select: none;
+}
+
+.field-chevron {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--md-sys-color-on-surface-variant);
+  pointer-events: none;
+  z-index: 2;
+  user-select: none;
 }
 
 .filter-select {
@@ -1702,15 +1718,35 @@ body {
   font-size: 0.78rem;
   font-weight: 500;
   cursor: pointer;
-  max-width: 200px;
+  height: 34px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 50px;
+  padding-right: 28px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 0;
+  z-index: 1;
 }
 
-.filter-field-wide .filter-select {
-  max-width: 270px;
+.pill-city .filter-select {
+  padding-left: 46px;
+  max-width: 220px;
+}
+
+.pill-niche .filter-select {
+  padding-left: 54px;
+  max-width: 320px;
+}
+
+.pill-staff .filter-select {
+  padding-left: 52px;
+  max-width: 180px;
+}
+
+.pill-type .filter-select {
+  padding-left: 50px;
+  max-width: 200px;
 }
 
 .filter-select optgroup {
@@ -1727,13 +1763,6 @@ body {
   font-weight: 400;
   font-size: 0.78rem;
   padding: 4px 8px;
-}
-
-.field-chevron {
-  position: absolute;
-  right: 10px;
-  color: var(--md-sys-color-on-surface-variant);
-  pointer-events: none;
 }
 
 /* Compact Expandable Search Control (Material 3) */

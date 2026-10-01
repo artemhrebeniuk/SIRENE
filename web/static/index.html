@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="/static/vendor/leaflet.css">
   
   <!-- Custom Material 3 Stylesheet -->
-  <link rel="stylesheet" href="/static/style.css?v=m3.21">
+  <link rel="stylesheet" href="/static/style.css?v=m3.23">
 </head>
 <body>
   <div class="app-layout">
@@ -506,7 +506,7 @@
         <div class="biz-filter-pipeline">
           <div class="filter-controls-strip">
             <!-- 1. City / Territory Selector -->
-            <div class="filter-field-pill" title="Filter by commune or city">
+            <div class="filter-field-pill pill-city" title="Filter by commune or city">
               <span class="field-label-prefix">City</span>
               <select id="bizCitySelect" class="filter-select">
                 <option value="">All Cities in Dept</option>
@@ -515,7 +515,7 @@
             </div>
 
             <!-- 2. Niche & Industry Selector (Grouped Presets + All NAF Sectors) -->
-            <div class="filter-field-pill filter-field-wide" title="Filter by business niche or NAF activity">
+            <div class="filter-field-pill filter-field-wide pill-niche" title="Filter by business niche or NAF activity">
               <span class="field-label-prefix">Niche</span>
               <select id="bizNafSelect" class="filter-select">
                 <option value="">All Niches &amp; Industries</option>
@@ -524,7 +524,7 @@
             </div>
 
             <!-- 3. Workforce & Financial Scale -->
-            <div class="filter-field-pill" title="Filter by workforce and team size">
+            <div class="filter-field-pill pill-staff" title="Filter by workforce and team size">
               <span class="field-label-prefix">Staff</span>
               <select id="selectWorkforce" class="filter-select" onchange="onWorkforceChange(this.value)">
                 <option value="all">All Staff Sizes</option>
@@ -537,7 +537,7 @@
             </div>
 
             <!-- 4. Channel / Presence Type -->
-            <div class="filter-field-pill" title="Filter by physical storefront or corporate role">
+            <div class="filter-field-pill pill-type" title="Filter by physical storefront or corporate role">
               <span class="field-label-prefix">Type</span>
               <select id="selectBranchType" class="filter-select" onchange="onBranchTypeChange(this.value)">
                 <option value="all">All Establishments</option>
@@ -608,6 +608,6 @@
   <script src="/static/vendor/leaflet-heat.js"></script>
   
   <!-- Client Application Engine -->
-  <script src="/static/app.js?v=m3.21"></script>
+  <script src="/static/app.js?v=m3.23"></script>
 </body>
 </html>

@@ -18,7 +18,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Directory for persistent server and pipeline logs
 LOGS_DIR = BASE_DIR / "logs"
-LOGS_DIR.mkdir(parents=True, exist_ok=True)
+try:
+    LOGS_DIR.mkdir(parents=True, exist_ok=True)
+except (OSError, PermissionError):
+    pass
 LOG_FILE_PATH = LOGS_DIR / "sirene.log"
 
 # Default log format with millisecond precision, module, function name, and line numbers
@@ -81,7 +84,8 @@ def setup_logging(
         root_logger.addHandler(console_handler)
 
         # 2. Rotating File Handler (10MB per file, up to 5 backups)
-        if log_to_file:
+        is_serverless = os.environ.get("VERCEL") or os.environ.get("AWS_LAMBDA_FUNCTION_NAME")
+        if log_to_file and not is_serverless:
             target_file = log_file or LOG_FILE_PATH
             try:
                 target_file.parent.mkdir(parents=True, exist_ok=True)

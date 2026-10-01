@@ -14,11 +14,14 @@ RAW_DATA_DIR = DATA_DIR / "raw"
 PROCESSED_DATA_DIR = DATA_DIR / "processed"
 OUTPUT_DIR = BASE_DIR / "output"
 
-# Ensure runtime directories exist
+# Ensure runtime directories exist (skip gracefully in read-only serverless environments)
 for directory in [DATA_DIR, RAW_DATA_DIR, PROCESSED_DATA_DIR, OUTPUT_DIR]:
     if not directory.exists():
-        directory.mkdir(parents=True, exist_ok=True)
-        logger.debug(f"Created runtime directory: {directory}")
+        try:
+            directory.mkdir(parents=True, exist_ok=True)
+            logger.debug(f"Created runtime directory: {directory}")
+        except (OSError, PermissionError) as e:
+            logger.debug(f"Read-only environment, skipping mkdir for {directory}: {e}")
 
 # data.gouv.fr API Configuration
 DATA_GOUV_API_BASE = "https://www.data.gouv.fr/api/1"
