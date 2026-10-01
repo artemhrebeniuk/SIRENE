@@ -808,7 +808,6 @@ body {
 .dot-regions { background: var(--md-sys-color-primary); box-shadow: 0 0 6px var(--md-sys-color-primary); }
 .dot-traffic { background: var(--md-sys-color-error); box-shadow: 0 0 6px var(--md-sys-color-error); }
 .dot-crowd   { background: var(--md-sys-color-tertiary); box-shadow: 0 0 6px var(--md-sys-color-tertiary); }
-.dot-parking { background: var(--md-sys-color-secondary); box-shadow: 0 0 6px var(--md-sys-color-secondary); }
 .dot-biz     { background: #A879E6; box-shadow: 0 0 6px rgba(168, 121, 230, 0.7); }
 
 /* Basemap Switcher (Material 3 Segmented Button) */
@@ -3069,8 +3068,7 @@ body {
 .legend-section.is-disabled .heatmap-gradient-bar,
 .legend-section.is-disabled .legend-scale-labels,
 .legend-section.is-disabled .blur-controls-row,
-.legend-section.is-disabled .traffic-grid,
-.legend-section.is-disabled .parking-grid {
+.legend-section.is-disabled .traffic-grid {
   opacity: 0.38;
   filter: grayscale(40%);
   transition: opacity var(--motion-duration-short2) var(--motion-easing-standard),
@@ -3315,175 +3313,7 @@ body {
   color: var(--md-sys-color-on-surface);
 }
 
-/* Parking Stacked Cards */
-.parking-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 4px;
-}
 
-.parking-row-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  background: var(--md-sys-color-surface-container);
-  border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--radius-small);
-  padding: 7px 10px;
-  transition: background var(--motion-duration-short2) var(--motion-easing-standard),
-              border-color var(--motion-duration-short2) var(--motion-easing-standard);
-}
-
-.parking-row-card:hover {
-  background: var(--md-sys-color-surface-container-highest);
-  border-color: var(--md-sys-color-outline);
-}
-
-.parking-card-left {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.parking-dot-icon {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  display: inline-block;
-  flex-shrink: 0;
-}
-
-.parking-dot-icon.badge-truck-dot {
-  background: var(--accent-emerald);
-  box-shadow: 0 0 6px var(--accent-emerald-glow);
-}
-
-.parking-dot-icon.badge-garage-dot {
-  background: var(--accent-amber);
-  box-shadow: 0 0 6px rgba(255, 183, 77, 0.4);
-}
-
-.parking-primary {
-  font-size: 0.72rem;
-  font-weight: 500;
-  font-family: var(--font-body);
-  color: var(--md-sys-color-on-surface);
-}
-
-.parking-secondary-badge {
-  font-size: 0.63rem;
-  font-weight: 500;
-  font-family: var(--font-body);
-  color: var(--md-sys-color-on-surface-variant);
-  background: var(--md-sys-color-surface-container-highest);
-  border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--radius-full);
-  padding: 2px 8px;
-  white-space: nowrap;
-}
-
-/* ==========================================================================
-   Truck Parking Custom Map Pins & Radar Panel
-   ========================================================================== */
-.parking-pin-truck {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  background: var(--accent-emerald);
-  border: 2px solid var(--md-sys-color-surface);
-  border-radius: var(--radius-small);
-  color: var(--md-sys-color-on-primary);
-  font-weight: 700;
-  font-size: 13px;
-  box-shadow: var(--shadow-elevation-2);
-  cursor: pointer;
-  transition: transform var(--motion-duration-short2) var(--motion-easing-standard);
-}
-
-.parking-pin-truck:hover {
-  transform: scale(1.15);
-  box-shadow: var(--shadow-elevation-3);
-}
-
-.parking-pin-garage {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  background: var(--md-sys-color-surface-container-high);
-  border: 1.5px solid var(--accent-amber);
-  border-radius: var(--radius-extra-small);
-  color: var(--accent-amber);
-  font-weight: 700;
-  font-size: 11px;
-  box-shadow: var(--shadow-elevation-1);
-  cursor: pointer;
-  transition: transform var(--motion-duration-short2) var(--motion-easing-standard);
-}
-
-.parking-pin-garage:hover {
-  transform: scale(1.15);
-}
-
-.truck-parking-panel {
-  margin-top: 14px;
-  background: var(--md-sys-color-surface-container-low);
-  border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--radius-medium);
-  padding: 12px 14px;
-  box-shadow: var(--shadow-elevation-1);
-}
-
-.truck-parking-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.truck-parking-title {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--md-sys-color-on-surface);
-}
-
-.truck-parking-title svg {
-  color: var(--md-sys-color-primary);
-}
-
-.radius-chips-group {
-  display: flex;
-  background: var(--md-sys-color-surface-container-lowest);
-  border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--radius-full);
-  padding: 2px;
-  gap: 2px;
-}
-
-.radius-chip {
-  padding: 3px 8px;
-  border-radius: var(--radius-full);
-  background: transparent;
-  border: none;
-  color: var(--md-sys-color-on-surface-variant);
-  font-size: 0.68rem;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-.radius-chip.active {
-  background: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
-  font-weight: 600;
-}
 
 /* ==========================================================================
    Animations & Transitions

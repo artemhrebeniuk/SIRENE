@@ -1013,10 +1013,6 @@ def export_csv():
 import math
 import requests
 
-# In-memory cache for nearby parking queries
-PARKING_CACHE: Dict[str, dict] = {}
-
-
 def calculate_distance_m(lat1: float, lon1: float, lat2: float, lon2: float) -> int:
     """Calculate distance in meters between two coordinates."""
     R = 6371000  # radius of Earth in meters
@@ -1027,128 +1023,6 @@ def calculate_distance_m(lat1: float, lon1: float, lat2: float, lon2: float) -> 
     a = math.sin(delta_phi / 2.0) ** 2 + math.cos(phi1) * math.cos(phi2) * math.sin(delta_lambda / 2.0) ** 2
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
     return int(R * c)
-
-
-def fetch_osm_parking(lat: float, lon: float, radius: int = 400) -> dict:
-    """Fetch nearby parking amenities from OpenStreetMap Overpass API mirrors with in-memory caching."""
-    radius = min(max(radius, 50), 1200)
-    cache_key = f"{round(lat, 4)}_{round(lon, 4)}_{radius}"
-    if cache_key in PARKING_CACHE:
-        return PARKING_CACHE[cache_key]
-
-    mirrors = [
-        "https://overpass-api.de/api/interpreter",
-        "https://overpass.kumi.systems/api/interpreter",
-        "https://overpass.openstreetmap.fr/api/interpreter",
-        "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
-    ]
-    headers = {
-        "User-Agent": "SIRENE-FleetLogistics-Platform/2.0 (commercial-truck-parking)",
-        "Accept": "application/json"
-    }
-
-    def _query_overpass(r):
-        q = f"""
-        [out:json][timeout:7];
-        (
-          node["amenity"="parking"](around:{r},{lat},{lon});
-          way["amenity"="parking"](around:{r},{lat},{lon});
-        );
-        out center 20;
-        """
-        for mirror in mirrors:
-            try:
-                resp = requests.post(mirror, data={"data": q}, headers=headers, timeout=6)
-                if resp.status_code == 200:
-                    elems = resp.json().get("elements", [])
-                    if elems:
-                        return elems
-            except Exception:
-                continue
-        return []
-
-    elements = _query_overpass(radius)
-    # If no parkings within narrow radius (e.g. 300-400m), automatically try up to 800m
-    effective_radius = radius
-    if not elements and radius < 700:
-        expanded_r = min(radius * 2, 800)
-        elements = _query_overpass(expanded_r)
-        if elements:
-            effective_radius = expanded_r
-            
-    try:
-        if elements:
-            results = []
-            for el in elements:
-                tags = el.get("tags", {})
-                p_lat = el.get("lat") or el.get("center", {}).get("lat")
-                p_lon = el.get("lon") or el.get("center", {}).get("lon")
-                if not p_lat or not p_lon:
-                    continue
-                dist = calculate_distance_m(lat, lon, p_lat, p_lon)
-                parking_type = tags.get("parking", "surface")
-                maxheight = tags.get("maxheight")
-                capacity = tags.get("capacity")
-                try:
-                    capacity_val = int(capacity) if capacity else None
-                except ValueError:
-                    capacity_val = None
-
-                is_underground = parking_type in ["underground", "multi-storey", "shed"] or tags.get("layer", "0") in ["-1", "-2", "-3"]
-                is_truck_friendly = not is_underground
-                if maxheight:
-                    try:
-                        h = float(maxheight.replace("m", "").strip())
-                        if h < 2.6:
-                            is_truck_friendly = False
-                    except ValueError:
-                        pass
-
-                name = tags.get("name") or (f"{tags.get('addr:street', '')} Parking" if tags.get('addr:street') else "Public Parking")
-                results.append({
-                    "id": el.get("id"),
-                    "name": name.strip(),
-                    "lat": p_lat,
-                    "lon": p_lon,
-                    "distance_m": dist,
-                    "type": parking_type,
-                    "is_underground": is_underground,
-                    "is_truck_friendly": is_truck_friendly,
-                    "capacity": capacity_val,
-                    "fee": tags.get("fee", "unknown"),
-                    "maxheight": maxheight
-                })
-
-            results.sort(key=lambda x: x["distance_m"])
-            response_data = {
-                "center": {"lat": lat, "lon": lon},
-                "radius": effective_radius,
-                "requested_radius": radius,
-                "count": len(results),
-                "truck_friendly_count": sum(1 for r in results if r["is_truck_friendly"]),
-                "parkings": results
-            }
-            PARKING_CACHE[cache_key] = response_data
-            logger.info(f"OSM Parking: lat={lat}, lon={lon}, radius={effective_radius}m -> {len(results)} spots found")
-            return response_data
-        else:
-            return {"center": {"lat": lat, "lon": lon}, "radius": radius, "count": 0, "truck_friendly_count": 0, "parkings": []}
-    except Exception as e:
-        logger.error(f"OSM Parking error for ({lat}, {lon}): {e}", exc_info=True)
-        return {"center": {"lat": lat, "lon": lon}, "radius": radius, "count": 0, "truck_friendly_count": 0, "parkings": [], "error": str(e)}
-
-
-@app.route("/api/parking/nearby")
-def get_nearby_parking():
-    """Find nearby parking spots around a business location for commercial trucks."""
-    try:
-        lat = float(request.args.get("lat"))
-        lon = float(request.args.get("lon"))
-        radius = int(request.args.get("radius", 400))
-    except (TypeError, ValueError):
-        return jsonify({"error": "Valid lat and lon are required"}), 400
-
-    return jsonify(fetch_osm_parking(lat, lon, radius))
 
 
 def get_establishment_dossier_data(siret: str) -> dict:
@@ -1405,12 +1279,6 @@ def get_establishment_dossier_data(siret: str) -> dict:
             density_stats["total_postal"] = st_row[2] or 0
             density_stats["total_dept"] = st_row[3] or 0
 
-    # Logistics truck parking spots nearby
-    parkings = []
-    if lat and lon:
-        parking_res = fetch_osm_parking(lat, lon, radius=400)
-        parkings = parking_res.get("parkings", [])[:3]
-
     qualite_map = {
         "11": "Quality 11 (Exact House Number)",
         "12": "Quality 12 (Street Interpolation)",
@@ -1478,8 +1346,7 @@ def get_establishment_dossier_data(siret: str) -> dict:
         "street_view_url": street_view_url,
         "gov_verify_url": f"https://annuaire-entreprises.data.gouv.fr/etablissement/{row[0]}",
         "competitors": competitors,
-        "density_stats": density_stats,
-        "parkings": parkings
+        "density_stats": density_stats
     }
 
 

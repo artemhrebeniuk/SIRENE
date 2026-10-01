@@ -84,7 +84,7 @@
         <div class="map-header-overlay">
 
           <div class="map-controls-cluster">
-            <!-- Operational Layers Group: Regions, Traffic, Crowd, Parking -->
+            <!-- Operational Layers Group: Regions, Traffic, Crowd -->
             <div class="map-layers-group">
               <button class="btn-layer-pill active" id="btnToggleRegions" title="Toggle Regional Business Density & Department Shading">
                 <span class="layer-dot dot-regions"></span>
@@ -108,14 +108,6 @@
                   <path d="M12 2c1.5 3 4 5.5 4 8.5 0 3.5-2.5 6.5-6 6.5s-6-3-6-6.5C4 7.5 6.5 5 8 2c0 2 1.5 4 2.5 5 1-1 1.5-3 1.5-5z"></path>
                 </svg>
                 Heatmap
-              </button>
-              <button class="btn-layer-pill" id="btnToggleParking" title="Auto Truck Parking Radar for Inspected Business">
-                <span class="layer-dot dot-parking"></span>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="3" width="18" height="18" rx="4"></rect>
-                  <path d="M9 17V7h4a3 3 0 0 1 0 6H9"></path>
-                </svg>
-                Parking Radar
               </button>
               <button class="btn-layer-pill" id="btnToggleBizPins" title="Display businesses as interactive pins on map">
                 <span class="layer-dot dot-biz"></span>
@@ -274,36 +266,7 @@
                 </div>
               </div>
 
-              <!-- 4. Truck & Logistics Parking Radar -->
-              <div class="legend-section is-disabled" id="legendParkingBlock">
-                <div class="section-header-row">
-                  <div class="section-title-wrap">
-                    <span class="layer-dot-glow dot-cyan"></span>
-                    <span class="section-title">Truck Parking Radar</span>
-                  </div>
-                  <button class="legend-toggle-pill off" id="legendToggleParking" onclick="toggleParkingRadar()" title="Toggle Truck Parking Radar">
-                    <span class="toggle-state-text">OFF</span>
-                  </button>
-                </div>
-                <div class="parking-grid">
-                  <div class="parking-row-card">
-                    <div class="parking-card-left">
-                      <span class="parking-dot-icon badge-truck-dot"></span>
-                      <span class="parking-primary">Surface / Open-Air</span>
-                    </div>
-                    <span class="parking-secondary-badge">Trucks &amp; Large Vans</span>
-                  </div>
-                  <div class="parking-row-card">
-                    <div class="parking-card-left">
-                      <span class="parking-dot-icon badge-garage-dot"></span>
-                      <span class="parking-primary">Underground Garage</span>
-                    </div>
-                    <span class="parking-secondary-badge">&lt;2.0m Limit</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 5. Business Establishments & Signboards Radar -->
+              <!-- 4. Business Establishments & Signboards Radar -->
               <div class="legend-section no-divider is-disabled" id="legendBizBlock">
                 <div class="section-header-row">
                   <div class="section-title-wrap">

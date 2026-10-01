@@ -40,8 +40,8 @@ def compute_national_heatmap_points():
         WHERE has_coordinates = true
           AND latitude BETWEEN 41.3 AND 51.2
           AND longitude BETWEEN -5.2 AND 9.8
-        GROUP BY round(latitude, 2), round(longitude, 2)
-        HAVING count(*) >= 350
+        GROUP BY round(latitude / 0.02), round(longitude / 0.02)
+        HAVING count(*) >= 280
         ORDER BY count DESC
     """).fetchall()
 
@@ -56,8 +56,8 @@ def compute_national_heatmap_points():
     points = []
     for lat, lon, cnt in rows:
         norm = (math.log10(cnt) - log_min) / (log_max - log_min) if log_max > log_min else 0.5
-        weight = round(0.18 + 0.82 * (norm ** 1.15), 3)
-        points.append([lat, lon, weight])
+        weight = round(0.04 + 0.76 * (norm ** 2.2), 3)
+        points.append([float(lat), float(lon), weight])
 
     return points
 
@@ -116,7 +116,7 @@ def get_crowd_heatmap_points(min_lat=None, min_lon=None, max_lat=None, max_lon=N
                         SELECT 
                             round(latitude, 5) AS lat,
                             round(longitude, 5) AS lon,
-                            0.45 AS weight
+                            0.14 AS weight
                         FROM read_parquet('{PARQUET_PATH}')
                         WHERE has_coordinates = true
                           AND latitude BETWEEN {min_lat} AND {max_lat}

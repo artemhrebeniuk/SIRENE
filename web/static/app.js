@@ -152,18 +152,13 @@ const modalState = {
   isLoading: false
 };
 
-// Operational Layers State (Regions, Traffic, Crowd Hotspots, Parking Radar)
+// Operational Layers State (Regions, Traffic, Crowd Hotspots)
 let isRegionsActive = true;
 let isTrafficActive = false;
 let isCrowdActive = false;
-let isParkingRadarActive = false;
 let isBusinessPinsActive = false;
-let activeParkingRadius = 300;
-let activeParkingTarget = null;
 
 let trafficTileLayer = null;
-let parkingLayerGroup = null;
-let parkingRadiusCircle = null;
 let crowdLayerGroup = null;
 let businessMarkersLayerGroup = null;
 let viewportBizDebounce = null;
@@ -283,9 +278,6 @@ function applyBasemapLayer(key, force = false) {
   if (businessMarkersLayerGroup) {
     businessMarkersLayerGroup.eachLayer(l => { if (l.bringToFront) l.bringToFront(); });
   }
-  if (parkingLayerGroup) {
-    parkingLayerGroup.eachLayer(l => { if (l.bringToFront) l.bringToFront(); });
-  }
   if (currentBizMarker && typeof currentBizMarker.bringToFront === 'function') {
     currentBizMarker.bringToFront();
   }
@@ -307,7 +299,6 @@ function initMap() {
   });
 
   // Initialize operational layer groups
-  parkingLayerGroup = L.layerGroup().addTo(map);
   businessMarkersLayerGroup = L.layerGroup().addTo(map);
   crowdLayerGroup = L.layerGroup();
 
@@ -323,16 +314,6 @@ function initMap() {
 
   map.on('moveend', () => {
     handleMapMoveZoom();
-  });
-
-  // Interactive Radar Relocation: Click anywhere on map to reposition Parking Radar
-  map.on('click', (e) => {
-    if (isParkingRadarActive && e.latlng) {
-      const lat = e.latlng.lat;
-      const lng = e.latlng.lng;
-      activeParkingTarget = { lat, lng, name: `Location [${lat.toFixed(4)}, ${lng.toFixed(4)}]` };
-      loadNearbyParkings(lat, lng, activeParkingTarget.name, activeParkingRadius);
-    }
   });
 
   // Automatic Container Resize Observer to prevent any unrendered tile gaps or black strips
@@ -446,8 +427,8 @@ function getFeatureStyle(feature) {
     fillOpacity = 0;
   }
 
-  // If a business is selected / located or parking radar is active, force fillOpacity to 0
-  if (currentBizMarker || activeParkingTarget) {
+  // If a business is selected / located, force fillOpacity to 0
+  if (currentBizMarker) {
     fillOpacity = 0;
   }
 
@@ -666,7 +647,7 @@ function bindUI() {
     });
   });
 
-  // Operational Layer Toggle Buttons (Regions, Traffic, Crowd Zones, Parking Radar)
+  // Operational Layer Toggle Buttons (Regions, Traffic, Crowd Zones)
   const btnRegions = document.getElementById('btnToggleRegions');
   if (btnRegions) {
     btnRegions.addEventListener('click', toggleRegionsLayer);
@@ -688,11 +669,6 @@ function bindUI() {
       setHeatmapRadius(btn.dataset.radius);
     });
   });
-
-  const btnParking = document.getElementById('btnToggleParking');
-  if (btnParking) {
-    btnParking.addEventListener('click', toggleParkingRadar);
-  }
 
   const btnBizPins = document.getElementById('btnToggleBizPins');
   if (btnBizPins) {
@@ -2050,16 +2026,8 @@ function pinBusinessOnMap(siret, lat, lng, name, address, nafCode, nafLabel, ens
 
   map.flyTo([lat, lng], 17, { duration: 1.2 });
 
-  // Store active parking target
-  activeParkingTarget = { siret, lat, lng, name, address, nafCode, nafLabel, googleUrl: gMapsUrl, govUrl: gGovUrl, streetViewUrl: svUrl };
-
-  // Update Drawer to show Business Profile & Truck Parking Radar
+  // Update Drawer to show Business Profile
   showBusinessInInspector(siret, lat, lng, name, address, nafCode, nafLabel, gMapsUrl, gGovUrl, svUrl, isClosed);
-
-  // If Parking Radar is enabled, scan nearby spots
-  if (isParkingRadarActive) {
-    loadNearbyParkings(lat, lng, name, activeParkingRadius);
-  }
 }
 
 /* ==========================================================================
@@ -2150,15 +2118,11 @@ function showBusinessInInspector(siret, lat, lng, name, address, nafCode, nafLab
     details.innerHTML = `
       <div id="inspectorFinancialBlock"></div>
       <div id="inspectorBranchesBlock"></div>
-      <div id="inspectorParkingBlock"></div>
     `;
   }
 
   loadBusinessFinancialEnrichment(siret);
   loadBusinessBranches(siret);
-
-  // Initial placeholder while parking radar queries Overpass
-  renderParkingDrawerPanel(name, activeParkingRadius, null, true);
 }
 
 async function loadBusinessFinancialEnrichment(siret) {
@@ -2376,262 +2340,16 @@ function showToast(msg, duration = 3200) {
   }, duration);
 }
 
-/* ==========================================================================
-   STEP 2: Truck Parking Radar & Search Radius
-   ========================================================================== */
-function toggleParkingRadar() {
-  const btn = document.getElementById('btnToggleParking');
-  isParkingRadarActive = !isParkingRadarActive;
-
-  if (btn) btn.classList.toggle('active', isParkingRadarActive);
-
-  const miniToggle = document.getElementById('legendToggleParking');
-  if (miniToggle) {
-    miniToggle.classList.toggle('off', !isParkingRadarActive);
-    const span = miniToggle.querySelector('.toggle-state-text');
-    if (span) span.textContent = isParkingRadarActive ? 'ON' : 'OFF';
-  }
-
-  const block = document.getElementById('legendParkingBlock');
-  if (block) {
-    block.classList.toggle('is-disabled', !isParkingRadarActive);
-  }
-
-  if (!isParkingRadarActive) {
-    if (parkingRadiusCircle && map.hasLayer(parkingRadiusCircle)) {
-      map.removeLayer(parkingRadiusCircle);
-      parkingRadiusCircle = null;
-    }
-    if (parkingLayerGroup) parkingLayerGroup.clearLayers();
-    showToast('Parking Radar deactivated');
-  } else {
-    // 1. If an inspected business exists, scan around it
-    if (activeParkingTarget && activeParkingTarget.lat && activeParkingTarget.lng) {
-      loadNearbyParkings(activeParkingTarget.lat, activeParkingTarget.lng, activeParkingTarget.name, activeParkingRadius);
-      showToast(`🅿️ Radar active: scanning near ${activeParkingTarget.name}`);
-    } else {
-      // 2. Otherwise auto-scan around the center of current map view
-      const center = map.getCenter();
-      activeParkingTarget = { lat: center.lat, lng: center.lng, name: 'Map Viewport Center' };
-      loadNearbyParkings(center.lat, center.lng, 'Map Viewport Center', activeParkingRadius);
-      showToast('🅿️ Parking Radar ON: Scanning center. Click map to scan any location.');
-    }
-  }
-}
-
-let activeParkingData = [];
-
-async function loadNearbyParkings(lat, lon, businessName, radius) {
-  if (!isParkingRadarActive) return;
-
-  activeParkingRadius = radius || activeParkingRadius || 400;
-
-  // 1. Draw or update circular radar zone on map
-  if (parkingRadiusCircle && map.hasLayer(parkingRadiusCircle)) {
-    map.removeLayer(parkingRadiusCircle);
-  }
-
-  parkingRadiusCircle = L.circle([lat, lon], {
-    radius: activeParkingRadius,
-    color: '#818cf8',
-    fillColor: '#818cf8',
-    fillOpacity: 0.12,
-    weight: 2,
-    dashArray: '6, 6'
-  }).addTo(map);
-
-  if (parkingLayerGroup) parkingLayerGroup.clearLayers();
-
-  // 2. Render loading skeleton in drawer
-  renderParkingDrawerPanel(businessName, activeParkingRadius, null, true);
-
-  try {
-    SireneLogger.info('RADAR', `Scanning nearby truck parkings around [${lat}, ${lon}] within ${activeParkingRadius}m for: "${businessName}"`);
-    const res = await apiFetch(`/api/parking/nearby?lat=${lat}&lon=${lon}&radius=${activeParkingRadius}`);
-    const data = await res.json();
-    const parkings = data.parkings || [];
-    activeParkingData = parkings;
-    const effectiveRadius = data.radius || activeParkingRadius;
-    SireneLogger.info('RADAR', `Found ${parkings.length} parking spots (${data.truck_friendly_count || 0} truck-friendly) within ${effectiveRadius}m`);
-
-    // If radius was expanded by backend, visually update circle
-    if (data.radius && data.radius !== activeParkingRadius && parkingRadiusCircle) {
-      parkingRadiusCircle.setRadius(data.radius);
-    }
-
-    if (parkings.length > 0) {
-      showToast(`🅿️ Found ${parkings.length} parking spots (${data.truck_friendly_count || 0} truck/van friendly)`);
-    } else {
-      showToast(`ℹ️ No registered parking spots found within ${effectiveRadius}m`);
-    }
-
-    // Render custom pins on map
-    parkings.forEach((p, idx) => {
-      const isTruck = p.is_truck_friendly;
-      const icon = L.divIcon({
-        className: isTruck ? 'parking-pin-truck' : 'parking-pin-garage',
-        html: isTruck ? '<span>P</span>' : '<span>P</span>',
-        iconSize: isTruck ? [28, 28] : [24, 24],
-        iconAnchor: isTruck ? [14, 14] : [12, 12]
-      });
-
-      const marker = L.marker([p.lat, p.lon], { icon });
-
-      marker.bindPopup(`
-        <div class="parking-popup">
-          <div class="parking-popup-badge ${isTruck ? 'badge-truck' : 'badge-garage'}">
-            ${isTruck ? '✓ Truck-Friendly Surface' : '⚠ Underground / Restricted'}
-          </div>
-          <div class="parking-popup-name">${escapeStr(p.name)}</div>
-          <div class="parking-popup-meta">
-            Distance: <b>${p.distance_m}m</b> from radar center<br>
-            Type: <b>${p.type || 'Standard'}</b><br>
-            ${p.capacity ? `Capacity: <b>${p.capacity} spots</b><br>` : ''}
-            ${p.maxheight ? `Max Clearance: <b>${p.maxheight}</b><br>` : ''}
-            Fee: <b>${p.fee === 'yes' ? 'Paid Parking' : (p.fee === 'no' ? 'Free Parking' : 'Standard')}</b>
-          </div>
-        </div>
-      `, { offset: [0, -8], maxWidth: 250 });
-
-      p._markerId = idx;
-      marker._spotIdx = idx;
-      parkingLayerGroup.addLayer(marker);
-    });
-
-    // 3. Render loaded drawer panel
-    renderParkingDrawerPanel(businessName, effectiveRadius, data, false);
-
-  } catch (err) {
-    SireneLogger.error('RADAR', `Failed to load nearby parkings: ${err.message}`, err);
-    renderParkingDrawerPanel(businessName, activeParkingRadius, { count: 0, truck_friendly_count: 0, parkings: [] }, false);
-  }
-}
-
-function setParkingRadius(newRadius) {
-  activeParkingRadius = newRadius;
-  if (activeParkingTarget) {
-    loadNearbyParkings(activeParkingTarget.lat, activeParkingTarget.lng, activeParkingTarget.name, activeParkingRadius);
-  }
-}
-
-function focusOnParking(spotIdx) {
-  const spot = activeParkingData[spotIdx];
-  if (!spot) return;
-
-  map.flyTo([spot.lat, spot.lon], 18, { duration: 0.8 });
-
-  parkingLayerGroup.eachLayer(layer => {
-    if (layer._spotIdx === spotIdx) {
-      setTimeout(() => layer.openPopup(), 400);
-    }
-  });
-}
-
-function renderParkingDrawerPanel(businessName, radius, data, isLoading) {
-  const container = document.getElementById('inspectorParkingBlock') || document.getElementById('inspectorDetails');
-  if (!container) return;
-
-  if (isLoading) {
-    container.innerHTML = `
-      <div class="truck-parking-panel">
-        <div class="truck-parking-header">
-          <div class="truck-parking-title">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="3" width="18" height="18" rx="4"></rect>
-              <path d="M9 17V7h4a3 3 0 0 1 0 6H9"></path>
-            </svg>
-            Truck Parking Radar
-          </div>
-          <div class="radius-chips-group">
-            <button class="radius-chip ${radius === 150 ? 'active' : ''}" onclick="setParkingRadius(150)">150m</button>
-            <button class="radius-chip ${radius === 300 ? 'active' : ''}" onclick="setParkingRadius(300)">300m</button>
-            <button class="radius-chip ${radius === 500 ? 'active' : ''}" onclick="setParkingRadius(500)">500m</button>
-          </div>
-        </div>
-        <div class="loading-state" style="padding:14px 0; font-size:0.75rem;">
-          Scanning live spots within ${radius}m radius...
-        </div>
-      </div>
-    `;
-    return;
-  }
-
-  const parkings = data.parkings || [];
-  const truckCount = data.truck_friendly_count || 0;
-  const undergroundCount = Math.max(data.count - truckCount, 0);
-
-  const spotsHtml = parkings.length > 0 ? parkings.map((p, idx) => {
-    const isTruck = p.is_truck_friendly;
-    return `
-      <div class="parking-row-item">
-        <div class="parking-row-info">
-          <div class="parking-row-name" title="${escapeStr(p.name)}">${p.name}</div>
-          <div class="parking-row-sub">
-            <span class="${isTruck ? 'badge-truck-tag' : 'badge-garage-tag'}">
-              ${isTruck ? '✓ Surface' : '⚠ Underground'}
-            </span>
-            <span>•</span>
-            <span>${p.distance_m}m</span>
-            ${p.capacity ? `<span>• ${p.capacity} spots</span>` : ''}
-          </div>
-        </div>
-        <button class="btn-focus-spot" onclick="focusOnParking(${idx})" title="Center map on this parking">
-          Focus
-        </button>
-      </div>
-    `;
-  }).join('') : `
-    <div style="font-size:0.73rem; color:var(--md-sys-color-on-surface-variant); text-align:center; padding:12px;">
-      No registered parking spots found within ${radius}m.<br>
-      <span style="font-size:0.67rem; color:var(--md-sys-color-outline);">Try selecting 500m radius.</span>
-    </div>
-  `;
-
-  container.innerHTML = `
-    <div class="truck-parking-panel">
-      <div class="truck-parking-header">
-        <div class="truck-parking-title">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="18" height="18" rx="4"></rect>
-            <path d="M9 17V7h4a3 3 0 0 1 0 6H9"></path>
-          </svg>
-          Truck Parking Radar
-        </div>
-        <div class="radius-chips-group">
-          <button class="radius-chip ${radius === 150 ? 'active' : ''}" onclick="setParkingRadius(150)">150m</button>
-          <button class="radius-chip ${radius === 300 ? 'active' : ''}" onclick="setParkingRadius(300)">300m</button>
-          <button class="radius-chip ${radius === 500 ? 'active' : ''}" onclick="setParkingRadius(500)">500m</button>
-        </div>
-      </div>
-
-      <div class="truck-stats-row">
-        <div class="truck-stat-card">
-          <div class="truck-stat-label">Truck Friendly</div>
-          <div class="truck-stat-value text-emerald">${truckCount}</div>
-        </div>
-        <div class="truck-stat-card">
-          <div class="truck-stat-label">Underground / Height</div>
-          <div class="truck-stat-value text-amber">${undergroundCount}</div>
-        </div>
-      </div>
-
-      <div class="parking-list-scroller">
-        ${spotsHtml}
-      </div>
-    </div>
-  `;
-}
 
 /* ==========================================================================
    STEP 3: Continuous Smooth Thermal Footfall Heatmap (Real Coordinates)
    ========================================================================== */
 const HEATMAP_GRADIENT = {
-  0.15: 'rgba(67, 56, 202, 0.45)',  // Deep Indigo (ambient density)
-  0.32: 'rgba(14, 165, 233, 0.72)', // Sky / Cyan
-  0.50: 'rgba(16, 185, 129, 0.85)', // Vivid Emerald
-  0.68: '#f59e0b',                   // Luminous Amber (active retail & commerce)
-  0.84: '#ea580c',                   // Hot Orange (high-density footfall)
-  1.00: '#dc2626'                    // Radiant Flame Core (epicenter)
+  0.20: 'rgba(59, 130, 246, 0.45)', // Soft Blue (baseline commercial activity)
+  0.40: 'rgba(16, 185, 129, 0.65)', // Emerald Green (moderate retail presence)
+  0.60: '#f59e0b',                   // Luminous Amber (active commercial node)
+  0.80: '#ea580c',                   // Hot Orange (high-density urban center)
+  1.00: '#dc2626'                    // Radiant Flame Core (metropolitan epicenter)
 };
 
 let crowdHeatLayer = null;
@@ -2648,21 +2366,21 @@ function getZoomAdaptiveHeatmapParams() {
   let baseR, baseBlur, minOp, maxVal;
 
   if (currentZoom <= 6) {
-    baseR = 14; baseBlur = 12; maxVal = 1.0; minOp = 0.18;
+    baseR = 11; baseBlur = 9; maxVal = 1.20; minOp = 0.05;
   } else if (currentZoom <= 8) {
-    baseR = 18; baseBlur = 14; maxVal = 1.0; minOp = 0.20;
+    baseR = 14; baseBlur = 11; maxVal = 1.10; minOp = 0.05;
   } else if (currentZoom <= 10) {
-    baseR = 24; baseBlur = 18; maxVal = 0.95; minOp = 0.22;
+    baseR = 18; baseBlur = 14; maxVal = 1.00; minOp = 0.06;
   } else if (currentZoom <= 12) {
-    baseR = 30; baseBlur = 22; maxVal = 0.90; minOp = 0.24;
+    baseR = 24; baseBlur = 18; maxVal = 0.95; minOp = 0.07;
   } else if (currentZoom <= 14) {
-    baseR = 36; baseBlur = 26; maxVal = 0.85; minOp = 0.26;
+    baseR = 30; baseBlur = 22; maxVal = 0.90; minOp = 0.08;
   } else {
-    baseR = 44; baseBlur = 30; maxVal = 0.80; minOp = 0.28;
+    baseR = 38; baseBlur = 26; maxVal = 0.85; minOp = 0.09;
   }
 
-  const finalR    = Math.max(8, Math.round(baseR    * heatmapRadiusMultiplier));
-  const finalBlur = Math.max(6, Math.round(baseBlur * heatmapRadiusMultiplier));
+  const finalR    = Math.max(7, Math.round(baseR    * heatmapRadiusMultiplier));
+  const finalBlur = Math.max(5, Math.round(baseBlur * heatmapRadiusMultiplier));
   return {
     radius:     finalR,
     blur:       finalBlur,
@@ -2671,8 +2389,6 @@ function getZoomAdaptiveHeatmapParams() {
     max:        maxVal
   };
 }
-
-
 
 function updateHeatmapOnZoom() {
   if (!crowdHeatLayer || !isCrowdActive || !map.hasLayer(crowdHeatLayer)) return;
@@ -2690,14 +2406,13 @@ async function checkViewportHeatmap() {
   if (!crowdHeatLayer || !isCrowdActive || !map || !map.hasLayer(crowdHeatLayer)) return;
   const zoom = map.getZoom();
 
-  // At zoom ≥ 10 (city/metro level), load high-density viewport coordinates
-  if (zoom >= 10) {
+  // Only at deep street / parcel level (zoom >= 14) check for micro-parcel enrichment
+  if (zoom >= 14) {
     const bounds = map.getBounds();
-    // Add 15% padding so panning is seamless without cutoffs at edges
     const latSpan = bounds.getNorth() - bounds.getSouth();
     const lngSpan = bounds.getEast() - bounds.getWest();
-    const padLat = latSpan * 0.15;
-    const padLng = lngSpan * 0.15;
+    const padLat = latSpan * 0.20;
+    const padLng = lngSpan * 0.20;
 
     const minLat = (bounds.getSouth() - padLat).toFixed(4);
     const maxLat = (bounds.getNorth() + padLat).toFixed(4);
@@ -2705,20 +2420,20 @@ async function checkViewportHeatmap() {
     const maxLng = (bounds.getEast() + padLng).toFixed(4);
 
     try {
-      SireneLogger.debug('MAP', `Updating viewport crowd heatmap for bounds [${minLat}, ${minLng}] -> [${maxLat}, ${maxLng}] (zoom ${zoom})`);
       const res = await apiFetch(`/api/crowd/heatmap?min_lat=${minLat}&max_lat=${maxLat}&min_lon=${minLng}&max_lon=${maxLng}`);
       if (!res.ok) return;
       const pts = await res.json();
-      if (pts && pts.length > 0 && crowdHeatLayer) {
+      // Only swap if server actually returned distinct high-res parcel points (not the national cache)
+      if (pts && pts.length > 0 && pts.length !== (cachedHeatmapData ? cachedHeatmapData.length : 0) && crowdHeatLayer) {
         crowdHeatLayer.setLatLngs(pts);
         isViewportHeatmapLoaded = true;
-        SireneLogger.debug('MAP', `Applied ${pts.length} multi-resolution viewport heatmap points`);
+        SireneLogger.debug('MAP', `Applied ${pts.length} high-res street parcel heatmap points`);
       }
     } catch (e) {
       SireneLogger.error('MAP', `Failed to load viewport heatmap: ${e.message}`, e);
     }
   } else {
-    // Revert back to calibrated national density if zoomed out (< 11)
+    // Revert back to national continuous calibrated density
     if (isViewportHeatmapLoaded && cachedHeatmapData && crowdHeatLayer) {
       crowdHeatLayer.setLatLngs(cachedHeatmapData);
       isViewportHeatmapLoaded = false;
@@ -2726,7 +2441,6 @@ async function checkViewportHeatmap() {
     }
   }
 }
-
 
 async function toggleCrowdHeatmap() {
   const btn = document.getElementById('btnToggleCrowd');
@@ -2784,11 +2498,6 @@ function renderHeatmapLayer(points) {
     minOpacity: params.minOpacity,
     gradient: HEATMAP_GRADIENT
   }).addTo(map);
-
-  // If already at high zoom, load viewport high-res points
-  if (map.getZoom() >= 8) {
-    checkViewportHeatmap();
-  }
 }
 
 function setHeatmapRadius(r) {
@@ -2963,9 +2672,6 @@ function renderBusinessMarkers(items) {
 
     marker.on('click', () => {
       showBusinessInInspector(b.siret, b.lat, b.lng, b.name, fullAddr, b.naf_code, b.naf_label, b.google_maps_url, b.gov_verify_url);
-      if (isParkingRadarActive) {
-        loadNearbyParkings(b.lat, b.lng, b.name, activeParkingRadius);
-      }
     });
 
     businessMarkersLayerGroup.addLayer(marker);
@@ -3061,24 +2767,17 @@ function resetAll() {
   state.selectedDepartment = null;
   state.selectedCommune = null;
   state.searchQuery = '';
-  activeParkingTarget = null;
 
-  document.getElementById('searchInput').value = '';
-  document.getElementById('clearSearch').style.display = 'none';
-  document.getElementById('inspectorDrawer').style.display = 'none';
+  const searchInp = document.getElementById('searchInput');
+  if (searchInp) searchInp.value = '';
+  const clearBtn = document.getElementById('clearSearch');
+  if (clearBtn) clearBtn.style.display = 'none';
+  const drawer = document.getElementById('inspectorDrawer');
+  if (drawer) drawer.style.display = 'none';
 
   if (currentBizMarker) {
     map.removeLayer(currentBizMarker);
     currentBizMarker = null;
-  }
-
-  if (parkingRadiusCircle && map.hasLayer(parkingRadiusCircle)) {
-    map.removeLayer(parkingRadiusCircle);
-    parkingRadiusCircle = null;
-  }
-
-  if (parkingLayerGroup) {
-    parkingLayerGroup.clearLayers();
   }
 
   if (state.communeMarker) {
