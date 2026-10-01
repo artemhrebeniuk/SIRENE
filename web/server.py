@@ -158,12 +158,12 @@ def get_db():
     remote_url = os.environ.get("PARQUET_URL") or os.environ.get("DATASET_URL")
     if remote_url and (remote_url.startswith("http") or remote_url.startswith("s3")):
         try:
+            # Vercel serverless has no home dir — use /tmp for DuckDB extensions
+            con.execute("SET home_directory='/tmp';")
+            con.execute("SET extension_directory='/tmp/duckdb_ext';")
             con.execute("INSTALL httpfs;")
             con.execute("LOAD httpfs;")
             con.execute("SET enable_progress_bar = false;")
-            # Allow insecure HTTP if needed (non-HTTPS)
-            if remote_url.startswith("http://"):
-                con.execute("SET s3_use_ssl = false;")
         except Exception as e:
             logger.warning(f"httpfs setup warning: {e}")
     return con
