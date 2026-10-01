@@ -2565,70 +2565,48 @@ let heatmapRadiusMultiplier = 1.0; // 0.7 (Tight), 1.0 (Balanced), 1.4 (Broad)
 
 function getZoomAdaptiveHeatmapParams() {
   const currentZoom = map ? map.getZoom() : 6;
-  let baseR = 14;
-  let baseBlur = 14;
-  let minOp = 0.05;
-  let maxVal = 1.6;
+  let baseR, baseBlur, minOp, maxVal;
 
   if (currentZoom <= 6) {
-    // National overview of France: clear glowing city nodes, no countryside fog
-    baseR = 12;
-    baseBlur = 13;
-    maxVal = 1.5;
+    // National overview: glowing city nodes
+    baseR = 12; baseBlur = 12; maxVal = 1.4; minOp = 0.04;
   } else if (currentZoom === 7) {
-    baseR = 14;
-    baseBlur = 14;
-    maxVal = 1.4;
+    baseR = 14; baseBlur = 13; maxVal = 1.3; minOp = 0.04;
   } else if (currentZoom === 8) {
-    baseR = 15;
-    baseBlur = 15;
-    maxVal = 1.3;
+    baseR = 15; baseBlur = 14; maxVal = 1.2; minOp = 0.04;
   } else if (currentZoom === 9) {
-    baseR = 16;
-    baseBlur = 16;
-    maxVal = 1.25;
+    baseR = 14; baseBlur = 13; maxVal = 1.1; minOp = 0.05;
   } else if (currentZoom === 10) {
-    baseR = 18;
-    baseBlur = 16;
-    maxVal = 1.2;
+    baseR = 12; baseBlur = 11; maxVal = 1.0; minOp = 0.05;
   } else if (currentZoom === 11) {
-    baseR = 18;
-    baseBlur = 16;
-    maxVal = 1.25;
+    // City overview: switch to viewport data, tighten blobs
+    baseR = 10; baseBlur = 9; maxVal = 1.0; minOp = 0.06;
   } else if (currentZoom === 12) {
-    baseR = 19;
-    baseBlur = 15;
-    maxVal = 1.35;
+    // District level: crisp density
+    baseR = 8; baseBlur = 7; maxVal = 0.9; minOp = 0.07;
   } else if (currentZoom === 13) {
-    baseR = 17;
-    baseBlur = 14;
-    maxVal = 1.5;
+    baseR = 7; baseBlur = 6; maxVal = 0.85; minOp = 0.08;
   } else if (currentZoom === 14) {
-    baseR = 13;
-    baseBlur = 10;
-    maxVal = 2.4;
+    baseR = 6; baseBlur = 5; maxVal = 0.8; minOp = 0.08;
   } else if (currentZoom === 15) {
-    // High zoom: crisp commercial ribbons along shopping streets
-    baseR = 11;
-    baseBlur = 8;
-    maxVal = 2.8;
-  } else if (currentZoom >= 16) {
-    // Street / parcel level: tight halos right on building facades and storefronts
-    baseR = 9;
-    baseBlur = 7;
-    maxVal = 3.2;
+    // High zoom: tight commercial ribbons along streets
+    baseR = 5; baseBlur = 4; maxVal = 0.75; minOp = 0.09;
+  } else {
+    // Street/parcel level: tight halos on building facades
+    baseR = 4; baseBlur = 3; maxVal = 0.7; minOp = 0.1;
   }
 
-  const finalR = Math.max(6, Math.round(baseR * heatmapRadiusMultiplier));
-  const finalBlur = Math.max(5, Math.round(baseBlur * heatmapRadiusMultiplier));
-  return { 
-    radius: finalR, 
-    blur: finalBlur, 
-    maxZoom: currentZoom, 
-    minOpacity: minOp, 
-    max: maxVal 
+  const finalR    = Math.max(4, Math.round(baseR    * heatmapRadiusMultiplier));
+  const finalBlur = Math.max(3, Math.round(baseBlur * heatmapRadiusMultiplier));
+  return {
+    radius:     finalR,
+    blur:       finalBlur,
+    maxZoom:    currentZoom,
+    minOpacity: minOp,
+    max:        maxVal
   };
 }
+
 
 function updateHeatmapOnZoom() {
   if (!crowdHeatLayer || !isCrowdActive || !map.hasLayer(crowdHeatLayer)) return;
@@ -2646,13 +2624,15 @@ async function checkViewportHeatmap() {
   if (!crowdHeatLayer || !isCrowdActive || !map || !map.hasLayer(crowdHeatLayer)) return;
   const zoom = map.getZoom();
 
-  if (zoom >= 8) {
+  // At zoom ≥ 11 (city/district level), national aggregates create huge blobs —
+  // replace with real per-establishment viewport coordinates from the API
+  if (zoom >= 11) {
     const bounds = map.getBounds();
-    // Add 12% padding to bounds so panning is completely seamless without cutoffs
+    // Add 15% padding so panning is seamless without cutoffs at edges
     const latSpan = bounds.getNorth() - bounds.getSouth();
     const lngSpan = bounds.getEast() - bounds.getWest();
-    const padLat = latSpan * 0.12;
-    const padLng = lngSpan * 0.12;
+    const padLat = latSpan * 0.15;
+    const padLng = lngSpan * 0.15;
 
     const minLat = (bounds.getSouth() - padLat).toFixed(4);
     const maxLat = (bounds.getNorth() + padLat).toFixed(4);
@@ -2673,7 +2653,7 @@ async function checkViewportHeatmap() {
       SireneLogger.error('MAP', `Failed to load viewport heatmap: ${e.message}`, e);
     }
   } else {
-    // Revert back to calibrated national density if zoomed out (< 8)
+    // Revert back to calibrated national density if zoomed out (< 11)
     if (isViewportHeatmapLoaded && cachedHeatmapData && crowdHeatLayer) {
       crowdHeatLayer.setLatLngs(cachedHeatmapData);
       isViewportHeatmapLoaded = false;
@@ -2681,6 +2661,7 @@ async function checkViewportHeatmap() {
     }
   }
 }
+
 
 async function toggleCrowdHeatmap() {
   const btn = document.getElementById('btnToggleCrowd');
