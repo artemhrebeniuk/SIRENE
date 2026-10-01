@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="/static/vendor/leaflet.css">
   
   <!-- Custom Material 3 Stylesheet -->
-  <link rel="stylesheet" href="/static/style.css?v=m3.16">
+  <link rel="stylesheet" href="/static/style.css?v=m3.20">
 </head>
 <body>
   <div class="app-layout">
@@ -127,7 +127,7 @@
               </button>
             </div>
 
-            <!-- Basemap Switcher: Google Maps, Satellite, Dark -->
+            <!-- Basemap Switcher: Map, Satellite -->
             <div class="basemap-selector" id="basemapSelectorGroup">
               <button class="btn-basemap active" data-basemap="google-roads" title="Actual Google Maps with all real street names, shops, and places">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -135,7 +135,7 @@
                   <line x1="9" y1="3" x2="9" y2="18"></line>
                   <line x1="15" y1="6" x2="15" y2="21"></line>
                 </svg>
-                Google Maps
+                Map
               </button>
               <button class="btn-basemap" data-basemap="google-satellite" title="Google Satellite Imagery & Labels">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -148,19 +148,24 @@
                 Satellite
               </button>
             </div>
-
-            <!-- Fullscreen Map Action (Single row, elegant M3 button) -->
-            <button class="btn-fullscreen-action" id="btnToggleFullscreen" onclick="toggleMapFullscreen()" title="Fullscreen Map (Press ESC to exit)">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
-              </svg>
-              <span>Fullscreen</span>
-            </button>
           </div>
+
+          <!-- Fullscreen Map Action (Anchored right, never clipped or hidden) -->
+          <button class="btn-fullscreen-action" id="btnToggleFullscreen" onclick="toggleMapFullscreen()" title="Fullscreen Map (Press ESC to exit)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+            </svg>
+            <span>Fullscreen</span>
+          </button>
         </div>
 
         <!-- The Leaflet Map Canvas -->
         <div id="map"></div>
+        <button class="map-floating-fullscreen" id="mapFloatingFullscreen" onclick="toggleMapFullscreen()" title="Toggle Fullscreen Map">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+          </svg>
+        </button>
 
         <!-- Unified Collapsible Map Legend (Design Maestro Style) -->
         <div class="unified-legend-container" id="unifiedLegendContainer">
@@ -503,100 +508,71 @@
           </div>
         </div>
 
-        <!-- Single Streamlined Unified Toolbar (Design Maestro Omnibar Filters) -->
-        <div class="biz-unified-toolbar">
-          <div class="toolbar-group">
-            <div class="toolbar-field">
-              <label for="bizCitySelect">City</label>
-              <div class="select-pill-wrapper">
-                <select id="bizCitySelect" class="biz-select">
-                  <option value="">All Cities</option>
-                </select>
-                <svg class="select-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-              </div>
+        <!-- Streamlined Single-Row Material 3 Filter Pipeline (Zero Redundancy) -->
+        <div class="biz-filter-pipeline">
+          <div class="filter-controls-strip">
+            <!-- 1. City / Territory Selector -->
+            <div class="filter-field-pill" title="Filter by commune or city">
+              <span class="field-label-prefix">City</span>
+              <select id="bizCitySelect" class="filter-select">
+                <option value="">All Cities in Dept</option>
+              </select>
+              <svg class="field-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </div>
-            <div class="toolbar-field">
-              <label for="bizNafSelect">Industry</label>
-              <div class="select-pill-wrapper">
-                <select id="bizNafSelect" class="biz-select">
-                  <option value="">All Industries</option>
-                </select>
-                <svg class="select-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-              </div>
-            </div>
-          </div>
 
-          <div class="toolbar-group toolbar-right">
-            <div class="biz-search-wrapper">
+            <!-- 2. Niche & Industry Selector (Grouped Presets + All NAF Sectors) -->
+            <div class="filter-field-pill filter-field-wide" title="Filter by business niche or NAF activity">
+              <span class="field-label-prefix">Niche</span>
+              <select id="bizNafSelect" class="filter-select">
+                <option value="">All Niches &amp; Industries</option>
+              </select>
+              <svg class="field-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+
+            <!-- 3. Workforce & Financial Scale -->
+            <div class="filter-field-pill" title="Filter by workforce and team size">
+              <span class="field-label-prefix">Staff</span>
+              <select id="selectWorkforce" class="filter-select" onchange="onWorkforceChange(this.value)">
+                <option value="all">All Staff Sizes</option>
+                <option value="with_staff">With Staff (1+ Staff)</option>
+                <option value="10_plus">10+ Staff (SMB / PME)</option>
+                <option value="50_plus">50+ Staff (Large Target)</option>
+                <option value="micro">Solo / Micro</option>
+              </select>
+              <svg class="field-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+
+            <!-- 4. Channel / Presence Type -->
+            <div class="filter-field-pill" title="Filter by physical storefront or corporate role">
+              <span class="field-label-prefix">Type</span>
+              <select id="selectBranchType" class="filter-select" onchange="onBranchTypeChange(this.value)">
+                <option value="all">All Establishments</option>
+                <option value="storefront">Physical Storefront (With Sign)</option>
+                <option value="secondary">Branches &amp; Outlets</option>
+                <option value="siege">Headquarters (Sièges)</option>
+              </select>
+              <svg class="field-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+
+            <!-- 5. Search Bar -->
+            <div class="filter-search-box">
               <svg class="search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
-              <input type="text" id="bizSearchInput" class="biz-search-field" placeholder="Search company name or SIRET...">
+              <input type="text" id="bizSearchInput" class="filter-search-input" placeholder="Search company, sign or SIRET...">
               <span class="search-shortcut modal-shortcut">/</span>
             </div>
           </div>
-        </div>
 
-        <!-- Lead Finder & Advertising Intelligence Filters Bar -->
-        <div class="lead-filter-bar">
-          <div class="lead-preset-chips" id="leadPresetChips">
-            <button class="lead-preset-chip active" data-preset="" onclick="setAdPreset('')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg>
-              <span>All Niches</span>
-            </button>
-            <button class="lead-preset-chip" data-preset="horeca" onclick="setAdPreset('horeca')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
-              <span>HoReCa</span>
-            </button>
-            <button class="lead-preset-chip" data-preset="auto" onclick="setAdPreset('auto')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="9" rx="2"></rect><path d="M7 11l2.5-6h5L17 11"></path><circle cx="7.5" cy="16.5" r="1.5"></circle><circle cx="16.5" cy="16.5" r="1.5"></circle></svg>
-              <span>Auto &amp; Moto</span>
-            </button>
-            <button class="lead-preset-chip" data-preset="health" onclick="setAdPreset('health')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"></path><rect x="3" y="3" width="18" height="18" rx="4" stroke-width="1.8"></rect></svg>
-              <span>Health &amp; Dental</span>
-            </button>
-            <button class="lead-preset-chip" data-preset="realestate" onclick="setAdPreset('realestate')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"></path><path d="M5 21V7l7-4 7 4v14"></path><path d="M9 10h2v3H9zM13 10h2v3h-2zM9 16h2v3H9zM13 16h2v3h-2z"></path></svg>
-              <span>Real Estate</span>
-            </button>
-            <button class="lead-preset-chip" data-preset="retail" onclick="setAdPreset('retail')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-              <span>Retail &amp; Fashion</span>
-            </button>
-          </div>
-
-          <div class="lead-quick-toggles">
-            <button class="lead-toggle-chip" id="chipToggleEnseigne" onclick="toggleLeadEnseigne()" title="Filter businesses with a registered commercial brand signboard on facade">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-              <span>Storefront Sign</span>
-            </button>
-            <div class="lead-select-pill-wrapper">
-              <select id="selectBranchType" class="lead-toggle-select" onchange="onBranchTypeChange(this.value)">
-                <option value="all">All Establishments</option>
-                <option value="secondary">Branches &amp; Outlets</option>
-                <option value="siege">Headquarters (Sièges)</option>
-              </select>
-              <svg class="select-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </div>
-            <div class="lead-select-pill-wrapper">
-              <select id="selectWorkforce" class="lead-toggle-select" onchange="onWorkforceChange(this.value)" title="Filter by workforce and team size">
-                <option value="all">All Staff Sizes</option>
-                <option value="with_staff">With Staff (1+ Employees)</option>
-                <option value="10_plus">10+ Employees (SMB / PME)</option>
-                <option value="50_plus">50+ Employees (Large Target)</option>
-                <option value="micro">Solo / Micro</option>
-              </select>
-              <svg class="select-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
+          <!-- Active Filter Funnel Feed: Shows active filters as removable chips + results count -->
+          <div class="active-filters-feed" id="activeFiltersFeed">
+            <div class="active-chips-list" id="activeChipsList"></div>
+            <div class="active-filters-summary">
+              <span id="bizCountFeed" class="active-count-feed">Loading establishments...</span>
+              <button class="btn-clear-all-filters" id="btnClearAllFilters" onclick="resetAllFilters()" style="display: none;">
+                Reset Filters
+              </button>
             </div>
           </div>
         </div>
@@ -610,7 +586,7 @@
                 <th style="width: 22%; min-width: 210px;">Physical Location &amp; Implantation</th>
                 <th style="width: 15%; min-width: 140px;">Industry (NAF)</th>
                 <th style="width: 13%; min-width: 135px;">Staff &amp; Ad Score</th>
-                <th style="width: 18%; min-width: 260px; text-align: center;">Actions</th>
+                <th style="width: 18%; min-width: 275px; text-align: center;">Actions</th>
               </tr>
             </thead>
             <tbody id="bizTableBody">
@@ -633,6 +609,6 @@
   <script src="/static/vendor/leaflet-heat.js"></script>
   
   <!-- Client Application Engine -->
-  <script src="/static/app.js?v=m3.16"></script>
+  <script src="/static/app.js?v=m3.20"></script>
 </body>
 </html>
