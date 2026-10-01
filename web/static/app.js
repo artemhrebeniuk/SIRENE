@@ -1952,7 +1952,7 @@ async function fetchAndRenderBusinesses(append = false) {
               </div>
             </div>
           </td>
-          <td style="text-align: center;">${actionBtn}</td>
+          <td class="biz-actions-td">${actionBtn}</td>
         </tr>
       `;
     }).join('');
