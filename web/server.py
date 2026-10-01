@@ -19,6 +19,18 @@ ENRICHMENT_CACHE: Dict[str, Dict[str, Any]] = {}
 # ---------------------------------------------------------------------------
 # Cache for resolved CDN URL (GitHub releases redirect → objects.githubusercontent.com)
 _RESOLVED_PARQUET_URL: str | None = None
+_RESOLVED_PARQUET_URL_TS: float = 0.0
+_RESOLVED_PARQUET_TTL: float = 180.0  # 3 minutes (AWS S3 signed tokens from GitHub expire in 5 min)
+
+# Precomputed summary cache for instantaneous zero-latency cold starts
+SUMMARY_CACHE_FILE = Path(__file__).resolve().parent / "summary_cache.json"
+_STATIC_SUMMARY_CACHE: Dict[str, Any] = {}
+if SUMMARY_CACHE_FILE.exists():
+    try:
+        with open(SUMMARY_CACHE_FILE, "r", encoding="utf-8") as _f:
+            _STATIC_SUMMARY_CACHE = json.load(_f)
+    except Exception as _err:
+        pass
 
 # Cache for heavy query results: {cache_key: {"data": ..., "ts": float}}
 _QUERY_CACHE: Dict[str, Dict[str, Any]] = {}
@@ -117,6 +129,11 @@ def handle_global_exception(e):
             "path": request.path
         }), e.code
 
+    err_str = str(e)
+    if "403" in err_str or "Forbidden" in err_str or "HTTP GET error" in err_str:
+        logger.warning("Detected HTTP 403 / remote parquet failure. Invalidating resolved parquet URL cache.")
+        invalidate_parquet_url_cache()
+
     logger.critical(f"Unhandled server exception on {request.method} {request.path}: {e}", exc_info=True)
     return jsonify({
         "error": "Internal Server Error",
@@ -151,25 +168,34 @@ DEPT_NAMES = {
 }
 
 
-def _resolve_url_redirect(url: str) -> str:
+def invalidate_parquet_url_cache():
+    global _RESOLVED_PARQUET_URL, _RESOLVED_PARQUET_URL_TS
+    _RESOLVED_PARQUET_URL = None
+    _RESOLVED_PARQUET_URL_TS = 0.0
+
+
+def _resolve_url_redirect(url: str, force_refresh: bool = False) -> str:
     """
     Follow HTTP redirects (e.g. GitHub releases 302 → CDN) and return final URL.
-    Caches the result in _RESOLVED_PARQUET_URL so we only do this once per warm instance.
+    Caches the result with a 3-minute TTL to prevent expired AWS S3 signed tokens.
     """
-    global _RESOLVED_PARQUET_URL
-    if _RESOLVED_PARQUET_URL is not None:
+    global _RESOLVED_PARQUET_URL, _RESOLVED_PARQUET_URL_TS
+    now = time.time()
+    if not force_refresh and _RESOLVED_PARQUET_URL is not None and (now - _RESOLVED_PARQUET_URL_TS) < _RESOLVED_PARQUET_TTL:
         return _RESOLVED_PARQUET_URL
     try:
         req = urllib.request.Request(url, method="HEAD")
         req.add_header("User-Agent", "DuckDB-SIRENE/1.0")
-        with urllib.request.urlopen(req, timeout=10) as resp:
+        with urllib.request.urlopen(req, timeout=8) as resp:
             final_url = resp.url
         if final_url != url:
-            logger.info(f"Resolved redirect: {url} → {final_url}")
+            logger.info(f"Resolved redirect: {url} → {final_url[:80]}...")
         _RESOLVED_PARQUET_URL = final_url
+        _RESOLVED_PARQUET_URL_TS = now
     except Exception as e:
         logger.warning(f"Redirect resolve failed ({e}), using original URL")
         _RESOLVED_PARQUET_URL = url
+        _RESOLVED_PARQUET_URL_TS = now
     return _RESOLVED_PARQUET_URL
 
 
@@ -205,7 +231,8 @@ def get_active_dataset_path() -> Tuple[str, bool]:
 
 def get_db():
     con = duckdb.connect()
-    con.execute("SET threads = 4;")
+    con.execute("SET threads = 2;")
+    con.execute("SET max_memory = '800MB';")
     # Enable httpfs extension when using remote parquet URL (S3, R2, GCS, HTTP)
     remote_url = os.environ.get("PARQUET_URL") or os.environ.get("DATASET_URL")
     if remote_url and (remote_url.startswith("http") or remote_url.startswith("s3")):
@@ -216,6 +243,8 @@ def get_db():
             con.execute("INSTALL httpfs;")
             con.execute("LOAD httpfs;")
             con.execute("SET enable_progress_bar = false;")
+            con.execute("SET http_timeout = 15000;")
+            con.execute("SET http_retries = 3;")
         except Exception as e:
             logger.warning(f"httpfs setup warning: {e}")
     return con
@@ -264,6 +293,11 @@ def get_kpis():
     if cached:
         return jsonify(cached)
 
+    if "kpis" in _STATIC_SUMMARY_CACHE:
+        kpis_data = _STATIC_SUMMARY_CACHE["kpis"]
+        cache_set("kpis", kpis_data)
+        return jsonify(kpis_data)
+
     data_file, is_sample = get_active_dataset_path()
     con = get_db()
     
@@ -306,6 +340,11 @@ def get_departments():
     cached = cache_get("departments")
     if cached:
         return jsonify(cached)
+
+    if "departments" in _STATIC_SUMMARY_CACHE:
+        depts_data = _STATIC_SUMMARY_CACHE["departments"]
+        cache_set("departments", depts_data)
+        return jsonify(depts_data)
 
     data_file, _ = get_active_dataset_path()
     con = get_db()
@@ -749,6 +788,8 @@ def export_filtered_businesses():
 
 @app.route("/api/communes")
 def get_communes():
+    if "communes" in _STATIC_SUMMARY_CACHE and _STATIC_SUMMARY_CACHE["communes"]:
+        return jsonify(_STATIC_SUMMARY_CACHE["communes"])
     web_file = os.path.join(BASE_DIR, "web", "top_communes.json")
     out_file = os.path.join(BASE_DIR, "output", "top_communes.json")
     target = web_file if os.path.exists(web_file) else out_file

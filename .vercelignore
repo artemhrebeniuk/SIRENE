@@ -1,0 +1,9 @@
+.agents/
+*.xlsx
+*.csv
+output/
+scratch/
+logs/
+tests/
+.git/
+.DS_Store

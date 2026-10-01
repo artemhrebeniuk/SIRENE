@@ -15,6 +15,8 @@ data/processed/
 *.zip
 *.tar.gz
 *.csv
+*.xlsx
+~$*
 !data/france_departements.geojson
 !data/naf/
 

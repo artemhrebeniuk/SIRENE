@@ -1,0 +1,1789 @@
+{
+  "kpis": {
+    "total_active_establishments": 15965766,
+    "geocoded_establishments": 13587428,
+    "geocoding_rate_pct": 85.1,
+    "distinct_departments": 96,
+    "distinct_naf_codes": 735,
+    "distinct_naf_2025_codes": 745,
+    "is_sample": false,
+    "source_file": "active_establishments_geo.parquet"
+  },
+  "departments": [
+    {
+      "code": "75",
+      "name": "Paris",
+      "total": 1337532,
+      "geocoded": 1159893,
+      "geocoded_pct": 86.7,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "13",
+      "name": "Bouches-du-Rhône",
+      "total": 564676,
+      "geocoded": 481507,
+      "geocoded_pct": 85.3,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "69",
+      "name": "Rhône",
+      "total": 513185,
+      "geocoded": 427031,
+      "geocoded_pct": 83.2,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "59",
+      "name": "Nord",
+      "total": 467523,
+      "geocoded": 398697,
+      "geocoded_pct": 85.3,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "33",
+      "name": "Gironde",
+      "total": 460366,
+      "geocoded": 385583,
+      "geocoded_pct": 83.8,
+      "top_naf": "68.20A",
+      "top_naf_label": "Rental & Leasing of Residential Apartments"
+    },
+    {
+      "code": "92",
+      "name": "Hauts-de-Seine",
+      "total": 437191,
+      "geocoded": 358155,
+      "geocoded_pct": 81.9,
+      "top_naf": "68.20A",
+      "top_naf_label": "Rental & Leasing of Residential Apartments"
+    },
+    {
+      "code": "06",
+      "name": "Alpes-Maritimes",
+      "total": 421960,
+      "geocoded": 356039,
+      "geocoded_pct": 84.4,
+      "top_naf": "68.20A",
+      "top_naf_label": "Rental & Leasing of Residential Apartments"
+    },
+    {
+      "code": "34",
+      "name": "Hérault",
+      "total": 374463,
+      "geocoded": 315995,
+      "geocoded_pct": 84.4,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "93",
+      "name": "Seine-Saint-Denis",
+      "total": 362903,
+      "geocoded": 304372,
+      "geocoded_pct": 83.9,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "31",
+      "name": "Haute-Garonne",
+      "total": 356933,
+      "geocoded": 292043,
+      "geocoded_pct": 81.8,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "83",
+      "name": "Var",
+      "total": 335655,
+      "geocoded": 285437,
+      "geocoded_pct": 85.0,
+      "top_naf": "68.20A",
+      "top_naf_label": "Rental & Leasing of Residential Apartments"
+    },
+    {
+      "code": "44",
+      "name": "Loire-Atlantique",
+      "total": 319780,
+      "geocoded": 265085,
+      "geocoded_pct": 82.9,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "94",
+      "name": "Val-de-Marne",
+      "total": 311824,
+      "geocoded": 255713,
+      "geocoded_pct": 82.0,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "38",
+      "name": "Isère",
+      "total": 304353,
+      "geocoded": 253904,
+      "geocoded_pct": 83.4,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "78",
+      "name": "Yvelines",
+      "total": 297726,
+      "geocoded": 244368,
+      "geocoded_pct": 82.1,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "77",
+      "name": "Seine-et-Marne",
+      "total": 276239,
+      "geocoded": 229100,
+      "geocoded_pct": 82.9,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "67",
+      "name": "Bas-Rhin",
+      "total": 255796,
+      "geocoded": 221273,
+      "geocoded_pct": 86.5,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "95",
+      "name": "Val-d'Oise",
+      "total": 251185,
+      "geocoded": 210144,
+      "geocoded_pct": 83.7,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "35",
+      "name": "Ille-et-Vilaine",
+      "total": 247272,
+      "geocoded": 209894,
+      "geocoded_pct": 84.9,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "91",
+      "name": "Essonne",
+      "total": 247014,
+      "geocoded": 204014,
+      "geocoded_pct": 82.6,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "74",
+      "name": "Haute-Savoie",
+      "total": 245154,
+      "geocoded": 200286,
+      "geocoded_pct": 81.7,
+      "top_naf": "68.20A",
+      "top_naf_label": "Rental & Leasing of Residential Apartments"
+    },
+    {
+      "code": "62",
+      "name": "Pas-de-Calais",
+      "total": 221005,
+      "geocoded": 193860,
+      "geocoded_pct": 87.7,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "76",
+      "name": "Seine-Maritime",
+      "total": 220723,
+      "geocoded": 188931,
+      "geocoded_pct": 85.6,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "64",
+      "name": "Pyrénées-Atlantiques",
+      "total": 198397,
+      "geocoded": 169252,
+      "geocoded_pct": 85.3,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "29",
+      "name": "Finistère",
+      "total": 198087,
+      "geocoded": 166483,
+      "geocoded_pct": 84.0,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "30",
+      "name": "Gard",
+      "total": 190588,
+      "geocoded": 165528,
+      "geocoded_pct": 86.9,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "57",
+      "name": "Moselle",
+      "total": 184405,
+      "geocoded": 160486,
+      "geocoded_pct": 87.0,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "17",
+      "name": "Charente-Maritime",
+      "total": 181608,
+      "geocoded": 151391,
+      "geocoded_pct": 83.4,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "56",
+      "name": "Morbihan",
+      "total": 178201,
+      "geocoded": 150807,
+      "geocoded_pct": 84.6,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "73",
+      "name": "Savoie",
+      "total": 166668,
+      "geocoded": 133335,
+      "geocoded_pct": 80.0,
+      "top_naf": "68.20A",
+      "top_naf_label": "Rental & Leasing of Residential Apartments"
+    },
+    {
+      "code": "49",
+      "name": "Maine-et-Loire",
+      "total": 164422,
+      "geocoded": 140125,
+      "geocoded_pct": 85.2,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "14",
+      "name": "Calvados",
+      "total": 162761,
+      "geocoded": 138576,
+      "geocoded_pct": 85.1,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "84",
+      "name": "Vaucluse",
+      "total": 159077,
+      "geocoded": 136518,
+      "geocoded_pct": 85.8,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "42",
+      "name": "Loire",
+      "total": 159044,
+      "geocoded": 136851,
+      "geocoded_pct": 86.0,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "85",
+      "name": "Vendée",
+      "total": 156212,
+      "geocoded": 131659,
+      "geocoded_pct": 84.3,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "68",
+      "name": "Haut-Rhin",
+      "total": 154998,
+      "geocoded": 135058,
+      "geocoded_pct": 87.1,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "63",
+      "name": "Puy-de-Dôme",
+      "total": 148024,
+      "geocoded": 125768,
+      "geocoded_pct": 85.0,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "66",
+      "name": "Pyrénées-Orientales",
+      "total": 141477,
+      "geocoded": 121633,
+      "geocoded_pct": 86.0,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "60",
+      "name": "Oise",
+      "total": 140413,
+      "geocoded": 121754,
+      "geocoded_pct": 86.7,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "51",
+      "name": "Marne",
+      "total": 140117,
+      "geocoded": 122430,
+      "geocoded_pct": 87.4,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "22",
+      "name": "Côtes-d'Armor",
+      "total": 138215,
+      "geocoded": 118360,
+      "geocoded_pct": 85.6,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "26",
+      "name": "Drôme",
+      "total": 135710,
+      "geocoded": 117592,
+      "geocoded_pct": 86.6,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "01",
+      "name": "Ain",
+      "total": 132813,
+      "geocoded": 111687,
+      "geocoded_pct": 84.1,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "37",
+      "name": "Indre-et-Loire",
+      "total": 130555,
+      "geocoded": 110363,
+      "geocoded_pct": 84.5,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "54",
+      "name": "Meurthe-et-Moselle",
+      "total": 130535,
+      "geocoded": 111218,
+      "geocoded_pct": 85.2,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "21",
+      "name": "Côte-d'Or",
+      "total": 128503,
+      "geocoded": 109811,
+      "geocoded_pct": 85.5,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "45",
+      "name": "Loiret",
+      "total": 126628,
+      "geocoded": 106600,
+      "geocoded_pct": 84.2,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "40",
+      "name": "Landes",
+      "total": 124555,
+      "geocoded": 104700,
+      "geocoded_pct": 84.1,
+      "top_naf": "68.20A",
+      "top_naf_label": "Rental & Leasing of Residential Apartments"
+    },
+    {
+      "code": "71",
+      "name": "Saône-et-Loire",
+      "total": 116314,
+      "geocoded": 101240,
+      "geocoded_pct": 87.0,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "25",
+      "name": "Doubs",
+      "total": 110568,
+      "geocoded": 95026,
+      "geocoded_pct": 85.9,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "11",
+      "name": "Aude",
+      "total": 110481,
+      "geocoded": 95029,
+      "geocoded_pct": 86.0,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "24",
+      "name": "Dordogne",
+      "total": 110062,
+      "geocoded": 95359,
+      "geocoded_pct": 86.6,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "27",
+      "name": "Eure",
+      "total": 108928,
+      "geocoded": 93981,
+      "geocoded_pct": 86.3,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "80",
+      "name": "Somme",
+      "total": 104821,
+      "geocoded": 91392,
+      "geocoded_pct": 87.2,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "50",
+      "name": "Manche",
+      "total": 101074,
+      "geocoded": 88875,
+      "geocoded_pct": 87.9,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "72",
+      "name": "Sarthe",
+      "total": 97811,
+      "geocoded": 85360,
+      "geocoded_pct": 87.3,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "81",
+      "name": "Tarn",
+      "total": 92882,
+      "geocoded": 79243,
+      "geocoded_pct": 85.3,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "86",
+      "name": "Vienne",
+      "total": 90791,
+      "geocoded": 77849,
+      "geocoded_pct": 85.7,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "02",
+      "name": "Aisne",
+      "total": 84974,
+      "geocoded": 75271,
+      "geocoded_pct": 88.6,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "47",
+      "name": "Lot-et-Garonne",
+      "total": 83299,
+      "geocoded": 74102,
+      "geocoded_pct": 89.0,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "28",
+      "name": "Eure-et-Loir",
+      "total": 82943,
+      "geocoded": 71928,
+      "geocoded_pct": 86.7,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "07",
+      "name": "Ardèche",
+      "total": 79146,
+      "geocoded": 67746,
+      "geocoded_pct": 85.6,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "88",
+      "name": "Vosges",
+      "total": 78611,
+      "geocoded": 68726,
+      "geocoded_pct": 87.4,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "16",
+      "name": "Charente",
+      "total": 77491,
+      "geocoded": 67782,
+      "geocoded_pct": 87.5,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "87",
+      "name": "Haute-Vienne",
+      "total": 76782,
+      "geocoded": 66903,
+      "geocoded_pct": 87.1,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "12",
+      "name": "Aveyron",
+      "total": 76535,
+      "geocoded": 68552,
+      "geocoded_pct": 89.6,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "79",
+      "name": "Deux-Sèvres",
+      "total": 73726,
+      "geocoded": 64664,
+      "geocoded_pct": 87.7,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "03",
+      "name": "Allier",
+      "total": 70933,
+      "geocoded": 63085,
+      "geocoded_pct": 88.9,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "89",
+      "name": "Yonne",
+      "total": 69671,
+      "geocoded": 61251,
+      "geocoded_pct": 87.9,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "41",
+      "name": "Loir-et-Cher",
+      "total": 67754,
+      "geocoded": 59096,
+      "geocoded_pct": 87.2,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "10",
+      "name": "Aube",
+      "total": 66608,
+      "geocoded": 58271,
+      "geocoded_pct": 87.5,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "65",
+      "name": "Hautes-Pyrénées",
+      "total": 65636,
+      "geocoded": 54673,
+      "geocoded_pct": 83.3,
+      "top_naf": "68.20A",
+      "top_naf_label": "Rental & Leasing of Residential Apartments"
+    },
+    {
+      "code": "53",
+      "name": "Mayenne",
+      "total": 62819,
+      "geocoded": 55713,
+      "geocoded_pct": 88.7,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "19",
+      "name": "Corrèze",
+      "total": 62735,
+      "geocoded": 55515,
+      "geocoded_pct": 88.5,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "82",
+      "name": "Tarn-et-Garonne",
+      "total": 61915,
+      "geocoded": 53786,
+      "geocoded_pct": 86.9,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "2B",
+      "name": "Haute-Corse",
+      "total": 59430,
+      "geocoded": 52795,
+      "geocoded_pct": 88.8,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "32",
+      "name": "Gers",
+      "total": 59280,
+      "geocoded": 52711,
+      "geocoded_pct": 88.9,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "2A",
+      "name": "Corse-du-Sud",
+      "total": 58637,
+      "geocoded": 52412,
+      "geocoded_pct": 89.4,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "39",
+      "name": "Jura",
+      "total": 58469,
+      "geocoded": 50630,
+      "geocoded_pct": 86.6,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "18",
+      "name": "Cher",
+      "total": 57696,
+      "geocoded": 50024,
+      "geocoded_pct": 86.7,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "61",
+      "name": "Orne",
+      "total": 56949,
+      "geocoded": 50792,
+      "geocoded_pct": 89.2,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "05",
+      "name": "Hautes-Alpes",
+      "total": 55908,
+      "geocoded": 46383,
+      "geocoded_pct": 83.0,
+      "top_naf": "68.20A",
+      "top_naf_label": "Rental & Leasing of Residential Apartments"
+    },
+    {
+      "code": "43",
+      "name": "Haute-Loire",
+      "total": 53608,
+      "geocoded": 47800,
+      "geocoded_pct": 89.2,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "04",
+      "name": "Alpes-de-Haute-Provence",
+      "total": 52446,
+      "geocoded": 44564,
+      "geocoded_pct": 85.0,
+      "top_naf": "68.20A",
+      "top_naf_label": "Rental & Leasing of Residential Apartments"
+    },
+    {
+      "code": "46",
+      "name": "Lot",
+      "total": 51342,
+      "geocoded": 44819,
+      "geocoded_pct": 87.3,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "08",
+      "name": "Ardennes",
+      "total": 48683,
+      "geocoded": 43772,
+      "geocoded_pct": 89.9,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "70",
+      "name": "Haute-Saône",
+      "total": 45955,
+      "geocoded": 40834,
+      "geocoded_pct": 88.9,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "36",
+      "name": "Indre",
+      "total": 45188,
+      "geocoded": 40416,
+      "geocoded_pct": 89.4,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "58",
+      "name": "Nièvre",
+      "total": 43140,
+      "geocoded": 38056,
+      "geocoded_pct": 88.2,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "09",
+      "name": "Ariège",
+      "total": 42254,
+      "geocoded": 36218,
+      "geocoded_pct": 85.7,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "15",
+      "name": "Cantal",
+      "total": 39034,
+      "geocoded": 35310,
+      "geocoded_pct": 90.5,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "55",
+      "name": "Meuse",
+      "total": 33996,
+      "geocoded": 30628,
+      "geocoded_pct": 90.1,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "52",
+      "name": "Haute-Marne",
+      "total": 32652,
+      "geocoded": 29430,
+      "geocoded_pct": 90.1,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "23",
+      "name": "Creuse",
+      "total": 31044,
+      "geocoded": 28169,
+      "geocoded_pct": 90.7,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "90",
+      "name": "Territoire de Belfort",
+      "total": 24763,
+      "geocoded": 21187,
+      "geocoded_pct": 85.6,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "48",
+      "name": "Lozère",
+      "total": 22922,
+      "geocoded": 20751,
+      "geocoded_pct": 90.5,
+      "top_naf": "68.20B",
+      "top_naf_label": "Rental & Leasing of Commercial Property & Land"
+    },
+    {
+      "code": "98",
+      "name": "Department 98",
+      "total": 4589,
+      "geocoded": 0,
+      "geocoded_pct": 0.0,
+      "top_naf": "85.20Z",
+      "top_naf_label": "Primary education"
+    }
+  ],
+  "communes": [
+    {
+      "city": "PARIS",
+      "dept": "75",
+      "total": 1322295,
+      "geocoded": 1146545,
+      "geocoded_pct": 86.7,
+      "lat": 48.86379,
+      "lng": 2.33437
+    },
+    {
+      "city": "MARSEILLE",
+      "dept": "13",
+      "total": 229010,
+      "geocoded": 192639,
+      "geocoded_pct": 84.1,
+      "lat": 43.29778,
+      "lng": 5.39394
+    },
+    {
+      "city": "LYON",
+      "dept": "69",
+      "total": 185267,
+      "geocoded": 150514,
+      "geocoded_pct": 81.2,
+      "lat": 45.75884,
+      "lng": 4.8412
+    },
+    {
+      "city": "TOULOUSE",
+      "dept": "31",
+      "total": 154156,
+      "geocoded": 122933,
+      "geocoded_pct": 79.7,
+      "lat": 43.60013,
+      "lng": 1.43977
+    },
+    {
+      "city": "NICE",
+      "dept": "06",
+      "total": 134153,
+      "geocoded": 112789,
+      "geocoded_pct": 84.1,
+      "lat": 43.70359,
+      "lng": 7.25796
+    },
+    {
+      "city": "BORDEAUX",
+      "dept": "33",
+      "total": 113160,
+      "geocoded": 94089,
+      "geocoded_pct": 83.1,
+      "lat": 44.84309,
+      "lng": -0.57776
+    },
+    {
+      "city": "MONTPELLIER",
+      "dept": "34",
+      "total": 99436,
+      "geocoded": 80845,
+      "geocoded_pct": 81.3,
+      "lat": 43.60988,
+      "lng": 3.86978
+    },
+    {
+      "city": "NANTES",
+      "dept": "44",
+      "total": 90151,
+      "geocoded": 72007,
+      "geocoded_pct": 79.9,
+      "lat": 47.2231,
+      "lng": -1.55554
+    },
+    {
+      "city": "STRASBOURG",
+      "dept": "67",
+      "total": 78245,
+      "geocoded": 65824,
+      "geocoded_pct": 84.1,
+      "lat": 48.58012,
+      "lng": 7.75002
+    },
+    {
+      "city": "LILLE",
+      "dept": "59",
+      "total": 77860,
+      "geocoded": 64447,
+      "geocoded_pct": 82.8,
+      "lat": 50.63154,
+      "lng": 3.05929
+    },
+    {
+      "city": "RENNES",
+      "dept": "35",
+      "total": 65251,
+      "geocoded": 53806,
+      "geocoded_pct": 82.5,
+      "lat": 48.10954,
+      "lng": -1.67662
+    },
+    {
+      "city": "AIX-EN-PROVENCE",
+      "dept": "13",
+      "total": 51759,
+      "geocoded": 43833,
+      "geocoded_pct": 84.7,
+      "lat": 43.52433,
+      "lng": 5.42757
+    },
+    {
+      "city": "GRENOBLE",
+      "dept": "38",
+      "total": 49842,
+      "geocoded": 40218,
+      "geocoded_pct": 80.7,
+      "lat": 45.18285,
+      "lng": 5.72355
+    },
+    {
+      "city": "BOULOGNE-BILLANCOURT",
+      "dept": "92",
+      "total": 42777,
+      "geocoded": 36080,
+      "geocoded_pct": 84.3,
+      "lat": 48.83647,
+      "lng": 2.24119
+    },
+    {
+      "city": "ANNECY",
+      "dept": "74",
+      "total": 41714,
+      "geocoded": 34424,
+      "geocoded_pct": 82.5,
+      "lat": 45.90639,
+      "lng": 6.12114
+    },
+    {
+      "city": "DIJON",
+      "dept": "21",
+      "total": 41154,
+      "geocoded": 33445,
+      "geocoded_pct": 81.3,
+      "lat": 47.32506,
+      "lng": 5.04108
+    },
+    {
+      "city": "VILLEURBANNE",
+      "dept": "69",
+      "total": 40458,
+      "geocoded": 31428,
+      "geocoded_pct": 77.7,
+      "lat": 45.76807,
+      "lng": 4.88388
+    },
+    {
+      "city": "REIMS",
+      "dept": "51",
+      "total": 40363,
+      "geocoded": 33222,
+      "geocoded_pct": 82.3,
+      "lat": 49.25292,
+      "lng": 4.03369
+    },
+    {
+      "city": "NIMES",
+      "dept": "30",
+      "total": 40341,
+      "geocoded": 34785,
+      "geocoded_pct": 86.2,
+      "lat": 43.8339,
+      "lng": 4.35467
+    },
+    {
+      "city": "SAINT-ETIENNE",
+      "dept": "42",
+      "total": 40013,
+      "geocoded": 33275,
+      "geocoded_pct": 83.2,
+      "lat": 45.4369,
+      "lng": 4.39331
+    },
+    {
+      "city": "CANNES",
+      "dept": "06",
+      "total": 39326,
+      "geocoded": 33445,
+      "geocoded_pct": 85.0,
+      "lat": 43.55427,
+      "lng": 7.0112
+    },
+    {
+      "city": "TOULON",
+      "dept": "83",
+      "total": 39260,
+      "geocoded": 32761,
+      "geocoded_pct": 83.4,
+      "lat": 43.12615,
+      "lng": 5.93408
+    },
+    {
+      "city": "ANGERS",
+      "dept": "49",
+      "total": 37295,
+      "geocoded": 30116,
+      "geocoded_pct": 80.8,
+      "lat": 47.46945,
+      "lng": -0.5527
+    },
+    {
+      "city": "CLERMONT-FERRAND",
+      "dept": "63",
+      "total": 36134,
+      "geocoded": 29434,
+      "geocoded_pct": 81.5,
+      "lat": 45.77937,
+      "lng": 3.09679
+    },
+    {
+      "city": "ROUEN",
+      "dept": "76",
+      "total": 35539,
+      "geocoded": 29116,
+      "geocoded_pct": 81.9,
+      "lat": 49.44108,
+      "lng": 1.09311
+    },
+    {
+      "city": "PERPIGNAN",
+      "dept": "66",
+      "total": 35149,
+      "geocoded": 30779,
+      "geocoded_pct": 87.6,
+      "lat": 42.69622,
+      "lng": 2.8943
+    },
+    {
+      "city": "TOURS",
+      "dept": "37",
+      "total": 35108,
+      "geocoded": 28449,
+      "geocoded_pct": 81.0,
+      "lat": 47.39225,
+      "lng": 0.69005
+    },
+    {
+      "city": "SAINT-DENIS",
+      "dept": "974",
+      "total": 34323,
+      "geocoded": 29533,
+      "geocoded_pct": 86.0,
+      "lat": -20.89551,
+      "lng": 55.46696
+    },
+    {
+      "city": "FORT-DE-FRANCE",
+      "dept": "972",
+      "total": 34166,
+      "geocoded": 31838,
+      "geocoded_pct": 93.2,
+      "lat": 14.61318,
+      "lng": -61.05708
+    },
+    {
+      "city": "MONTREUIL",
+      "dept": "93",
+      "total": 34103,
+      "geocoded": 28362,
+      "geocoded_pct": 83.2,
+      "lat": 48.86103,
+      "lng": 2.44115
+    },
+    {
+      "city": "NEUILLY-SUR-SEINE",
+      "dept": "92",
+      "total": 33538,
+      "geocoded": 29770,
+      "geocoded_pct": 88.8,
+      "lat": 48.88444,
+      "lng": 2.26802
+    },
+    {
+      "city": "ANTIBES",
+      "dept": "06",
+      "total": 32614,
+      "geocoded": 27293,
+      "geocoded_pct": 83.7,
+      "lat": 43.58391,
+      "lng": 7.11025
+    },
+    {
+      "city": "BREST",
+      "dept": "29",
+      "total": 30648,
+      "geocoded": 25056,
+      "geocoded_pct": 81.8,
+      "lat": 48.39639,
+      "lng": -4.48818
+    },
+    {
+      "city": "METZ",
+      "dept": "57",
+      "total": 30526,
+      "geocoded": 26285,
+      "geocoded_pct": 86.1,
+      "lat": 49.11283,
+      "lng": 6.18782
+    },
+    {
+      "city": "CAEN",
+      "dept": "14",
+      "total": 30273,
+      "geocoded": 24976,
+      "geocoded_pct": 82.5,
+      "lat": 49.18352,
+      "lng": -0.36618
+    },
+    {
+      "city": "NANCY",
+      "dept": "54",
+      "total": 29890,
+      "geocoded": 24378,
+      "geocoded_pct": 81.6,
+      "lat": 48.68988,
+      "lng": 6.17649
+    },
+    {
+      "city": "SAINT-PAUL",
+      "dept": "974",
+      "total": 29457,
+      "geocoded": 25921,
+      "geocoded_pct": 88.0,
+      "lat": -21.02718,
+      "lng": 55.27475
+    },
+    {
+      "city": "LE MANS",
+      "dept": "72",
+      "total": 29394,
+      "geocoded": 24760,
+      "geocoded_pct": 84.2,
+      "lat": 47.99842,
+      "lng": 0.1986
+    },
+    {
+      "city": "LE HAVRE",
+      "dept": "76",
+      "total": 29158,
+      "geocoded": 24550,
+      "geocoded_pct": 84.2,
+      "lat": 49.49963,
+      "lng": 0.12333
+    },
+    {
+      "city": "AMIENS",
+      "dept": "80",
+      "total": 28849,
+      "geocoded": 24005,
+      "geocoded_pct": 83.2,
+      "lat": 49.89212,
+      "lng": 2.29695
+    },
+    {
+      "city": "AVIGNON",
+      "dept": "84",
+      "total": 28674,
+      "geocoded": 24505,
+      "geocoded_pct": 85.5,
+      "lat": 43.93875,
+      "lng": 4.82414
+    },
+    {
+      "city": "LIMOGES",
+      "dept": "87",
+      "total": 28089,
+      "geocoded": 23951,
+      "geocoded_pct": 85.3,
+      "lat": 45.83708,
+      "lng": 1.25653
+    },
+    {
+      "city": "BESANCON",
+      "dept": "25",
+      "total": 27875,
+      "geocoded": 23440,
+      "geocoded_pct": 84.1,
+      "lat": 47.24094,
+      "lng": 6.01219
+    },
+    {
+      "city": "SAINT-DENIS",
+      "dept": "93",
+      "total": 27660,
+      "geocoded": 23015,
+      "geocoded_pct": 83.2,
+      "lat": 48.93068,
+      "lng": 2.3574
+    },
+    {
+      "city": "COURBEVOIE",
+      "dept": "92",
+      "total": 27539,
+      "geocoded": 22394,
+      "geocoded_pct": 81.3,
+      "lat": 48.89755,
+      "lng": 2.2539
+    },
+    {
+      "city": "ORLEANS",
+      "dept": "45",
+      "total": 27425,
+      "geocoded": 22005,
+      "geocoded_pct": 80.2,
+      "lat": 47.8961,
+      "lng": 1.90836
+    },
+    {
+      "city": "LA ROCHELLE",
+      "dept": "17",
+      "total": 26762,
+      "geocoded": 21594,
+      "geocoded_pct": 80.7,
+      "lat": 46.15917,
+      "lng": -1.15984
+    },
+    {
+      "city": "VERSAILLES",
+      "dept": "78",
+      "total": 24747,
+      "geocoded": 20819,
+      "geocoded_pct": 84.1,
+      "lat": 48.80417,
+      "lng": 2.13625
+    },
+    {
+      "city": "ASNIERES-SUR-SEINE",
+      "dept": "92",
+      "total": 24095,
+      "geocoded": 18989,
+      "geocoded_pct": 78.8,
+      "lat": 48.91484,
+      "lng": 2.28712
+    },
+    {
+      "city": "MULHOUSE",
+      "dept": "68",
+      "total": 24012,
+      "geocoded": 20964,
+      "geocoded_pct": 87.3,
+      "lat": 47.74781,
+      "lng": 7.32971
+    },
+    {
+      "city": "LEVALLOIS-PERRET",
+      "dept": "92",
+      "total": 23075,
+      "geocoded": 19573,
+      "geocoded_pct": 84.8,
+      "lat": 48.8937,
+      "lng": 2.28738
+    },
+    {
+      "city": "BEZIERS",
+      "dept": "34",
+      "total": 22971,
+      "geocoded": 19942,
+      "geocoded_pct": 86.8,
+      "lat": 43.3458,
+      "lng": 3.22718
+    },
+    {
+      "city": "PAU",
+      "dept": "64",
+      "total": 22927,
+      "geocoded": 18615,
+      "geocoded_pct": 81.2,
+      "lat": 43.30701,
+      "lng": -0.3618
+    },
+    {
+      "city": "AUBERVILLIERS",
+      "dept": "93",
+      "total": 22489,
+      "geocoded": 19409,
+      "geocoded_pct": 86.3,
+      "lat": 48.91175,
+      "lng": 2.38495
+    },
+    {
+      "city": "ARGENTEUIL",
+      "dept": "95",
+      "total": 22088,
+      "geocoded": 18449,
+      "geocoded_pct": 83.5,
+      "lat": 48.94831,
+      "lng": 2.24118
+    },
+    {
+      "city": "SAINT-MAUR-DES-FOSSES",
+      "dept": "94",
+      "total": 21977,
+      "geocoded": 18524,
+      "geocoded_pct": 84.3,
+      "lat": 48.79885,
+      "lng": 2.49334
+    },
+    {
+      "city": "NANTERRE",
+      "dept": "92",
+      "total": 21969,
+      "geocoded": 18172,
+      "geocoded_pct": 82.7,
+      "lat": 48.89344,
+      "lng": 2.2092
+    },
+    {
+      "city": "POITIERS",
+      "dept": "86",
+      "total": 20632,
+      "geocoded": 16722,
+      "geocoded_pct": 81.0,
+      "lat": 46.58026,
+      "lng": 0.34769
+    },
+    {
+      "city": "MERIGNAC",
+      "dept": "33",
+      "total": 20587,
+      "geocoded": 16860,
+      "geocoded_pct": 81.9,
+      "lat": 44.83702,
+      "lng": -0.65691
+    },
+    {
+      "city": "SAINT-PIERRE",
+      "dept": "974",
+      "total": 20281,
+      "geocoded": 17388,
+      "geocoded_pct": 85.7,
+      "lat": -21.32155,
+      "lng": 55.48109
+    },
+    {
+      "city": "AJACCIO",
+      "dept": "2A",
+      "total": 19235,
+      "geocoded": 17170,
+      "geocoded_pct": 89.3,
+      "lat": 41.92907,
+      "lng": 8.73947
+    },
+    {
+      "city": "ROUBAIX",
+      "dept": "59",
+      "total": 19218,
+      "geocoded": 15850,
+      "geocoded_pct": 82.5,
+      "lat": 50.68888,
+      "lng": 3.17682
+    },
+    {
+      "city": "COLOMBES",
+      "dept": "92",
+      "total": 19150,
+      "geocoded": 15219,
+      "geocoded_pct": 79.5,
+      "lat": 48.92092,
+      "lng": 2.24847
+    },
+    {
+      "city": "RUEIL-MALMAISON",
+      "dept": "92",
+      "total": 19116,
+      "geocoded": 15545,
+      "geocoded_pct": 81.3,
+      "lat": 48.87649,
+      "lng": 2.18197
+    },
+    {
+      "city": "PANTIN",
+      "dept": "93",
+      "total": 19025,
+      "geocoded": 15900,
+      "geocoded_pct": 83.6,
+      "lat": 48.89574,
+      "lng": 2.40572
+    },
+    {
+      "city": "VALENCE",
+      "dept": "26",
+      "total": 18886,
+      "geocoded": 16007,
+      "geocoded_pct": 84.8,
+      "lat": 44.92524,
+      "lng": 4.90186
+    },
+    {
+      "city": "CLICHY",
+      "dept": "92",
+      "total": 18853,
+      "geocoded": 15239,
+      "geocoded_pct": 80.8,
+      "lat": 48.90251,
+      "lng": 2.30757
+    },
+    {
+      "city": "CRETEIL",
+      "dept": "94",
+      "total": 18832,
+      "geocoded": 15578,
+      "geocoded_pct": 82.7,
+      "lat": 48.7854,
+      "lng": 2.458
+    },
+    {
+      "city": "FREJUS",
+      "dept": "83",
+      "total": 18347,
+      "geocoded": 15269,
+      "geocoded_pct": 83.2,
+      "lat": 43.43574,
+      "lng": 6.74189
+    },
+    {
+      "city": "ISSY-LES-MOULINEAUX",
+      "dept": "92",
+      "total": 18250,
+      "geocoded": 14708,
+      "geocoded_pct": 80.6,
+      "lat": 48.82348,
+      "lng": 2.26561
+    },
+    {
+      "city": "HYERES",
+      "dept": "83",
+      "total": 17694,
+      "geocoded": 15159,
+      "geocoded_pct": 85.7,
+      "lat": 43.10478,
+      "lng": 6.13804
+    },
+    {
+      "city": "VANNES",
+      "dept": "56",
+      "total": 17648,
+      "geocoded": 15002,
+      "geocoded_pct": 85.0,
+      "lat": 47.65831,
+      "lng": -2.76244
+    },
+    {
+      "city": "SAINT-OUEN-SUR-SEINE",
+      "dept": "93",
+      "total": 17454,
+      "geocoded": 14227,
+      "geocoded_pct": 81.5,
+      "lat": 48.90782,
+      "lng": 2.33484
+    },
+    {
+      "city": "PUTEAUX",
+      "dept": "92",
+      "total": 17370,
+      "geocoded": 14685,
+      "geocoded_pct": 84.5,
+      "lat": 48.88527,
+      "lng": 2.23904
+    },
+    {
+      "city": "CAYENNE",
+      "dept": "973",
+      "total": 17333,
+      "geocoded": 16181,
+      "geocoded_pct": 93.4,
+      "lat": 4.93223,
+      "lng": -52.31739
+    },
+    {
+      "city": "VITRY-SUR-SEINE",
+      "dept": "94",
+      "total": 17180,
+      "geocoded": 14027,
+      "geocoded_pct": 81.6,
+      "lat": 48.79121,
+      "lng": 2.39219
+    },
+    {
+      "city": "NARBONNE",
+      "dept": "11",
+      "total": 17094,
+      "geocoded": 14502,
+      "geocoded_pct": 84.8,
+      "lat": 43.17853,
+      "lng": 3.00955
+    },
+    {
+      "city": "VINCENNES",
+      "dept": "94",
+      "total": 16906,
+      "geocoded": 13855,
+      "geocoded_pct": 82.0,
+      "lat": 48.84748,
+      "lng": 2.43574
+    },
+    {
+      "city": "CHAMBERY",
+      "dept": "73",
+      "total": 16840,
+      "geocoded": 13842,
+      "geocoded_pct": 82.2,
+      "lat": 45.57376,
+      "lng": 5.91614
+    },
+    {
+      "city": "BAYONNE",
+      "dept": "64",
+      "total": 16836,
+      "geocoded": 14264,
+      "geocoded_pct": 84.7,
+      "lat": 43.49115,
+      "lng": -1.4737
+    },
+    {
+      "city": "QUIMPER",
+      "dept": "29",
+      "total": 16806,
+      "geocoded": 14416,
+      "geocoded_pct": 85.8,
+      "lat": 47.99238,
+      "lng": -4.0973
+    },
+    {
+      "city": "IVRY-SUR-SEINE",
+      "dept": "94",
+      "total": 16540,
+      "geocoded": 13301,
+      "geocoded_pct": 80.4,
+      "lat": 48.81377,
+      "lng": 2.38493
+    },
+    {
+      "city": "BAIE-MAHAULT",
+      "dept": "971",
+      "total": 16459,
+      "geocoded": 15500,
+      "geocoded_pct": 94.2,
+      "lat": 16.24564,
+      "lng": -61.57621
+    },
+    {
+      "city": "COLMAR",
+      "dept": "68",
+      "total": 16337,
+      "geocoded": 14117,
+      "geocoded_pct": 86.4,
+      "lat": 48.07887,
+      "lng": 7.35448
+    },
+    {
+      "city": "MONTAUBAN",
+      "dept": "82",
+      "total": 16117,
+      "geocoded": 13982,
+      "geocoded_pct": 86.8,
+      "lat": 44.01779,
+      "lng": 1.35988
+    },
+    {
+      "city": "LES ABYMES",
+      "dept": "971",
+      "total": 15981,
+      "geocoded": 14607,
+      "geocoded_pct": 91.4,
+      "lat": 16.26023,
+      "lng": -61.51189
+    },
+    {
+      "city": "CERGY",
+      "dept": "95",
+      "total": 15775,
+      "geocoded": 12525,
+      "geocoded_pct": 79.4,
+      "lat": 49.04284,
+      "lng": 2.05059
+    },
+    {
+      "city": "CAGNES-SUR-MER",
+      "dept": "06",
+      "total": 15668,
+      "geocoded": 13264,
+      "geocoded_pct": 84.7,
+      "lat": 43.66363,
+      "lng": 7.15319
+    },
+    {
+      "city": "DUNKERQUE",
+      "dept": "59",
+      "total": 15614,
+      "geocoded": 13260,
+      "geocoded_pct": 84.9,
+      "lat": 51.03614,
+      "lng": 2.37636
+    },
+    {
+      "city": "ARLES",
+      "dept": "13",
+      "total": 15612,
+      "geocoded": 13652,
+      "geocoded_pct": 87.4,
+      "lat": 43.6599,
+      "lng": 4.64067
+    },
+    {
+      "city": "TOURCOING",
+      "dept": "59",
+      "total": 15611,
+      "geocoded": 13079,
+      "geocoded_pct": 83.8,
+      "lat": 50.72203,
+      "lng": 3.1589
+    },
+    {
+      "city": "AULNAY-SOUS-BOIS",
+      "dept": "93",
+      "total": 15469,
+      "geocoded": 13381,
+      "geocoded_pct": 86.5,
+      "lat": 48.93864,
+      "lng": 2.49618
+    },
+    {
+      "city": "LE LAMENTIN",
+      "dept": "972",
+      "total": 15333,
+      "geocoded": 13916,
+      "geocoded_pct": 90.8,
+      "lat": 14.62411,
+      "lng": -61.00491
+    },
+    {
+      "city": "EVRY-COURCOURONNES",
+      "dept": "91",
+      "total": 15327,
+      "geocoded": 12661,
+      "geocoded_pct": 82.6,
+      "lat": 48.62848,
+      "lng": 2.43095
+    },
+    {
+      "city": "VILLENEUVE-D'ASCQ",
+      "dept": "59",
+      "total": 15299,
+      "geocoded": 12680,
+      "geocoded_pct": 82.9,
+      "lat": 50.6339,
+      "lng": 3.14301
+    },
+    {
+      "city": "SAINT-MALO",
+      "dept": "35",
+      "total": 15286,
+      "geocoded": 12652,
+      "geocoded_pct": 82.8,
+      "lat": 48.64501,
+      "lng": -1.9976
+    },
+    {
+      "city": "CHAMPIGNY-SUR-MARNE",
+      "dept": "94",
+      "total": 15264,
+      "geocoded": 12630,
+      "geocoded_pct": 82.7,
+      "lat": 48.81617,
+      "lng": 2.5169
+    },
+    {
+      "city": "GRASSE",
+      "dept": "06",
+      "total": 15263,
+      "geocoded": 12919,
+      "geocoded_pct": 84.6,
+      "lat": 43.65018,
+      "lng": 6.93276
+    },
+    {
+      "city": "ANGLET",
+      "dept": "64",
+      "total": 14997,
+      "geocoded": 12376,
+      "geocoded_pct": 82.5,
+      "lat": 43.48992,
+      "lng": -1.51583
+    },
+    {
+      "city": "LORIENT",
+      "dept": "56",
+      "total": 14732,
+      "geocoded": 12429,
+      "geocoded_pct": 84.4,
+      "lat": 47.74835,
+      "lng": -3.37327
+    }
+  ]
+}
